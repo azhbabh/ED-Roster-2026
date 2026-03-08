@@ -927,6 +927,133 @@
         [data-shift="DO"] { color: #5c6370; }
         [data-shift="SD"] { color: #5c6370; }
         [data-shift="-"] { color: #2e3a2f; }
+
+        /* ══════════════════════════════════════════
+           SHIFT BACKGROUNDS — TEMA CERAH SAHAJA
+           ══════════════════════════════════════════ */
+
+        /* ── N (Malam) — Background putih, tulisan hitam ── */
+        body.theme-light .day-box[data-shift="N"] {
+            background: #ffffff !important;
+            border-color: #e0e0e0 !important;
+        }
+        body.theme-light .day-box[data-shift="N"] .shift-text {
+            color: #212121 !important;
+            text-shadow: none;
+        }
+        body.theme-light .day-box[data-shift="N"] .date-num {
+            color: #757575 !important;
+        }
+        body.theme-light .day-box[data-shift="N"] .assign-text {
+            color: #424242 !important;
+        }
+
+        /* ── Cuti (SD, DO, AL, RPL, MC, PH) — Background putih, tulisan peach ── */
+        body.theme-light .day-box[data-shift="SD"],
+        body.theme-light .day-box[data-shift="DO"],
+        body.theme-light .day-box[data-shift="AL"],
+        body.theme-light .day-box[data-shift="RPL"],
+        body.theme-light .day-box[data-shift="MC"],
+        body.theme-light .day-box[data-shift="PH"] {
+            background: #ffffff !important;
+            border-color: #e0e0e0 !important;
+        }
+        body.theme-light .day-box[data-shift="SD"] .shift-text,
+        body.theme-light .day-box[data-shift="DO"] .shift-text,
+        body.theme-light .day-box[data-shift="AL"] .shift-text,
+        body.theme-light .day-box[data-shift="RPL"] .shift-text,
+        body.theme-light .day-box[data-shift="MC"] .shift-text,
+        body.theme-light .day-box[data-shift="PH"] .shift-text {
+            color: #ff8a65 !important;
+        }
+        body.theme-light .day-box[data-shift="SD"] .date-num,
+        body.theme-light .day-box[data-shift="DO"] .date-num,
+        body.theme-light .day-box[data-shift="AL"] .date-num,
+        body.theme-light .day-box[data-shift="RPL"] .date-num,
+        body.theme-light .day-box[data-shift="MC"] .date-num,
+        body.theme-light .day-box[data-shift="PH"] .date-num {
+            color: #ffab91 !important;
+        }
+        body.theme-light .day-box[data-shift="SD"] .assign-text,
+        body.theme-light .day-box[data-shift="DO"] .assign-text,
+        body.theme-light .day-box[data-shift="AL"] .assign-text,
+        body.theme-light .day-box[data-shift="RPL"] .assign-text,
+        body.theme-light .day-box[data-shift="MC"] .assign-text,
+        body.theme-light .day-box[data-shift="PH"] .assign-text {
+            color: #ff8a65 !important;
+        }
+
+        /* ── Shift kerja + Locum — Background putih, tulisan hijau pastel ── */
+        body.theme-light .day-box[data-shift="M"],
+        body.theme-light .day-box[data-shift="E"],
+        body.theme-light .day-box[data-shift="M/E"],
+        body.theme-light .day-box[data-shift="M/N"],
+        body.theme-light .day-box[data-shift="E/N"],
+        body.theme-light .day-box[data-shift="SD/M"],
+        body.theme-light .day-box[data-shift="SD/E"],
+        body.theme-light .day-box[data-shift="SD/N"],
+        body.theme-light .day-box[data-shift="DO/M"],
+        body.theme-light .day-box[data-shift="DO/E"],
+        body.theme-light .day-box[data-shift="DO/N"] {
+            background: #ffffff !important;
+            border-color: #e0e0e0 !important;
+        }
+        body.theme-light .day-box[data-shift="M"] .shift-text,
+        body.theme-light .day-box[data-shift="E"] .shift-text,
+        body.theme-light .day-box[data-shift="M/E"] .shift-text,
+        body.theme-light .day-box[data-shift="M/N"] .shift-text,
+        body.theme-light .day-box[data-shift="E/N"] .shift-text,
+        body.theme-light .day-box[data-shift="SD/M"] .shift-text,
+        body.theme-light .day-box[data-shift="SD/E"] .shift-text,
+        body.theme-light .day-box[data-shift="SD/N"] .shift-text,
+        body.theme-light .day-box[data-shift="DO/M"] .shift-text,
+        body.theme-light .day-box[data-shift="DO/E"] .shift-text,
+        body.theme-light .day-box[data-shift="DO/N"] .shift-text {
+            color: #2e7d32 !important;
+        }
+        body.theme-light .day-box[data-shift="M"] .date-num,
+        body.theme-light .day-box[data-shift="E"] .date-num,
+        body.theme-light .day-box[data-shift="M/E"] .date-num,
+        body.theme-light .day-box[data-shift="M/N"] .date-num,
+        body.theme-light .day-box[data-shift="E/N"] .date-num,
+        body.theme-light .day-box[data-shift="SD/M"] .date-num,
+        body.theme-light .day-box[data-shift="SD/E"] .date-num,
+        body.theme-light .day-box[data-shift="SD/N"] .date-num,
+        body.theme-light .day-box[data-shift="DO/M"] .date-num,
+        body.theme-light .day-box[data-shift="DO/E"] .date-num,
+        body.theme-light .day-box[data-shift="DO/N"] .date-num {
+            color: #66bb6a !important;
+        }
+        body.theme-light .day-box[data-shift="M"] .assign-text,
+        body.theme-light .day-box[data-shift="E"] .assign-text,
+        body.theme-light .day-box[data-shift="M/E"] .assign-text,
+        body.theme-light .day-box[data-shift="M/N"] .assign-text,
+        body.theme-light .day-box[data-shift="E/N"] .assign-text,
+        body.theme-light .day-box[data-shift="SD/M"] .assign-text,
+        body.theme-light .day-box[data-shift="SD/E"] .assign-text,
+        body.theme-light .day-box[data-shift="SD/N"] .assign-text,
+        body.theme-light .day-box[data-shift="DO/M"] .assign-text,
+        body.theme-light .day-box[data-shift="DO/E"] .assign-text,
+        body.theme-light .day-box[data-shift="DO/N"] .assign-text {
+            color: #2e7d32 !important;
+        }
+
+        /* ── Hari ini (today) — heartbeat border emerald, background putih ── */
+        @keyframes heartbeat-border {
+            0%   { box-shadow: 0 0 0 0px rgba(80,200,120,0.8), 0 0 0 2px rgba(80,200,120,0.4); border-color: #50c878; }
+            30%  { box-shadow: 0 0 0 3px rgba(80,200,120,0.5), 0 0 0 5px rgba(80,200,120,0.2); border-color: #2ecc71; }
+            50%  { box-shadow: 0 0 0 1px rgba(80,200,120,0.9), 0 0 0 3px rgba(80,200,120,0.3); border-color: #50c878; }
+            70%  { box-shadow: 0 0 0 4px rgba(80,200,120,0.4), 0 0 0 7px rgba(80,200,120,0.1); border-color: #2ecc71; }
+            100% { box-shadow: 0 0 0 0px rgba(80,200,120,0.8), 0 0 0 2px rgba(80,200,120,0.4); border-color: #50c878; }
+        }
+        body.theme-light .day-box.today {
+            background: #ffffff !important;
+            border: 2px solid #50c878 !important;
+            animation: heartbeat-border 1.6s ease-in-out infinite !important;
+        }
+        body.theme-light .day-box.today .date-num {
+            color: #2e7d32 !important;
+        }
     </style>
 </head>
 <body>
@@ -1449,7 +1576,6 @@ async function fetchPrayerTimes() {
     const cached = localStorage.getItem(cacheKey);
     if(cached) { prayerTimes = JSON.parse(cached); renderPrayerWidget(); return; }
     try {
-        // Kuala Terengganu: lat 5.3317, lng 103.1408, Jakim method = 3
         const url = `https://api.aladhan.com/v1/timings/${d}-${m}-${y}?latitude=5.3317&longitude=103.1408&method=3`;
         const res = await fetch(url);
         const data = await res.json();
@@ -1464,12 +1590,10 @@ async function fetchPrayerTimes() {
                 isha:    t.Isha
             };
             localStorage.setItem(cacheKey, JSON.stringify(prayerTimes));
-            // clear old cache entries
             Object.keys(localStorage).forEach(k => { if(k.startsWith('prayer_') && k !== cacheKey) localStorage.removeItem(k); });
             renderPrayerWidget();
         } else { renderPrayerError('Data tidak tersedia.'); }
     } catch(e) {
-        // Fallback: approximate times for KT (hardcoded seasonal avg)
         renderPrayerError('Tiada sambungan internet. Cuba semula.');
     }
 }
@@ -1494,13 +1618,11 @@ function renderPrayerWidget() {
     let nextIdx = -1, nextMins = Infinity;
     const times = PRAYER_KEYS.map(k => timeStrToMinutes(prayerTimes[k]));
 
-    // Find next prayer
     for(let i=0; i<times.length; i++) {
         if(times[i] > nowMins) { nextIdx = i; nextMins = times[i]; break; }
     }
-    if(nextIdx === -1) { nextIdx = 0; nextMins = times[0] + 24*60; } // wrap to next day fajr
+    if(nextIdx === -1) { nextIdx = 0; nextMins = times[0] + 24*60; }
 
-    // Build grid
     let html = '';
     PRAYER_KEYS.forEach((k,i) => {
         const isNext = i === nextIdx;
@@ -1512,7 +1634,6 @@ function renderPrayerWidget() {
     });
     grid.innerHTML = html;
 
-    // Banner
     banner.style.display = 'flex';
     document.getElementById('prayer-next-name').innerText = PRAYER_NAMES[nextIdx === 0 && nextMins > 24*60 ? 0 : nextIdx];
     document.getElementById('prayer-next-time').innerText = prayerTimes[PRAYER_KEYS[nextIdx === 0 && nextMins > 24*60 ? 0 : nextIdx]];
@@ -1539,14 +1660,12 @@ function renderPrayerError(msg) {
     document.getElementById('prayer-grid').innerHTML = `<div class="prayer-error" style="grid-column:1/-1;">${msg}</div>`;
 }
 
-// Re-render prayer at midnight
 function schedulePrayerRefresh() {
     const now = new Date();
     const msToMidnight = (24*60*60*1000) - (now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds())*1000;
     setTimeout(() => { fetchPrayerTimes(); schedulePrayerRefresh(); }, msToMidnight+1000);
 }
 
-// Prayer countdown tick — every second
 function startPrayerTick() {
     if(prayerCountdownTimer) clearInterval(prayerCountdownTimer);
     prayerCountdownTimer = setInterval(() => {
@@ -1558,8 +1677,6 @@ function startPrayerTick() {
         for(let i=0; i<times.length; i++) { if(times[i] > nowMins) { nextIdx=i; nextMins=times[i]; break; } }
         if(nextIdx === -1) { nextIdx=0; nextMins=times[0]+24*60; }
         updatePrayerCountdown(nextMins, nowMins);
-
-        // Re-render grid slots every minute to update active/passed
         if(now.getSeconds() === 0) renderPrayerWidget();
     }, 1000);
 }
@@ -1694,7 +1811,6 @@ function renderNursingNotes(query = '') {
         return;
     }
 
-    // Sort: newest first
     const sorted = [...filtered].sort((a,b) => {
         const da = new Date(a.date + 'T' + (a.time||'00:00'));
         const db = new Date(b.date + 'T' + (b.time||'00:00'));
@@ -1719,7 +1835,7 @@ function renderNursingNotes(query = '') {
 }
 
 // ══════════════════════════════════════════
-//  CORE FUNCTIONS (unchanged)
+//  CORE FUNCTIONS
 // ══════════════════════════════════════════
 function toMY(d) { if(!d) return ''; const p=d.split('-'); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d; }
 function saveData() { localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); renderStats(); updateShiftSummary(); }
@@ -1758,7 +1874,10 @@ function generateCalendar() {
     for(let d=1;d<=daysInMonth;d++) {
         const key=isoKey(year,month,d);
         const data=store.calendar[key]||{s:'-',a:''};
-        const box=document.createElement('div'); box.className='day-box';
+        const box=document.createElement('div');
+        box.className='day-box';
+        // ── PERUBAHAN: tambah data-shift attribute untuk CSS styling ──
+        box.setAttribute('data-shift', data.s||'-');
         if(new Date().toDateString()===new Date(year,month,d).toDateString()) box.classList.add('today');
         box.onclick=()=>openShiftPicker(key);
         const color=shiftColor(data.s);
@@ -2082,7 +2201,8 @@ function renderClaim(){
         const entry=store.calendar[key]; const s=entry.s||'';
         const dateStr=`${String(d).padStart(2,'0')}/${String(month+1).padStart(2,'0')}/${year}`;
         if(s==='N') malam.push({date:dateStr,shift:s});
-        if(s==='M/E'||s==='M/N'||s==='E/N'){const assign=entry.a?` (${entry.a})`:''; locum.push({date:dateStr,shift:s+assign});}
+        const LOCUM_SHIFTS=['M/E','M/N','E/N','SD/M','SD/E','SD/N','DO/M','DO/E','DO/N'];
+        if(LOCUM_SHIFTS.includes(s)){const assign=entry.a?` (${entry.a})`:''; locum.push({date:dateStr,shift:s+assign});}
         if(s==='PH'){const phEntry=ph2026.find(p=>p.d===key);if(phEntry&&phEntry.paid)phBayar.push({date:dateStr,name:phEntry.n});}
     });
     const sortFn=(a,b)=>a.date.localeCompare(b.date);
@@ -2342,6 +2462,10 @@ function applyTheme(name) {
     if(glow) glow.style.background=`radial-gradient(circle,${t.primaryGlow} 0%,transparent 70%)`;
     currentTheme=name;
     localStorage.setItem('roster_theme',name);
+    // ── PERUBAHAN: toggle class pada body untuk CSS shift backgrounds ──
+    document.body.classList.toggle('theme-light', name === 'light');
+    // Re-generate calendar supaya data-shift attributes dipakai semula
+    generateCalendar();
 }
 
 function toggleTheme() { applyTheme(currentTheme==='dark'?'light':'dark'); }
