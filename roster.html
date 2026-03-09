@@ -6,7 +6,7 @@
     <title>Roster Premium - Ahmad Zilalul Hilmi Bin Adnan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" onload="console.log('GSI loaded')" onerror="console.warn('GSI failed to load')"></script>
     <style>
         :root {
             --primary: #50c878;
@@ -2150,7 +2150,12 @@ function handleGsyncAction() {
 // ── Sign In ──
 function gSignIn() {
     if(!GDRIVE_CLIENT_ID || GDRIVE_CLIENT_ID.includes('YOUR_CLIENT_ID')) {
-        alert('⚠️ Sila masukkan Google Client ID anda dalam kod.\n\nRujuk arahan setup di bawah profil.');
+        alert('⚠️ Sila masukkan Google Client ID anda dalam kod.');
+        return;
+    }
+    if(typeof google === 'undefined' || !google.accounts) {
+        gsyncSetStatus('Memuatkan Google...', 'syncing');
+        setTimeout(gSignIn, 1000);
         return;
     }
     gsyncSetStatus('Menghubungi Google...', 'syncing');
