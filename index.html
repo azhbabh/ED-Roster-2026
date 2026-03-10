@@ -2120,39 +2120,62 @@ let gFileId        = null;
 let gSaveDebounce  = null;
 let gSyncing       = false;
 let gTokenExpiry   = null;
+let gRefreshTimer  = null;
 
-// ── Simpan & muat token dari localStorage ──
+// ── Simpan sesi ke localStorage ──
 function gSaveSession(token, expireIn, userInfo) {
-    const expiry = Date.now() + (expireIn - 60) * 1000; // tolak 60s buffer
+    const expiry = Date.now() + (expireIn - 60) * 1000;
     localStorage.setItem('roster_gtoken', token);
     localStorage.setItem('roster_gtoken_expiry', String(expiry));
     if(userInfo) localStorage.setItem('roster_guser', JSON.stringify(userInfo));
+    localStorage.setItem('roster_gtoken_hint', '1');
     gTokenExpiry = expiry;
 }
 
+// ── Muat sesi dari localStorage ──
 function gLoadSession() {
-    const token = localStorage.getItem('roster_gtoken');
+    const token  = localStorage.getItem('roster_gtoken');
     const expiry = parseInt(localStorage.getItem('roster_gtoken_expiry') || '0');
-    const user = localStorage.getItem('roster_guser');
+    const user   = localStorage.getItem('roster_guser');
     if(token && expiry && Date.now() < expiry) {
         gAccessToken = token;
         gTokenExpiry = expiry;
         if(user) { gUserInfo = JSON.parse(user); gsyncSetUser(gUserInfo); }
         return true;
     }
-    // Token tamat — padam
     localStorage.removeItem('roster_gtoken');
     localStorage.removeItem('roster_gtoken_expiry');
     return false;
 }
 
-// ── Auto-refresh token sebelum tamat ──
+// ── Jadual auto-refresh token (tanpa popup) ──
 function gScheduleRefresh() {
+    if(gRefreshTimer) clearTimeout(gRefreshTimer);
     if(!gTokenExpiry) return;
-    const msLeft = gTokenExpiry - Date.now() - 120000; // refresh 2 minit awal
+    const msLeft = gTokenExpiry - Date.now() - 120000;
     if(msLeft > 0) {
-        setTimeout(() => { if(gAccessToken) gSignIn(true); }, msLeft);
+        gRefreshTimer = setTimeout(() => gSilentRefresh(), msLeft);
     }
+}
+
+// ── Silent refresh guna hint (tanpa popup, tanpa klik) ──
+function gSilentRefresh() {
+    if(typeof google === 'undefined' || !google.accounts) return;
+    const hint = gUserInfo ? (gUserInfo.email || '') : '';
+    const client = google.accounts.oauth2.initTokenClient({
+        client_id: GDRIVE_CLIENT_ID,
+        scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+        hint: hint,
+        callback: (resp) => {
+            if(resp.error) { gsyncSetStatus('Sila log masuk semula', 'error'); return; }
+            gAccessToken = resp.access_token;
+            gSaveSession(gAccessToken, resp.expires_in || 3600, gUserInfo);
+            gScheduleRefresh();
+            gsyncSetStatus('✓ Bersambung — auto-save aktif', 'synced');
+        }
+    });
+    // prompt kosong + hint = senyap, tiada popup jika Google masih kenal user
+    client.requestAccessToken({ prompt: '', login_hint: hint });
 }
 
 // ── UI helpers ──
@@ -2183,47 +2206,42 @@ function handleGsyncAction() {
     if(gAccessToken) { gSignOut(); } else { gSignIn(false); }
 }
 
-// ── Sign In — silent=true untuk auto reconnect tanpa popup ──
+// ── Log Masuk (manual — bila user tekan butang LOG MASUK) ──
 function gSignIn(silent = false) {
     if(!GDRIVE_CLIENT_ID || GDRIVE_CLIENT_ID.includes('YOUR_CLIENT_ID')) {
         alert('⚠️ Sila masukkan Google Client ID anda dalam kod.');
         return;
     }
     if(typeof google === 'undefined' || !google.accounts) {
-        if(!silent) gsyncSetStatus('Memuatkan Google...', 'syncing');
         setTimeout(() => gSignIn(silent), 1000);
         return;
     }
-    if(!silent) gsyncSetStatus('Menghubungi Google...', 'syncing');
-    else gsyncSetStatus('Menyambung semula...', 'syncing');
+
+    if(silent) {
+        // Cuba silent refresh dulu — jika gagal, JANGAN tunjuk popup
+        gSilentRefresh();
+        return;
+    }
+
+    // Manual login — tunjuk popup pilih akaun sekali sahaja
+    gsyncSetStatus('Menghubungi Google...', 'syncing');
+    const hint = gUserInfo ? (gUserInfo.email || '') : (localStorage.getItem('roster_guser') ? JSON.parse(localStorage.getItem('roster_guser')).email : '');
     const client = google.accounts.oauth2.initTokenClient({
         client_id: GDRIVE_CLIENT_ID,
         scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+        hint: hint,
         callback: async (resp) => {
-            if(resp.error) {
-                if(!silent) {
-                    gsyncSetStatus('Gagal log masuk', 'error');
-                } else {
-                    const cachedUser = localStorage.getItem('roster_guser');
-                    if(cachedUser) { gUserInfo = JSON.parse(cachedUser); gsyncSetUser(gUserInfo); }
-                    gsyncSetStatus('Perlu log masuk semula', 'error');
-                }
-                return;
-            }
+            if(resp.error) { gsyncSetStatus('Gagal log masuk', 'error'); return; }
             gAccessToken = resp.access_token;
-            const expireIn = resp.expires_in || 3600;
             await gFetchUserInfo();
-            gSaveSession(gAccessToken, expireIn, gUserInfo);
+            gSaveSession(gAccessToken, resp.expires_in || 3600, gUserInfo);
             gScheduleRefresh();
-            localStorage.setItem('roster_gtoken_hint', '1');
-            if(silent) {
-                gsyncSetStatus('✓ Bersambung — auto-save aktif', 'synced');
-            } else {
-                await gLoadFromDrive();
-            }
+            await gLoadFromDrive();
         }
     });
-    client.requestAccessToken({ prompt: silent ? '' : 'select_account' });
+    // Guna 'select_account' hanya kali pertama, selepas itu guna hint supaya auto-pilih
+    const prompt = hint ? '' : 'select_account';
+    client.requestAccessToken({ prompt, login_hint: hint });
 }
 
 // ── Sign Out ──
@@ -2361,17 +2379,20 @@ window.addEventListener('load', () => {
     startPrayerTick();
     schedulePrayerRefresh();
 
-    // Cuba muat token dari cache dulu
+    const hasCachedUser = !!localStorage.getItem('roster_guser');
+
     if(gLoadSession()) {
-        // Token masih sah — terus sambung tanpa popup
+        // ✅ Token masih sah dalam cache — terus sambung tanpa sebarang popup
         gsyncSetStatus('✓ Bersambung — auto-save aktif', 'synced');
         gScheduleRefresh();
-        // Refresh token senyap di latar belakang
-        setTimeout(() => gSignIn(true), 2000);
-    } else if(localStorage.getItem('roster_gtoken_hint') === '1') {
-        // Pernah login tapi token tamat — cuba silent sign-in
+    } else if(localStorage.getItem('roster_gtoken_hint') === '1' && hasCachedUser) {
+        // Token tamat — cuba silent refresh (tiada popup, tiada klik)
+        // Papar nama dari cache dulu supaya UI nampak lengkap
+        const cachedUser = localStorage.getItem('roster_guser');
+        if(cachedUser) { gUserInfo = JSON.parse(cachedUser); gsyncSetUser(gUserInfo); }
         gsyncSetStatus('Menyambung semula...', 'syncing');
-        setTimeout(() => gSignIn(true), 1500);
+        // Tunggu GSI library load sepenuhnya dulu
+        setTimeout(() => gSilentRefresh(), 2000);
     }
 });
 migrateCalendarKeys();
