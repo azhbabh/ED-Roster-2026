@@ -657,7 +657,7 @@
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--text-dim);
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: all 0.15s;
@@ -1063,6 +1063,200 @@
         }
         .gsync-signin-btn:hover { background: #f8f9fa; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
         .gsync-signin-btn:active { background: #f1f3f4; }
+
+        /* ── MONTHLY EXPENSES / RECEIPT ── */
+        .expense-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .expense-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s;
+        }
+        .expense-header:active { background: var(--card-raised); }
+        .expense-header-left { display: flex; align-items: center; gap: 8px; }
+        
+        .expense-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.45rem; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            background: rgba(243,156,18,0.12);
+            border: 1px solid rgba(243,156,18,0.25);
+            color: #f39c12;
+            padding: 2px 7px; border-radius: 20px;
+        }
+        .expense-count-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 700;
+            color: var(--text-dim);
+        }
+        .expense-body {
+            display: none;
+            border-top: 1px solid var(--border);
+            padding: 14px 16px 18px;
+        }
+        .expense-body.open { display: block; }
+        .expense-month-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .expense-month-row input[type="month"] {
+            flex: 1; margin-bottom: 0;
+        }
+        /* Receipt category block */
+        .receipt-cat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .receipt-cat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: linear-gradient(90deg, var(--card-raised), transparent);
+        }
+        .receipt-sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 14px;
+            border-top: 1px solid var(--border);
+        }
+        .receipt-cat-title {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        .receipt-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem; color: var(--text-muted);
+        }
+        .receipt-upload-zone {
+            border: 1px dashed var(--border-bright);
+            border-radius: var(--radius-xs);
+            padding: 4px 9px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+            background: transparent;
+            flex-shrink: 0;
+        }
+        .receipt-upload-zone:active, .receipt-upload-zone.drag-over {
+            border-color: var(--primary);
+            background: var(--primary-dim);
+        }
+        .receipt-upload-icon { font-size: 0.75rem; }
+        .receipt-upload-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.52rem; color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+        /* Receipt list rows */
+        .receipt-list { padding: 0 14px; }
+        .receipt-list:not(:empty) { padding-bottom: 8px; }
+        .receipt-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .receipt-row:last-child { border-bottom: none; }
+        .receipt-row-icon { font-size: 0.85rem; flex-shrink: 0; }
+        .receipt-row-name {
+            flex: 1;
+            font-size: 0.76rem;
+            color: var(--text);
+            background: none;
+            border: none;
+            outline: none;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'DM Sans', sans-serif;
+            cursor: text;
+            min-width: 0;
+            transition: background 0.15s, border 0.15s;
+            border: 1px solid transparent;
+        }
+        .receipt-row-name:focus {
+            background: var(--surface);
+            border-color: var(--border-bright);
+        }
+        .receipt-row-view {
+            background: none; border: none;
+            color: var(--primary); font-size: 0.65rem;
+            cursor: pointer; padding: 3px 7px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700; letter-spacing: 0.04em;
+            border-radius: var(--radius-xs);
+            border: 1px solid rgba(80,200,120,0.2);
+            transition: background 0.15s; flex-shrink: 0;
+        }
+        .receipt-row-view:active { background: var(--primary-dim); }
+        .receipt-row-del {
+            background: none; border: none;
+            color: var(--danger); font-size: 0.85rem;
+            cursor: pointer; opacity: 0.4;
+            padding: 2px 4px; transition: opacity 0.15s;
+            flex-shrink: 0;
+        }
+        .receipt-row-del:active { opacity: 1; }
+        .receipt-row-dl {
+            background: none; border: none;
+            color: var(--text-dim); font-size: 0.85rem;
+            cursor: pointer; opacity: 0.55;
+            padding: 2px 4px; transition: opacity 0.15s;
+            flex-shrink: 0;
+        }
+        .receipt-row-dl:active { opacity: 1; color: var(--primary); }
+        /* Lightbox */
+        .receipt-lightbox {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .receipt-lightbox.open { display: flex; }
+        .receipt-lightbox img {
+            max-width: 94vw; max-height: 82vh;
+            border-radius: var(--radius-sm);
+            object-fit: contain;
+        }
+        .receipt-lightbox-close {
+            position: absolute; top: 16px; right: 16px;
+            background: rgba(255,255,255,0.1); border: none;
+            color: white; font-size: 1.4rem; cursor: pointer;
+            border-radius: 50%; width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .receipt-lightbox-name {
+            color: rgba(255,255,255,0.6);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; margin-top: 10px;
+            letter-spacing: 0.06em;
+        }
     </style>
 </head>
 <body>
@@ -1234,16 +1428,11 @@
             <h3>Nursing Note</h3>
             <button onclick="openAddNursingNote()" class="btn-add-drug">+</button>
         </div>
-        <div class="tools-tabbar" id="tools-tabbar" style="margin: -4px -16px 12px; padding: 0 12px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 0;">
-            <div class="tool-tab" onclick="switchTool('rsi')" data-tool="rsi" id="tab-rsi">💉 RSI 7P</div>
-            <div class="tool-tab" onclick="switchTool('lytic')" data-tool="lytic" id="tab-lytic">⚡ Lytic Cocktail</div>
-            <div class="tool-tab" onclick="switchTool('drugcalc')" data-tool="drugcalc" id="tab-drugcalc">🧮 Drug Calc</div>
-        </div>
         <div id="tool-nursing" class="tool-panel active">
-            <input type="text" class="nursing-search" placeholder="🔍 Cari nota..." oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
+            <input type="text" id="nursing-search-input" class="nursing-search" placeholder="🔍 Cari nota... (taip 'rsi', 'lytic', 'drug calc')" oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
             <div id="nursing-note-list"></div>
         </div>
-        <div id="tool-rsi" class="tool-panel">
+        <div id="tool-rsi" class="tool-panel"><button onclick="openBuiltinPanel(null)" style="background:none;border:none;color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;padding:0 0 10px;display:flex;align-items:center;gap:4px;">‹ Kembali</button>
             <div class="rsi-panel-title">7P Rapid Sequence Intubation (RSI)</div>
             <div class="rsi-step">
                 <div class="rsi-step-header">
@@ -1355,7 +1544,7 @@
                 </div>
             </div>
         </div>
-        <div id="tool-lytic" class="tool-panel">
+        <div id="tool-lytic" class="tool-panel"><button onclick="openBuiltinPanel(null)" style="background:none;border:none;color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;padding:0 0 10px;display:flex;align-items:center;gap:4px;">‹ Kembali</button>
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#f39c12;filter:drop-shadow(0 0 6px rgba(243,156,18,0.4));">⚡ Lytic Cocktail</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">Correction for Hyperkalaemia</div>
@@ -1389,7 +1578,7 @@
                 </div>
             </div>
         </div>
-        <div id="tool-drugcalc" class="tool-panel">
+        <div id="tool-drugcalc" class="tool-panel"><button onclick="openBuiltinPanel(null)" style="background:none;border:none;color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;padding:0 0 10px;display:flex;align-items:center;gap:4px;">‹ Kembali</button>
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#c678dd;filter:drop-shadow(0 0 6px rgba(198,120,221,0.4));">🧮 Drug Calculation</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:14px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">IV Infusion Protocol</div>
@@ -1468,9 +1657,160 @@
         </div>
     </div>
 
-</div><!-- /page -->
+    <!-- MONTHLY EXPENSES / RECEIPT -->
+    <div class="expense-section" id="expense-section">
+        <div class="expense-header" onclick="toggleExpenses()">
+            <div class="expense-header-left">
+                <span style="font-size:1rem;">🧾</span>
+                <h3>Monthly Expenses</h3>
+                <span class="expense-tag">Receipt</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="expense-count-badge" id="expense-header-count"></span>
+                <span id="expense-toggle-icon" style="font-size:0.75rem;color:var(--text-dim);">▼</span>
+            </div>
+        </div>
+        <div id="expense-body" class="expense-body">
+            <!-- Month selector -->
+            <div class="expense-month-row">
+                <button onclick="changeReceiptMonth(-1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;" onmousedown="this.style.background='var(--card-raised)';" onmouseup="this.style.background='var(--surface)';">◀</button>
+                <input type="month" id="expense-month" onchange="renderReceipts()" style="flex:1;margin-bottom:0;text-align:center;">
+                <button onclick="changeReceiptMonth(1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;" onmousedown="this.style.background='var(--card-raised)';" onmouseup="this.style.background='var(--surface)';">▶</button>
+            </div>
 
-<!-- MODAL -->
+            <!-- House Rent -->
+            <div class="receipt-cat">
+                <div class="receipt-cat-header">
+                    <div class="receipt-cat-title">🏠 House Rent</div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span class="receipt-count" id="rc-count-rent"></span>
+                        <input type="file" id="rf-rent" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('rent',this)">
+                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-rent').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('rent',event,this)">
+                            <span class="receipt-upload-icon">📎</span>
+                            <span class="receipt-upload-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="receipt-list" id="rg-rent"></div>
+            </div>
+
+            <!-- Car -->
+            <div class="receipt-cat">
+                <div class="receipt-cat-header">
+                    <div class="receipt-cat-title">🚗 Car</div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span class="receipt-count" id="rc-count-car"></span>
+                        <input type="file" id="rf-car" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('car',this)">
+                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-car').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('car',event,this)">
+                            <span class="receipt-upload-icon">📎</span>
+                            <span class="receipt-upload-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="receipt-list" id="rg-car"></div>
+            </div>
+
+            <!-- Personal -->
+            <div class="receipt-cat">
+                <div class="receipt-cat-header">
+                    <div class="receipt-cat-title">👤 Personal</div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span class="receipt-count" id="rc-count-personal"></span>
+                        <input type="file" id="rf-personal" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('personal',this)">
+                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-personal').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('personal',event,this)">
+                            <span class="receipt-upload-icon">📎</span>
+                            <span class="receipt-upload-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="receipt-list" id="rg-personal"></div>
+            </div>
+
+            <!-- Utility -->
+            <div class="receipt-cat">
+                <div class="receipt-cat-header">
+                    <div class="receipt-cat-title">⚡ Utility</div>
+                    <span class="receipt-count" id="rc-count-utility"></span>
+                </div>
+                <!-- TNB -->
+                <div class="receipt-sub-header">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">TNB</span>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <input type="file" id="rf-utility-tnb" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('utility-tnb',this)">
+                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-utility-tnb').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('utility-tnb',event,this)">
+                            <span class="receipt-upload-icon">📎</span>
+                            <span class="receipt-upload-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="receipt-list" id="rg-utility-tnb"></div>
+                <!-- SATU -->
+                <div class="receipt-sub-header">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">SATU</span>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <input type="file" id="rf-utility-satu" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('utility-satu',this)">
+                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-utility-satu').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('utility-satu',event,this)">
+                            <span class="receipt-upload-icon">📎</span>
+                            <span class="receipt-upload-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="receipt-list" id="rg-utility-satu"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECEIPT LIGHTBOX -->
+    <div class="receipt-lightbox" id="receipt-lightbox" onclick="closeReceiptLightbox()">
+        <button class="receipt-lightbox-close" onclick="closeReceiptLightbox()">✕</button>
+        <img id="receipt-lightbox-img" src="" alt="Receipt">
+        <div class="receipt-lightbox-name" id="receipt-lightbox-name"></div>
+    </div>
+
+    <!-- LHDN RECORD -->
+    <div class="expense-section" id="lhdn-section">
+        <div class="expense-header" onclick="toggleLhdn()">
+            <div class="expense-header-left">
+                <span style="font-size:1rem;">🏛️</span>
+                <h3>LHDN Record</h3>
+                <span class="expense-tag" style="background:rgba(122,179,255,0.1);border-color:rgba(122,179,255,0.25);color:#7ab3ff;">Cukai</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="expense-count-badge" id="lhdn-header-count" style="color:#7ab3ff;"></span>
+                <span id="lhdn-toggle-icon" style="font-size:0.75rem;color:var(--text-dim);">▼</span>
+            </div>
+        </div>
+        <div id="lhdn-body" class="expense-body">
+            <!-- Year selector -->
+            <div class="expense-month-row">
+                <button onclick="changeLhdnYear(-1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">◀</button>
+                <div id="lhdn-year-display" style="flex:1;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.1em;color:#7ab3ff;filter:drop-shadow(0 0 6px rgba(122,179,255,0.3));"></div>
+                <button onclick="changeLhdnYear(1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">▶</button>
+            </div>
+
+            <!-- Upload zone -->
+            <div class="receipt-cat" style="border-color:rgba(122,179,255,0.15);">
+                <div class="receipt-cat-header" style="background:linear-gradient(90deg,rgba(122,179,255,0.08),transparent);">
+                    <div class="receipt-cat-title" style="color:#7ab3ff;">📁 Dokumen Cukai</div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span class="receipt-count" id="lhdn-count"></span>
+                        <input type="file" id="lhdn-file-input" accept="image/*,application/pdf" multiple hidden onchange="handleLhdnUpload(this)">
+                        <div class="receipt-upload-zone" style="border-color:rgba(122,179,255,0.3);" onclick="document.getElementById('lhdn-file-input').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleLhdnDrop(event,this)">
+                            <span class="receipt-upload-icon">📎</span>
+                            <span class="receipt-upload-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Category filter tabs -->
+                <div id="lhdn-cat-tabs" style="display:none;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:0 4px;">
+                </div>
+                <!-- Receipt list -->
+                <div class="receipt-list" id="lhdn-list"></div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /page -->
 <div class="modal-overlay" id="overlay" onclick="closeSheet()"></div>
 <div class="bottom-sheet" id="sheet">
     <div class="sheet-handle"></div>
@@ -1502,7 +1842,7 @@ let store = JSON.parse(localStorage.getItem('roster_ultimate_v3')) || {
     al:{total:0,taken:[]}, rpl:{records:[]}, cpd:{records:[]},
     calendar:{}, todos:[], notes:"", drugs:[],
     pdfData:null, rsiImage:null, profilePic:null,
-    nursingNotes:[]
+    nursingNotes:[], receipts:{}, lhdn:{}
 };
 if(!store.nursingNotes) store.nursingNotes = [];
 
@@ -1596,9 +1936,7 @@ function switchTool(id) {
     activeToolTab = (activeToolTab === id) ? 'nursing' : id;
     panels.forEach(p => {
         const panel = document.getElementById('tool-' + p);
-        const tab = document.getElementById('tab-' + p);
         if(panel) panel.classList.toggle('active', activeToolTab === p);
-        if(tab) tab.classList.toggle('active', activeToolTab === p);
     });
     if(activeToolTab === 'nursing') renderNursingNotes();
 }
@@ -1663,7 +2001,77 @@ function deleteNursingNote(idx) {
     store.nursingNotes.splice(idx, 1); saveData(); renderNursingNotes(); closeSheet();
 }
 
-function filterNursingNotes(q) { renderNursingNotes(q); }
+function filterNursingNotes(q) {
+    const lower = (q || '').toLowerCase().trim();
+
+    const builtins = [
+        { panel: 'rsi',      label: '💉 7P Rapid Sequence Intubation (RSI)', words: ['rsi','7p','rapid','sequence','intubation','lemon','males','preoxygenation','pretreatment','paralytic','positioning','postintubation'] },
+        { panel: 'lytic',    label: '⚡ Lytic Cocktail', words: ['lytic','cocktail','hyperkalemia','hyperkalaemia','kalium','calcium','gluconate','dextrose','insulin'] },
+        { panel: 'drugcalc', label: '🧮 Drug Calculation', words: ['drug calc','drug calculation','noradrenaline','nora','lovophed','infusion','mcg/kg','ml/hr'] }
+    ];
+
+    // Hide all special panels, show nursing by default
+    ['rsi','lytic','drugcalc'].forEach(p => {
+        const el = document.getElementById('tool-' + p);
+        if (el) { el.style.display = 'none'; el.classList.remove('active'); }
+    });
+    const nursingPanel = document.getElementById('tool-nursing');
+    if (nursingPanel) { nursingPanel.style.display = 'block'; nursingPanel.classList.add('active'); }
+
+    if (!lower) { renderNursingNotes(''); return; }
+
+    // Check if any builtin keyword matches
+    const matchedBuiltins = builtins.filter(b => b.words.some(w => w.includes(lower) || lower.includes(w)));
+
+    if (matchedBuiltins.length > 0) {
+        // Show builtin shortcuts in the nursing-note-list area
+        const list = document.getElementById('nursing-note-list');
+        if (list) {
+            list.innerHTML = matchedBuiltins.map(b => `
+                <div onclick="openBuiltinPanel('${b.panel}')" style="
+                    background:var(--surface); border:1px solid var(--border);
+                    border-left:3px solid var(--primary);
+                    border-radius:var(--radius-sm); padding:11px 14px;
+                    margin-bottom:8px; cursor:pointer;
+                    display:flex; align-items:center; justify-content:space-between;
+                    transition:border-color 0.15s;">
+                    <span style="font-size:0.82rem;font-weight:700;color:var(--text);">${b.label}</span>
+                    <span style="font-size:0.7rem;color:var(--primary);font-family:'JetBrains Mono',monospace;font-weight:700;">BUKA ›</span>
+                </div>`).join('');
+        }
+    } else {
+        renderNursingNotes(q);
+    }
+}
+
+function openBuiltinPanel(panel) {
+    // Clear search
+    const input = document.getElementById('nursing-search-input');
+    if (input) input.value = '';
+
+    const nursingPanel = document.getElementById('tool-nursing');
+    const builtinPanels = ['rsi','lytic','drugcalc'];
+
+    if (!panel) {
+        // Back to nursing
+        if (nursingPanel) { nursingPanel.style.display = 'block'; nursingPanel.classList.add('active'); }
+        builtinPanels.forEach(p => {
+            const el = document.getElementById('tool-' + p);
+            if (el) { el.style.display = 'none'; el.classList.remove('active'); }
+        });
+        renderNursingNotes('');
+        return;
+    }
+
+    // Hide nursing, show target panel
+    if (nursingPanel) { nursingPanel.style.display = 'none'; nursingPanel.classList.remove('active'); }
+    builtinPanels.forEach(p => {
+        const el = document.getElementById('tool-' + p);
+        if (!el) return;
+        if (p === panel) { el.style.display = 'block'; el.classList.add('active'); }
+        else { el.style.display = 'none'; el.classList.remove('active'); }
+    });
+}
 
 function renderNursingNotes(query = '') {
     const list = document.getElementById('nursing-note-list'); if(!list) return;
@@ -2371,6 +2779,345 @@ function gTriggerSave() {
 function toggleTheme() { applyTheme(currentTheme==='dark'?'light':'dark'); }
 function loadTheme() { applyTheme(localStorage.getItem('roster_theme')==='light'?'light':'dark'); }
 
+// ── MONTHLY EXPENSES — RECEIPT STORE ──
+let expenseOpen = false;
+
+function toggleExpenses() {
+    expenseOpen = !expenseOpen;
+    document.getElementById('expense-body').classList.toggle('open', expenseOpen);
+    document.getElementById('expense-toggle-icon').innerText = expenseOpen ? '▲' : '▼';
+}
+
+const RECEIPT_CATS = ['rent','car','personal','utility-tnb','utility-satu'];
+
+function getReceiptMonthKey() {
+    const m = document.getElementById('expense-month');
+    return m ? m.value : new Date().toISOString().slice(0,7);
+}
+
+function getReceiptStore() {
+    if (!store.receipts) store.receipts = {};
+    const key = getReceiptMonthKey();
+    if (!store.receipts[key]) {
+        store.receipts[key] = { rent:[], car:[], personal:[], 'utility-tnb':[], 'utility-satu':[] };
+    }
+    return store.receipts[key];
+}
+
+function saveReceipts() {
+    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+    gTriggerSave();
+    renderReceipts();
+}
+
+function handleReceiptUpload(cat, input) {
+    const files = Array.from(input.files);
+    if (!files.length) return;
+    const data = getReceiptStore();
+    let processed = 0;
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: e.target.result });
+            processed++;
+            if (processed === files.length) { input.value = ''; saveReceipts(); }
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function handleReceiptDrop(cat, event, zone) {
+    event.preventDefault();
+    zone.classList.remove('drag-over');
+    const files = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/') || f.type === 'application/pdf');
+    if (!files.length) return;
+    const data = getReceiptStore();
+    let processed = 0;
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: e.target.result });
+            processed++;
+            if (processed === files.length) saveReceipts();
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function deleteReceipt(cat, idx) {
+    const data = getReceiptStore();
+    if (confirm('Padam receipt ini?')) {
+        data[cat].splice(idx, 1);
+        saveReceipts();
+    }
+}
+
+function openReceiptLightbox(idx, cat) {
+    const data = getReceiptStore();
+    const r = data[cat] && data[cat][idx];
+    if (!r) return;
+    document.getElementById('receipt-lightbox-img').src = r.data;
+    document.getElementById('receipt-lightbox-name').innerText = r.name || '';
+    document.getElementById('receipt-lightbox').classList.add('open');
+}
+
+function closeReceiptLightbox() {
+    document.getElementById('receipt-lightbox').classList.remove('open');
+    document.getElementById('receipt-lightbox-img').src = '';
+}
+
+function changeReceiptMonth(dir) {
+    const input = document.getElementById('expense-month');
+    if (!input.value) return;
+    const [y, m] = input.value.split('-').map(Number);
+    const date = new Date(y, m - 1 + dir, 1);
+    const newVal = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
+    input.value = newVal;
+    renderReceipts();
+}
+
+function renameReceipt(cat, idx, newName) {
+    const data = getReceiptStore();
+    if (data[cat] && data[cat][idx] !== undefined) {
+        data[cat][idx].name = newName;
+        localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+        gTriggerSave();
+    }
+}
+
+function downloadReceipt(cat, idx) {
+    const data = getReceiptStore();
+    const r = data[cat] && data[cat][idx];
+    if (!r) return;
+    const a = document.createElement('a');
+    a.href = r.data;
+    // Use current display name as filename, fallback to original
+    const ext = r.type === 'application/pdf' ? '.pdf' : r.origName ? r.origName.split('.').pop() : 'jpg';
+    a.download = r.name || r.origName || `receipt.${ext}`;
+    a.click();
+}
+
+function renderReceiptGrid(cat, listId, countId) {
+    const data = getReceiptStore();
+    const items = data[cat] || [];
+    const list = document.getElementById(listId);
+    const countEl = document.getElementById(countId);
+    if (!list) return items.length;
+    if (countEl) countEl.innerText = items.length ? `${items.length} fail` : '';
+    list.innerHTML = items.map((r, i) => {
+        const isPdf = r.type === 'application/pdf';
+        const icon = isPdf ? '📄' : '🖼️';
+        const viewAction = isPdf
+            ? `window.open('${r.data}','_blank')`
+            : `openReceiptLightbox(${i},'${cat}')`;
+        const safeName = (r.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        return `<div class="receipt-row">
+            <span class="receipt-row-icon">${icon}</span>
+            <input class="receipt-row-name" type="text" value="${safeName}" placeholder="Nama receipt..."
+                onchange="renameReceipt('${cat}',${i},this.value)"
+                onclick="this.select()">
+            <button class="receipt-row-view" onclick="${viewAction}">Buka</button>
+            <button class="receipt-row-dl" onclick="downloadReceipt('${cat}',${i})" title="Download">⬇</button>
+            <button class="receipt-row-del" onclick="deleteReceipt('${cat}',${i})">✕</button>
+        </div>`;
+    }).join('');
+    return items.length;
+}
+
+function renderReceipts() {
+    if (!store.receipts) store.receipts = {};
+    renderReceiptGrid('rent', 'rg-rent', 'rc-count-rent');
+    renderReceiptGrid('car', 'rg-car', 'rc-count-car');
+    renderReceiptGrid('personal', 'rg-personal', 'rc-count-personal');
+    renderReceiptGrid('utility-tnb', 'rg-utility-tnb', null);
+    renderReceiptGrid('utility-satu', 'rg-utility-satu', null);
+    // Combined utility count
+    const data = getReceiptStore();
+    const utilCount = (data['utility-tnb']||[]).length + (data['utility-satu']||[]).length;
+    const uc = document.getElementById('rc-count-utility');
+    if (uc) uc.innerText = utilCount ? `${utilCount} fail` : '';
+    // Header count
+    const total = RECEIPT_CATS.reduce((s,c) => s + (data[c]||[]).length, 0);
+    const hc = document.getElementById('expense-header-count');
+    if (hc) hc.innerText = total ? `${total} receipt` : '';
+}
+
+function initExpenses() {
+    const monthInput = document.getElementById('expense-month');
+    if (monthInput) monthInput.value = new Date().toISOString().slice(0,7);
+    if (!store.receipts) store.receipts = {};
+    renderReceipts();
+}
+
+
+
+
+// ── LHDN RECORD ──
+let lhdnOpen = false;
+let lhdnYear = new Date().getFullYear();
+let lhdnActiveCat = 'semua';
+
+function toggleLhdn() {
+    lhdnOpen = !lhdnOpen;
+    document.getElementById('lhdn-body').classList.toggle('open', lhdnOpen);
+    document.getElementById('lhdn-toggle-icon').innerText = lhdnOpen ? '▲' : '▼';
+}
+
+function changeLhdnYear(dir) {
+    lhdnYear += dir;
+    renderLhdn();
+}
+
+function getLhdnStore() {
+    if (!store.lhdn) store.lhdn = {};
+    if (!store.lhdn[lhdnYear]) store.lhdn[lhdnYear] = [];
+    return store.lhdn[lhdnYear];
+}
+
+function saveLhdn() {
+    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+    gTriggerSave();
+    renderLhdn();
+}
+
+function handleLhdnUpload(input) {
+    const files = Array.from(input.files);
+    if (!files.length) return;
+    const items = getLhdnStore();
+    let processed = 0;
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            items.push({ name: file.name, origName: file.name, type: file.type, data: e.target.result, cat: '' });
+            processed++;
+            if (processed === files.length) { input.value = ''; saveLhdn(); }
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function handleLhdnDrop(event, zone) {
+    event.preventDefault();
+    zone.classList.remove('drag-over');
+    const files = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/') || f.type === 'application/pdf');
+    if (!files.length) return;
+    const items = getLhdnStore();
+    let processed = 0;
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            items.push({ name: file.name, origName: file.name, type: file.type, data: e.target.result, cat: '' });
+            processed++;
+            if (processed === files.length) saveLhdn();
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function renameLhdn(idx, val) {
+    const items = getLhdnStore();
+    if (items[idx]) { items[idx].name = val; localStorage.setItem('roster_ultimate_v3', JSON.stringify(store)); gTriggerSave(); }
+}
+
+function recatLhdn(idx, val) {
+    const items = getLhdnStore();
+    if (items[idx]) { items[idx].cat = val; saveLhdn(); }
+}
+
+function deleteLhdn(idx) {
+    const items = getLhdnStore();
+    if (confirm('Padam dokumen ini?')) { items.splice(idx, 1); saveLhdn(); }
+}
+
+function downloadLhdn(idx) {
+    const items = getLhdnStore();
+    const r = items[idx];
+    if (!r) return;
+    const a = document.createElement('a');
+    a.href = r.data;
+    a.download = r.name || r.origName || 'dokumen';
+    a.click();
+}
+
+function openLhdnLightbox(idx) {
+    const items = getLhdnStore();
+    const r = items[idx];
+    if (!r) return;
+    document.getElementById('receipt-lightbox-img').src = r.data;
+    document.getElementById('receipt-lightbox-name').innerText = r.name || '';
+    document.getElementById('receipt-lightbox').classList.add('open');
+}
+
+function renderLhdn() {
+    if (!store.lhdn) store.lhdn = {};
+    const yearEl = document.getElementById('lhdn-year-display');
+    if (yearEl) yearEl.innerText = lhdnYear;
+
+    const items = getLhdnStore();
+    const countEl = document.getElementById('lhdn-count');
+    const headerCount = document.getElementById('lhdn-header-count');
+    if (countEl) countEl.innerText = items.length ? `${items.length} fail` : '';
+    if (headerCount) headerCount.innerText = items.length ? `${items.length} dokumen` : '';
+
+    // Build category tabs from unique cats
+    const cats = ['Semua', ...Array.from(new Set(items.map(r => r.cat).filter(Boolean)))];
+    const tabBar = document.getElementById('lhdn-cat-tabs');
+    if (tabBar) {
+        if (cats.length > 1) {
+            tabBar.style.display = 'block';
+            tabBar.innerHTML = cats.map(c => {
+                const key = c.toLowerCase();
+                const isActive = lhdnActiveCat === key;
+                return `<span onclick="lhdnActiveCat='${key}';renderLhdn()" style="display:inline-block;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid ${isActive ? '#7ab3ff' : 'transparent'};color:${isActive ? '#7ab3ff' : 'var(--text-dim)'};white-space:nowrap;">${c}</span>`;
+            }).join('');
+        } else {
+            tabBar.style.display = 'none';
+        }
+    }
+
+    // Filter items
+    const filtered = lhdnActiveCat === 'semua' ? items.map((r,i) => ({r,i})) : items.map((r,i) => ({r,i})).filter(({r}) => (r.cat||'').toLowerCase() === lhdnActiveCat);
+
+    const list = document.getElementById('lhdn-list');
+    if (!list) return;
+    if (!filtered.length) { list.innerHTML = `<div style="padding:10px 0 14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-muted);">Tiada dokumen${lhdnActiveCat !== 'semua' ? ' dalam kategori ini' : ''}</div>`; return; }
+
+    // Group by category for display
+    const groups = {};
+    filtered.forEach(({r, i}) => {
+        const g = r.cat || '—';
+        if (!groups[g]) groups[g] = [];
+        groups[g].push({r, i});
+    });
+
+    list.innerHTML = Object.entries(groups).map(([grp, grpItems]) => {
+        const rows = grpItems.map(({r, i}) => {
+            const isPdf = r.type === 'application/pdf';
+            const icon = isPdf ? '📄' : '🖼️';
+            const viewAction = isPdf ? `window.open(getLhdnStore()[${i}].data,'_blank')` : `openLhdnLightbox(${i})`;
+            const safeName = (r.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            const safeCat = (r.cat || '').replace(/"/g, '&quot;');
+            return `<div class="receipt-row">
+                <span class="receipt-row-icon">${icon}</span>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;">
+                    <input class="receipt-row-name" type="text" value="${safeName}" placeholder="Nama dokumen..." onchange="renameLhdn(${i},this.value)" onclick="this.select()" style="width:100%;">
+                    <input class="receipt-row-name" type="text" value="${safeCat}" placeholder="Kategori (cth: EA Form, Slip Gaji...)" onchange="recatLhdn(${i},this.value)" onclick="this.select()" style="font-size:0.65rem;color:var(--text-dim);width:100%;">
+                </div>
+                <button class="receipt-row-view" onclick="${viewAction}" style="color:#7ab3ff;border-color:rgba(122,179,255,0.2);">Buka</button>
+                <button class="receipt-row-dl" onclick="downloadLhdn(${i})">⬇</button>
+                <button class="receipt-row-del" onclick="deleteLhdn(${i})">✕</button>
+            </div>`;
+        }).join('');
+        const grpLabel = grp !== '—' ? `<div style="padding:6px 0 2px;font-family:'JetBrains Mono',monospace;font-size:0.52rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7ab3ff;opacity:0.7;">${grp}</div>` : '';
+        return grpLabel + rows;
+    }).join('');
+}
+
+function initLhdn() {
+    if (!store.lhdn) store.lhdn = {};
+    lhdnYear = new Date().getFullYear();
+    renderLhdn();
+}
 
 
 window.addEventListener('load', () => {
@@ -2404,6 +3151,8 @@ renderStats();
 loadNotes();
 loadTheme();
 renderNursingNotes();
+initExpenses();
+initLhdn();
 </script>
 </body>
 </html>
