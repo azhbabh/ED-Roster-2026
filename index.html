@@ -1606,7 +1606,6 @@
             </div>
             <!-- Google Drive sync (inline) -->
             <div class="hero-gsync" id="gsync-bar">
-                <div class="hero-gsync-avatar" id="gsync-avatar">☁️</div>
                 <div class="hero-gsync-info">
                     <div class="hero-gsync-name" id="gsync-name">Tidak Log Masuk</div>
                     <div class="hero-gsync-status" id="gsync-status">Google Drive</div>
@@ -3054,8 +3053,8 @@ function gsyncSetUser(user) {
     const avatar = document.getElementById('gsync-avatar');
     const btn = document.getElementById('gsync-action-btn');
     if(user) {
-        if(name) name.innerText = user.name || user.email || 'Google User';
-        if(avatar) avatar.innerHTML = user.picture ? `<img src="${user.picture}">` : '👤';
+        if(name) name.innerText = 'Google Drive';
+        if(avatar) avatar.innerHTML = '☁️';
         if(btn) { btn.innerText = 'KELUAR'; btn.className = 'hero-gsync-btn danger'; }
     } else {
         if(name) name.innerText = 'Tidak Log Masuk';
