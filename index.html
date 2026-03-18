@@ -72,152 +72,133 @@
 
         /* ── PRAYER TIME WIDGET ── */
         .prayer-widget {
-            background: var(--card);
             border: 1px solid var(--border);
+            border-top: 2px solid transparent;
+            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
             border-radius: var(--radius);
-            padding: 14px 16px;
-            margin-top: 14px;
-            margin-bottom: 0;
+            padding: 10px 14px;
+            margin-top: 10px;
+            margin-bottom: 12px;
             position: relative;
             overflow: hidden;
         }
-
         .prayer-widget::before {
             content: '';
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background: linear-gradient(135deg, rgba(80,200,120,0.05) 0%, transparent 60%);
             pointer-events: none;
         }
-
         .prayer-widget-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
-
         .prayer-widget-title {
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 5px;
         }
-
         .prayer-widget-title span {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.58rem;
+            font-size: 0.55rem;
             font-weight: 700;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--primary);
         }
-
         .prayer-location {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: var(--text-muted);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
         }
-
+        /* Next prayer — compact inline pill */
         .prayer-next-banner {
-            background: var(--primary-dim);
-            border: 1px solid rgba(80,200,120,0.2);
-            border-radius: var(--radius-xs);
-            padding: 8px 12px;
+            display: none;
+        }
+        /* Compact next prayer row above grid */
+        .prayer-next-compact {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
+            gap: 6px;
+            margin-bottom: 7px;
         }
-
-        .prayer-next-label {
+        .prayer-next-compact-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.55rem;
-            color: var(--primary);
+            font-size: 0.5rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
+            color: var(--text-muted);
         }
-
-        .prayer-next-name {
-            font-size: 0.85rem;
+        .prayer-next-compact-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .prayer-next-compact-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
             font-weight: 700;
             color: var(--text);
         }
-
-        .prayer-next-time {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.6rem;
-            letter-spacing: 0.05em;
-            color: var(--primary);
-            filter: drop-shadow(0 0 8px var(--primary-glow));
-        }
-
-        .prayer-countdown {
+        .prayer-next-compact-countdown {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             color: var(--text-dim);
-            text-align: right;
+            margin-left: auto;
         }
-
         .prayer-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 4px;
+            gap: 3px;
         }
-
         .prayer-slot {
             text-align: center;
-            padding: 7px 2px;
+            padding: 5px 2px;
             border-radius: var(--radius-xs);
             background: var(--surface);
             border: 1px solid var(--border);
             transition: all 0.2s;
             position: relative;
         }
-
         .prayer-slot.active {
             border-color: var(--primary);
             background: var(--primary-dim);
         }
-
-        .prayer-slot.passed {
-            opacity: 0.45;
-        }
-
+        .prayer-slot.passed { opacity: 0.4; }
         .prayer-slot-name {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.48rem;
+            font-size: 0.44rem;
             font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
-
         .prayer-slot.active .prayer-slot-name { color: var(--primary); }
-
         .prayer-slot-time {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             color: var(--text-dim);
         }
-
         .prayer-slot.active .prayer-slot-time { color: var(--text); }
-
         .prayer-loading {
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
-            padding: 16px;
+            padding: 10px;
             font-family: 'JetBrains Mono', monospace;
         }
-
         .prayer-error {
             text-align: center;
             font-size: 0.65rem;
             color: var(--danger);
-            padding: 8px;
+            padding: 6px;
             font-family: 'JetBrains Mono', monospace;
         }
 
@@ -322,8 +303,11 @@
 
         /* ── SHIFT SUMMARY ── */
         .shift-summary {
-            background: var(--card);
             border: 1px solid var(--border);
+            border-top: 2px solid transparent;
+            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
             border-radius: var(--radius);
             padding: 16px; margin-bottom: 12px;
             display: grid; grid-template-columns: 1fr 1fr;
@@ -340,7 +324,8 @@
         /* ── STATS ROW ── */
         .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px; }
         .stat-card {
-            background:var(--card); border:1px solid var(--border); border-radius:var(--radius-sm);
+            border:1px solid var(--border); border-top:2px solid transparent; border-radius:var(--radius-sm);
+            background-image:linear-gradient(var(--card),var(--card)),linear-gradient(90deg,rgba(80,200,120,0.6),rgba(80,200,120,0.1)); background-origin:border-box; background-clip:padding-box,border-box;
             padding:14px 6px 10px; text-align:center; cursor:pointer;
             transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);
             position:relative; overflow:hidden;
@@ -370,9 +355,13 @@
 
         /* ── SECTION ── */
         .section {
-            background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+            border:1px solid var(--border); border-radius:var(--radius);
             padding:18px 16px; margin-bottom:12px;
             position:relative; overflow:hidden;
+            border-top: 2px solid transparent;
+            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
         }
         .section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
         h3 { font-family:'JetBrains Mono',monospace; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.18em; color:var(--primary); }
@@ -503,6 +492,33 @@
             font-family:'JetBrains Mono',monospace; transition:all 0.15s;
         }
         .btn-rsi:active { background:var(--primary); color:black; }
+
+        /* ── DRUG TABS ── */
+        .drug-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 12px;
+            margin-top: -4px;
+        }
+        .drug-tab {
+            padding: 8px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .drug-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        .drug-tab-panel { display: none; }
+        .drug-tab-panel.active { display: block; }
         #btn-pdf { background:#1a2e45; border:1px solid rgba(65,105,225,0.4); color:#7ab3ff; border-radius:var(--radius-xs); padding:5px 9px; font-size:0.6rem; font-weight:700; cursor:pointer; display:none; font-family:'JetBrains Mono',monospace; }
         .btn-add-drug { background:none; border:1px solid var(--border-bright); color:var(--primary); border-radius:var(--radius-xs); width:28px; height:28px; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
         .btn-add-drug:active { background:var(--primary); color:black; }
@@ -585,7 +601,7 @@
         .claim-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); }
         .claim-row:last-child { border-bottom:none; }
         .claim-cat-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-        .claim-badge { font-size:0.62rem; background:var(--primary); color:#000; font-weight:900; padding:2px 8px; border-radius:20px; }
+        .claim-badge { font-size:0.62rem; background:var(--primary-dim); color:var(--primary); border:1px solid rgba(80,200,120,0.25); font-weight:700; padding:2px 8px; border-radius:20px; }
         .claim-divider { height:1px; background:var(--border); margin:12px 0; }
 
         .selection-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; }
@@ -737,6 +753,20 @@
             padding: 10px 14px !important;
             font-size: 0.78rem !important;
             margin-bottom: 10px !important;
+        }
+
+        /* ── RECEIPT STATUS BAR ── */
+        .receipt-status-dot {
+            width: 3px; height: 13px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            transition: background 0.4s;
+        }
+        .receipt-status-dot.empty {
+            background: var(--danger);
+        }
+        .receipt-status-dot.filled {
+            background: var(--success);
         }
 
         .nursing-empty {
@@ -1066,8 +1096,11 @@
 
         /* ── MONTHLY EXPENSES / RECEIPT ── */
         .expense-section {
-            background: var(--card);
             border: 1px solid var(--border);
+            border-top: 2px solid transparent;
+            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
             border-radius: var(--radius);
             margin-bottom: 12px;
             overflow: hidden;
@@ -1257,32 +1290,330 @@
             font-size: 0.6rem; margin-top: 10px;
             letter-spacing: 0.06em;
         }
+        /* ── HERO CLOCK HEADER ── */
+        .hero-header {
+            background: var(--card-raised);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 20px 20px 18px;
+            margin-top: 14px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--primary-dim) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.6;
+        }
+        .hero-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            position: relative; z-index: 1;
+        }
+        .hero-dept-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        .hero-clock-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            position: relative; z-index: 1;
+        }
+        .hero-clock-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary);
+            position: relative; z-index: 1;
+        }
+        .hero-clock-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            position: relative; z-index: 1;
+        }
+        .hero-clock-sep {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+        .hero-divider {
+            height: 1px;
+            background: var(--border-bright);
+            margin: 14px 0 14px;
+            position: relative; z-index: 1;
+        }
+        .hero-staff-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative; z-index: 1;
+        }
+        .hero-staff-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .hero-staff-name {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.58rem;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+        .hero-staff-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+        }
+        .hero-roster-badge { display: none; }
+
+        .hero-gsync {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding-left: 12px;
+            border-left: 1px solid var(--border-bright);
+            flex-shrink: 0;
+            max-width: 130px;
+        }
+        .hero-gsync-avatar {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border-bright);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .hero-gsync-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover; border-radius: 50%;
+        }
+        .hero-gsync-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .hero-gsync-name {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 70px;
+        }
+        .hero-gsync-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.48rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .hero-gsync-btn {
+            background: var(--primary-dim);
+            border: 1px solid rgba(80,200,120,0.3);
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.48rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            padding: 4px 7px;
+            border-radius: var(--radius-xs);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+        .hero-gsync-btn:active { background: var(--primary); color: black; }
+        .hero-gsync-btn.danger {
+            background: rgba(255,82,82,0.1);
+            border-color: rgba(255,82,82,0.3);
+            color: var(--danger);
+        }
+        .hero-gsync-status.syncing { color: #f39c12; }
+        .hero-gsync-status.synced { color: var(--success); }
+        .hero-gsync-status.error { color: var(--danger); }
+
+        /* ── QUICK NOTES ── */
+        .qnote-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--primary);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            margin-bottom: 8px;
+        }
+        .qnote-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .qnote-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            cursor: text;
+        }
+        .qnote-title::placeholder { color: var(--text-muted); }
+        .qnote-actions { display: flex; gap: 6px; flex-shrink: 0; }
+        .qnote-btn-save {
+            background: none; border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem; font-weight: 700;
+            color: var(--primary); cursor: pointer; padding: 0;
+            letter-spacing: 0.04em;
+        }
+        .qnote-btn-del {
+            background: none; border: none;
+            font-size: 0.8rem; color: var(--danger);
+            cursor: pointer; opacity: 0.4; padding: 0;
+            transition: opacity 0.15s;
+        }
+        .qnote-btn-del:active { opacity: 1; }
+        .qnote-textarea {
+            width: 100%;
+            background: none;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text);
+            line-height: 1.55;
+            min-height: 60px;
+        }
+        .qnote-textarea::placeholder { color: var(--text-muted); }
+        .qnote-saved-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem;
+            color: var(--success);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .qnote-saved-badge.show { opacity: 1; }
+        .qnote-empty {
+            text-align: center;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        /* ── CALENDAR / CLAIM SLIDER ── */
+        .cal-slider-wrap {
+            position: relative;
+            margin-bottom: 12px;
+            touch-action: pan-y;
+        }
+        .cal-slider-track {
+            display: flex;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .cal-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            min-width: 0;
+        }
+        .cal-slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+        .cal-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--border-bright);
+            transition: background 0.25s, transform 0.25s;
+        }
+        .cal-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
     </style>
-</head>
 <body>
 
 <div class="ambient-glow"></div>
 
 <div class="page">
 
-    <!-- THEME BAR -->
-    <div class="theme-bar">
-        <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-btn">
-            <span id="theme-toggle-icon">☀️</span>
-            <span id="theme-toggle-label">CERAH</span>
-        </button>
-    </div>
-
-    <!-- GOOGLE SYNC BAR -->
-    <div class="gsync-bar" id="gsync-bar">
-        <div class="gsync-left">
-            <div class="gsync-avatar" id="gsync-avatar">☁️</div>
-            <div>
-                <div class="gsync-name" id="gsync-name">Tidak Log Masuk</div>
-                <div class="gsync-status" id="gsync-status">Google Drive — Tidak aktif</div>
+    <!-- HERO CLOCK HEADER -->
+    <div class="hero-header">
+        <!-- Top row: dept label + theme toggle -->
+        <div class="hero-top-row">
+            <span class="hero-dept-label">Emergency Dept</span>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-btn">
+                <span id="theme-toggle-icon">☀️</span>
+                <span id="theme-toggle-label">CERAH</span>
+            </button>
+        </div>
+        <!-- Clock + Date + Day row -->
+        <div class="hero-clock-row">
+            <div id="hero-clock-time" class="hero-clock-time">--:--:--</div>
+            <span class="hero-clock-sep">·</span>
+            <div id="hero-clock-date" class="hero-clock-date">-- --- ----</div>
+            <span class="hero-clock-sep">·</span>
+            <div id="hero-clock-day" class="hero-clock-date">---</div>
+        </div>
+        <!-- Divider -->
+        <div class="hero-divider"></div>
+        <!-- Staff info row -->
+        <div class="hero-staff-row">
+            <div class="avatar-ring" style="flex-shrink:0;">
+                <img id="profile-pic" src="https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=50c878&color=000&bold=true" class="profile-img" onclick="document.getElementById('upload').click()">
+            </div>
+            <input type="file" id="upload" hidden onchange="loadImg(event)">
+            <div class="hero-staff-info">
+                <div class="hero-staff-name">Ahmad Zilalul Hilmi Bin Adnan</div>
+                <div class="hero-staff-id">Staff · 0656</div>
+            </div>
+            <!-- Google Drive sync (inline) -->
+            <div class="hero-gsync" id="gsync-bar">
+                <div class="hero-gsync-avatar" id="gsync-avatar">☁️</div>
+                <div class="hero-gsync-info">
+                    <div class="hero-gsync-name" id="gsync-name">Tidak Log Masuk</div>
+                    <div class="hero-gsync-status" id="gsync-status">Google Drive</div>
+                </div>
+                <button class="hero-gsync-btn" id="gsync-action-btn" onclick="handleGsyncAction()">MASUK</button>
             </div>
         </div>
-        <button class="gsync-btn" id="gsync-action-btn" onclick="handleGsyncAction()">LOG MASUK</button>
     </div>
 
     <!-- PRAYER TIME WIDGET -->
@@ -1294,35 +1625,14 @@
             </div>
             <span class="prayer-location">Kuala Terengganu, TRG</span>
         </div>
-        <div id="prayer-next-banner" class="prayer-next-banner" style="display:none;">
-            <div>
-                <div class="prayer-next-label">Seterusnya</div>
-                <div class="prayer-next-name" id="prayer-next-name">—</div>
-                <div class="prayer-countdown" id="prayer-countdown">—</div>
-            </div>
-            <div class="prayer-next-time" id="prayer-next-time">--:--</div>
+        <div id="prayer-next-compact" class="prayer-next-compact" style="display:none;">
+            <span class="prayer-next-compact-label">Seterusnya</span>
+            <span class="prayer-next-compact-name" id="prayer-next-name">—</span>
+            <span class="prayer-next-compact-time" id="prayer-next-time">--:--</span>
+            <span class="prayer-next-compact-countdown" id="prayer-countdown">—</span>
         </div>
         <div id="prayer-grid" class="prayer-grid">
             <div class="prayer-loading" style="grid-column:1/-1;">Memuatkan waktu solat...</div>
-        </div>
-    </div>
-
-    <!-- PROFILE HEADER -->
-    <div class="profile-header">
-        <div class="profile-left">
-            <div class="avatar-ring">
-                <img id="profile-pic" src="https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=50c878&color=000&bold=true" class="profile-img" onclick="document.getElementById('upload').click()">
-            </div>
-            <input type="file" id="upload" hidden onchange="loadImg(event)">
-            <div class="profile-info">
-                <div class="profile-name">Ahmad Zilalul Hilmi Bin Adnan</div>
-                <div class="staff-id">Staff · 0656</div>
-                <div id="live-clock">--/--/---- | --:--:--</div>
-            </div>
-        </div>
-        <div class="roster-badge">
-            <span class="main">ROSTER</span>
-            <span class="dept">Emergency Dept</span>
         </div>
     </div>
 
@@ -1365,31 +1675,41 @@
 
     <input type="file" id="restore-upload" accept="application/json" hidden onchange="processRestore(event)">
 
-    <!-- CALENDAR -->
-    <div class="section">
-        <div class="cal-nav">
-            <button class="nav-btn" onclick="changeMonth(-1)">❮</button>
-            <h3 id="cal-title">--</h3>
-            <button class="nav-btn" onclick="changeMonth(1)">❯</button>
+    <!-- CALENDAR + CLAIM SLIDER -->
+    <div class="cal-slider-wrap" id="cal-slider-wrap">
+        <!-- Dot indicator -->
+        <div class="cal-slider-dots">
+            <span class="cal-dot active" id="cal-dot-0"></span>
+            <span class="cal-dot" id="cal-dot-1"></span>
         </div>
-        <button class="import-btn" onclick="openImportSheet()">📋 IMPORT DARI EXCEL</button>
-        <div class="calendar-grid">
-            <div class="day-label">AH</div><div class="day-label">IS</div><div class="day-label">SE</div>
-            <div class="day-label">RA</div><div class="day-label">KH</div><div class="day-label">JU</div><div class="day-label">SA</div>
-        </div>
-        <div id="calendar-body" class="calendar-grid"></div>
-    </div>
-
-    <!-- CLAIM -->
-    <div class="section" id="claim-section">
-        <div class="claim-toggle" onclick="toggleClaim()">
-            <h3>Kiraan Claim</h3>
-            <div style="display:flex;align-items:center;gap:8px;">
-                <span id="claim-month-label" style="font-size:0.6rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;"></span>
-                <span id="claim-toggle-icon" style="font-size:0.75rem;color:var(--text-dim);">▼</span>
+        <div class="cal-slider-track" id="cal-slider-track">
+            <!-- Slide 0: Calendar -->
+            <div class="cal-slide">
+                <div class="section" style="margin-bottom:0;">
+                    <div class="cal-nav">
+                        <button class="nav-btn" onclick="changeMonth(-1)">❮</button>
+                        <h3 id="cal-title">--</h3>
+                        <button class="nav-btn" onclick="changeMonth(1)">❯</button>
+                    </div>
+                    <button class="import-btn" onclick="openImportSheet()">📋 IMPORT DARI EXCEL</button>
+                    <div class="calendar-grid">
+                        <div class="day-label">AH</div><div class="day-label">IS</div><div class="day-label">SE</div>
+                        <div class="day-label">RA</div><div class="day-label">KH</div><div class="day-label">JU</div><div class="day-label">SA</div>
+                    </div>
+                    <div id="calendar-body" class="calendar-grid"></div>
+                </div>
+            </div>
+            <!-- Slide 1: Claim -->
+            <div class="cal-slide">
+                <div class="section" id="claim-section" style="margin-bottom:0;">
+                    <div class="section-header">
+                        <h3>Kiraan Claim</h3>
+                        <span id="claim-month-label" style="font-size:0.6rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;"></span>
+                    </div>
+                    <div id="claim-body" style="margin-top:0;"></div>
+                </div>
             </div>
         </div>
-        <div id="claim-body" style="display:none;margin-top:12px;"></div>
     </div>
 
     <!-- EMERGENCY DRUG -->
@@ -1397,14 +1717,23 @@
         <div class="section-header">
             <h3>Emergency Drug</h3>
             <div class="drug-toolbar">
-                <button class="btn-rsi" onclick="handleRSIClick()">💉 Pre-Med RSI</button>
                 <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
                 <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
                 <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
             </div>
         </div>
-        <input type="text" id="drug-search" placeholder="Cari ubat..." oninput="searchDrugs()">
-        <div id="drug-results"></div>
+        <!-- Tabs -->
+        <div class="drug-tabs">
+            <div class="drug-tab active" id="dtab-drug" onclick="switchDrugTab('drug')">Senarai Ubat</div>
+            <div class="drug-tab" id="dtab-rsi" onclick="switchDrugTab('rsi')">💉 Pre-Med RSI</div>
+        </div>
+        <!-- Panel: Senarai Ubat -->
+        <div class="drug-tab-panel active" id="dpanel-drug">
+            <input type="text" id="drug-search" placeholder="Cari ubat..." oninput="searchDrugs()">
+            <div id="drug-results"></div>
+        </div>
+        <!-- Panel: Pre-Med RSI (inline, no sheet) -->
+        <div class="drug-tab-panel" id="dpanel-rsi"></div>
     </div>
 
     <!-- TO-DO -->
@@ -1418,21 +1747,36 @@
 
     <!-- NOTES -->
     <div class="section">
-        <h3 style="margin-bottom:10px;">Nota Ringkas</h3>
-        <textarea id="personal-notes" placeholder="Tulis nota di sini..." oninput="saveNotes()"></textarea>
+        <div class="section-header">
+            <h3>Nota Ringkas</h3>
+            <button onclick="addQuickNote()" class="btn-add-drug">+</button>
+        </div>
+        <div id="quick-notes-list"></div>
+        <textarea id="personal-notes" style="display:none;"></textarea>
     </div>
 
     <!-- NURSING NOTE -->
     <div class="section">
         <div class="section-header">
             <h3>Nursing Note</h3>
-            <button onclick="openAddNursingNote()" class="btn-add-drug">+</button>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span id="nursing-note-count-badge" style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;color:var(--primary);background:var(--primary-dim);border:1px solid rgba(80,200,120,0.25);border-radius:20px;padding:2px 9px;display:none;"></span>
+                <button onclick="openAddNursingNote()" class="btn-add-drug">+</button>
+            </div>
         </div>
-        <div id="tool-nursing" class="tool-panel active">
-            <input type="text" id="nursing-search-input" class="nursing-search" placeholder="🔍 Cari nota... (taip 'rsi', 'lytic', 'drug calc')" oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
+        <!-- Tabs -->
+        <div class="drug-tabs">
+            <div class="drug-tab active" id="ntab-nota" onclick="switchNursingTab('nota')">Nota</div>
+            <div class="drug-tab" id="ntab-rsi" onclick="switchNursingTab('rsi')">💉 RSI</div>
+            <div class="drug-tab" id="ntab-lytic" onclick="switchNursingTab('lytic')">⚡ Lytic</div>
+            <div class="drug-tab" id="ntab-drugcalc" onclick="switchNursingTab('drugcalc')">🧮 Drug Calc</div>
+        </div>
+        <!-- Panel: Nota -->
+        <div class="drug-tab-panel active" id="npanel-nota">
+            <input type="text" id="nursing-search-input" class="nursing-search" placeholder="🔍 Cari nota..." oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
             <div id="nursing-note-list"></div>
         </div>
-        <div id="tool-rsi" class="tool-panel"><button onclick="openBuiltinPanel(null)" style="background:none;border:none;color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;padding:0 0 10px;display:flex;align-items:center;gap:4px;">‹ Kembali</button>
+        <div id="npanel-rsi" class="drug-tab-panel">
             <div class="rsi-panel-title">7P Rapid Sequence Intubation (RSI)</div>
             <div class="rsi-step">
                 <div class="rsi-step-header">
@@ -1544,7 +1888,7 @@
                 </div>
             </div>
         </div>
-        <div id="tool-lytic" class="tool-panel"><button onclick="openBuiltinPanel(null)" style="background:none;border:none;color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;padding:0 0 10px;display:flex;align-items:center;gap:4px;">‹ Kembali</button>
+        <div id="npanel-lytic" class="drug-tab-panel">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#f39c12;filter:drop-shadow(0 0 6px rgba(243,156,18,0.4));">⚡ Lytic Cocktail</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">Correction for Hyperkalaemia</div>
@@ -1578,7 +1922,7 @@
                 </div>
             </div>
         </div>
-        <div id="tool-drugcalc" class="tool-panel"><button onclick="openBuiltinPanel(null)" style="background:none;border:none;color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;padding:0 0 10px;display:flex;align-items:center;gap:4px;">‹ Kembali</button>
+        <div id="npanel-drugcalc" class="drug-tab-panel">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#c678dd;filter:drop-shadow(0 0 6px rgba(198,120,221,0.4));">🧮 Drug Calculation</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:14px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">IV Infusion Protocol</div>
@@ -1681,7 +2025,9 @@
             <!-- House Rent -->
             <div class="receipt-cat">
                 <div class="receipt-cat-header">
-                    <div class="receipt-cat-title">🏠 House Rent</div>
+                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
+                        <span id="dot-rent" class="receipt-status-dot empty"></span>🏠 House Rent
+                    </div>
                     <div style="display:flex;align-items:center;gap:8px;">
                         <span class="receipt-count" id="rc-count-rent"></span>
                         <input type="file" id="rf-rent" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('rent',this)">
@@ -1697,7 +2043,9 @@
             <!-- Car -->
             <div class="receipt-cat">
                 <div class="receipt-cat-header">
-                    <div class="receipt-cat-title">🚗 Car</div>
+                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
+                        <span id="dot-car" class="receipt-status-dot empty"></span>🚗 Car
+                    </div>
                     <div style="display:flex;align-items:center;gap:8px;">
                         <span class="receipt-count" id="rc-count-car"></span>
                         <input type="file" id="rf-car" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('car',this)">
@@ -1713,7 +2061,9 @@
             <!-- Personal -->
             <div class="receipt-cat">
                 <div class="receipt-cat-header">
-                    <div class="receipt-cat-title">👤 Personal</div>
+                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
+                        <span id="dot-personal" class="receipt-status-dot empty"></span>👤 Personal
+                    </div>
                     <div style="display:flex;align-items:center;gap:8px;">
                         <span class="receipt-count" id="rc-count-personal"></span>
                         <input type="file" id="rf-personal" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('personal',this)">
@@ -1729,12 +2079,14 @@
             <!-- Utility -->
             <div class="receipt-cat">
                 <div class="receipt-cat-header">
-                    <div class="receipt-cat-title">⚡ Utility</div>
+                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
+                        ⚡ Utility
+                    </div>
                     <span class="receipt-count" id="rc-count-utility"></span>
                 </div>
                 <!-- TNB -->
                 <div class="receipt-sub-header">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">TNB</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;"><span id="dot-utility-tnb" class="receipt-status-dot empty"></span>TNB</span>
                     <div style="display:flex;align-items:center;gap:8px;">
                         <input type="file" id="rf-utility-tnb" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('utility-tnb',this)">
                         <div class="receipt-upload-zone" onclick="document.getElementById('rf-utility-tnb').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('utility-tnb',event,this)">
@@ -1746,7 +2098,7 @@
                 <div class="receipt-list" id="rg-utility-tnb"></div>
                 <!-- SATU -->
                 <div class="receipt-sub-header">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">SATU</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;"><span id="dot-utility-satu" class="receipt-status-dot empty"></span>SATU</span>
                     <div style="display:flex;align-items:center;gap:8px;">
                         <input type="file" id="rf-utility-satu" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('utility-satu',this)">
                         <div class="receipt-upload-zone" onclick="document.getElementById('rf-utility-satu').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('utility-satu',event,this)">
@@ -1890,7 +2242,8 @@ function renderPrayerWidget() {
         html += `<div class="prayer-slot${isNext?' active':''}${isPassed&&!isNext?' passed':''}"><div class="prayer-slot-name">${PRAYER_NAMES[i]}</div><div class="prayer-slot-time">${prayerTimes[k]}</div></div>`;
     });
     grid.innerHTML = html;
-    banner.style.display = 'flex';
+    const compact = document.getElementById('prayer-next-compact');
+    if (compact) compact.style.display = 'flex';
     document.getElementById('prayer-next-name').innerText = PRAYER_NAMES[nextIdx === 0 && nextMins > 24*60 ? 0 : nextIdx];
     document.getElementById('prayer-next-time').innerText = prayerTimes[PRAYER_KEYS[nextIdx === 0 && nextMins > 24*60 ? 0 : nextIdx]];
     updatePrayerCountdown(nextMins, nowMins);
@@ -2002,84 +2355,53 @@ function deleteNursingNote(idx) {
 }
 
 function filterNursingNotes(q) {
-    const lower = (q || '').toLowerCase().trim();
-
-    const builtins = [
-        { panel: 'rsi',      label: '💉 7P Rapid Sequence Intubation (RSI)', words: ['rsi','7p','rapid','sequence','intubation','lemon','males','preoxygenation','pretreatment','paralytic','positioning','postintubation'] },
-        { panel: 'lytic',    label: '⚡ Lytic Cocktail', words: ['lytic','cocktail','hyperkalemia','hyperkalaemia','kalium','calcium','gluconate','dextrose','insulin'] },
-        { panel: 'drugcalc', label: '🧮 Drug Calculation', words: ['drug calc','drug calculation','noradrenaline','nora','lovophed','infusion','mcg/kg','ml/hr'] }
-    ];
-
-    // Hide all special panels, show nursing by default
-    ['rsi','lytic','drugcalc'].forEach(p => {
-        const el = document.getElementById('tool-' + p);
-        if (el) { el.style.display = 'none'; el.classList.remove('active'); }
-    });
-    const nursingPanel = document.getElementById('tool-nursing');
-    if (nursingPanel) { nursingPanel.style.display = 'block'; nursingPanel.classList.add('active'); }
-
-    if (!lower) { renderNursingNotes(''); return; }
-
-    // Check if any builtin keyword matches
-    const matchedBuiltins = builtins.filter(b => b.words.some(w => w.includes(lower) || lower.includes(w)));
-
-    if (matchedBuiltins.length > 0) {
-        // Show builtin shortcuts in the nursing-note-list area
-        const list = document.getElementById('nursing-note-list');
-        if (list) {
-            list.innerHTML = matchedBuiltins.map(b => `
-                <div onclick="openBuiltinPanel('${b.panel}')" style="
-                    background:var(--surface); border:1px solid var(--border);
-                    border-left:3px solid var(--primary);
-                    border-radius:var(--radius-sm); padding:11px 14px;
-                    margin-bottom:8px; cursor:pointer;
-                    display:flex; align-items:center; justify-content:space-between;
-                    transition:border-color 0.15s;">
-                    <span style="font-size:0.82rem;font-weight:700;color:var(--text);">${b.label}</span>
-                    <span style="font-size:0.7rem;color:var(--primary);font-family:'JetBrains Mono',monospace;font-weight:700;">BUKA ›</span>
-                </div>`).join('');
-        }
-    } else {
-        renderNursingNotes(q);
-    }
+    renderNursingNotes(q);
 }
 
 function openBuiltinPanel(panel) {
-    // Clear search
-    const input = document.getElementById('nursing-search-input');
-    if (input) input.value = '';
-
-    const nursingPanel = document.getElementById('tool-nursing');
-    const builtinPanels = ['rsi','lytic','drugcalc'];
-
-    if (!panel) {
-        // Back to nursing
-        if (nursingPanel) { nursingPanel.style.display = 'block'; nursingPanel.classList.add('active'); }
-        builtinPanels.forEach(p => {
-            const el = document.getElementById('tool-' + p);
-            if (el) { el.style.display = 'none'; el.classList.remove('active'); }
-        });
-        renderNursingNotes('');
-        return;
-    }
-
-    // Hide nursing, show target panel
-    if (nursingPanel) { nursingPanel.style.display = 'none'; nursingPanel.classList.remove('active'); }
-    builtinPanels.forEach(p => {
-        const el = document.getElementById('tool-' + p);
-        if (!el) return;
-        if (p === panel) { el.style.display = 'block'; el.classList.add('active'); }
-        else { el.style.display = 'none'; el.classList.remove('active'); }
-    });
+    if (panel) switchNursingTab(panel);
+    else switchNursingTab('nota');
 }
+
+let nursingShowAll = false;
+
+const BUILTIN_SHORTCUTS = [
+    { panel: 'rsi',      label: '7P Rapid Sequence Intubation', icon: '💉', color: '#7ab3ff', bg: 'rgba(122,179,255,0.08)', border: 'rgba(122,179,255,0.25)' },
+    { panel: 'lytic',    label: 'Lytic Cocktail',               icon: '⚡', color: '#f39c12', bg: 'rgba(243,156,18,0.08)',  border: 'rgba(243,156,18,0.25)'  },
+    { panel: 'drugcalc', label: 'Drug Calculation',             icon: '🧮', color: '#c678dd', bg: 'rgba(198,120,221,0.08)', border: 'rgba(198,120,221,0.25)' },
+];
 
 function renderNursingNotes(query = '') {
     const list = document.getElementById('nursing-note-list'); if(!list) return;
     const notes = store.nursingNotes || [];
-    const filtered = query ? notes.filter(n => n.text.toLowerCase().includes(query.toLowerCase()) || (n.patient||'').toLowerCase().includes(query.toLowerCase())) : notes;
-    if(filtered.length === 0) { list.innerHTML = `<div class="nursing-empty">${query ? '😕 Tiada nota ditemui.' : '📋 Belum ada nota. Tambah yang pertama!'}</div>`; return; }
+
+    // Update count badge
+    const badge = document.getElementById('nursing-note-count-badge');
+    if (badge) {
+        if (notes.length > 0) {
+            badge.style.display = 'inline-block';
+            badge.innerText = notes.length + ' nota';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    const queryLower = (query || '').toLowerCase().trim();
+    const filtered = queryLower ? notes.filter(n => n.text.toLowerCase().includes(queryLower) || (n.patient||'').toLowerCase().includes(queryLower)) : notes;
+
+    if (filtered.length === 0) {
+        list.innerHTML = `<div class="nursing-empty">${query ? '😕 Tiada nota ditemui.' : '📋 Belum ada nota. Tambah yang pertama!'}</div>`;
+        return;
+    }
+
     const sorted = [...filtered].sort((a,b) => { const da = new Date(a.date+'T'+(a.time||'00:00')), db = new Date(b.date+'T'+(b.time||'00:00')); return db-da; });
-    list.innerHTML = sorted.map(n => {
+
+    const PREVIEW_COUNT = 3;
+    const showAll = nursingShowAll || !!query;
+    const toShow = showAll ? sorted : sorted.slice(0, PREVIEW_COUNT);
+    const hidden = sorted.length - PREVIEW_COUNT;
+
+    const cards = toShow.map(n => {
         const realIdx = store.nursingNotes.indexOf(n);
         const catInfo = NURSING_CATEGORIES.find(c => c.id === n.category) || NURSING_CATEGORIES[4];
         const dispDate = n.date ? n.date.split('-').reverse().join('/') : '';
@@ -2092,18 +2414,124 @@ function renderNursingNotes(query = '') {
             <div class="nursing-note-tags"><span class="nursing-tag ${n.category}">${catInfo.label}</span></div>
         </div>`;
     }).join('');
+
+    let toggleBtn = '';
+    if (!query && sorted.length > PREVIEW_COUNT) {
+        if (!showAll) {
+            toggleBtn = `<button onclick="nursingShowAll=true;renderNursingNotes('')" style="width:100%;margin-top:4px;background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xs);padding:9px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;color:var(--text-dim);cursor:pointer;letter-spacing:0.08em;">▼ LIHAT ${hidden} NOTA LAGI</button>`;
+        } else {
+            toggleBtn = `<button onclick="nursingShowAll=false;renderNursingNotes('')" style="width:100%;margin-top:4px;background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xs);padding:9px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;color:var(--text-dim);cursor:pointer;letter-spacing:0.08em;">▲ LIPAT SEMULA</button>`;
+        }
+    }
+
+    list.innerHTML = cards + toggleBtn;
 }
 
 function toMY(d) { if(!d) return ''; const p=d.split('-'); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d; }
 function saveData() { localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); renderStats(); updateShiftSummary(); gTriggerSave(); }
-function saveNotes() { store.notes=document.getElementById('personal-notes').value; localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); gTriggerSave(); }
-function loadNotes() { document.getElementById('personal-notes').value=store.notes||""; if(store.profilePic) document.getElementById('profile-pic').src=store.profilePic; }
+function saveNotes() { /* legacy compat */ }
+function saveNotesManual() { /* legacy compat */ }
+
+function getQuickNotes() {
+    if (!store.quickNotes) store.quickNotes = [];
+    return store.quickNotes;
+}
+
+function saveQuickNotes() {
+    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+    gTriggerSave();
+}
+
+function renderQuickNotes() {
+    const list = document.getElementById('quick-notes-list');
+    if (!list) return;
+    const notes = getQuickNotes();
+    if (notes.length === 0) {
+        list.innerHTML = `<div class="qnote-empty">Tiada nota. Tekan + untuk tambah.</div>`;
+        return;
+    }
+    list.innerHTML = notes.map((n, i) => `
+        <div class="qnote-card" id="qnote-card-${i}">
+            <div class="qnote-header">
+                <input class="qnote-title" type="text" value="${(n.title||'').replace(/"/g,'&quot;')}" placeholder="Tajuk nota..." onchange="updateQuickNoteTitle(${i}, this.value)">
+                <div class="qnote-actions">
+                    <span class="qnote-saved-badge" id="qnote-badge-${i}">✓ SIMPAN</span>
+                    <button class="qnote-btn-save" onclick="saveQuickNote(${i})">SIMPAN</button>
+                    <button class="qnote-btn-del" onclick="deleteQuickNote(${i})">✕</button>
+                </div>
+            </div>
+            <textarea class="qnote-textarea" placeholder="Tulis nota di sini..." rows="3">${n.text||''}</textarea>
+        </div>`).join('');
+}
+
+function addQuickNote() {
+    const notes = getQuickNotes();
+    notes.unshift({ title: '', text: '', saved: true });
+    saveQuickNotes();
+    renderQuickNotes();
+    // Focus title of first note
+    setTimeout(() => {
+        const t = document.querySelector('.qnote-title');
+        if (t) t.focus();
+    }, 50);
+}
+
+function updateQuickNoteTitle(idx, val) {
+    const notes = getQuickNotes();
+    if (notes[idx]) notes[idx].title = val;
+}
+
+function saveQuickNote(idx) {
+    const notes = getQuickNotes();
+    if (!notes[idx]) return;
+    const card = document.getElementById(`qnote-card-${idx}`);
+    if (card) {
+        const ta = card.querySelector('.qnote-textarea');
+        if (ta) notes[idx].text = ta.value;
+        const ti = card.querySelector('.qnote-title');
+        if (ti) notes[idx].title = ti.value;
+    }
+    saveQuickNotes();
+    const badge = document.getElementById(`qnote-badge-${idx}`);
+    if (badge) {
+        badge.classList.add('show');
+        setTimeout(() => badge.classList.remove('show'), 1800);
+    }
+}
+
+function deleteQuickNote(idx) {
+    if (!confirm('Padam nota ini?')) return;
+    const notes = getQuickNotes();
+    notes.splice(idx, 1);
+    saveQuickNotes();
+    renderQuickNotes();
+}
+
+function loadNotes() {
+    // Migrate old single note to quickNotes if needed
+    if (store.notes && (!store.quickNotes || store.quickNotes.length === 0)) {
+        store.quickNotes = [{ title: 'Nota', text: store.notes }];
+    }
+    if (store.profilePic) document.getElementById('profile-pic').src = store.profilePic;
+    renderQuickNotes();
+}
 function triggerDatePicker(id) { const el=document.getElementById(id); if(el&&'showPicker' in HTMLInputElement.prototype) el.showPicker(); else if(el){el.focus();el.click();} }
 
 function updateTime() {
-    const n=new Date();
-    const d=String(n.getDate()).padStart(2,'0'), m=String(n.getMonth()+1).padStart(2,'0'), y=n.getFullYear();
-    document.getElementById('live-clock').innerText=`${d}/${m}/${y} | ${n.toLocaleTimeString('ms-MY',{hour12:false})}`;
+    const n = new Date();
+    const days = ['AHAD','ISNIN','SELASA','RABU','KHAMIS','JUMAAT','SABTU'];
+    const months = ['JAN','FEB','MAC','APR','MEI','JUN','JUL','OGO','SEP','OKT','NOV','DIS'];
+    const timeStr = n.toLocaleTimeString('ms-MY', {hour12: false, hour:'2-digit', minute:'2-digit', second:'2-digit'});
+    const dateStr = `${String(n.getDate()).padStart(2,'0')} ${months[n.getMonth()]} ${n.getFullYear()}`;
+    const dayStr = days[n.getDay()];
+    const tEl = document.getElementById('hero-clock-time');
+    const dEl = document.getElementById('hero-clock-date');
+    const dyEl = document.getElementById('hero-clock-day');
+    if (tEl) tEl.innerText = timeStr;
+    if (dEl) dEl.innerText = dateStr;
+    if (dyEl) dyEl.innerText = dayStr;
+    const legacy = document.getElementById('live-clock');
+    if (legacy) legacy.innerText = `${String(n.getDate()).padStart(2,'0')}/${String(n.getMonth()+1).padStart(2,'0')}/${n.getFullYear()} | ${timeStr}`;
 }
 
 function changeMonth(dir) { currentCalDate.setMonth(currentCalDate.getMonth()+dir); generateCalendar(); renderStats(); }
@@ -2369,6 +2797,33 @@ const RSI_DATA = [
 
 function handleRSIClick(){ document.getElementById('sheet-title').innerText="💉 Pre-Med RSI"; let html=''; RSI_DATA.forEach(section=>{ html+=`<div class="rsi-group-header">${section.group}</div>`; section.drugs.forEach(d=>{ html+=`<div class="drug-item"><div style="flex:1;min-width:0;"><div class="drug-name">${d.name}</div><div class="drug-ampule">${d.ampule}</div><div class="drug-prep">${d.prep}</div></div></div>`; }); }); document.getElementById('sheet-content').innerHTML=html; openSheet(); }
 
+function switchNursingTab(tab) {
+    ['nota','rsi','lytic','drugcalc'].forEach(t => {
+        document.getElementById('ntab-'+t).classList.toggle('active', t===tab);
+        document.getElementById('npanel-'+t).classList.toggle('active', t===tab);
+    });
+}
+
+function switchDrugTab(tab) {
+    ['drug','rsi'].forEach(t => {
+        document.getElementById('dtab-'+t).classList.toggle('active', t===tab);
+        document.getElementById('dpanel-'+t).classList.toggle('active', t===tab);
+    });
+    if (tab === 'rsi') {
+        const panel = document.getElementById('dpanel-rsi');
+        if (panel && !panel.innerHTML.trim()) {
+            let html = '';
+            RSI_DATA.forEach(section => {
+                html += `<div class="rsi-group-header">${section.group}</div>`;
+                section.drugs.forEach(d => {
+                    html += `<div class="drug-item"><div style="flex:1;min-width:0;"><div class="drug-name">${d.name}</div><div class="drug-ampule">${d.ampule}</div><div class="drug-prep">${d.prep}</div></div></div>`;
+                });
+            });
+            panel.innerHTML = html;
+        }
+    }
+}
+
 function triggerPDFUpload(e){e.preventDefault();document.getElementById('pdf-upload').click();}
 function savePDF(e){ const file=e.target.files[0]; if(file&&file.type==="application/pdf"){ const reader=new FileReader(); reader.onload=function(ev){store.pdfData=ev.target.result;saveData();checkPDFStatus();alert("PDF berjaya dimuat naik!");}; reader.readAsDataURL(file); } else alert("Sila pilih fail PDF sahaja."); }
 function openStoredPDF(){ if(store.pdfData){ const base64Parts=store.pdfData.split(','), contentType=base64Parts[0].split(':')[1].split(';')[0]; const byteCharacters=atob(base64Parts[1]), byteArrays=[]; for(let o=0;o<byteCharacters.length;o+=512){const slice=byteCharacters.slice(o,o+512);const bn=new Array(slice.length);for(let i=0;i<slice.length;i++)bn[i]=slice.charCodeAt(i);byteArrays.push(new Uint8Array(bn));} const blob=new Blob(byteArrays,{type:contentType}), blobUrl=URL.createObjectURL(blob); window.open(blobUrl,'_blank'); setTimeout(()=>URL.revokeObjectURL(blobUrl),100); } }
@@ -2590,7 +3045,7 @@ function gSilentRefresh() {
 function gsyncSetStatus(msg, cls='') {
     const el = document.getElementById('gsync-status');
     if(!el) return;
-    el.className = 'gsync-status' + (cls ? ' '+cls : '');
+    el.className = 'hero-gsync-status' + (cls ? ' '+cls : '');
     el.innerText = msg;
 }
 
@@ -2601,12 +3056,12 @@ function gsyncSetUser(user) {
     if(user) {
         if(name) name.innerText = user.name || user.email || 'Google User';
         if(avatar) avatar.innerHTML = user.picture ? `<img src="${user.picture}">` : '👤';
-        if(btn) { btn.innerText = 'LOG KELUAR'; btn.className = 'gsync-btn danger'; }
+        if(btn) { btn.innerText = 'KELUAR'; btn.className = 'hero-gsync-btn danger'; }
     } else {
         if(name) name.innerText = 'Tidak Log Masuk';
         if(avatar) avatar.innerHTML = '☁️';
-        if(btn) { btn.innerText = 'LOG MASUK'; btn.className = 'gsync-btn'; }
-        gsyncSetStatus('Google Drive — Tidak aktif');
+        if(btn) { btn.innerText = 'MASUK'; btn.className = 'hero-gsync-btn'; }
+        gsyncSetStatus('Google Drive');
     }
 }
 
@@ -2924,6 +3379,12 @@ function renderReceiptGrid(cat, listId, countId) {
     return items.length;
 }
 
+function setReceiptDot(dotId, hasItems) {
+    const dot = document.getElementById(dotId);
+    if (!dot) return;
+    dot.className = 'receipt-status-dot ' + (hasItems ? 'filled' : 'empty');
+}
+
 function renderReceipts() {
     if (!store.receipts) store.receipts = {};
     renderReceiptGrid('rent', 'rg-rent', 'rc-count-rent');
@@ -2933,13 +3394,21 @@ function renderReceipts() {
     renderReceiptGrid('utility-satu', 'rg-utility-satu', null);
     // Combined utility count
     const data = getReceiptStore();
-    const utilCount = (data['utility-tnb']||[]).length + (data['utility-satu']||[]).length;
+    const tnbCount = (data['utility-tnb']||[]).length;
+    const satuCount = (data['utility-satu']||[]).length;
+    const utilCount = tnbCount + satuCount;
     const uc = document.getElementById('rc-count-utility');
     if (uc) uc.innerText = utilCount ? `${utilCount} fail` : '';
     // Header count
     const total = RECEIPT_CATS.reduce((s,c) => s + (data[c]||[]).length, 0);
     const hc = document.getElementById('expense-header-count');
     if (hc) hc.innerText = total ? `${total} receipt` : '';
+    // Update status dots
+    setReceiptDot('dot-rent',         (data['rent']||[]).length > 0);
+    setReceiptDot('dot-car',          (data['car']||[]).length > 0);
+    setReceiptDot('dot-personal',     (data['personal']||[]).length > 0);
+    setReceiptDot('dot-utility-tnb',  tnbCount > 0);
+    setReceiptDot('dot-utility-satu', satuCount > 0);
 }
 
 function initExpenses() {
@@ -3153,7 +3622,42 @@ loadTheme();
 renderNursingNotes();
 initExpenses();
 initLhdn();
+
+// ── CALENDAR / CLAIM SWIPE SLIDER ──
+(function() {
+    const track = document.getElementById('cal-slider-track');
+    const wrap  = document.getElementById('cal-slider-wrap');
+    if (!track || !wrap) return;
+    let curSlide = 0;
+    const TOTAL = 2;
+
+    function goTo(idx) {
+        curSlide = Math.max(0, Math.min(TOTAL - 1, idx));
+        track.style.transform = `translateX(-${curSlide * 100}%)`;
+        document.querySelectorAll('.cal-dot').forEach((d, i) => d.classList.toggle('active', i === curSlide));
+    }
+
+    let startX = 0, startY = 0, dragging = false;
+
+    wrap.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dragging = true;
+    }, { passive: true });
+
+    wrap.addEventListener('touchend', e => {
+        if (!dragging) return;
+        dragging = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
+        if (dx < 0) goTo(curSlide + 1);
+        else        goTo(curSlide - 1);
+    }, { passive: true });
+
+    // Also allow click on dots
+    document.querySelectorAll('.cal-dot').forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+})();
 </script>
 </body>
 </html>
-
