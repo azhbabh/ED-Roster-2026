@@ -404,26 +404,43 @@
         .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; }
         .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; }
 
-        .day-box[data-shift="M"] .shift-text,
-        .day-box[data-shift="E"] .shift-text { color: #66bb6a; }
-        .day-box[data-shift="M"] .date-num,
-        .day-box[data-shift="E"] .date-num { color: #000000; }
-        .day-box[data-shift="M"] .assign-text,
-        .day-box[data-shift="E"] .assign-text { color: #66bb6a; }
+        /* ── SHIFT M (Pagi) — latar hijau muda ── */
+        .day-box[data-shift="M"] { background: #e8f5e9; border-color: #a5d6a7; }
+        .day-box[data-shift="M"] .shift-text { color: #2e7d32; }
+        .day-box[data-shift="M"] .date-num { color: #1b5e20; }
+        .day-box[data-shift="M"] .assign-text { color: #388e3c; }
 
-        .day-box[data-shift="N"] .shift-text { color: #212121; }
-        .day-box[data-shift="N"] .date-num { color: #000000; }
-        .day-box[data-shift="N"] .assign-text { color: #424242; }
+        /* ── SHIFT E (Petang) — latar oren muda ── */
+        .day-box[data-shift="E"] { background: #fff8e1; border-color: #ffe082; }
+        .day-box[data-shift="E"] .shift-text { color: #e65100; }
+        .day-box[data-shift="E"] .date-num { color: #bf360c; }
+        .day-box[data-shift="E"] .assign-text { color: #ef6c00; }
 
+        /* ── SHIFT N (Malam) — latar biru gelap ── */
+        .day-box[data-shift="N"] { background: #1a237e; border-color: #3949ab; }
+        .day-box[data-shift="N"] .shift-text { color: #90caf9; }
+        .day-box[data-shift="N"] .date-num { color: #bbdefb; }
+        .day-box[data-shift="N"] .assign-text { color: #64b5f6; }
+
+        /* ── DOUBLE SHIFT — latar teal gelap ── */
+        .day-box[data-shift="M/E"] { background: #e0f2f1; border-color: #80cbc4; }
+        .day-box[data-shift="M/N"] { background: #e8eaf6; border-color: #9fa8da; }
+        .day-box[data-shift="E/N"] { background: #f3e5f5; border-color: #ce93d8; }
+        .day-box[data-shift="SD/M"],
+        .day-box[data-shift="SD/E"],
+        .day-box[data-shift="SD/N"] { background: #fce4ec; border-color: #f48fb1; }
+        .day-box[data-shift="DO/M"],
+        .day-box[data-shift="DO/E"],
+        .day-box[data-shift="DO/N"] { background: #fce4ec; border-color: #f48fb1; }
         .day-box[data-shift="M/E"] .shift-text,
         .day-box[data-shift="M/N"] .shift-text,
-        .day-box[data-shift="E/N"] .shift-text,
+        .day-box[data-shift="E/N"] .shift-text { color: #004d40; }
         .day-box[data-shift="SD/M"] .shift-text,
         .day-box[data-shift="SD/E"] .shift-text,
         .day-box[data-shift="SD/N"] .shift-text,
         .day-box[data-shift="DO/M"] .shift-text,
         .day-box[data-shift="DO/E"] .shift-text,
-        .day-box[data-shift="DO/N"] .shift-text { color: #00695c; }
+        .day-box[data-shift="DO/N"] .shift-text { color: #880e4f; }
         .day-box[data-shift="M/E"] .date-num,
         .day-box[data-shift="M/N"] .date-num,
         .day-box[data-shift="E/N"] .date-num,
@@ -435,32 +452,47 @@
         .day-box[data-shift="DO/N"] .date-num { color: #000000; }
         .day-box[data-shift="M/E"] .assign-text,
         .day-box[data-shift="M/N"] .assign-text,
-        .day-box[data-shift="E/N"] .assign-text,
+        .day-box[data-shift="E/N"] .assign-text { color: #00695c; }
         .day-box[data-shift="SD/M"] .assign-text,
         .day-box[data-shift="SD/E"] .assign-text,
         .day-box[data-shift="SD/N"] .assign-text,
         .day-box[data-shift="DO/M"] .assign-text,
         .day-box[data-shift="DO/E"] .assign-text,
-        .day-box[data-shift="DO/N"] .assign-text { color: #00695c; }
+        .day-box[data-shift="DO/N"] .assign-text { color: #880e4f; }
 
+        /* ── SD/DO — latar merah jambu ── */
+        .day-box[data-shift="SD"] { background: #fce4ec; border-color: #f48fb1; }
+        .day-box[data-shift="DO"] { background: #fce4ec; border-color: #f48fb1; }
         .day-box[data-shift="SD"] .shift-text,
-        .day-box[data-shift="DO"] .shift-text,
-        .day-box[data-shift="AL"] .shift-text,
-        .day-box[data-shift="RPL"] .shift-text,
-        .day-box[data-shift="MC"] .shift-text,
-        .day-box[data-shift="PH"] .shift-text { color: #e64a19; }
+        .day-box[data-shift="DO"] .shift-text { color: #880e4f; }
         .day-box[data-shift="SD"] .date-num,
-        .day-box[data-shift="DO"] .date-num,
-        .day-box[data-shift="AL"] .date-num,
-        .day-box[data-shift="RPL"] .date-num,
-        .day-box[data-shift="MC"] .date-num,
-        .day-box[data-shift="PH"] .date-num { color: #000000; }
+        .day-box[data-shift="DO"] .date-num { color: #000000; }
         .day-box[data-shift="SD"] .assign-text,
-        .day-box[data-shift="DO"] .assign-text,
-        .day-box[data-shift="AL"] .assign-text,
-        .day-box[data-shift="RPL"] .assign-text,
-        .day-box[data-shift="MC"] .assign-text,
-        .day-box[data-shift="PH"] .assign-text { color: #e64a19; }
+        .day-box[data-shift="DO"] .assign-text { color: #ad1457; }
+
+        /* ── AL — latar biru lembut ── */
+        .day-box[data-shift="AL"] { background: #e3f2fd; border-color: #90caf9; }
+        .day-box[data-shift="AL"] .shift-text { color: #0d47a1; }
+        .day-box[data-shift="AL"] .date-num { color: #000000; }
+        .day-box[data-shift="AL"] .assign-text { color: #1565c0; }
+
+        /* ── RPL — latar ungu muda ── */
+        .day-box[data-shift="RPL"] { background: #ede7f6; border-color: #b39ddb; }
+        .day-box[data-shift="RPL"] .shift-text { color: #4527a0; }
+        .day-box[data-shift="RPL"] .date-num { color: #000000; }
+        .day-box[data-shift="RPL"] .assign-text { color: #512da8; }
+
+        /* ── MC — latar kuning ── */
+        .day-box[data-shift="MC"] { background: #fffde7; border-color: #fff176; }
+        .day-box[data-shift="MC"] .shift-text { color: #f57f17; }
+        .day-box[data-shift="MC"] .date-num { color: #000000; }
+        .day-box[data-shift="MC"] .assign-text { color: #f9a825; }
+
+        /* ── PH — latar emas ── */
+        .day-box[data-shift="PH"] { background: #fff3e0; border-color: #ffcc80; }
+        .day-box[data-shift="PH"] .shift-text { color: #e65100; }
+        .day-box[data-shift="PH"] .date-num { color: #000000; }
+        .day-box[data-shift="PH"] .assign-text { color: #ef6c00; }
 
         .day-box[data-shift="-"] .shift-text { color: #cccccc; }
         .day-box[data-shift="-"] .date-num { color: #000000; }
@@ -1652,8 +1684,9 @@
     <!-- STATS ROW -->
     <div class="stats-row">
         <div class="stat-card" onclick="openRecordSheet('AL')">
-            <small>Rekod AL</small>
+            <small>Baki AL</small>
             <div class="stat-val" id="text-al">0</div>
+            <div style="font-size:0.4rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:2px;" id="text-al-sub">/ — hari</div>
             <div class="progress-track"><div id="bar-al" class="progress-fill" style="width:100%"></div></div>
         </div>
         <div class="stat-card" onclick="openRecordSheet('RPL')">
@@ -1997,6 +2030,121 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- DOPAMINE -->
+                <div class="rsi-step" style="border-color:rgba(122,179,255,0.2);margin-top:10px;margin-bottom:0;">
+                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(122,179,255,0.1),transparent);border-bottom-color:rgba(122,179,255,0.2);">
+                        <span style="font-size:0.9rem;">💉</span>
+                        <div>
+                            <div class="rsi-step-name">Dopamine</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);margin-top:2px;">200mg/5mls — 1 amp</div>
+                        </div>
+                    </div>
+                    <div class="rsi-step-body">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Single Strength</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">1 amp in 45ml D5%</div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#7ab3ff;margin-top:2px;">= 4 mg/ml</div>
+                            </div>
+                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Double Strength</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">2 amp in 40ml D5%</div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#7ab3ff;margin-top:2px;">= 8 mg/ml</div>
+                            </div>
+                        </div>
+                        <div style="background:rgba(122,179,255,0.06);border:1px solid rgba(122,179,255,0.2);border-radius:var(--radius-xs);padding:12px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Dose (mcg/kg/min)</div><input type="number" id="dopa-dose" placeholder="5" step="1" min="1" max="20" oninput="calcDopa()" style="background:var(--surface);border:1px solid rgba(122,179,255,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Berat (kg)</div><input type="number" id="dopa-weight" placeholder="70" step="0.1" min="0" oninput="calcDopa()" style="background:var(--surface);border:1px solid rgba(122,179,255,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
+                            </div>
+                            <div id="dopa-result" style="display:none;">
+                                <div style="height:1px;background:rgba(122,179,255,0.2);margin-bottom:10px;"></div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                                    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Single (4mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#7ab3ff;line-height:1;" id="dopa-single">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
+                                    <div style="background:var(--card);border:1px solid rgba(122,179,255,0.3);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Double (8mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#7ab3ff;line-height:1;" id="dopa-double">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
+                                </div>
+                            </div>
+                            <div id="dopa-placeholder" style="text-align:center;padding:8px 0;font-size:0.68rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Isi dos dan berat untuk kira rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOBUTAMINE -->
+                <div class="rsi-step" style="border-color:rgba(80,200,120,0.2);margin-top:10px;margin-bottom:0;">
+                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(80,200,120,0.1),transparent);border-bottom-color:rgba(80,200,120,0.2);">
+                        <span style="font-size:0.9rem;">🫀</span>
+                        <div>
+                            <div class="rsi-step-name">Dobutamine</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);margin-top:2px;">250mg/20mls — 1 vial</div>
+                        </div>
+                    </div>
+                    <div class="rsi-step-body">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Standard</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">250mg in 50ml D5%</div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#50c878;margin-top:2px;">= 5 mg/ml</div>
+                            </div>
+                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Dose Range</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">2–20 mcg/kg/min</div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:2px;">titrasi mengikut respon</div>
+                            </div>
+                        </div>
+                        <div style="background:rgba(80,200,120,0.06);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-xs);padding:12px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Dose (mcg/kg/min)</div><input type="number" id="dobu-dose" placeholder="5" step="1" min="2" max="20" oninput="calcDobu()" style="background:var(--surface);border:1px solid rgba(80,200,120,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Berat (kg)</div><input type="number" id="dobu-weight" placeholder="70" step="0.1" min="0" oninput="calcDobu()" style="background:var(--surface);border:1px solid rgba(80,200,120,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
+                            </div>
+                            <div id="dobu-result" style="display:none;">
+                                <div style="height:1px;background:rgba(80,200,120,0.2);margin-bottom:10px;"></div>
+                                <div style="background:var(--card);border:1px solid rgba(80,200,120,0.3);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Rate (5mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#50c878;line-height:1;" id="dobu-rate">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
+                            </div>
+                            <div id="dobu-placeholder" style="text-align:center;padding:8px 0;font-size:0.68rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Isi dos dan berat untuk kira rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADRENALINE -->
+                <div class="rsi-step" style="border-color:rgba(255,82,82,0.2);margin-top:10px;margin-bottom:0;">
+                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(255,82,82,0.08),transparent);border-bottom-color:rgba(255,82,82,0.2);">
+                        <span style="font-size:0.9rem;">⚡</span>
+                        <div>
+                            <div class="rsi-step-name" style="color:#ff7070;">Adrenaline (Epinephrine)</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);margin-top:2px;">1mg/1ml — 1 amp</div>
+                        </div>
+                    </div>
+                    <div class="rsi-step-body">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Low Dose</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">1mg in 50ml NS</div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#ff7070;margin-top:2px;">= 0.02 mg/ml</div>
+                            </div>
+                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">High Dose</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">5mg in 50ml NS</div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#ff7070;margin-top:2px;">= 0.1 mg/ml</div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:10px;background:rgba(255,82,82,0.08);border:1px solid rgba(255,82,82,0.25);border-radius:var(--radius-xs);padding:7px 10px;font-size:0.7rem;color:#ff7070;font-weight:700;">⚠️ Dos: 0.01–1.0 mcg/kg/min. Cardiac monitor wajib.</div>
+                        <div style="background:rgba(255,82,82,0.06);border:1px solid rgba(255,82,82,0.2);border-radius:var(--radius-xs);padding:12px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Dose (mcg/kg/min)</div><input type="number" id="adre-dose" placeholder="0.1" step="0.01" min="0.01" max="1.0" oninput="calcAdre()" style="background:var(--surface);border:1px solid rgba(255,82,82,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Berat (kg)</div><input type="number" id="adre-weight" placeholder="70" step="0.1" min="0" oninput="calcAdre()" style="background:var(--surface);border:1px solid rgba(255,82,82,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
+                            </div>
+                            <div id="adre-result" style="display:none;">
+                                <div style="height:1px;background:rgba(255,82,82,0.2);margin-bottom:10px;"></div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                                    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Low (0.02mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#ff7070;line-height:1;" id="adre-low">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
+                                    <div style="background:var(--card);border:1px solid rgba(255,82,82,0.3);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">High (0.1mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#ff7070;line-height:1;" id="adre-high">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
+                                </div>
+                            </div>
+                            <div id="adre-placeholder" style="text-align:center;padding:8px 0;font-size:0.68rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Isi dos dan berat untuk kira rate</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2022,6 +2170,12 @@
                 <button onclick="changeReceiptMonth(1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;" onmousedown="this.style.background='var(--card-raised)';" onmouseup="this.style.background='var(--surface)';">▶</button>
             </div>
 
+            <!-- JUMLAH BULANAN BANNER -->
+            <div id="expense-total-banner" style="display:flex;justify-content:space-between;align-items:center;background:var(--primary-dim);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-xs);padding:10px 14px;margin-bottom:10px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;color:var(--primary);letter-spacing:0.1em;text-transform:uppercase;">Jumlah Bulan Ini</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--primary);letter-spacing:0.05em;line-height:1;" id="expense-grand-total">RM 0.00</div>
+            </div>
+
             <!-- House Rent -->
             <div class="receipt-cat">
                 <div class="receipt-cat-header">
@@ -2036,6 +2190,10 @@
                             <span class="receipt-upload-text">Upload</span>
                         </div>
                     </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;padding:4px 0 6px;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
+                    <input type="number" id="amt-rent" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
                 </div>
                 <div class="receipt-list" id="rg-rent"></div>
             </div>
@@ -2055,6 +2213,10 @@
                         </div>
                     </div>
                 </div>
+                <div style="display:flex;align-items:center;gap:8px;padding:4px 0 6px;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
+                    <input type="number" id="amt-car" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
+                </div>
                 <div class="receipt-list" id="rg-car"></div>
             </div>
 
@@ -2072,6 +2234,10 @@
                             <span class="receipt-upload-text">Upload</span>
                         </div>
                     </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;padding:4px 0 6px;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
+                    <input type="number" id="amt-personal" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
                 </div>
                 <div class="receipt-list" id="rg-personal"></div>
             </div>
@@ -2095,6 +2261,10 @@
                         </div>
                     </div>
                 </div>
+                <div style="display:flex;align-items:center;gap:8px;padding:2px 0 6px;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
+                    <input type="number" id="amt-tnb" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
+                </div>
                 <div class="receipt-list" id="rg-utility-tnb"></div>
                 <!-- SATU -->
                 <div class="receipt-sub-header">
@@ -2106,6 +2276,10 @@
                             <span class="receipt-upload-text">Upload</span>
                         </div>
                     </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;padding:2px 0 6px;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
+                    <input type="number" id="amt-satu" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
                 </div>
                 <div class="receipt-list" id="rg-utility-satu"></div>
             </div>
@@ -2179,7 +2353,7 @@
 const ph2026 = [
     {n:"Israk dan Mikraj",d:"2026-01-17",paid:false},{n:"Tahun Baru Cina",d:"2026-02-17",paid:false},
     {n:"Tahun Baru Cina (Hari ke-2)",d:"2026-02-18",paid:false},{n:"Hari Ulangtahun Sultan TRG",d:"2026-03-04",paid:false},
-    {n:"Nuzul Quran",d:"2026-03-07",paid:false},{n:"Hari Raya Puasa",d:"2026-03-21",paid:false},
+    {n:"Nuzul Quran",d:"2026-03-07",paid:false},{n:"Cuti Peristiwa Hari Raya Puasa",d:"2026-03-19",paid:false},{n:"Hari Raya Puasa",d:"2026-03-21",paid:false},
     {n:"Hari Raya Puasa (Hari ke-2)",d:"2026-03-22",paid:false},{n:"Hari Keputeraan Sultan TRG",d:"2026-04-26",paid:true},
     {n:"Hari Pekerja",d:"2026-05-01",paid:true},{n:"Hari Arafah",d:"2026-05-26",paid:false},
     {n:"Hari Raya Haji",d:"2026-05-27",paid:false},{n:"Hari Raya Haji (Hari ke-2)",d:"2026-05-28",paid:false},
@@ -2308,6 +2482,121 @@ function calcNora() {
     document.getElementById('nora-single').innerText = single.toFixed(2);
     document.getElementById('nora-double').innerText = double.toFixed(2);
     result.style.display = 'block'; placeholder.style.display = 'none';
+}
+
+// ── KALKULATOR DOS UBAT (Dose by Weight) ──
+function calcDopa() {
+    const dose=parseFloat(document.getElementById('dopa-dose').value);
+    const wt=parseFloat(document.getElementById('dopa-weight').value);
+    const res=document.getElementById('dopa-result'), ph=document.getElementById('dopa-placeholder');
+    if(isNaN(dose)||isNaN(wt)||dose<=0||wt<=0){res.style.display='none';ph.style.display='block';return;}
+    const mghr=(dose*wt*60)/1000;
+    document.getElementById('dopa-single').innerText=(mghr/4).toFixed(2);
+    document.getElementById('dopa-double').innerText=(mghr/8).toFixed(2);
+    res.style.display='block'; ph.style.display='none';
+}
+
+function calcDobu() {
+    const dose=parseFloat(document.getElementById('dobu-dose').value);
+    const wt=parseFloat(document.getElementById('dobu-weight').value);
+    const res=document.getElementById('dobu-result'), ph=document.getElementById('dobu-placeholder');
+    if(isNaN(dose)||isNaN(wt)||dose<=0||wt<=0){res.style.display='none';ph.style.display='block';return;}
+    const mghr=(dose*wt*60)/1000;
+    document.getElementById('dobu-rate').innerText=(mghr/5).toFixed(2);
+    res.style.display='block'; ph.style.display='none';
+}
+
+function calcAdre() {
+    const dose=parseFloat(document.getElementById('adre-dose').value);
+    const wt=parseFloat(document.getElementById('adre-weight').value);
+    const res=document.getElementById('adre-result'), ph=document.getElementById('adre-placeholder');
+    if(isNaN(dose)||isNaN(wt)||dose<=0||wt<=0){res.style.display='none';ph.style.display='block';return;}
+    const mghr=(dose*wt*60)/1000;
+    document.getElementById('adre-low').innerText=(mghr/0.02).toFixed(2);
+    document.getElementById('adre-high').innerText=(mghr/0.1).toFixed(2);
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── KALKULATOR DOS UBAT (Dose per Weight) ──
+// Dipaparkan dalam sheet ubat — masuk berat → dapat dos
+function openDrugDoseCalc(drugName, dosePerKg, unit, notes) {
+    document.getElementById('sheet-title').innerText='⚖️ Kalkulator Dos';
+    document.getElementById('sheet-content').innerHTML=`
+        <div style="background:var(--primary-dim);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-xs);padding:10px 12px;margin-bottom:14px;">
+            <div style="font-weight:700;font-size:0.85rem;color:var(--primary);margin-bottom:2px;">${drugName}</div>
+            <div style="font-size:0.68rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">${dosePerKg} ${unit}/kg${notes?'<br>'+notes:''}</div>
+        </div>
+        <label>Berat Pesakit (kg)</label>
+        <input type="number" id="dc-weight" placeholder="cth: 70" step="0.1" min="0" oninput="updateDrugDose(${JSON.stringify(dosePerKg)},${JSON.stringify(unit)})" style="font-size:1rem;">
+        <div id="dc-result" style="display:none;margin-top:10px;">
+            <div style="background:var(--surface);border:1px solid var(--primary);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.1em;">Dos Diperlukan</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--primary);line-height:1;filter:drop-shadow(0 0 8px rgba(80,200,120,0.4));" id="dc-dose-val">—</div>
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;" id="dc-dose-unit"></div>
+            </div>
+        </div>
+        <div id="dc-placeholder" style="text-align:center;padding:20px 0;font-size:0.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Masukkan berat pesakit</div>
+    `;
+    openSheet();
+}
+
+function updateDrugDose(dosePerKg, unit) {
+    const wt=parseFloat(document.getElementById('dc-weight').value);
+    const res=document.getElementById('dc-result'), ph=document.getElementById('dc-placeholder');
+    if(isNaN(wt)||wt<=0){res.style.display='none';ph.style.display='block';return;}
+    const totalDose=(dosePerKg*wt);
+    document.getElementById('dc-dose-val').innerText=totalDose%1===0?totalDose:totalDose.toFixed(2);
+    document.getElementById('dc-dose-unit').innerText=unit+' (berat: '+wt+' kg)';
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── LABEL LHDN AUTO ──
+const LHDN_KEYWORD_MAP = [
+    {keys:['ea form','ea','borang ea'],cat:'EA Form'},
+    {keys:['slip gaji','payslip','gaji'],cat:'Slip Gaji'},
+    {keys:['pcb','potongan cukai'],cat:'PCB'},
+    {keys:['zakat'],cat:'Zakat'},
+    {keys:['tabung haji','th'],cat:'Tabung Haji'},
+    {keys:['kwsp','epf'],cat:'KWSP / EPF'},
+    {keys:['socso','perkeso'],cat:'SOCSO'},
+    {keys:['eis','pka'],cat:'EIS'},
+    {keys:['insurans','insurance','takaful'],cat:'Insurans / Takaful'},
+    {keys:['resit','receipt','bil','invoice'],cat:'Resit'},
+    {keys:['bank','penyata bank','statement'],cat:'Penyata Bank'},
+    {keys:['sewa','rent','sewaan'],cat:'Sewa'},
+    {keys:['medical','ubat','hospital','klinik','clinic','bil hospital'],cat:'Perbelanjaan Perubatan'},
+    {keys:['pendidikan','education','yuran','fees','sekolah','kolej','universiti'],cat:'Pendidikan'},
+    {keys:['derma','donation','wakaf','sadaqah'],cat:'Derma'},
+    {keys:['kereta','car','kenderaan','roadtax','insurans kenderaan'],cat:'Kenderaan'},
+];
+
+function autoLhdnLabel(filename) {
+    const lower = filename.toLowerCase().replace(/[_\-\.]/g,' ');
+    for(const rule of LHDN_KEYWORD_MAP) {
+        for(const key of rule.keys) {
+            if(lower.includes(key)) return rule.cat;
+        }
+    }
+    return '';
+}
+
+// ── KOMPRES IMEJ SEBELUM SIMPAN ──
+async function compressImage(dataUrl, maxWidth=1200, quality=0.72) {
+    return new Promise(resolve => {
+        if(!dataUrl.startsWith('data:image/')) { resolve(dataUrl); return; }
+        const img = new Image();
+        img.onload = () => {
+            let {width, height} = img;
+            if(width > maxWidth) { height = Math.round(height * maxWidth / width); width = maxWidth; }
+            const canvas = document.createElement('canvas');
+            canvas.width = width; canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => resolve(dataUrl);
+        img.src = dataUrl;
+    });
 }
 
 const NURSING_CATEGORIES = [
@@ -2702,17 +2991,34 @@ function checkPaidPH(){ const sel=document.getElementById('in-ph-select'); if(!s
 
 function renderRecords(type){
     const content=document.getElementById('sheet-content'); let html='<div>';
-    if(type==='AL'){ store.al.taken.forEach((d,i)=>html+=`<div class="record-card"><div>Cuti: ${toMY(d)}</div><button class="btn-delete" onclick="store.al.taken.splice(${i},1);saveData();renderRecords('AL')">×</button></div>`); html+=`<label>Tarikh Cuti</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')">`; }
-    else if(type==='RPL'){ store.rpl.records.forEach((r,i)=>html+=`<div class="record-card"><div><b>${r.t}</b><br><small style="color:var(--text-dim)">${toMY(r.d1)} ➔ ${r.isPaid?'PAID':toMY(r.d2)}</small></div><button class="btn-delete" onclick="store.rpl.records.splice(${i},1);saveData();renderRecords('RPL')">×</button></div>`); const recordedDates=store.rpl.records.map(r=>r.d1); const avPH=ph2026.filter(p=>!recordedDates.includes(p.d)); html+=`<div id="paid-alert" class="paid-alert"></div><label>Pilih PH</label><select id="in-ph-select" onchange="document.getElementById('in-d1').value=this.value;checkPaidPH();"><option value="">-- Pilih --</option>${avPH.map(p=>{const dp=p.d.split('-');return`<option value="${p.d}" data-paid="${p.paid}">(${dp[2]}/${dp[1]}) ${p.n}</option>`;}).join('')}</select><input type="date" id="in-d1" hidden><label id="label-rpl">Tarikh Ganti</label><input type="date" id="in-d2" onclick="triggerDatePicker('in-d2')">`; }
+    if(type==='AL'){
+        html+=`<label>Jumlah AL Setahun</label><div style="display:flex;gap:8px;margin-bottom:12px;"><input type="number" id="in-al-total" value="${store.al.total||''}" placeholder="cth: 20" style="flex:1;margin-bottom:0;" oninput="store.al.total=parseInt(this.value)||0;saveData();renderStats();"><span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);align-self:center;white-space:nowrap;">hari/tahun</span></div>`;
+        html+=`<div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--primary);margin-bottom:8px;padding:8px 10px;background:var(--primary-dim);border-radius:var(--radius-xs);border:1px solid rgba(80,200,120,0.2);">Baki: ${store.al.total?Math.max(0,store.al.total-store.al.taken.length)+' hari':'-'} &nbsp;|&nbsp; Diambil: ${store.al.taken.length} hari</div>`;
+        store.al.taken.forEach((d,i)=>html+=`<div class="record-card"><div>Cuti: ${toMY(d)}</div><div style="display:flex;gap:6px;"><button style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;" onclick="editAL(${i})">EDIT</button><button class="btn-delete" onclick="store.al.taken.splice(${i},1);saveData();renderRecords('AL');renderStats();">×</button></div></div>`);
+        html+=`<input type="hidden" id="al-edit-idx" value="-1"><label>Tarikh Cuti</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')">`;
+    }
+    else if(type==='RPL'){ store.rpl.records.forEach((r,i)=>html+=`<div class="record-card"><div><b>${r.t}</b><br><small style="color:var(--text-dim)">${toMY(r.d1)} ➔ ${r.isPaid?'PAID':toMY(r.d2)}</small></div><div style="display:flex;gap:6px;"><button style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;" onclick="editRPL(${i})">EDIT</button><button class="btn-delete" onclick="store.rpl.records.splice(${i},1);saveData();renderRecords('RPL')">×</button></div></div>`); const recordedDates=store.rpl.records.map(r=>r.d1); const avPH=ph2026.filter(p=>!recordedDates.includes(p.d)); html+=`<input type="hidden" id="rpl-edit-idx" value="-1"><div id="paid-alert" class="paid-alert"></div><label>Pilih PH</label><select id="in-ph-select" onchange="document.getElementById('in-d1').value=this.value;checkPaidPH();"><option value="">-- Pilih --</option>${avPH.map(p=>{const dp=p.d.split('-');return`<option value="${p.d}" data-paid="${p.paid}">(${dp[2]}/${dp[1]}) ${p.n}</option>`;}).join('')}</select><input type="date" id="in-d1" hidden><label id="label-rpl">Tarikh Ganti</label><input type="date" id="in-d2" onclick="triggerDatePicker('in-d2')">`; }
     else if(type==='CPD'){ store.cpd.records.forEach((r,i)=>html+=`<div class="record-card"><div style="flex:1"><b>${r.t}</b><br><small style="color:var(--text-dim)">📅 ${toMY(r.d)} | 🕒 ${r.t1} - ${r.t2}</small></div><div style="font-weight:700;color:var(--success);margin-right:8px;">${r.p} Pts</div><div style="display:flex;flex-direction:column;gap:4px;"><button style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;" onclick="editCPD(${i})">EDIT</button><button class="btn-delete" onclick="store.cpd.records.splice(${i},1);saveData();renderRecords('CPD')">×</button></div></div>`); html+=`<input type="hidden" id="cpd-edit-idx" value="-1"><label>Nama Kursus</label><input type="text" id="in-t"><label>Tarikh</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div><label>Mula</label><input type="time" id="in-t1"></div><div><label>Tamat</label><input type="time" id="in-t2"></div></div><label>Mata</label><input type="number" id="in-p">`; }
     html+=`</div><button class="btn-primary" id="btn-save-rec" onclick="addRec('${type}')">SIMPAN</button>`; content.innerHTML=html;
 }
 
+function editAL(i){ const d=store.al.taken[i]; document.getElementById('al-edit-idx').value=i; document.getElementById('in-d').value=d; const btn=document.getElementById('btn-save-rec'); if(btn){btn.innerText='KEMASKINI';btn.style.background='var(--warning)';btn.style.color='black';} document.getElementById('in-d').scrollIntoView({behavior:'smooth',block:'center'}); }
+
+function editRPL(i){ const r=store.rpl.records[i]; document.getElementById('rpl-edit-idx').value=i; const sel=document.getElementById('in-ph-select'); if(sel){for(let o=0;o<sel.options.length;o++){if(sel.options[o].value===r.d1){sel.selectedIndex=o;break;}} document.getElementById('in-d1').value=r.d1; checkPaidPH();} document.getElementById('in-d2').value=r.d2||''; const btn=document.getElementById('btn-save-rec'); if(btn){btn.innerText='KEMASKINI RPL';btn.style.background='var(--warning)';btn.style.color='black';} }
+
 function addRec(type){
-    if(type==='AL'){const d=document.getElementById('in-d').value;if(d)store.al.taken.push(d);}
-    else if(type==='RPL'){const sel=document.getElementById('in-ph-select'),d1=document.getElementById('in-d1').value,d2=document.getElementById('in-d2').value;if(sel&&d1){const t=sel.options[sel.selectedIndex].text,isPaid=sel.options[sel.selectedIndex].getAttribute('data-paid')==='true';if(t&&d1&&(isPaid||d2))store.rpl.records.push({t,d1,d2,isPaid});}}
+    if(type==='AL'){
+        const d=document.getElementById('in-d').value;
+        const idx=parseInt(document.getElementById('al-edit-idx')?.value??'-1');
+        if(d){ if(idx>=0){store.al.taken[idx]=d;}else{store.al.taken.push(d);} }
+    }
+    else if(type==='RPL'){
+        const sel=document.getElementById('in-ph-select'),d1=document.getElementById('in-d1').value,d2=document.getElementById('in-d2').value;
+        const idx=parseInt(document.getElementById('rpl-edit-idx')?.value??'-1');
+        if(sel&&d1){const t=sel.options[sel.selectedIndex].text,isPaid=sel.options[sel.selectedIndex].getAttribute('data-paid')==='true';if(t&&d1&&(isPaid||d2)){if(idx>=0){store.rpl.records[idx]={t,d1,d2,isPaid};}else{store.rpl.records.push({t,d1,d2,isPaid});}}}
+    }
     else if(type==='CPD'){ const t=document.getElementById('in-t').value,d=document.getElementById('in-d').value,p=document.getElementById('in-p').value,t1=document.getElementById('in-t1').value,t2=document.getElementById('in-t2').value; const idx=parseInt(document.getElementById('cpd-edit-idx').value); if(t&&d&&p&&t1&&t2){ if(idx>=0){ store.cpd.records[idx]={t,d,p,t1,t2}; } else { store.cpd.records.push({t,d,p,t1,t2}); } } }
-    saveData();renderRecords(type);
+    saveData();renderRecords(type);renderStats();
 }
 
 function editCPD(i){ const r=store.cpd.records[i]; document.getElementById('cpd-edit-idx').value=i; document.getElementById('in-t').value=r.t; document.getElementById('in-d').value=r.d; document.getElementById('in-t1').value=r.t1; document.getElementById('in-t2').value=r.t2; document.getElementById('in-p').value=r.p; const btn=document.getElementById('btn-save-rec'); if(btn){btn.innerText='KEMASKINI';btn.style.background='var(--warning)';btn.style.color='black';} document.getElementById('in-t').focus(); document.getElementById('in-t').scrollIntoView({behavior:'smooth',block:'center'}); }
@@ -2724,7 +3030,16 @@ function updateTodo(i){ const t=document.getElementById('pop-todo-t').value,d=do
 function renderTodos(){ const list=document.getElementById('todo-list'); if(!list)return; list.innerHTML=''; if(store.todos.length===0){list.innerHTML='<div style="font-size:0.72rem;color:var(--text-muted);padding:10px;text-align:center;">Tiada tugasan.</div>';return;} store.todos.forEach((todo,i)=>{ list.innerHTML+=`<div class="todo-item"><input type="checkbox" style="width:16px;height:16px;accent-color:var(--primary);" ${todo.done?'checked':''} onchange="store.todos[${i}].done=!store.todos[${i}].done;saveData();renderTodos();"><div class="todo-text ${todo.done?'done':''}">${todo.t}${todo.date?`<small style="color:var(--text-muted);font-size:0.6rem;margin-left:8px;">(Due: ${toMY(todo.date)})</small>`:''}</div><button onclick="editTodo(${i})" style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;padding:0 4px;">EDIT</button><button class="todo-del" onclick="store.todos.splice(${i},1);saveData();renderTodos();">×</button></div>`; }); }
 
 function renderStats(){
-    document.getElementById('text-al').innerText=store.al.taken.length;
+    const taken=store.al.taken.length;
+    const total=store.al.total||0;
+    const baki=total>0?Math.max(0,total-taken):null;
+    document.getElementById('text-al').innerText=baki!==null?baki:taken;
+    const subEl=document.getElementById('text-al-sub');
+    if(subEl) subEl.innerText=total>0?`diambil: ${taken} / ${total} hari`:'ketik utk tetapkan jumlah';
+    const barAl=document.getElementById('bar-al');
+    if(barAl) barAl.style.width=total>0?Math.min((taken/total*100),100)+'%':'100%';
+    if(barAl && taken>=total && total>0) barAl.style.background='var(--danger)';
+    else if(barAl) barAl.style.background='';
     document.getElementById('text-rpl').innerText=store.rpl.records.length;
     const pts=store.cpd.records.reduce((s,r)=>s+Number(r.p),0);
     document.getElementById('text-cpd').innerText=`${pts}/20`;
@@ -3265,6 +3580,39 @@ function saveReceipts() {
     renderReceipts();
 }
 
+function getExpenseAmountsKey() { return 'expense_amt_'+getReceiptMonthKey(); }
+
+function loadExpenseAmounts() {
+    const key = getExpenseAmountsKey();
+    const saved = JSON.parse(localStorage.getItem(key)||'{}');
+    ['rent','car','personal','tnb','satu'].forEach(id => {
+        const el = document.getElementById('amt-'+id);
+        if(el) el.value = saved[id]||'';
+    });
+    updateExpenseTotal();
+}
+
+function saveExpenseAmounts() {
+    const key = getExpenseAmountsKey();
+    const data = {};
+    ['rent','car','personal','tnb','satu'].forEach(id => {
+        const el = document.getElementById('amt-'+id);
+        if(el && el.value) data[id] = el.value;
+    });
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+function updateExpenseTotal() {
+    saveExpenseAmounts();
+    const ids = ['rent','car','personal','tnb','satu'];
+    const total = ids.reduce((s,id) => {
+        const el = document.getElementById('amt-'+id);
+        return s + (el ? parseFloat(el.value)||0 : 0);
+    }, 0);
+    const el = document.getElementById('expense-grand-total');
+    if(el) el.innerText = 'RM ' + total.toFixed(2);
+}
+
 function handleReceiptUpload(cat, input) {
     const files = Array.from(input.files);
     if (!files.length) return;
@@ -3272,8 +3620,9 @@ function handleReceiptUpload(cat, input) {
     let processed = 0;
     files.forEach(file => {
         const reader = new FileReader();
-        reader.onload = e => {
-            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: e.target.result });
+        reader.onload = async e => {
+            const compressed = await compressImage(e.target.result);
+            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: compressed });
             processed++;
             if (processed === files.length) { input.value = ''; saveReceipts(); }
         };
@@ -3290,8 +3639,9 @@ function handleReceiptDrop(cat, event, zone) {
     let processed = 0;
     files.forEach(file => {
         const reader = new FileReader();
-        reader.onload = e => {
-            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: e.target.result });
+        reader.onload = async e => {
+            const compressed = await compressImage(e.target.result);
+            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: compressed });
             processed++;
             if (processed === files.length) saveReceipts();
         };
@@ -3409,6 +3759,8 @@ function renderReceipts() {
     setReceiptDot('dot-personal',     (data['personal']||[]).length > 0);
     setReceiptDot('dot-utility-tnb',  tnbCount > 0);
     setReceiptDot('dot-utility-satu', satuCount > 0);
+    // Load saved amounts for this month
+    loadExpenseAmounts();
 }
 
 function initExpenses() {
@@ -3456,8 +3808,10 @@ function handleLhdnUpload(input) {
     let processed = 0;
     files.forEach(file => {
         const reader = new FileReader();
-        reader.onload = e => {
-            items.push({ name: file.name, origName: file.name, type: file.type, data: e.target.result, cat: '' });
+        reader.onload = async e => {
+            const compressed = await compressImage(e.target.result);
+            const autocat = autoLhdnLabel(file.name);
+            items.push({ name: file.name, origName: file.name, type: file.type, data: compressed, cat: autocat });
             processed++;
             if (processed === files.length) { input.value = ''; saveLhdn(); }
         };
@@ -3474,8 +3828,10 @@ function handleLhdnDrop(event, zone) {
     let processed = 0;
     files.forEach(file => {
         const reader = new FileReader();
-        reader.onload = e => {
-            items.push({ name: file.name, origName: file.name, type: file.type, data: e.target.result, cat: '' });
+        reader.onload = async e => {
+            const compressed = await compressImage(e.target.result);
+            const autocat = autoLhdnLabel(file.name);
+            items.push({ name: file.name, origName: file.name, type: file.type, data: compressed, cat: autocat });
             processed++;
             if (processed === files.length) saveLhdn();
         };
