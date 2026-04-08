@@ -9,21 +9,21 @@
     <script src="https://accounts.google.com/gsi/client" onload="console.log('GSI loaded')" onerror="console.warn('GSI failed to load')"></script>
     <style>
         :root {
-            --primary: #50c878;
-            --primary-dim: rgba(80,200,120,0.12);
-            --primary-glow: rgba(80,200,120,0.35);
-            --bg: #080c0a;
-            --surface: #0f1510;
-            --card: #131a14;
-            --card-raised: #192118;
-            --border: #1e2b1f;
-            --border-bright: #2a3d2b;
-            --text: #e8f0e9;
-            --text-dim: #6b7e6c;
-            --text-muted: #3a4a3b;
-            --danger: #ff5252;
-            --success: #2ecc71;
-            --warning: #f39c12;
+            --primary: #1a8f45;
+            --primary-dim: rgba(26,143,69,0.10);
+            --primary-glow: rgba(26,143,69,0.20);
+            --bg: #f0f2f0;
+            --surface: #ffffff;
+            --card: #ffffff;
+            --card-raised: #f9faf9;
+            --border: #e0e5e1;
+            --border-bright: #ccd1cc;
+            --text: #111811;
+            --text-dim: #556055;
+            --text-muted: #aab5aa;
+            --danger: #e03232;
+            --success: #1a8f45;
+            --warning: #d08000;
             --radius: 20px;
             --radius-sm: 12px;
             --radius-xs: 8px;
@@ -42,23 +42,17 @@
         }
 
         body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.4;
+            display: none;
         }
 
         .ambient-glow {
             position: fixed;
             width: 500px; height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(26,143,69,0.08) 0%, transparent 70%);
             top: -200px; right: -150px;
             pointer-events: none;
-            z-index: 0; opacity: 0.3;
+            z-index: 0; opacity: 1;
             animation: driftGlow 8s ease-in-out infinite alternate;
         }
         @keyframes driftGlow { from{transform:translate(0,0) scale(1);} to{transform:translate(-30px,40px) scale(1.1);} }
@@ -220,24 +214,6 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* ── THEME BAR ── */
-        .theme-bar {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 12px 4px 10px;
-        }
-        .theme-toggle-btn {
-            display: flex; align-items: center; gap: 7px;
-            background: var(--card); border: 1px solid var(--border-bright);
-            border-radius: 20px; padding: 5px 12px 5px 8px;
-            cursor: pointer; transition: all 0.2s;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem; font-weight: 700;
-            color: var(--text-dim); letter-spacing: 0.08em;
-        }
-        .theme-toggle-btn:active { transform: scale(0.95); }
-
         /* ── PROFILE HEADER ── */
         .profile-header {
             background: var(--card);
@@ -395,7 +371,7 @@
         }
         .import-btn:active { background:var(--primary); color:black; }
         .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
-        .day-label { text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.55rem; font-weight:700; color:#ffffff; padding-bottom:6px; letter-spacing:0.05em; }
+        .day-label { text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.55rem; font-weight:700; color:#000000; padding-bottom:6px; letter-spacing:0.05em; }
         .day-box {
             aspect-ratio:1; border-radius:var(--radius-xs);
             display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -412,20 +388,13 @@
             font-weight:700;
             color: #000000;
         }
-        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; }
-        .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; }
+        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color: #000000; }
+        .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; color: #000000; }
 
+        /* SHIFT KERJA — tulisan hitam */
         .day-box[data-shift="M"] .shift-text,
-        .day-box[data-shift="E"] .shift-text { color: #66bb6a; }
-        .day-box[data-shift="M"] .date-num,
-        .day-box[data-shift="E"] .date-num { color: #000000; }
-        .day-box[data-shift="M"] .assign-text,
-        .day-box[data-shift="E"] .assign-text { color: #66bb6a; }
-
-        .day-box[data-shift="N"] .shift-text { color: #212121; }
-        .day-box[data-shift="N"] .date-num { color: #000000; }
-        .day-box[data-shift="N"] .assign-text { color: #424242; }
-
+        .day-box[data-shift="E"] .shift-text,
+        .day-box[data-shift="N"] .shift-text,
         .day-box[data-shift="M/E"] .shift-text,
         .day-box[data-shift="M/N"] .shift-text,
         .day-box[data-shift="E/N"] .shift-text,
@@ -434,16 +403,11 @@
         .day-box[data-shift="SD/N"] .shift-text,
         .day-box[data-shift="DO/M"] .shift-text,
         .day-box[data-shift="DO/E"] .shift-text,
-        .day-box[data-shift="DO/N"] .shift-text { color: #00695c; }
-        .day-box[data-shift="M/E"] .date-num,
-        .day-box[data-shift="M/N"] .date-num,
-        .day-box[data-shift="E/N"] .date-num,
-        .day-box[data-shift="SD/M"] .date-num,
-        .day-box[data-shift="SD/E"] .date-num,
-        .day-box[data-shift="SD/N"] .date-num,
-        .day-box[data-shift="DO/M"] .date-num,
-        .day-box[data-shift="DO/E"] .date-num,
-        .day-box[data-shift="DO/N"] .date-num { color: #000000; }
+        .day-box[data-shift="DO/N"] .shift-text { color: #000000; }
+
+        .day-box[data-shift="M"] .assign-text,
+        .day-box[data-shift="E"] .assign-text,
+        .day-box[data-shift="N"] .assign-text,
         .day-box[data-shift="M/E"] .assign-text,
         .day-box[data-shift="M/N"] .assign-text,
         .day-box[data-shift="E/N"] .assign-text,
@@ -452,26 +416,35 @@
         .day-box[data-shift="SD/N"] .assign-text,
         .day-box[data-shift="DO/M"] .assign-text,
         .day-box[data-shift="DO/E"] .assign-text,
-        .day-box[data-shift="DO/N"] .assign-text { color: #00695c; }
+        .day-box[data-shift="DO/N"] .assign-text { color: #000000; }
 
-        .day-box[data-shift="SD"] .shift-text,
+        /* SHIFT CUTI — tulisan maroon */
         .day-box[data-shift="DO"] .shift-text,
-        .day-box[data-shift="AL"] .shift-text,
+        .day-box[data-shift="SD"] .shift-text,
         .day-box[data-shift="RPL"] .shift-text,
+        .day-box[data-shift="PH"] .shift-text,
         .day-box[data-shift="MC"] .shift-text,
-        .day-box[data-shift="PH"] .shift-text { color: #e64a19; }
-        .day-box[data-shift="SD"] .date-num,
+        .day-box[data-shift="AL"] .shift-text,
+        .day-box[data-shift="EL"] .shift-text,
+        .day-box[data-shift="ODO"] .shift-text { color: #800000; }
+
         .day-box[data-shift="DO"] .date-num,
-        .day-box[data-shift="AL"] .date-num,
+        .day-box[data-shift="SD"] .date-num,
         .day-box[data-shift="RPL"] .date-num,
+        .day-box[data-shift="PH"] .date-num,
         .day-box[data-shift="MC"] .date-num,
-        .day-box[data-shift="PH"] .date-num { color: #000000; }
-        .day-box[data-shift="SD"] .assign-text,
+        .day-box[data-shift="AL"] .date-num,
+        .day-box[data-shift="EL"] .date-num,
+        .day-box[data-shift="ODO"] .date-num { color: #800000; }
+
         .day-box[data-shift="DO"] .assign-text,
-        .day-box[data-shift="AL"] .assign-text,
+        .day-box[data-shift="SD"] .assign-text,
         .day-box[data-shift="RPL"] .assign-text,
+        .day-box[data-shift="PH"] .assign-text,
         .day-box[data-shift="MC"] .assign-text,
-        .day-box[data-shift="PH"] .assign-text { color: #e64a19; }
+        .day-box[data-shift="AL"] .assign-text,
+        .day-box[data-shift="EL"] .assign-text,
+        .day-box[data-shift="ODO"] .assign-text { color: #800000; }
 
         .day-box[data-shift="-"] .shift-text { color: #cccccc; }
         .day-box[data-shift="-"] .date-num { color: #000000; }
@@ -745,6 +718,94 @@
             color: var(--text-muted);
             font-family: 'JetBrains Mono', monospace;
         }
+
+        /* ── NOTA OVERLAY ── */
+        .nota-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.82);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 0;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .nota-overlay.open {
+            display: flex;
+        }
+        .nota-overlay-panel {
+            background: var(--card);
+            border-radius: 28px 28px 0 0;
+            border-top: 1px solid var(--border-bright);
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.7);
+            width: 100%;
+            max-width: 480px;
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUpNota 0.32s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes slideUpNota {
+            from { transform: translateY(60px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .nota-overlay-handle {
+            text-align: center;
+            padding: 14px 0 4px;
+            flex-shrink: 0;
+        }
+        .nota-overlay-handle::before {
+            content: '';
+            display: inline-block;
+            width: 36px; height: 3px;
+            background: var(--border-bright);
+            border-radius: 10px;
+        }
+        .nota-overlay-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px 14px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .nota-overlay-accent {
+            width: 3px; height: 20px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+        .nota-overlay-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.15rem;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            flex: 1;
+        }
+        .nota-overlay-close {
+            background: var(--surface);
+            border: 1px solid var(--border-bright);
+            color: var(--text-dim);
+            border-radius: 50%;
+            width: 30px; height: 30px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.15s;
+        }
+        .nota-overlay-close:active { background: var(--danger); color: white; border-color: var(--danger); }
+        .nota-overlay-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px 40px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .nota-overlay-body::-webkit-scrollbar { width: 3px; }
+        .nota-overlay-body::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 10px; }
 
         /* ── SCROLLBAR ── */
         ::-webkit-scrollbar { width:4px; }
@@ -1062,21 +1123,494 @@
         }
         .gsync-signin-btn:hover { background: #f8f9fa; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
         .gsync-signin-btn:active { background: #f1f3f4; }
-    </style>
+
+        /* ── QUICK NOTES ── */
+        .quick-note-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--primary);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .quick-note-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            cursor: pointer;
+            gap: 8px;
+        }
+        .quick-note-card-header:active { background: var(--card-raised); }
+        .quick-note-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .quick-note-actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+            align-items: center;
+        }
+        .quick-note-action-btn {
+            background: none;
+            border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 3px 6px;
+            border-radius: var(--radius-xs);
+            transition: all 0.15s;
+            letter-spacing: 0.06em;
+        }
+        .quick-note-action-btn.edit { color: var(--primary); border: 1px solid rgba(80,200,120,0.25); }
+        .quick-note-action-btn.edit:active { background: var(--primary); color: black; }
+        .quick-note-action-btn.del { color: var(--danger); border: 1px solid rgba(255,82,82,0.25); }
+        .quick-note-action-btn.del:active { background: var(--danger); color: white; }
+        .quick-note-chevron {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .quick-note-card.open .quick-note-chevron { transform: rotate(180deg); }
+        .quick-note-body {
+            display: none;
+            padding: 0 12px 12px;
+            border-top: 1px solid var(--border);
+        }
+        .quick-note-card.open .quick-note-body { display: block; }
+        .quick-note-text {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text);
+            white-space: pre-wrap;
+            padding-top: 10px;
+        }
+
+        /* ── TOOL CARDS ── */
+        .tool-card-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+            text-align: center;
+        }
+        .tool-card-btn:active { transform: scale(0.93); background: var(--card-raised); }
+        .tool-card-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-dim);
+        }
+        .tool-card-icon { font-size: 1.4rem; line-height: 1; }
+        .tool-card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.54rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        .tool-card-btn.active .tool-card-label { color: var(--primary); }
+
+        /* ── MONTHLY EXPENSES ── */
+        .expense-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .expense-month-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .expense-month-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .expense-cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .expense-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .expense-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            cursor: pointer;
+            background: linear-gradient(90deg, var(--primary-dim), transparent);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .expense-card-header:active { opacity: 0.8; }
+
+        .expense-card-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .expense-card-icon {
+            font-size: 1.3rem;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-xs);
+            background: var(--card);
+            border: 1px solid var(--border-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .expense-card-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .expense-card-plate {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+        }
+
+        .expense-card-total {
+            text-align: right;
+        }
+
+        .expense-total-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.48rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .expense-total-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.04em;
+            color: var(--text);
+        }
+
+        .expense-card-body {
+            display: none;
+            padding: 12px 14px;
+        }
+
+        .expense-card-body.open { display: block; }
+
+        .expense-type-row {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .expense-type-info { flex: 1; min-width: 0; }
+
+        .expense-type-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .expense-type-value {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .expense-type-value.date-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+
+        .expense-type-value.amount-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+        }
+
+        .expense-type-value.amount-val.danger { color: var(--danger); }
+        .expense-type-value.amount-val.primary { color: var(--primary); }
+        .expense-type-value.amount-val.warning { color: var(--warning); }
+
+        .expense-edit-btn {
+            background: var(--primary-dim);
+            border: 1px solid rgba(26,143,69,0.2);
+            color: var(--primary);
+            border-radius: var(--radius-xs);
+            padding: 4px 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.52rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .expense-edit-btn:active { background: var(--primary); color: white; }
+
+        .expense-summary-bar {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            margin-top: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .expense-summary-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+        }
+
+        .expense-summary-total {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.04em;
+            color: var(--danger);
+        }
+
+        /* ── SERVICE RECORD ── */
+        .svc-vehicle-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .svc-vehicle-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            cursor: pointer;
+            user-select: none;
+            background: linear-gradient(90deg, var(--primary-dim), transparent);
+        }
+        .svc-vehicle-header:active { opacity: 0.8; }
+        .svc-vehicle-left { display: flex; align-items: center; gap: 10px; }
+        .svc-vehicle-icon {
+            font-size: 1.3rem; width: 36px; height: 36px;
+            border-radius: var(--radius-xs);
+            background: var(--card); border: 1px solid var(--border-bright);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .svc-vehicle-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text); display: block; margin-bottom: 2px;
+        }
+        .svc-vehicle-plate {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem; letter-spacing: 0.12em;
+        }
+        .svc-vehicle-chevron {
+            font-size: 0.65rem; color: var(--text-muted);
+            transition: transform 0.2s; flex-shrink: 0;
+        }
+        .svc-vehicle-card.open .svc-vehicle-chevron { transform: rotate(180deg); }
+        .svc-vehicle-body { display: none; border-top: 1px solid var(--border); }
+        .svc-vehicle-card.open .svc-vehicle-body { display: block; }
+
+        /* Tab bar inside vehicle card */
+        .svc-tabbar {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+        .svc-tab {
+            flex: 1; text-align: center;
+            padding: 9px 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.56rem; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s;
+        }
+        .svc-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .svc-tab:first-child { border-right: 1px solid var(--border); }
+
+        /* Records list */
+        .svc-panel { display: none; padding: 10px 12px 12px; }
+        .svc-panel.active { display: block; }
+
+        .svc-add-btn {
+            width: 100%;
+            background: var(--primary-dim);
+            border: 1px dashed rgba(26,143,69,0.35);
+            color: var(--primary);
+            border-radius: var(--radius-xs);
+            padding: 9px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            cursor: pointer; margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            transition: all 0.15s;
+        }
+        .svc-add-btn:active { background: var(--primary); color: white; }
+
+        .svc-record {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .svc-record:last-child { margin-bottom: 0; }
+        .svc-record-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .svc-record-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; font-weight: 700;
+            color: var(--primary);
+            display: flex; align-items: center; gap: 5px;
+        }
+        .svc-record-type {
+            font-size: 0.78rem; font-weight: 700;
+            color: var(--text); margin-bottom: 2px;
+        }
+        .svc-record-mileage {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: var(--text-dim);
+        }
+        .svc-record-notes {
+            font-size: 0.72rem; color: var(--text-dim);
+            line-height: 1.5; margin-top: 4px;
+            font-style: italic;
+        }
+        .svc-record-actions {
+            display: flex; gap: 5px; flex-shrink: 0;
+        }
+        .svc-record-btn {
+            background: none; border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem; font-weight: 700;
+            cursor: pointer; padding: 3px 7px;
+            border-radius: var(--radius-xs);
+            letter-spacing: 0.05em;
+            transition: all 0.15s;
+        }
+        .svc-record-btn.edit {
+            color: var(--primary);
+            border: 1px solid rgba(26,143,69,0.25);
+        }
+        .svc-record-btn.edit:active { background: var(--primary); color: white; }
+        .svc-record-btn.del {
+            color: var(--danger);
+            border: 1px solid rgba(224,50,50,0.25);
+        }
+        .svc-record-btn.del:active { background: var(--danger); color: white; }
+        .svc-empty {
+            text-align: center; padding: 18px 0;
+            font-size: 0.68rem; color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* upcoming badge */
+        .svc-upcoming-badge {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem; font-weight: 700;
+            padding: 2px 7px; border-radius: 20px;
+            margin-left: 6px; vertical-align: middle;
+        }
+        .svc-upcoming-badge.soon {
+            background: rgba(208,128,0,0.12);
+            border: 1px solid rgba(208,128,0,0.3);
+            color: var(--warning);
+        }
+        .svc-upcoming-badge.overdue {
+            background: rgba(224,50,50,0.12);
+            border: 1px solid rgba(224,50,50,0.3);
+            color: var(--danger);
+        }
+        .svc-upcoming-badge.ok {
+            background: var(--primary-dim);
+            border: 1px solid rgba(26,143,69,0.25);
+            color: var(--primary);
+        }
 </head>
 <body>
 
 <div class="ambient-glow"></div>
 
 <div class="page">
-
-    <!-- THEME BAR -->
-    <div class="theme-bar">
-        <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-btn">
-            <span id="theme-toggle-icon">☀️</span>
-            <span id="theme-toggle-label">CERAH</span>
-        </button>
-    </div>
 
     <!-- GOOGLE SYNC BAR -->
     <div class="gsync-bar" id="gsync-bar">
@@ -1116,7 +1650,7 @@
     <div class="profile-header">
         <div class="profile-left">
             <div class="avatar-ring">
-                <img id="profile-pic" src="https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=50c878&color=000&bold=true" class="profile-img" onclick="document.getElementById('upload').click()">
+                <img id="profile-pic" src="https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=1a8f45&color=fff&bold=true" class="profile-img" onclick="document.getElementById('upload').click()">
             </div>
             <input type="file" id="upload" hidden onchange="loadImg(event)">
             <div class="profile-info">
@@ -1199,10 +1733,12 @@
 
     <!-- EMERGENCY DRUG -->
     <div class="section">
-        <div class="section-header">
-            <h3>Emergency Drug</h3>
-            <div class="drug-toolbar">
-                <button class="btn-rsi" onclick="handleRSIClick()">💉 Pre-Med RSI</button>
+        <div class="section-header" style="cursor:pointer;" onclick="openDrugOverlay()">
+            <h3 style="display:flex;align-items:center;gap:8px;">
+                Emergency Drug
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;font-weight:700;letter-spacing:0.1em;background:var(--primary-dim);border:1px solid rgba(80,200,120,0.25);color:var(--primary);padding:2px 7px;border-radius:20px;text-transform:uppercase;">Lihat Semua ↗</span>
+            </h3>
+            <div class="drug-toolbar" onclick="event.stopPropagation()">
                 <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
                 <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
                 <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
@@ -1223,8 +1759,12 @@
 
     <!-- NOTES -->
     <div class="section">
-        <h3 style="margin-bottom:10px;">Nota Ringkas</h3>
-        <textarea id="personal-notes" placeholder="Tulis nota di sini..." oninput="saveNotes()"></textarea>
+        <div class="section-header">
+            <h3>Nota Ringkas</h3>
+            <button onclick="openAddQuickNote()" class="btn-add-drug">+</button>
+        </div>
+        <div id="quick-notes-list"></div>
+        <div id="quick-notes-empty" style="text-align:center;padding:18px 0;font-size:0.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">📝 Tiada nota. Tekan + untuk tambah.</div>
     </div>
 
     <!-- NURSING NOTE -->
@@ -1233,10 +1773,29 @@
             <h3>Nursing Note</h3>
             <button onclick="openAddNursingNote()" class="btn-add-drug">+</button>
         </div>
-        <div class="tools-tabbar" id="tools-tabbar" style="margin: -4px -16px 12px; padding: 0 12px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 0;">
+        <div class="tools-tabbar" id="tools-tabbar" style="display:none !important;">
             <div class="tool-tab" onclick="switchTool('rsi')" data-tool="rsi" id="tab-rsi">💉 RSI 7P</div>
             <div class="tool-tab" onclick="switchTool('lytic')" data-tool="lytic" id="tab-lytic">⚡ Lytic Cocktail</div>
             <div class="tool-tab" onclick="switchTool('drugcalc')" data-tool="drugcalc" id="tab-drugcalc">🧮 Drug Calc</div>
+        </div>
+        <!-- Tool Cards Grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+            <div class="tool-card-btn" onclick="openNotaOverlay('rsi')" id="toolcard-rsi">
+                <span class="tool-card-icon">💉</span>
+                <span class="tool-card-label">RSI 7P</span>
+            </div>
+            <div class="tool-card-btn" onclick="openNotaOverlay('lytic')" id="toolcard-lytic">
+                <span class="tool-card-icon">⚡</span>
+                <span class="tool-card-label">Lytic Cocktail</span>
+            </div>
+            <div class="tool-card-btn" onclick="openNotaOverlay('drugcalc')" id="toolcard-drugcalc">
+                <span class="tool-card-icon">🧮</span>
+                <span class="tool-card-label">Drug Calc</span>
+            </div>
+            <div class="tool-card-btn" onclick="openNotaOverlay('rsipremed')" id="toolcard-rsipremed">
+                <span class="tool-card-icon">🩺</span>
+                <span class="tool-card-label">Pre-Med RSI</span>
+            </div>
         </div>
         <div id="tool-nursing" class="tool-panel active">
             <input type="text" class="nursing-search" placeholder="🔍 Cari nota..." oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
@@ -1465,6 +2024,39 @@
                 </div>
             </div>
         </div>
+        <!-- PRE-MED RSI PANEL -->
+        <div id="tool-rsipremed" class="tool-panel">
+            <div id="rsipremed-content"></div>
+        </div>
+    </div>
+
+    <!-- SERVICE RECORD -->
+    <div class="section">
+        <div class="section-header">
+            <h3>Rekod Servis Kenderaan</h3>
+        </div>
+        <div id="svc-cards-grid"></div>
+    </div>
+
+    <!-- MONTHLY EXPENSES -->
+    <div class="section">
+        <div class="expense-section-header">
+            <h3>Monthly Expenses</h3>
+            <div class="expense-month-nav">
+                <button class="nav-btn" onclick="expenseChangeMonth(-1)">❮</button>
+                <span class="expense-month-label" id="expense-month-label">—</span>
+                <button class="nav-btn" onclick="expenseChangeMonth(1)">❯</button>
+            </div>
+        </div>
+
+        <div class="expense-cards-grid" id="expense-cards-grid">
+            <!-- Cards rendered by JS -->
+        </div>
+
+        <div class="expense-summary-bar" style="margin-top:12px;">
+            <span class="expense-summary-label">Jumlah Keseluruhan</span>
+            <span class="expense-summary-total" id="expense-grand-total">RM 0.00</span>
+        </div>
     </div>
 
 </div><!-- /page -->
@@ -1479,6 +2071,35 @@
     </div>
     <div id="sheet-content-wrap">
         <div id="sheet-content"></div>
+    </div>
+</div>
+
+<!-- NOTA OVERLAY -->
+<div class="nota-overlay" id="nota-overlay" onclick="handleNotaOverlayClick(event)">
+    <div class="nota-overlay-panel" id="nota-overlay-panel">
+        <div class="nota-overlay-handle"></div>
+        <div class="nota-overlay-header">
+            <div class="nota-overlay-accent" id="nota-overlay-accent"></div>
+            <div class="nota-overlay-title" id="nota-overlay-title">Nota</div>
+            <div class="nota-overlay-close" onclick="closeNotaOverlay()">✕</div>
+        </div>
+        <div class="nota-overlay-body" id="nota-overlay-body"></div>
+    </div>
+</div>
+
+<!-- DRUG OVERLAY -->
+<div class="nota-overlay" id="drug-overlay" onclick="handleDrugOverlayClick(event)">
+    <div class="nota-overlay-panel" style="max-height:94vh;">
+        <div class="nota-overlay-handle"></div>
+        <div class="nota-overlay-header">
+            <div class="nota-overlay-accent" style="background:var(--danger);"></div>
+            <div class="nota-overlay-title">💊 Emergency Drug</div>
+            <div class="nota-overlay-close" onclick="closeDrugOverlay()">✕</div>
+        </div>
+        <div style="padding:12px 20px 0;flex-shrink:0;">
+            <input type="text" id="drug-overlay-search" placeholder="🔍 Cari ubat..." oninput="renderDrugOverlay()" style="margin-bottom:0;font-size:0.82rem;padding:10px 14px;background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xs);width:100%;color:var(--text);font-family:'DM Sans',sans-serif;">
+        </div>
+        <div class="nota-overlay-body" id="drug-overlay-list" style="padding-top:12px;"></div>
     </div>
 </div>
 
@@ -1504,6 +2125,8 @@ let store = JSON.parse(localStorage.getItem('roster_ultimate_v3')) || {
     nursingNotes:[]
 };
 if(!store.nursingNotes) store.nursingNotes = [];
+if(!store.expenses) store.expenses = {};
+if(!store.quickNotes) store.quickNotes = [];
 
 const PRAYER_NAMES = ['Subuh','Syuruk','Zohor','Asar','Maghrib','Isyak'];
 const PRAYER_KEYS  = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
@@ -1591,7 +2214,8 @@ function startPrayerTick() {
 let activeToolTab = 'nursing';
 
 function switchTool(id) {
-    const panels = ['nursing', 'rsi', 'lytic', 'drugcalc'];
+    const panels = ['nursing', 'rsi', 'lytic', 'drugcalc', 'rsipremed'];
+    const cards = ['rsi', 'lytic', 'drugcalc', 'rsipremed'];
     activeToolTab = (activeToolTab === id) ? 'nursing' : id;
     panels.forEach(p => {
         const panel = document.getElementById('tool-' + p);
@@ -1599,7 +2223,70 @@ function switchTool(id) {
         if(panel) panel.classList.toggle('active', activeToolTab === p);
         if(tab) tab.classList.toggle('active', activeToolTab === p);
     });
+    // Update tool cards active state
+    cards.forEach(c => {
+        const card = document.getElementById('toolcard-' + c);
+        if(card) card.classList.toggle('active', activeToolTab === c);
+    });
     if(activeToolTab === 'nursing') renderNursingNotes();
+    if(activeToolTab === 'rsipremed') renderRSIPremedPanel();
+}
+
+const NOTA_META = {
+    rsi:      { title: '💉 RSI 7P',           accent: '#50c878',  panelId: 'tool-rsi' },
+    lytic:    { title: '⚡ Lytic Cocktail',   accent: '#f39c12',  panelId: 'tool-lytic' },
+    drugcalc: { title: '🧮 Drug Calc',        accent: '#c678dd',  panelId: 'tool-drugcalc' },
+    rsipremed:{ title: '🩺 Pre-Med RSI',      accent: '#7ab3ff',  panelId: 'tool-rsipremed' },
+};
+
+function openNotaOverlay(id) {
+    const meta = NOTA_META[id];
+    if(!meta) return;
+    // Pre-render rsipremed if needed
+    if(id === 'rsipremed') renderRSIPremedPanel();
+    const srcPanel = document.getElementById(meta.panelId);
+    const body = document.getElementById('nota-overlay-body');
+    if(srcPanel) {
+        body.innerHTML = srcPanel.innerHTML;
+        // Re-init nora calculator bindings in overlay
+        if(id === 'drugcalc') {
+            const d = body.querySelector('#nora-dose');
+            const w = body.querySelector('#nora-weight');
+            if(d) d.oninput = () => calcNoraOverlay(body);
+            if(w) w.oninput = () => calcNoraOverlay(body);
+        }
+    }
+    document.getElementById('nota-overlay-title').innerText = meta.title;
+    document.getElementById('nota-overlay-accent').style.background = meta.accent;
+    document.getElementById('nota-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeNotaOverlay() {
+    document.getElementById('nota-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function handleNotaOverlayClick(e) {
+    if(e.target === document.getElementById('nota-overlay')) closeNotaOverlay();
+}
+
+function calcNoraOverlay(container) {
+    const dose = parseFloat(container.querySelector('#nora-dose').value);
+    const weight = parseFloat(container.querySelector('#nora-weight').value);
+    const result = container.querySelector('#nora-result');
+    const placeholder = container.querySelector('#nora-placeholder');
+    if(isNaN(dose) || isNaN(weight) || dose <= 0 || weight <= 0) {
+        result.style.display='none'; placeholder.style.display='block'; return;
+    }
+    const mghr = (dose * weight * 60) / 1000;
+    const single = mghr / 0.08, double = mghr / 0.16;
+    container.querySelector('#nora-dose-show').innerText = dose;
+    container.querySelector('#nora-wt-show').innerText = weight;
+    container.querySelector('#nora-mghr').innerText = mghr.toFixed(4) + ' mg/hr';
+    container.querySelector('#nora-single').innerText = single.toFixed(2);
+    container.querySelector('#nora-double').innerText = double.toFixed(2);
+    result.style.display = 'block'; placeholder.style.display = 'none';
 }
 
 function calcNora() {
@@ -1687,8 +2374,98 @@ function renderNursingNotes(query = '') {
 
 function toMY(d) { if(!d) return ''; const p=d.split('-'); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d; }
 function saveData() { localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); renderStats(); updateShiftSummary(); gTriggerSave(); }
-function saveNotes() { store.notes=document.getElementById('personal-notes').value; localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); gTriggerSave(); }
-function loadNotes() { document.getElementById('personal-notes').value=store.notes||""; if(store.profilePic) document.getElementById('profile-pic').src=store.profilePic; }
+function saveNotes() { gTriggerSave(); } // legacy stub
+function loadNotes() { if(store.profilePic) document.getElementById('profile-pic').src=store.profilePic; renderQuickNotes(); }
+
+// ── QUICK NOTES ──
+if(!store.quickNotes) store.quickNotes = [];
+
+function renderQuickNotes() {
+    if(!store.quickNotes) store.quickNotes = [];
+    const list = document.getElementById('quick-notes-list');
+    const empty = document.getElementById('quick-notes-empty');
+    if(!list) return;
+    const sorted = [...store.quickNotes].sort((a,b) => a.title.localeCompare(b.title, 'ms'));
+    if(sorted.length === 0) {
+        list.innerHTML = '';
+        if(empty) empty.style.display = 'block';
+        return;
+    }
+    if(empty) empty.style.display = 'none';
+    list.innerHTML = sorted.map((n, si) => {
+        const ri = store.quickNotes.indexOf(store.quickNotes.find(x => x.id === n.id));
+        const preview = n.text ? n.text.replace(/\n/g,' ').substring(0,50) + (n.text.length > 50 ? '…' : '') : '';
+        return `<div class="quick-note-card" id="qncard-${n.id}">
+            <div class="quick-note-card-header" onclick="toggleQuickNote('${n.id}')">
+                <span class="quick-note-title">${n.title}</span>
+                <div class="quick-note-actions" onclick="event.stopPropagation()">
+                    <button class="quick-note-action-btn edit" onclick="openEditQuickNote('${n.id}')">EDIT</button>
+                    <button class="quick-note-action-btn del" onclick="deleteQuickNote('${n.id}')">DEL</button>
+                </div>
+                <span class="quick-note-chevron">▼</span>
+            </div>
+            <div class="quick-note-body">
+                <div class="quick-note-text">${n.text || '<span style="color:var(--text-muted);font-style:italic;font-size:0.75rem;">Tiada kandungan.</span>'}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function toggleQuickNote(id) {
+    const card = document.getElementById('qncard-' + id);
+    if(card) card.classList.toggle('open');
+}
+
+function openAddQuickNote() {
+    document.getElementById('sheet-title').innerText = '📝 Tambah Nota Baru';
+    document.getElementById('sheet-content').innerHTML = `
+        <label>Tajuk Nota</label>
+        <input type="text" id="qn-title" placeholder="cth: Prosedur IV, Dos Ubat..." maxlength="60">
+        <label>Kandungan Nota</label>
+        <textarea id="qn-text" style="height:200px;" placeholder="Tulis nota di sini..."></textarea>
+        <input type="hidden" id="qn-edit-id" value="">
+        <button class="btn-primary" onclick="saveQuickNote()">SIMPAN NOTA</button>`;
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('qn-title'); if(el) el.focus(); }, 350);
+}
+
+function openEditQuickNote(id) {
+    const note = store.quickNotes.find(n => n.id === id);
+    if(!note) return;
+    document.getElementById('sheet-title').innerText = '✏️ Edit Nota';
+    document.getElementById('sheet-content').innerHTML = `
+        <label>Tajuk Nota</label>
+        <input type="text" id="qn-title" value="${note.title.replace(/"/g,'&quot;')}" maxlength="60">
+        <label>Kandungan Nota</label>
+        <textarea id="qn-text" style="height:200px;">${note.text || ''}</textarea>
+        <input type="hidden" id="qn-edit-id" value="${id}">
+        <button class="btn-primary" style="background:var(--warning);color:black;" onclick="saveQuickNote()">KEMASKINI NOTA</button>
+        <button class="btn-danger" onclick="deleteQuickNote('${id}',true)">PADAM NOTA</button>`;
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('qn-text'); if(el) el.focus(); }, 350);
+}
+
+function saveQuickNote() {
+    const title = (document.getElementById('qn-title').value || '').trim();
+    const text = (document.getElementById('qn-text').value || '').trim();
+    const editId = document.getElementById('qn-edit-id').value;
+    if(!title) { alert('Sila isi tajuk nota.'); return; }
+    if(!store.quickNotes) store.quickNotes = [];
+    if(editId) {
+        const idx = store.quickNotes.findIndex(n => n.id === editId);
+        if(idx >= 0) { store.quickNotes[idx].title = title; store.quickNotes[idx].text = text; }
+    } else {
+        store.quickNotes.push({ id: 'qn_' + Date.now(), title, text });
+    }
+    saveData(); renderQuickNotes(); closeSheet();
+}
+
+function deleteQuickNote(id, fromSheet=false) {
+    if(!confirm('Padam nota ini?')) return;
+    store.quickNotes = (store.quickNotes || []).filter(n => n.id !== id);
+    saveData(); renderQuickNotes();
+    if(fromSheet) closeSheet();
+}
 function triggerDatePicker(id) { const el=document.getElementById(id); if(el&&'showPicker' in HTMLInputElement.prototype) el.showPicker(); else if(el){el.focus();el.click();} }
 
 function updateTime() {
@@ -1730,10 +2507,9 @@ function generateCalendar() {
 
 function getShiftColor(s) {
     if(!s || s==='-') return '#cccccc';
-    if(s==='N') return '#212121';
-    if(s==='M' || s==='E') return '#66bb6a';
-    if(s==='SD' || s==='DO' || s==='AL' || s==='RPL' || s==='MC' || s==='PH') return '#e64a19';
-    return '#00695c'; // fallback for combos
+    const CUTI = ['DO','SD','RPL','PH','MC','AL','EL','ODO'];
+    if(CUTI.includes(s)) return '#800000';
+    return '#000000';
 }
 
 function renderShiftText(s) {
@@ -1775,7 +2551,89 @@ function openAddDrugSheet() { document.getElementById('sheet-title').innerText="
 function saveDrug() { const name=document.getElementById('drug-name-in').value.trim(), ampule=document.getElementById('drug-ampule-in').value.trim(), prep=document.getElementById('drug-prep-in').value.trim(); if(name&&prep){store.drugs.push({name,ampule:ampule||'—',prep}); saveData(); closeSheet(); searchDrugs();} }
 function openEditDrugSheet(idx) { const d=store.drugs[idx]; document.getElementById('sheet-title').innerText="Edit Ubat"; document.getElementById('sheet-content').innerHTML=`<label>Nama Ubat</label><input type="text" id="edit-name" value="${d.name}"><label>Dose / Ampule</label><input type="text" id="edit-ampule" value="${d.ampule||''}"><label>Cara Penyediaan</label><textarea id="edit-prep" style="height:90px;">${d.prep}</textarea><button class="btn-primary" onclick="updateDrug(${idx})">KEMASKINI</button>`; openSheet(); }
 function updateDrug(idx) { const n=document.getElementById('edit-name').value.trim(), a=document.getElementById('edit-ampule').value.trim(), p=document.getElementById('edit-prep').value.trim(); if(n&&p){store.drugs[idx].name=n;store.drugs[idx].ampule=a||'—';store.drugs[idx].prep=p;saveData();closeSheet();searchDrugs();} }
-function deleteDrug(idx){if(confirm("Padam ubat ini?")){store.drugs.splice(idx,1);saveData();searchDrugs();}}
+function deleteDrug(idx){if(confirm("Padam ubat ini?")){store.drugs.splice(idx,1);saveData();searchDrugs();renderDrugOverlay();}}
+
+function openDrugOverlay() {
+    document.getElementById('drug-overlay-search').value = '';
+    renderDrugOverlay();
+    document.getElementById('drug-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(()=>{ document.getElementById('drug-overlay-search').focus(); }, 350);
+}
+
+function closeDrugOverlay() {
+    document.getElementById('drug-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function handleDrugOverlayClick(e) {
+    if(e.target === document.getElementById('drug-overlay')) closeDrugOverlay();
+}
+
+function renderDrugOverlay() {
+    const q = (document.getElementById('drug-overlay-search').value || '').toLowerCase().trim();
+    const list = document.getElementById('drug-overlay-list');
+    if(!list) return;
+    const filtered = q
+        ? store.drugs.map((d,idx)=>({d,idx})).filter(({d})=>d.name.toLowerCase().includes(q)||( d.ampule&&d.ampule.toLowerCase().includes(q))||(d.prep&&d.prep.toLowerCase().includes(q)))
+        : store.drugs.map((d,idx)=>({d,idx}));
+    if(filtered.length === 0) {
+        list.innerHTML = `<div style="text-align:center;padding:30px 20px;font-size:0.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">${q ? '😕 Tiada ubat ditemui.' : '💊 Tiada ubat dalam senarai.'}</div>`;
+        return;
+    }
+    // Group by first letter if no search
+    if(!q) {
+        const groups = {};
+        filtered.forEach(({d,idx}) => {
+            const letter = d.name[0].toUpperCase();
+            if(!groups[letter]) groups[letter] = [];
+            groups[letter].push({d,idx});
+        });
+        let html = '';
+        Object.keys(groups).sort().forEach(letter => {
+            html += `<div style="font-family:'JetBrains Mono',monospace;font-size:0.5rem;font-weight:700;letter-spacing:0.14em;color:var(--primary);text-transform:uppercase;padding:6px 0 4px;border-bottom:1px solid var(--border);margin-bottom:6px;">${letter}</div>`;
+            groups[letter].forEach(({d,idx}) => {
+                html += buildDrugOverlayItem(d, idx);
+            });
+        });
+        list.innerHTML = html;
+    } else {
+        list.innerHTML = filtered.map(({d,idx}) => buildDrugOverlayItem(d, idx, q)).join('');
+    }
+}
+
+function buildDrugOverlayItem(d, idx, q) {
+    const hl = (str) => {
+        if(!q || !str) return str || '';
+        const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+        return str.replace(re, `<mark style="background:rgba(80,200,120,0.25);color:var(--primary);border-radius:2px;">$1</mark>`);
+    };
+    return `<div class="drug-item" style="margin-bottom:8px;">
+        <div style="flex:1;min-width:0;">
+            <div class="drug-name">${hl(d.name)}</div>
+            <div class="drug-ampule">${hl(d.ampule||'—')}</div>
+            <div class="drug-prep">${hl(d.prep)}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;margin-left:8px;">
+            <button onclick="event.stopPropagation();openEditDrugSheetFromOverlay(${idx})" style="background:none;color:var(--success);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;padding:2px 4px;">EDIT</button>
+            <button onclick="event.stopPropagation();deleteDrugFromOverlay(${idx})" style="background:none;color:var(--danger);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;padding:2px 4px;">DEL</button>
+        </div>
+    </div>`;
+}
+
+function openEditDrugSheetFromOverlay(idx) {
+    closeDrugOverlay();
+    setTimeout(() => openEditDrugSheet(idx), 200);
+}
+
+function deleteDrugFromOverlay(idx) {
+    if(confirm("Padam ubat ini?")) {
+        store.drugs.splice(idx,1);
+        saveData();
+        searchDrugs();
+        renderDrugOverlay();
+    }
+}
 
 function openShiftPicker(key) {
     const existing=store.calendar[key]||{};
@@ -1960,6 +2818,28 @@ const RSI_DATA = [
 
 function handleRSIClick(){ document.getElementById('sheet-title').innerText="💉 Pre-Med RSI"; let html=''; RSI_DATA.forEach(section=>{ html+=`<div class="rsi-group-header">${section.group}</div>`; section.drugs.forEach(d=>{ html+=`<div class="drug-item"><div style="flex:1;min-width:0;"><div class="drug-name">${d.name}</div><div class="drug-ampule">${d.ampule}</div><div class="drug-prep">${d.prep}</div></div></div>`; }); }); document.getElementById('sheet-content').innerHTML=html; openSheet(); }
 
+function renderRSIPremedPanel() {
+    const el = document.getElementById('rsipremed-content');
+    if(!el) return;
+    let html = '<div style="padding:2px 0 4px;">';
+    RSI_DATA.forEach(section => {
+        html += `<div style="margin-bottom:10px;">
+            <div class="rsi-group-header" style="margin-bottom:6px;">${section.group}</div>`;
+        section.drugs.forEach(d => {
+            html += `<div class="drug-item" style="margin-bottom:6px;">
+                <div style="flex:1;min-width:0;">
+                    <div class="drug-name">${d.name}</div>
+                    <div class="drug-ampule">${d.ampule}</div>
+                    <div class="drug-prep">${d.prep}</div>
+                </div>
+            </div>`;
+        });
+        html += '</div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+}
+
 function triggerPDFUpload(e){e.preventDefault();document.getElementById('pdf-upload').click();}
 function savePDF(e){ const file=e.target.files[0]; if(file&&file.type==="application/pdf"){ const reader=new FileReader(); reader.onload=function(ev){store.pdfData=ev.target.result;saveData();checkPDFStatus();alert("PDF berjaya dimuat naik!");}; reader.readAsDataURL(file); } else alert("Sila pilih fail PDF sahaja."); }
 function openStoredPDF(){ if(store.pdfData){ const base64Parts=store.pdfData.split(','), contentType=base64Parts[0].split(':')[1].split(';')[0]; const byteCharacters=atob(base64Parts[1]), byteArrays=[]; for(let o=0;o<byteCharacters.length;o+=512){const slice=byteCharacters.slice(o,o+512);const bn=new Array(slice.length);for(let i=0;i<slice.length;i++)bn[i]=slice.charCodeAt(i);byteArrays.push(new Uint8Array(bn));} const blob=new Blob(byteArrays,{type:contentType}), blobUrl=URL.createObjectURL(blob); window.open(blobUrl,'_blank'); setTimeout(()=>URL.revokeObjectURL(blobUrl),100); } }
@@ -2056,53 +2936,7 @@ const DEFAULT_DRUGS = [
 
 function migrateDefaultDrugs(){ const existingNames=store.drugs.map(d=>d.name.toLowerCase()); let added=0; DEFAULT_DRUGS.forEach(def=>{if(!existingNames.includes(def.name.toLowerCase())){store.drugs.push(def);added++;}}); store.drugs=store.drugs.map(d=>({name:d.name,ampule:d.ampule||d.prep||'—',prep:d.prep||''})); if(added>0) localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); }
 
-const THEMES = {
-    dark: {
-        bg:'#0a0a0a', surface:'#111', card:'#161616', cardRaised:'#1c1c1c',
-        border:'#222', borderBright:'#2e2e2e',
-        text:'#f0f0f0', textDim:'#777', textMuted:'#333',
-        primary:'#50c878', primaryDim:'rgba(80,200,120,0.10)', primaryGlow:'rgba(80,200,120,0.30)',
-        avatarBg:'50c878', avatarFg:'000', icon:'☀️', label:'CERAH'
-    },
-    light: {
-        bg:'#f4f4f4', surface:'#ffffff', card:'#ffffff', cardRaised:'#f9f9f9',
-        border:'#e0e0e0', borderBright:'#cccccc',
-        text:'#111111', textDim:'#666666', textMuted:'#aaaaaa',
-        primary:'#1a8f45', primaryDim:'rgba(26,143,69,0.10)', primaryGlow:'rgba(26,143,69,0.20)',
-        avatarBg:'1a8f45', avatarFg:'fff', icon:'🌙', label:'GELAP'
-    }
-};
-
-let currentTheme = 'dark';
-
-function applyTheme(name) {
-    const t=THEMES[name]; if(!t) return;
-    const r=document.documentElement;
-    r.style.setProperty('--bg',t.bg);
-    r.style.setProperty('--surface',t.surface);
-    r.style.setProperty('--card',t.card);
-    r.style.setProperty('--card-raised',t.cardRaised);
-    r.style.setProperty('--border',t.border);
-    r.style.setProperty('--border-bright',t.borderBright);
-    r.style.setProperty('--text',t.text);
-    r.style.setProperty('--text-dim',t.textDim);
-    r.style.setProperty('--text-muted',t.textMuted);
-    r.style.setProperty('--primary',t.primary);
-    r.style.setProperty('--primary-dim',t.primaryDim);
-    r.style.setProperty('--primary-glow',t.primaryGlow);
-    const icon=document.getElementById('theme-toggle-icon'), label=document.getElementById('theme-toggle-label');
-    if(icon) icon.innerText=t.icon;
-    if(label) label.innerText=t.label;
-    const pic=document.getElementById('profile-pic');
-    if(pic&&pic.src.includes('ui-avatars')) pic.src=`https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=${t.avatarBg}&color=${t.avatarFg}&bold=true`;
-    const glow=document.querySelector('.ambient-glow');
-    if(glow) glow.style.background=`radial-gradient(circle,${t.primaryGlow} 0%,transparent 70%)`;
-    currentTheme=name;
-    localStorage.setItem('roster_theme',name);
-    document.querySelectorAll('.day-label').forEach(el => {
-        el.style.color = name === 'light' ? '#000000' : '#ffffff';
-    });
-}
+let currentTheme = 'light';
 
 // ══════════════════════════════════════════
 //  GOOGLE DRIVE API
@@ -2293,8 +3127,539 @@ function gTriggerSave() {
     gSaveDebounce = setTimeout(gSaveToDrive, 1500);
 }
 
-function toggleTheme() { applyTheme(currentTheme==='dark'?'light':'dark'); }
-function loadTheme() { applyTheme(localStorage.getItem('roster_theme')==='light'?'light':'dark'); }
+function loadTheme() { /* light theme only — static */ }
+
+// ══════════════════════════════════════════
+//  MONTHLY EXPENSES
+// ══════════════════════════════════════════
+
+if(!store.expenses) store.expenses = {};
+
+let expenseCurrentDate = new Date();
+
+// ── SERVICE RECORD ──
+if(!store.serviceRecords) store.serviceRecords = {};
+
+const SVC_VEHICLES = [
+    { id: 'motor',  icon: '🏍️', name: 'Motor',  plate: 'WTE4108', color: 'var(--primary)' },
+    { id: 'kereta', icon: '🚗', name: 'Kereta', plate: 'TCC8852', color: 'var(--warning)' },
+];
+
+const SVC_TYPES_PRESET = [
+    'Tukar Minyak & Penapis',
+    'Tukar Brek',
+    'Tukar Tayar',
+    'Servis Berkala',
+    'Tukar Bateri',
+    'Pemeriksaan AC',
+    'Tune-Up',
+    'Tukar Timing Belt',
+    'Road Tax & Insurans',
+    'Lain-lain',
+];
+
+function svcGetRecords(vehicleId, kind) {
+    if(!store.serviceRecords[vehicleId]) store.serviceRecords[vehicleId] = { past:[], upcoming:[] };
+    return store.serviceRecords[vehicleId][kind] || [];
+}
+
+function svcSave() { saveData(); }
+
+function renderSvcCards() {
+    const grid = document.getElementById('svc-cards-grid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    SVC_VEHICLES.forEach(v => {
+        const past = svcGetRecords(v.id, 'past');
+        const upcoming = svcGetRecords(v.id, 'upcoming');
+
+        // Nearest upcoming badge
+        let headerBadge = '';
+        if(upcoming.length > 0) {
+            const sorted = [...upcoming].sort((a,b)=>a.date.localeCompare(b.date));
+            const next = sorted[0];
+            const daysLeft = Math.ceil((new Date(next.date) - new Date()) / 86400000);
+            if(daysLeft < 0) headerBadge = `<span class="svc-upcoming-badge overdue">TERTUNGGAK ${Math.abs(daysLeft)}h</span>`;
+            else if(daysLeft <= 30) headerBadge = `<span class="svc-upcoming-badge soon">DALAM ${daysLeft}h</span>`;
+            else headerBadge = `<span class="svc-upcoming-badge ok">DALAM ${daysLeft}h</span>`;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'svc-vehicle-card';
+        card.id = `svc-card-${v.id}`;
+        card.innerHTML = `
+        <div class="svc-vehicle-header" onclick="toggleSvcCard('${v.id}')">
+            <div class="svc-vehicle-left">
+                <div class="svc-vehicle-icon">${v.icon}</div>
+                <div>
+                    <span class="svc-vehicle-name">${v.name}</span>
+                    <span class="svc-vehicle-plate" style="color:${v.color};">${v.plate}</span>
+                    ${headerBadge}
+                </div>
+            </div>
+            <span class="svc-vehicle-chevron">▼</span>
+        </div>
+        <div class="svc-vehicle-body" id="svc-body-${v.id}">
+            <div class="svc-tabbar">
+                <div class="svc-tab active" id="svc-tab-${v.id}-past" onclick="switchSvcTab('${v.id}','past')">📋 Servis Lepas (${past.length})</div>
+                <div class="svc-tab" id="svc-tab-${v.id}-upcoming" onclick="switchSvcTab('${v.id}','upcoming')">🗓️ Servis Akan Datang (${upcoming.length})</div>
+            </div>
+            <div class="svc-panel active" id="svc-panel-${v.id}-past">
+                <button class="svc-add-btn" onclick="openSvcForm('${v.id}','past')">+ Tambah Rekod Servis Lepas</button>
+                <div id="svc-list-${v.id}-past">${renderSvcList(v.id, 'past')}</div>
+            </div>
+            <div class="svc-panel" id="svc-panel-${v.id}-upcoming">
+                <button class="svc-add-btn" onclick="openSvcForm('${v.id}','upcoming')">+ Tambah Servis Akan Datang</button>
+                <div id="svc-list-${v.id}-upcoming">${renderSvcList(v.id, 'upcoming')}</div>
+            </div>
+        </div>`;
+        grid.appendChild(card);
+    });
+}
+
+function renderSvcList(vehicleId, kind) {
+    const records = svcGetRecords(vehicleId, kind);
+    if(records.length === 0) {
+        const label = kind === 'past' ? 'Tiada rekod servis lepas.' : 'Tiada jadual servis akan datang.';
+        return `<div class="svc-empty">📭 ${label}</div>`;
+    }
+    // Sort: past = newest first, upcoming = nearest first
+    const sorted = [...records].map((r,i)=>({...r,_idx:i})).sort((a,b)=>
+        kind === 'past' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date)
+    );
+    return sorted.map(r => {
+        let dateBadge = '';
+        if(kind === 'upcoming') {
+            const daysLeft = Math.ceil((new Date(r.date) - new Date()) / 86400000);
+            if(daysLeft < 0) dateBadge = `<span class="svc-upcoming-badge overdue">TERTUNGGAK</span>`;
+            else if(daysLeft <= 30) dateBadge = `<span class="svc-upcoming-badge soon">${daysLeft}h lagi</span>`;
+            else dateBadge = `<span class="svc-upcoming-badge ok">${daysLeft}h lagi</span>`;
+        }
+        return `
+        <div class="svc-record">
+            <div class="svc-record-top">
+                <div style="flex:1;min-width:0;">
+                    <div class="svc-record-date">📅 ${toMY(r.date)} ${dateBadge}</div>
+                    <div class="svc-record-type">${r.type || '—'}</div>
+                    ${r.mileage ? `<div class="svc-record-mileage">🔢 ${Number(r.mileage).toLocaleString()} km</div>` : ''}
+                    ${r.notes ? `<div class="svc-record-notes">"${r.notes}"</div>` : ''}
+                </div>
+                <div class="svc-record-actions">
+                    <button class="svc-record-btn edit" onclick="openSvcForm('${vehicleId}','${kind}',${r._idx})">EDIT</button>
+                    <button class="svc-record-btn del" onclick="deleteSvcRecord('${vehicleId}','${kind}',${r._idx})">DEL</button>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function toggleSvcCard(id) {
+    const card = document.getElementById('svc-card-' + id);
+    if(card) card.classList.toggle('open');
+}
+
+function switchSvcTab(vehicleId, kind) {
+    ['past','upcoming'].forEach(k => {
+        document.getElementById(`svc-tab-${vehicleId}-${k}`)?.classList.toggle('active', k === kind);
+        document.getElementById(`svc-panel-${vehicleId}-${k}`)?.classList.toggle('active', k === kind);
+    });
+}
+
+function refreshSvcCard(vehicleId) {
+    // Re-render just the lists and tab counts without collapsing
+    const past = svcGetRecords(vehicleId, 'past');
+    const upcoming = svcGetRecords(vehicleId, 'upcoming');
+    const pastEl = document.getElementById(`svc-list-${vehicleId}-past`);
+    const upcomingEl = document.getElementById(`svc-list-${vehicleId}-upcoming`);
+    if(pastEl) pastEl.innerHTML = renderSvcList(vehicleId, 'past');
+    if(upcomingEl) upcomingEl.innerHTML = renderSvcList(vehicleId, 'upcoming');
+    const tabPast = document.getElementById(`svc-tab-${vehicleId}-past`);
+    const tabUpcoming = document.getElementById(`svc-tab-${vehicleId}-upcoming`);
+    if(tabPast) tabPast.textContent = `📋 Servis Lepas (${past.length})`;
+    if(tabUpcoming) tabUpcoming.textContent = `🗓️ Servis Akan Datang (${upcoming.length})`;
+}
+
+function openSvcForm(vehicleId, kind, editIdx = -1) {
+    const vehicle = SVC_VEHICLES.find(v => v.id === vehicleId);
+    const records = svcGetRecords(vehicleId, kind);
+    const isEdit = editIdx >= 0;
+    const rec = isEdit ? records[editIdx] : null;
+    const kindLabel = kind === 'past' ? 'Servis Lepas' : 'Servis Akan Datang';
+
+    document.getElementById('sheet-title').innerText = `${isEdit ? '✏️ Edit' : '➕ Tambah'} — ${vehicle.name} ${kindLabel}`;
+
+    const today = new Date().toISOString().split('T')[0];
+    const presetOptions = SVC_TYPES_PRESET.map(t =>
+        `<option value="${t}" ${rec && rec.type === t ? 'selected' : ''}>${t}</option>`
+    ).join('');
+
+    document.getElementById('sheet-content').innerHTML = `
+        <label>Tarikh ${kindLabel}</label>
+        <input type="date" id="svc-inp-date" value="${rec ? rec.date : today}" onclick="triggerDatePicker('svc-inp-date')">
+
+        <label>Jenis Servis</label>
+        <select id="svc-inp-type-preset" onchange="svcTypePresetChange()">
+            <option value="">— Pilih jenis servis —</option>
+            ${presetOptions}
+            <option value="__custom__" ${rec && !SVC_TYPES_PRESET.includes(rec.type) ? 'selected' : ''}>Lain-lain (taip sendiri)</option>
+        </select>
+        <input type="text" id="svc-inp-type-custom" placeholder="Taip jenis servis..." value="${rec && !SVC_TYPES_PRESET.includes(rec.type) ? rec.type : ''}" style="display:${rec && !SVC_TYPES_PRESET.includes(rec.type) ? 'block' : 'none'};">
+
+        <label>Perbatuan / KM <span style="font-weight:400;opacity:0.6;">(pilihan)</span></label>
+        <input type="number" id="svc-inp-mileage" placeholder="cth: 85000" value="${rec ? rec.mileage || '' : ''}" min="0">
+
+        <label>Nota Tambahan <span style="font-weight:400;opacity:0.6;">(pilihan)</span></label>
+        <textarea id="svc-inp-notes" style="height:80px;" placeholder="cth: Tukar 3 benda, kedai ABC...">${rec ? rec.notes || '' : ''}</textarea>
+
+        <input type="hidden" id="svc-inp-vehicle" value="${vehicleId}">
+        <input type="hidden" id="svc-inp-kind" value="${kind}">
+        <input type="hidden" id="svc-inp-idx" value="${editIdx}">
+
+        <button class="btn-primary" onclick="saveSvcRecord()">SIMPAN</button>
+        ${isEdit ? `<button class="btn-danger" onclick="deleteSvcRecord('${vehicleId}','${kind}',${editIdx},true)">PADAM REKOD</button>` : ''}
+    `;
+    openSheet();
+    setTimeout(() => {
+        // If editing with preset type, show it selected
+        if(rec && SVC_TYPES_PRESET.includes(rec.type)) {
+            document.getElementById('svc-inp-type-preset').value = rec.type;
+        }
+    }, 100);
+}
+
+function svcTypePresetChange() {
+    const sel = document.getElementById('svc-inp-type-preset').value;
+    const custom = document.getElementById('svc-inp-type-custom');
+    custom.style.display = sel === '__custom__' ? 'block' : 'none';
+    if(sel === '__custom__') custom.focus();
+}
+
+function saveSvcRecord() {
+    const vehicleId = document.getElementById('svc-inp-vehicle').value;
+    const kind = document.getElementById('svc-inp-kind').value;
+    const editIdx = parseInt(document.getElementById('svc-inp-idx').value);
+    const date = document.getElementById('svc-inp-date').value;
+    const presetVal = document.getElementById('svc-inp-type-preset').value;
+    const customVal = document.getElementById('svc-inp-type-custom').value.trim();
+    const type = presetVal === '__custom__' ? customVal : presetVal;
+    const mileage = document.getElementById('svc-inp-mileage').value.trim();
+    const notes = document.getElementById('svc-inp-notes').value.trim();
+
+    if(!date) { alert('Sila pilih tarikh.'); return; }
+    if(!type) { alert('Sila pilih atau taip jenis servis.'); return; }
+
+    if(!store.serviceRecords[vehicleId]) store.serviceRecords[vehicleId] = { past:[], upcoming:[] };
+    const records = store.serviceRecords[vehicleId][kind];
+    const rec = { date, type, mileage, notes };
+
+    if(editIdx >= 0) {
+        records[editIdx] = rec;
+    } else {
+        records.push(rec);
+    }
+    svcSave();
+    closeSheet();
+    refreshSvcCard(vehicleId);
+}
+
+function deleteSvcRecord(vehicleId, kind, idx, fromSheet = false) {
+    if(!confirm('Padam rekod ini?')) return;
+    if(!store.serviceRecords[vehicleId]) return;
+    store.serviceRecords[vehicleId][kind].splice(idx, 1);
+    svcSave();
+    if(fromSheet) closeSheet();
+    refreshSvcCard(vehicleId);
+}
+
+const EXPENSE_VEHICLES = [
+    {
+        id: 'motor',
+        icon: '🏍️',
+        title: 'Motor',
+        plate: 'WTE4108',
+        color: 'primary',
+        types: [
+            { key: 'lastService', label: 'Last Service', kind: 'date', hasServiceType: true },
+            { key: 'nextService', label: 'Next Service', kind: 'date', hasServiceType: true },
+        ]
+    },
+    {
+        id: 'kereta',
+        icon: '🚗',
+        title: 'Kereta',
+        plate: 'TCC8852',
+        color: 'warning',
+        types: [
+            { key: 'lastService', label: 'Last Service', kind: 'date', hasServiceType: true },
+            { key: 'nextService', label: 'Next Service', kind: 'date', hasServiceType: true },
+            { key: 'loanPayment', label: 'Loan Payment', kind: 'amount' },
+        ]
+    },
+    {
+        id: 'personal',
+        icon: '👤',
+        title: 'Personal',
+        plate: null,
+        color: 'danger',
+        types: [
+            { key: 'loanPayment', label: 'Loan Payment', kind: 'amount' },
+        ]
+    }
+];
+
+function expenseMonthKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+
+function expenseGetData(vehicleId) {
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(!store.expenses[mk]) store.expenses[mk] = {};
+    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
+    return store.expenses[mk][vehicleId];
+}
+
+function expenseChangeMonth(dir) {
+    expenseCurrentDate.setMonth(expenseCurrentDate.getMonth() + dir);
+    renderExpenseCards();
+}
+
+const MONTH_NAMES_MY = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogos','Sep','Okt','Nov','Dis'];
+
+function renderExpenseCards() {
+    const label = `${MONTH_NAMES_MY[expenseCurrentDate.getMonth()]} ${expenseCurrentDate.getFullYear()}`;
+    document.getElementById('expense-month-label').innerText = label;
+
+    let grandTotal = 0;
+    const grid = document.getElementById('expense-cards-grid');
+    grid.innerHTML = '';
+
+    EXPENSE_VEHICLES.forEach(v => {
+        const data = expenseGetData(v.id);
+        let cardTotal = 0;
+
+        // Sum amount types
+        v.types.forEach(t => {
+            if(t.kind === 'amount' && data[t.key]) {
+                cardTotal += parseFloat(data[t.key]) || 0;
+            }
+        });
+        grandTotal += cardTotal;
+
+        const colorMap = { primary: 'var(--primary)', warning: 'var(--warning)', danger: 'var(--danger)' };
+        const accentColor = colorMap[v.color] || 'var(--primary)';
+
+        let typesHTML = '';
+        v.types.forEach(t => {
+            const val = data[t.key] || '';
+            let displayVal = '';
+            let valClass = '';
+
+            if(t.kind === 'date') {
+                displayVal = val ? toMY(val) : '— Belum ditetapkan';
+                valClass = val ? 'date-val' : '';
+            } else if(t.kind === 'amount') {
+                displayVal = val ? `RM ${parseFloat(val).toFixed(2)}` : 'RM 0.00';
+                valClass = `amount-val ${v.color}`;
+            } else {
+                displayVal = val || '— Belum ditetapkan';
+            }
+
+            // Receipt
+            const receiptData = data[`receipt_${t.key}`];
+            let receiptHTML = '';
+            if(receiptData) {
+                if(receiptData.startsWith('data:image')) {
+                    receiptHTML = `<img src="${receiptData}" class="receipt-thumb" onclick="expenseViewReceipt('${v.id}','${t.key}')" title="Lihat resit">`;
+                } else {
+                    receiptHTML = `<div class="receipt-pdf-badge" onclick="expenseViewReceipt('${v.id}','${t.key}')" title="Lihat PDF">📄</div>`;
+                }
+            }
+
+            // ServiceType sub-field (only for date fields with hasServiceType)
+            let serviceTypeHTML = '';
+            if(t.hasServiceType) {
+                const stKey = t.key + '_serviceType';
+                const stVal = data[stKey] || '';
+                serviceTypeHTML = `
+                <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+                        <div>
+                            <span class="expense-type-label" style="margin-bottom:1px;">Type of Service</span>
+                            <span style="font-size:0.75rem;color:${stVal ? 'var(--text)' : 'var(--text-muted)'};font-weight:600;">${stVal || '— Belum ditetapkan'}</span>
+                        </div>
+                        <button class="expense-edit-btn" onclick="openExpenseEdit('${v.id}','${stKey}','text','Type of Service')">EDIT</button>
+                    </div>
+                </div>`;
+            }
+
+            typesHTML += `
+            <div class="expense-type-row" style="flex-direction:column;align-items:stretch;gap:0;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <div class="expense-type-info">
+                        <span class="expense-type-label">${t.label}</span>
+                        <span class="expense-type-value ${valClass}">${displayVal}</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                        ${receiptHTML}
+                        <div>
+                            <button class="expense-edit-btn" onclick="openExpenseEdit('${v.id}','${t.key}','${t.kind}','${t.label}')">EDIT</button>
+                            <div style="margin-top:4px;">
+                                <label class="receipt-upload-btn" for="receipt-input-${v.id}-${t.key}" title="Upload resit" style="padding:4px 7px;flex:unset;">
+                                    <span style="font-size:0.75rem;">📎</span>
+                                    <span class="receipt-upload-label" style="font-size:0.46rem;">${receiptData ? 'TUKAR' : 'RESIT'}</span>
+                                </label>
+                                <input type="file" id="receipt-input-${v.id}-${t.key}" accept="image/*,application/pdf" hidden onchange="handleReceiptUpload(event,'${v.id}','${t.key}')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ${serviceTypeHTML}
+            </div>`;
+        });
+
+        const cardEl = document.createElement('div');
+        cardEl.className = 'expense-card';
+        cardEl.id = `expense-card-${v.id}`;
+        cardEl.innerHTML = `
+            <div class="expense-card-header" onclick="toggleExpenseCard('${v.id}')">
+                <div class="expense-card-left">
+                    <div class="expense-card-icon">${v.icon}</div>
+                    <div>
+                        <span class="expense-card-title">${v.title}</span>
+                        ${v.plate ? `<span class="expense-card-plate" style="color:${accentColor};">${v.plate}</span>` : `<span class="expense-card-plate" style="color:${accentColor};font-size:0.78rem;letter-spacing:0.04em;">Peribadi</span>`}
+                    </div>
+                </div>
+                <div class="expense-card-total">
+                    <span class="expense-total-label">Jumlah</span>
+                    <span class="expense-total-val" style="color:${cardTotal > 0 ? accentColor : 'var(--text-muted)'};">${cardTotal > 0 ? 'RM '+cardTotal.toFixed(2) : '—'}</span>
+                </div>
+            </div>
+            <div class="expense-card-body" id="expense-body-${v.id}">
+                ${typesHTML}
+            </div>`;
+        grid.appendChild(cardEl);
+    });
+
+    // Grand total
+    document.getElementById('expense-grand-total').innerText = `RM ${grandTotal.toFixed(2)}`;
+}
+
+function toggleExpenseCard(id) {
+    const body = document.getElementById('expense-body-'+id);
+    if(body) body.classList.toggle('open');
+}
+
+function openExpenseEdit(vehicleId, fieldKey, kind, label) {
+    const data = expenseGetData(vehicleId);
+    const current = data[fieldKey] || '';
+    const vehicle = EXPENSE_VEHICLES.find(v => v.id === vehicleId);
+    const vLabel = vehicle ? `${vehicle.title}${vehicle.plate ? ' '+vehicle.plate : ''}` : '';
+
+    document.getElementById('sheet-title').innerText = `✏️ ${vLabel} — ${label}`;
+
+    let inputHTML = '';
+    if(kind === 'date') {
+        inputHTML = `<label>${label}</label><input type="date" id="exp-input" value="${current}" onclick="triggerDatePicker('exp-input')">`;
+    } else if(kind === 'amount') {
+        inputHTML = `<label>${label} (RM)</label><input type="number" id="exp-input" value="${current}" placeholder="0.00" step="0.01" min="0">`;
+    } else {
+        inputHTML = `<label>${label}</label><input type="text" id="exp-input" value="${current}" placeholder="Masukkan jenis servis...">`;
+    }
+
+    document.getElementById('sheet-content').innerHTML = `
+        ${inputHTML}
+        <input type="hidden" id="exp-vehicle-id" value="${vehicleId}">
+        <input type="hidden" id="exp-field-key" value="${fieldKey}">
+        <button class="btn-primary" onclick="saveExpenseField()">SIMPAN</button>
+        ${current ? `<button class="btn-danger" onclick="clearExpenseField('${vehicleId}','${fieldKey}')">PADAM</button>` : ''}`;
+
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('exp-input'); if(el){ el.focus(); if(kind === 'date' && 'showPicker' in HTMLInputElement.prototype) el.showPicker(); } }, 350);
+}
+
+function saveExpenseField() {
+    const vehicleId = document.getElementById('exp-vehicle-id').value;
+    const fieldKey = document.getElementById('exp-field-key').value;
+    const val = document.getElementById('exp-input').value.trim();
+    if(!val) { alert('Sila isi nilai.'); return; }
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(!store.expenses[mk]) store.expenses[mk] = {};
+    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
+    store.expenses[mk][vehicleId][fieldKey] = val;
+    saveData();
+    renderExpenseCards();
+    closeSheet();
+    // Re-open card
+    const body = document.getElementById('expense-body-'+vehicleId);
+    if(body) body.classList.add('open');
+}
+
+function clearExpenseField(vehicleId, fieldKey) {
+    if(!confirm('Padam entri ini?')) return;
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(store.expenses[mk] && store.expenses[mk][vehicleId]) {
+        delete store.expenses[mk][vehicleId][fieldKey];
+        delete store.expenses[mk][vehicleId]['receipt_'+fieldKey];
+    }
+    saveData(); renderExpenseCards(); closeSheet();
+    const body = document.getElementById('expense-body-'+vehicleId);
+    if(body) body.classList.add('open');
+}
+
+function handleReceiptUpload(event, vehicleId, fieldKey) {
+    const file = event.target.files[0];
+    if(!file) return;
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(!store.expenses[mk]) store.expenses[mk] = {};
+    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        store.expenses[mk][vehicleId]['receipt_'+fieldKey] = e.target.result;
+        saveData();
+        renderExpenseCards();
+        const body = document.getElementById('expense-body-'+vehicleId);
+        if(body) body.classList.add('open');
+    };
+    reader.readAsDataURL(file);
+    event.target.value = '';
+}
+
+function expenseViewReceipt(vehicleId, fieldKey) {
+    const data = expenseGetData(vehicleId);
+    const receiptData = data['receipt_'+fieldKey];
+    if(!receiptData) return;
+
+    const vehicle = EXPENSE_VEHICLES.find(v => v.id === vehicleId);
+    const typeInfo = vehicle.types.find(t => t.key === fieldKey);
+    document.getElementById('sheet-title').innerText = `🧾 Resit — ${typeInfo ? typeInfo.label : fieldKey}`;
+
+    let content = '';
+    if(receiptData.startsWith('data:image')) {
+        content = `<div style="text-align:center;"><img src="${receiptData}" style="max-width:100%;border-radius:var(--radius-sm);border:1px solid var(--border);"></div>`;
+    } else {
+        content = `<div style="text-align:center;padding:20px;">
+            <div style="font-size:3rem;margin-bottom:12px;">📄</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:16px;">Fail PDF</div>
+            <a href="${receiptData}" download="resit_${vehicleId}_${fieldKey}.pdf" style="display:inline-block;background:var(--primary-dim);border:1px solid rgba(80,200,120,0.3);color:var(--primary);border-radius:var(--radius-xs);padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;text-decoration:none;letter-spacing:0.08em;">⬇️ MUAT TURUN PDF</a>
+        </div>`;
+    }
+
+    content += `<button class="btn-danger" style="margin-top:12px;" onclick="deleteExpenseReceipt('${vehicleId}','${fieldKey}')">PADAM RESIT</button>`;
+    document.getElementById('sheet-content').innerHTML = content;
+    openSheet();
+}
+
+function deleteExpenseReceipt(vehicleId, fieldKey) {
+    if(!confirm('Padam resit ini?')) return;
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(store.expenses[mk] && store.expenses[mk][vehicleId]) {
+        delete store.expenses[mk][vehicleId]['receipt_'+fieldKey];
+    }
+    saveData(); renderExpenseCards(); closeSheet();
+    const body = document.getElementById('expense-body-'+vehicleId);
+    if(body) body.classList.add('open');
+}
 
 
 
@@ -2303,6 +3668,12 @@ window.addEventListener('load', () => {
     fetchPrayerTimes();
     startPrayerTick();
     schedulePrayerRefresh();
+});
+window.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') {
+        if(document.getElementById('drug-overlay').classList.contains('open')) { closeDrugOverlay(); return; }
+        if(document.getElementById('nota-overlay').classList.contains('open')) { closeNotaOverlay(); return; }
+    }
 });
 migrateCalendarKeys();
 migrateDefaultDrugs();
@@ -2313,6 +3684,9 @@ renderStats();
 loadNotes();
 loadTheme();
 renderNursingNotes();
+renderExpenseCards();
+renderQuickNotes();
+renderSvcCards();
 </script>
 </body>
 </html>
