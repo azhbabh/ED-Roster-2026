@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com https://fonts.googleapis.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://accounts.google.com; font-src https://fonts.gstatic.com; connect-src * https://accounts.google.com https://*.googleapis.com; img-src * data: https://*.googleusercontent.com; frame-src https://accounts.google.com;">
     <title>Roster Premium - Ahmad Zilalul Hilmi Bin Adnan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -72,133 +71,152 @@
 
         /* ── PRAYER TIME WIDGET ── */
         .prayer-widget {
+            background: var(--card);
             border: 1px solid var(--border);
-            border-top: 2px solid transparent;
-            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
             border-radius: var(--radius);
-            padding: 10px 14px;
-            margin-top: 10px;
-            margin-bottom: 12px;
+            padding: 14px 16px;
+            margin-top: 14px;
+            margin-bottom: 0;
             position: relative;
             overflow: hidden;
         }
+
         .prayer-widget::before {
             content: '';
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background: linear-gradient(135deg, rgba(80,200,120,0.05) 0%, transparent 60%);
             pointer-events: none;
         }
+
         .prayer-widget-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
+
         .prayer-widget-title {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 7px;
         }
+
         .prayer-widget-title span {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.55rem;
+            font-size: 0.58rem;
             font-weight: 700;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--primary);
         }
+
         .prayer-location {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.5rem;
+            font-size: 0.55rem;
             color: var(--text-muted);
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
         }
-        /* Next prayer — compact inline pill */
+
         .prayer-next-banner {
-            display: none;
-        }
-        /* Compact next prayer row above grid */
-        .prayer-next-compact {
+            background: var(--primary-dim);
+            border: 1px solid rgba(80,200,120,0.2);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 7px;
+            justify-content: space-between;
+            margin-bottom: 10px;
         }
-        .prayer-next-compact-label {
+
+        .prayer-next-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.5rem;
+            font-size: 0.55rem;
+            color: var(--primary);
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--text-muted);
         }
-        .prayer-next-compact-name {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .prayer-next-compact-time {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
+
+        .prayer-next-name {
+            font-size: 0.85rem;
             font-weight: 700;
             color: var(--text);
         }
-        .prayer-next-compact-countdown {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.5rem;
-            color: var(--text-dim);
-            margin-left: auto;
+
+        .prayer-next-time {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            filter: drop-shadow(0 0 8px var(--primary-glow));
         }
+
+        .prayer-countdown {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            text-align: right;
+        }
+
         .prayer-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 3px;
+            gap: 4px;
         }
+
         .prayer-slot {
             text-align: center;
-            padding: 5px 2px;
+            padding: 7px 2px;
             border-radius: var(--radius-xs);
             background: var(--surface);
             border: 1px solid var(--border);
             transition: all 0.2s;
             position: relative;
         }
+
         .prayer-slot.active {
             border-color: var(--primary);
             background: var(--primary-dim);
         }
-        .prayer-slot.passed { opacity: 0.4; }
+
+        .prayer-slot.passed {
+            opacity: 0.45;
+        }
+
         .prayer-slot-name {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.44rem;
+            font-size: 0.48rem;
             font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
+
         .prayer-slot.active .prayer-slot-name { color: var(--primary); }
+
         .prayer-slot-time {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             font-weight: 700;
             color: var(--text-dim);
         }
+
         .prayer-slot.active .prayer-slot-time { color: var(--text); }
+
         .prayer-loading {
             text-align: center;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
-            padding: 10px;
+            padding: 16px;
             font-family: 'JetBrains Mono', monospace;
         }
+
         .prayer-error {
             text-align: center;
             font-size: 0.65rem;
             color: var(--danger);
-            padding: 6px;
+            padding: 8px;
             font-family: 'JetBrains Mono', monospace;
         }
 
@@ -276,7 +294,8 @@
             color: var(--text);
             text-transform: uppercase; letter-spacing: 0.04em;
             line-height: 1.2; margin-bottom: 4px;
-            white-space: normal; word-break: break-word;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            max-width: 160px;
         }
         .staff-id { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-dim); margin-bottom: 4px; }
         #live-clock { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--primary); font-weight: 700; }
@@ -302,11 +321,8 @@
 
         /* ── SHIFT SUMMARY ── */
         .shift-summary {
+            background: var(--card);
             border: 1px solid var(--border);
-            border-top: 2px solid transparent;
-            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
             border-radius: var(--radius);
             padding: 16px; margin-bottom: 12px;
             display: grid; grid-template-columns: 1fr 1fr;
@@ -323,8 +339,7 @@
         /* ── STATS ROW ── */
         .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px; }
         .stat-card {
-            border:1px solid var(--border); border-top:2px solid transparent; border-radius:var(--radius-sm);
-            background-image:linear-gradient(var(--card),var(--card)),linear-gradient(90deg,rgba(80,200,120,0.6),rgba(80,200,120,0.1)); background-origin:border-box; background-clip:padding-box,border-box;
+            background:var(--card); border:1px solid var(--border); border-radius:var(--radius-sm);
             padding:14px 6px 10px; text-align:center; cursor:pointer;
             transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);
             position:relative; overflow:hidden;
@@ -354,13 +369,9 @@
 
         /* ── SECTION ── */
         .section {
-            border:1px solid var(--border); border-radius:var(--radius);
+            background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
             padding:18px 16px; margin-bottom:12px;
             position:relative; overflow:hidden;
-            border-top: 2px solid transparent;
-            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
         }
         .section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
         h3 { font-family:'JetBrains Mono',monospace; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.18em; color:var(--primary); }
@@ -401,98 +412,63 @@
             font-weight:700;
             color: #000000;
         }
-        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; }
-        .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; }
+        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color: #000000; }
+        .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; color: #000000; }
 
-        /* ── SHIFT M (Pagi) — latar hijau muda ── */
-        .day-box[data-shift="M"] { background: #e8f5e9; border-color: #a5d6a7; }
-        .day-box[data-shift="M"] .shift-text { color: #2e7d32; }
-        .day-box[data-shift="M"] .date-num { color: #1b5e20; }
-        .day-box[data-shift="M"] .assign-text { color: #388e3c; }
-
-        /* ── SHIFT E (Petang) — latar oren muda ── */
-        .day-box[data-shift="E"] { background: #fff8e1; border-color: #ffe082; }
-        .day-box[data-shift="E"] .shift-text { color: #e65100; }
-        .day-box[data-shift="E"] .date-num { color: #bf360c; }
-        .day-box[data-shift="E"] .assign-text { color: #ef6c00; }
-
-        /* ── SHIFT N (Malam) — latar biru gelap ── */
-        .day-box[data-shift="N"] { background: #1a237e; border-color: #3949ab; }
-        .day-box[data-shift="N"] .shift-text { color: #90caf9; }
-        .day-box[data-shift="N"] .date-num { color: #bbdefb; }
-        .day-box[data-shift="N"] .assign-text { color: #64b5f6; }
-
-        /* ── DOUBLE SHIFT — latar teal gelap ── */
-        .day-box[data-shift="M/E"] { background: #e0f2f1; border-color: #80cbc4; }
-        .day-box[data-shift="M/N"] { background: #e8eaf6; border-color: #9fa8da; }
-        .day-box[data-shift="E/N"] { background: #f3e5f5; border-color: #ce93d8; }
-        .day-box[data-shift="SD/M"],
-        .day-box[data-shift="SD/E"],
-        .day-box[data-shift="SD/N"] { background: #fce4ec; border-color: #f48fb1; }
-        .day-box[data-shift="DO/M"],
-        .day-box[data-shift="DO/E"],
-        .day-box[data-shift="DO/N"] { background: #fce4ec; border-color: #f48fb1; }
+        /* SHIFT KERJA — tulisan hitam */
+        .day-box[data-shift="M"] .shift-text,
+        .day-box[data-shift="E"] .shift-text,
+        .day-box[data-shift="N"] .shift-text,
         .day-box[data-shift="M/E"] .shift-text,
         .day-box[data-shift="M/N"] .shift-text,
-        .day-box[data-shift="E/N"] .shift-text { color: #004d40; }
+        .day-box[data-shift="E/N"] .shift-text,
         .day-box[data-shift="SD/M"] .shift-text,
         .day-box[data-shift="SD/E"] .shift-text,
         .day-box[data-shift="SD/N"] .shift-text,
         .day-box[data-shift="DO/M"] .shift-text,
         .day-box[data-shift="DO/E"] .shift-text,
-        .day-box[data-shift="DO/N"] .shift-text { color: #880e4f; }
-        .day-box[data-shift="M/E"] .date-num,
-        .day-box[data-shift="M/N"] .date-num,
-        .day-box[data-shift="E/N"] .date-num,
-        .day-box[data-shift="SD/M"] .date-num,
-        .day-box[data-shift="SD/E"] .date-num,
-        .day-box[data-shift="SD/N"] .date-num,
-        .day-box[data-shift="DO/M"] .date-num,
-        .day-box[data-shift="DO/E"] .date-num,
-        .day-box[data-shift="DO/N"] .date-num { color: #000000; }
+        .day-box[data-shift="DO/N"] .shift-text { color: #000000; }
+
+        .day-box[data-shift="M"] .assign-text,
+        .day-box[data-shift="E"] .assign-text,
+        .day-box[data-shift="N"] .assign-text,
         .day-box[data-shift="M/E"] .assign-text,
         .day-box[data-shift="M/N"] .assign-text,
-        .day-box[data-shift="E/N"] .assign-text { color: #00695c; }
+        .day-box[data-shift="E/N"] .assign-text,
         .day-box[data-shift="SD/M"] .assign-text,
         .day-box[data-shift="SD/E"] .assign-text,
         .day-box[data-shift="SD/N"] .assign-text,
         .day-box[data-shift="DO/M"] .assign-text,
         .day-box[data-shift="DO/E"] .assign-text,
-        .day-box[data-shift="DO/N"] .assign-text { color: #880e4f; }
+        .day-box[data-shift="DO/N"] .assign-text { color: #000000; }
 
-        /* ── SD/DO — latar merah jambu ── */
-        .day-box[data-shift="SD"] { background: #fce4ec; border-color: #f48fb1; }
-        .day-box[data-shift="DO"] { background: #fce4ec; border-color: #f48fb1; }
+        /* SHIFT CUTI — tulisan maroon */
+        .day-box[data-shift="DO"] .shift-text,
         .day-box[data-shift="SD"] .shift-text,
-        .day-box[data-shift="DO"] .shift-text { color: #880e4f; }
+        .day-box[data-shift="RPL"] .shift-text,
+        .day-box[data-shift="PH"] .shift-text,
+        .day-box[data-shift="MC"] .shift-text,
+        .day-box[data-shift="AL"] .shift-text,
+        .day-box[data-shift="EL"] .shift-text,
+        .day-box[data-shift="ODO"] .shift-text { color: #800000; }
+
+        .day-box[data-shift="DO"] .date-num,
         .day-box[data-shift="SD"] .date-num,
-        .day-box[data-shift="DO"] .date-num { color: #000000; }
+        .day-box[data-shift="RPL"] .date-num,
+        .day-box[data-shift="PH"] .date-num,
+        .day-box[data-shift="MC"] .date-num,
+        .day-box[data-shift="AL"] .date-num,
+        .day-box[data-shift="EL"] .date-num,
+        .day-box[data-shift="ODO"] .date-num { color: #800000; }
+
+        .day-box[data-shift="DO"] .assign-text,
         .day-box[data-shift="SD"] .assign-text,
-        .day-box[data-shift="DO"] .assign-text { color: #ad1457; }
-
-        /* ── AL — latar biru lembut ── */
-        .day-box[data-shift="AL"] { background: #e3f2fd; border-color: #90caf9; }
-        .day-box[data-shift="AL"] .shift-text { color: #0d47a1; }
-        .day-box[data-shift="AL"] .date-num { color: #000000; }
-        .day-box[data-shift="AL"] .assign-text { color: #1565c0; }
-
-        /* ── RPL — latar ungu muda ── */
-        .day-box[data-shift="RPL"] { background: #ede7f6; border-color: #b39ddb; }
-        .day-box[data-shift="RPL"] .shift-text { color: #4527a0; }
-        .day-box[data-shift="RPL"] .date-num { color: #000000; }
-        .day-box[data-shift="RPL"] .assign-text { color: #512da8; }
-
-        /* ── MC — latar kuning ── */
-        .day-box[data-shift="MC"] { background: #fffde7; border-color: #fff176; }
-        .day-box[data-shift="MC"] .shift-text { color: #f57f17; }
-        .day-box[data-shift="MC"] .date-num { color: #000000; }
-        .day-box[data-shift="MC"] .assign-text { color: #f9a825; }
-
-        /* ── PH — latar emas ── */
-        .day-box[data-shift="PH"] { background: #fff3e0; border-color: #ffcc80; }
-        .day-box[data-shift="PH"] .shift-text { color: #e65100; }
-        .day-box[data-shift="PH"] .date-num { color: #000000; }
-        .day-box[data-shift="PH"] .assign-text { color: #ef6c00; }
+        .day-box[data-shift="RPL"] .assign-text,
+        .day-box[data-shift="PH"] .assign-text,
+        .day-box[data-shift="MC"] .assign-text,
+        .day-box[data-shift="AL"] .assign-text,
+        .day-box[data-shift="EL"] .assign-text,
+        .day-box[data-shift="ODO"] .assign-text { color: #800000; }
 
         .day-box[data-shift="-"] .shift-text { color: #cccccc; }
         .day-box[data-shift="-"] .date-num { color: #000000; }
@@ -523,33 +499,6 @@
             font-family:'JetBrains Mono',monospace; transition:all 0.15s;
         }
         .btn-rsi:active { background:var(--primary); color:black; }
-
-        /* ── DRUG TABS ── */
-        .drug-tabs {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 12px;
-            margin-top: -4px;
-        }
-        .drug-tab {
-            padding: 8px 14px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.58rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.15s;
-            white-space: nowrap;
-        }
-        .drug-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        .drug-tab-panel { display: none; }
-        .drug-tab-panel.active { display: block; }
         #btn-pdf { background:#1a2e45; border:1px solid rgba(65,105,225,0.4); color:#7ab3ff; border-radius:var(--radius-xs); padding:5px 9px; font-size:0.6rem; font-weight:700; cursor:pointer; display:none; font-family:'JetBrains Mono',monospace; }
         .btn-add-drug { background:none; border:1px solid var(--border-bright); color:var(--primary); border-radius:var(--radius-xs); width:28px; height:28px; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
         .btn-add-drug:active { background:var(--primary); color:black; }
@@ -632,7 +581,7 @@
         .claim-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); }
         .claim-row:last-child { border-bottom:none; }
         .claim-cat-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-        .claim-badge { font-size:0.62rem; background:var(--primary-dim); color:var(--primary); border:1px solid rgba(80,200,120,0.25); font-weight:700; padding:2px 8px; border-radius:20px; }
+        .claim-badge { font-size:0.62rem; background:var(--primary); color:#000; font-weight:900; padding:2px 8px; border-radius:20px; }
         .claim-divider { height:1px; background:var(--border); margin:12px 0; }
 
         .selection-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; }
@@ -704,7 +653,7 @@
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--text-dim);
+            color: var(--text-muted);
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: all 0.15s;
@@ -784,20 +733,6 @@
             padding: 10px 14px !important;
             font-size: 0.78rem !important;
             margin-bottom: 10px !important;
-        }
-
-        /* ── RECEIPT STATUS BAR ── */
-        .receipt-status-dot {
-            width: 3px; height: 13px;
-            border-radius: 2px;
-            flex-shrink: 0;
-            transition: background 0.4s;
-        }
-        .receipt-status-dot.empty {
-            background: var(--danger);
-        }
-        .receipt-status-dot.filled {
-            background: var(--success);
         }
 
         .nursing-empty {
@@ -1125,527 +1060,402 @@
         .gsync-signin-btn:hover { background: #f8f9fa; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
         .gsync-signin-btn:active { background: #f1f3f4; }
 
-        /* ── MONTHLY EXPENSES / RECEIPT ── */
-        .expense-section {
-            border: 1px solid var(--border);
-            border-top: 2px solid transparent;
-            background-image: linear-gradient(var(--card), var(--card)), linear-gradient(90deg, rgba(80,200,120,0.6), rgba(80,200,120,0.1));
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            border-radius: var(--radius);
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-        .expense-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 16px;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.15s;
-        }
-        .expense-header:active { background: var(--card-raised); }
-        .expense-header-left { display: flex; align-items: center; gap: 8px; }
-        
-        .expense-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.45rem; font-weight: 700;
-            letter-spacing: 0.12em; text-transform: uppercase;
-            background: rgba(243,156,18,0.12);
-            border: 1px solid rgba(243,156,18,0.25);
-            color: #f39c12;
-            padding: 2px 7px; border-radius: 20px;
-        }
-        .expense-count-badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem; font-weight: 700;
-            color: var(--text-dim);
-        }
-        .expense-body {
-            display: none;
-            border-top: 1px solid var(--border);
-            padding: 14px 16px 18px;
-        }
-        .expense-body.open { display: block; }
-        .expense-month-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-        .expense-month-row input[type="month"] {
-            flex: 1; margin-bottom: 0;
-        }
-        /* Receipt category block */
-        .receipt-cat {
+        /* ── QUICK NOTES ── */
+        .quick-note-card {
             background: var(--surface);
             border: 1px solid var(--border);
+            border-left: 3px solid var(--primary);
             border-radius: var(--radius-sm);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             overflow: hidden;
+            transition: all 0.2s;
         }
-        .receipt-cat-header {
+        .quick-note-card-header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            padding: 10px 14px;
-            background: linear-gradient(90deg, var(--card-raised), transparent);
-        }
-        .receipt-sub-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 14px;
-            border-top: 1px solid var(--border);
-        }
-        .receipt-cat-title {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem; font-weight: 700;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--text-dim);
-        }
-        .receipt-count {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.55rem; color: var(--text-muted);
-        }
-        .receipt-upload-zone {
-            border: 1px dashed var(--border-bright);
-            border-radius: var(--radius-xs);
-            padding: 4px 9px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+            padding: 10px 12px;
             cursor: pointer;
-            transition: all 0.15s;
-            background: transparent;
-            flex-shrink: 0;
+            gap: 8px;
         }
-        .receipt-upload-zone:active, .receipt-upload-zone.drag-over {
-            border-color: var(--primary);
-            background: var(--primary-dim);
-        }
-        .receipt-upload-icon { font-size: 0.75rem; }
-        .receipt-upload-text {
+        .quick-note-card-header:active { background: var(--card-raised); }
+        .quick-note-title {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.52rem; color: var(--text-muted);
-            letter-spacing: 0.04em;
-        }
-        /* Receipt list rows */
-        .receipt-list { padding: 0 14px; }
-        .receipt-list:not(:empty) { padding-bottom: 8px; }
-        .receipt-row {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            padding: 5px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .receipt-row:last-child { border-bottom: none; }
-        .receipt-row-icon { font-size: 0.85rem; flex-shrink: 0; }
-        .receipt-row-name {
-            flex: 1;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
+            font-weight: 700;
             color: var(--text);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .quick-note-actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+            align-items: center;
+        }
+        .quick-note-action-btn {
             background: none;
             border: none;
-            outline: none;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: 'DM Sans', sans-serif;
-            cursor: text;
-            min-width: 0;
-            transition: background 0.15s, border 0.15s;
-            border: 1px solid transparent;
-        }
-        .receipt-row-name:focus {
-            background: var(--surface);
-            border-color: var(--border-bright);
-        }
-        .receipt-row-view {
-            background: none; border: none;
-            color: var(--primary); font-size: 0.65rem;
-            cursor: pointer; padding: 3px 7px;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700; letter-spacing: 0.04em;
-            border-radius: var(--radius-xs);
-            border: 1px solid rgba(80,200,120,0.2);
-            transition: background 0.15s; flex-shrink: 0;
-        }
-        .receipt-row-view:active { background: var(--primary-dim); }
-        .receipt-row-del {
-            background: none; border: none;
-            color: var(--danger); font-size: 0.85rem;
-            cursor: pointer; opacity: 0.4;
-            padding: 2px 4px; transition: opacity 0.15s;
-            flex-shrink: 0;
-        }
-        .receipt-row-del:active { opacity: 1; }
-        .receipt-row-dl {
-            background: none; border: none;
-            color: var(--text-dim); font-size: 0.85rem;
-            cursor: pointer; opacity: 0.55;
-            padding: 2px 4px; transition: opacity 0.15s;
-            flex-shrink: 0;
-        }
-        .receipt-row-dl:active { opacity: 1; color: var(--primary); }
-        /* Lightbox */
-        .receipt-lightbox {
-            display: none;
-            position: fixed; inset: 0;
-            background: rgba(0,0,0,0.92);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .receipt-lightbox.open { display: flex; }
-        .receipt-lightbox img {
-            max-width: 94vw; max-height: 82vh;
-            border-radius: var(--radius-sm);
-            object-fit: contain;
-        }
-        .receipt-lightbox-close {
-            position: absolute; top: 16px; right: 16px;
-            background: rgba(255,255,255,0.1); border: none;
-            color: white; font-size: 1.4rem; cursor: pointer;
-            border-radius: 50%; width: 36px; height: 36px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .receipt-lightbox-name {
-            color: rgba(255,255,255,0.6);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem; margin-top: 10px;
-            letter-spacing: 0.06em;
-        }
-        /* ── HERO CLOCK HEADER ── */
-        .hero-header {
-            background: var(--card-raised);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 20px 20px 18px;
-            margin-top: 14px;
-            margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-header::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, var(--primary-dim) 0%, transparent 60%);
-            pointer-events: none;
-        }
-        .hero-header::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0.6;
-        }
-        .hero-top-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            position: relative; z-index: 1;
-        }
-        .hero-dept-label {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.55rem;
             font-weight: 700;
-            letter-spacing: 0.18em;
+            cursor: pointer;
+            padding: 3px 6px;
+            border-radius: var(--radius-xs);
+            transition: all 0.15s;
+            letter-spacing: 0.06em;
+        }
+        .quick-note-action-btn.edit { color: var(--primary); border: 1px solid rgba(80,200,120,0.25); }
+        .quick-note-action-btn.edit:active { background: var(--primary); color: black; }
+        .quick-note-action-btn.del { color: var(--danger); border: 1px solid rgba(255,82,82,0.25); }
+        .quick-note-action-btn.del:active { background: var(--danger); color: white; }
+        .quick-note-chevron {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .quick-note-card.open .quick-note-chevron { transform: rotate(180deg); }
+        .quick-note-body {
+            display: none;
+            padding: 0 12px 12px;
+            border-top: 1px solid var(--border);
+        }
+        .quick-note-card.open .quick-note-body { display: block; }
+        .quick-note-text {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text);
+            white-space: pre-wrap;
+            padding-top: 10px;
+        }
+
+        /* ── TOOL CARDS ── */
+        .tool-card-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+            text-align: center;
+        }
+        .tool-card-btn:active { transform: scale(0.93); background: var(--card-raised); }
+        .tool-card-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-dim);
+        }
+        .tool-card-icon { font-size: 1.4rem; line-height: 1; }
+        .tool-card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.54rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--text-dim);
         }
-        .hero-clock-time {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            color: var(--primary);
-            position: relative; z-index: 1;
+        .tool-card-btn.active .tool-card-label { color: var(--primary); }
+
+        /* ── MONTHLY EXPENSES ── */
+        .expense-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
         }
-        .hero-clock-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--primary);
-            position: relative; z-index: 1;
+
+        .expense-month-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .hero-clock-row {
+
+        .expense-month-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .expense-cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .expense-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .expense-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            cursor: pointer;
+            background: linear-gradient(90deg, var(--primary-dim), transparent);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .expense-card-header:active { opacity: 0.8; }
+
+        .expense-card-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .expense-card-icon {
+            font-size: 1.3rem;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-xs);
+            background: var(--card);
+            border: 1px solid var(--border-bright);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            position: relative; z-index: 1;
+            flex-shrink: 0;
         }
-        .hero-clock-sep {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-        }
-        .hero-divider {
-            height: 1px;
-            background: var(--border-bright);
-            margin: 14px 0 14px;
-            position: relative; z-index: 1;
-        }
-        .hero-staff-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative; z-index: 1;
-        }
-        .hero-staff-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .hero-staff-name {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 0.58rem;
-            color: var(--text);
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-            line-height: 1.3;
-            margin-bottom: 2px;
-            white-space: normal;
-            word-break: break-word;
-        }
-        .hero-staff-id {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--text-dim);
-        }
-        .hero-roster-badge { display: none; }
 
-        .hero-gsync {
+        .expense-card-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .expense-card-plate {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+            filter: drop-shadow(0 0 6px var(--primary-glow));
+        }
+
+        .expense-card-total {
+            text-align: right;
+        }
+
+        .expense-total-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.48rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .expense-total-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.04em;
+            color: var(--text);
+        }
+
+        .expense-card-body {
+            display: none;
+            padding: 12px 14px;
+        }
+
+        .expense-card-body.open { display: block; }
+
+        .expense-type-row {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 10px 12px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 7px;
-            padding-left: 12px;
-            border-left: 1px solid var(--border-bright);
-            flex-shrink: 0;
-            max-width: 130px;
-            align-self: center;
+            justify-content: space-between;
+            gap: 8px;
         }
-        .hero-gsync-avatar {
-            font-size: 1.1rem;
-            flex-shrink: 0;
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            background: var(--surface);
-            border: 1px solid var(--border-bright);
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
+
+        .expense-type-info { flex: 1; min-width: 0; }
+
+        .expense-type-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 3px;
         }
-        .hero-gsync-avatar img {
-            width: 100%; height: 100%;
-            object-fit: cover; border-radius: 50%;
-        }
-        .hero-gsync-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .hero-gsync-name {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.6rem;
+
+        .expense-type-value {
+            font-size: 0.82rem;
             font-weight: 700;
             color: var(--text);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 70px;
         }
-        .hero-gsync-status {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.48rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-        .hero-gsync-btn {
-            background: var(--primary-dim);
-            border: 1px solid rgba(80,200,120,0.3);
-            color: var(--primary);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.48rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            padding: 4px 7px;
-            border-radius: var(--radius-xs);
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.15s;
-            flex-shrink: 0;
-        }
-        .hero-gsync-btn:active { background: var(--primary); color: black; }
-        .hero-gsync-btn.danger {
-            background: rgba(255,82,82,0.1);
-            border-color: rgba(255,82,82,0.3);
-            color: var(--danger);
-        }
-        .hero-gsync-status.syncing { color: #f39c12; }
-        .hero-gsync-status.synced { color: var(--success); }
-        .hero-gsync-status.error { color: var(--danger); }
 
-        /* ── QUICK NOTES ── */
-        .qnote-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--primary);
-            border-radius: var(--radius-sm);
-            padding: 10px 12px;
-            margin-bottom: 8px;
-        }
-        .qnote-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 6px;
-        }
-        .qnote-title {
+        .expense-type-value.date-val {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            background: none;
-            border: none;
-            outline: none;
-            width: 100%;
-            cursor: text;
+            font-size: 0.72rem;
+            color: var(--text-dim);
         }
-        .qnote-title::placeholder { color: var(--text-muted); }
-        .qnote-actions { display: flex; gap: 6px; flex-shrink: 0; }
-        .qnote-btn-save {
-            background: none; border: none;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.58rem; font-weight: 700;
-            color: var(--primary); cursor: pointer; padding: 0;
+
+        .expense-type-value.amount-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
             letter-spacing: 0.04em;
         }
-        .qnote-btn-del {
-            background: none; border: none;
-            font-size: 0.8rem; color: var(--danger);
-            cursor: pointer; opacity: 0.4; padding: 0;
-            transition: opacity 0.15s;
-        }
-        .qnote-btn-del:active { opacity: 1; }
-        .qnote-textarea {
-            width: 100%;
-            background: none;
-            border: none;
-            outline: none;
-            resize: none;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.78rem;
-            color: var(--text);
-            line-height: 1.55;
-            min-height: 60px;
-        }
-        .qnote-textarea::placeholder { color: var(--text-muted); }
-        .qnote-saved-badge {
+
+        .expense-type-value.amount-val.danger { color: var(--danger); }
+        .expense-type-value.amount-val.primary { color: var(--primary); }
+        .expense-type-value.amount-val.warning { color: var(--warning); }
+
+        .expense-edit-btn {
+            background: var(--primary-dim);
+            border: 1px solid rgba(80,200,120,0.2);
+            color: var(--primary);
+            border-radius: var(--radius-xs);
+            padding: 4px 8px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.5rem;
-            color: var(--success);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .qnote-saved-badge.show { opacity: 1; }
-        .qnote-empty {
-            text-align: center;
-            padding: 16px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--text-muted);
+            font-size: 0.52rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        /* ── CALENDAR / CLAIM SLIDER ── */
-        .cal-slider-wrap {
-            position: relative;
-            margin-bottom: 12px;
-            touch-action: pan-y;
-        }
-        .cal-slider-track {
+        .expense-edit-btn:active { background: var(--primary); color: black; }
+
+        .expense-receipt-strip {
+            margin-top: 8px;
             display: flex;
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
+            align-items: center;
+            gap: 8px;
         }
-        .cal-slide {
-            flex: 0 0 100%;
-            width: 100%;
-            min-width: 0;
-        }
-        .cal-slider-dots {
+
+        .receipt-upload-btn {
             display: flex;
-            justify-content: center;
+            align-items: center;
             gap: 6px;
-            margin-bottom: 8px;
-        }
-        .cal-dot {
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: var(--border-bright);
-            transition: background 0.25s, transform 0.25s;
-        }
-        .cal-dot.active {
-            background: var(--primary);
-            transform: scale(1.3);
+            background: var(--card);
+            border: 1px dashed var(--border-bright);
+            border-radius: var(--radius-xs);
+            padding: 7px 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+            flex: 1;
         }
 
+        .receipt-upload-btn:active { border-color: var(--primary); background: var(--primary-dim); }
+
+        .receipt-upload-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.52rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .receipt-thumb {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-xs);
+            border: 1px solid var(--border-bright);
+            object-fit: cover;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .receipt-pdf-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-xs);
+            border: 1px solid rgba(255,82,82,0.3);
+            background: rgba(255,82,82,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .expense-summary-bar {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            margin-top: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .expense-summary-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+        }
+
+        .expense-summary-total {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.04em;
+            color: var(--danger);
+            filter: drop-shadow(0 0 8px rgba(255,82,82,0.3));
+        }
     </style>
+</head>
 <body>
 
 <div class="ambient-glow"></div>
 
 <div class="page">
 
-    <!-- HERO CLOCK HEADER -->
-    <div class="hero-header">
-        <!-- Top row: dept label + theme toggle -->
-        <div class="hero-top-row">
-            <span class="hero-dept-label">Emergency Dept</span>
-            <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-btn">
-                <span id="theme-toggle-icon">☀️</span>
-                <span id="theme-toggle-label">CERAH</span>
-            </button>
-        </div>
-        <!-- Clock + Date + Day row -->
-        <div class="hero-clock-row">
-            <div id="hero-clock-time" class="hero-clock-time">--:--:--</div>
-            <span class="hero-clock-sep">·</span>
-            <div id="hero-clock-date" class="hero-clock-date">-- --- ----</div>
-            <span class="hero-clock-sep">·</span>
-            <div id="hero-clock-day" class="hero-clock-date">---</div>
-        </div>
-        <!-- Divider -->
-        <div class="hero-divider"></div>
-        <!-- Staff info row -->
-        <div class="hero-staff-row">
-            <div class="avatar-ring" style="flex-shrink:0;">
-                <img id="profile-pic" src="https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=50c878&color=000&bold=true" class="profile-img" onclick="document.getElementById('upload').click()">
-            </div>
-            <input type="file" id="upload" hidden onchange="loadImg(event)">
-            <div class="hero-staff-info" style="margin-top:-2px;">
-                <div class="hero-staff-name">Ahmad Zilalul Hilmi Bin Adnan</div>
-                <div class="hero-staff-id">Staff · 0656</div>
-            </div>
-            <!-- Google Drive sync (inline) -->
-            <div class="hero-gsync" id="gsync-bar">
-                <div class="hero-gsync-info">
-                    <div class="hero-gsync-name" id="gsync-name">Tidak Log Masuk</div>
-                    <div class="hero-gsync-status" id="gsync-status">Google Drive</div>
-                </div>
-                <button class="hero-gsync-btn" id="gsync-action-btn" onclick="handleGsyncAction()">MASUK</button>
+    <!-- THEME BAR -->
+    <div class="theme-bar">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-btn">
+            <span id="theme-toggle-icon">☀️</span>
+            <span id="theme-toggle-label">CERAH</span>
+        </button>
+    </div>
+
+    <!-- GOOGLE SYNC BAR -->
+    <div class="gsync-bar" id="gsync-bar">
+        <div class="gsync-left">
+            <div class="gsync-avatar" id="gsync-avatar">☁️</div>
+            <div>
+                <div class="gsync-name" id="gsync-name">Tidak Log Masuk</div>
+                <div class="gsync-status" id="gsync-status">Google Drive — Tidak aktif</div>
             </div>
         </div>
+        <button class="gsync-btn" id="gsync-action-btn" onclick="handleGsyncAction()">LOG MASUK</button>
     </div>
 
     <!-- PRAYER TIME WIDGET -->
@@ -1657,14 +1467,35 @@
             </div>
             <span class="prayer-location">Kuala Terengganu, TRG</span>
         </div>
-        <div id="prayer-next-compact" class="prayer-next-compact" style="display:none;">
-            <span class="prayer-next-compact-label">Seterusnya</span>
-            <span class="prayer-next-compact-name" id="prayer-next-name">—</span>
-            <span class="prayer-next-compact-time" id="prayer-next-time">--:--</span>
-            <span class="prayer-next-compact-countdown" id="prayer-countdown">—</span>
+        <div id="prayer-next-banner" class="prayer-next-banner" style="display:none;">
+            <div>
+                <div class="prayer-next-label">Seterusnya</div>
+                <div class="prayer-next-name" id="prayer-next-name">—</div>
+                <div class="prayer-countdown" id="prayer-countdown">—</div>
+            </div>
+            <div class="prayer-next-time" id="prayer-next-time">--:--</div>
         </div>
         <div id="prayer-grid" class="prayer-grid">
             <div class="prayer-loading" style="grid-column:1/-1;">Memuatkan waktu solat...</div>
+        </div>
+    </div>
+
+    <!-- PROFILE HEADER -->
+    <div class="profile-header">
+        <div class="profile-left">
+            <div class="avatar-ring">
+                <img id="profile-pic" src="https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=50c878&color=000&bold=true" class="profile-img" onclick="document.getElementById('upload').click()">
+            </div>
+            <input type="file" id="upload" hidden onchange="loadImg(event)">
+            <div class="profile-info">
+                <div class="profile-name">Ahmad Zilalul Hilmi Bin Adnan</div>
+                <div class="staff-id">Staff · 0656</div>
+                <div id="live-clock">--/--/---- | --:--:--</div>
+            </div>
+        </div>
+        <div class="roster-badge">
+            <span class="main">ROSTER</span>
+            <span class="dept">Emergency Dept</span>
         </div>
     </div>
 
@@ -1684,9 +1515,8 @@
     <!-- STATS ROW -->
     <div class="stats-row">
         <div class="stat-card" onclick="openRecordSheet('AL')">
-            <small>Baki AL</small>
+            <small>Rekod AL</small>
             <div class="stat-val" id="text-al">0</div>
-            <div style="font-size:0.4rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:2px;" id="text-al-sub">/ — hari</div>
             <div class="progress-track"><div id="bar-al" class="progress-fill" style="width:100%"></div></div>
         </div>
         <div class="stat-card" onclick="openRecordSheet('RPL')">
@@ -1708,41 +1538,31 @@
 
     <input type="file" id="restore-upload" accept="application/json" hidden onchange="processRestore(event)">
 
-    <!-- CALENDAR + CLAIM SLIDER -->
-    <div class="cal-slider-wrap" id="cal-slider-wrap">
-        <!-- Dot indicator -->
-        <div class="cal-slider-dots">
-            <span class="cal-dot active" id="cal-dot-0"></span>
-            <span class="cal-dot" id="cal-dot-1"></span>
+    <!-- CALENDAR -->
+    <div class="section">
+        <div class="cal-nav">
+            <button class="nav-btn" onclick="changeMonth(-1)">❮</button>
+            <h3 id="cal-title">--</h3>
+            <button class="nav-btn" onclick="changeMonth(1)">❯</button>
         </div>
-        <div class="cal-slider-track" id="cal-slider-track">
-            <!-- Slide 0: Calendar -->
-            <div class="cal-slide">
-                <div class="section" style="margin-bottom:0;">
-                    <div class="cal-nav">
-                        <button class="nav-btn" onclick="changeMonth(-1)">❮</button>
-                        <h3 id="cal-title">--</h3>
-                        <button class="nav-btn" onclick="changeMonth(1)">❯</button>
-                    </div>
-                    <button class="import-btn" onclick="openImportSheet()">📋 IMPORT DARI EXCEL</button>
-                    <div class="calendar-grid">
-                        <div class="day-label">AH</div><div class="day-label">IS</div><div class="day-label">SE</div>
-                        <div class="day-label">RA</div><div class="day-label">KH</div><div class="day-label">JU</div><div class="day-label">SA</div>
-                    </div>
-                    <div id="calendar-body" class="calendar-grid"></div>
-                </div>
-            </div>
-            <!-- Slide 1: Claim -->
-            <div class="cal-slide">
-                <div class="section" id="claim-section" style="margin-bottom:0;">
-                    <div class="section-header">
-                        <h3>Kiraan Claim</h3>
-                        <span id="claim-month-label" style="font-size:0.6rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;"></span>
-                    </div>
-                    <div id="claim-body" style="margin-top:0;"></div>
-                </div>
+        <button class="import-btn" onclick="openImportSheet()">📋 IMPORT DARI EXCEL</button>
+        <div class="calendar-grid">
+            <div class="day-label">AH</div><div class="day-label">IS</div><div class="day-label">SE</div>
+            <div class="day-label">RA</div><div class="day-label">KH</div><div class="day-label">JU</div><div class="day-label">SA</div>
+        </div>
+        <div id="calendar-body" class="calendar-grid"></div>
+    </div>
+
+    <!-- CLAIM -->
+    <div class="section" id="claim-section">
+        <div class="claim-toggle" onclick="toggleClaim()">
+            <h3>Kiraan Claim</h3>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span id="claim-month-label" style="font-size:0.6rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;"></span>
+                <span id="claim-toggle-icon" style="font-size:0.75rem;color:var(--text-dim);">▼</span>
             </div>
         </div>
+        <div id="claim-body" style="display:none;margin-top:12px;"></div>
     </div>
 
     <!-- EMERGENCY DRUG -->
@@ -1755,18 +1575,8 @@
                 <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
             </div>
         </div>
-        <!-- Tabs -->
-        <div class="drug-tabs">
-            <div class="drug-tab active" id="dtab-drug" onclick="switchDrugTab('drug')">Senarai Ubat</div>
-            <div class="drug-tab" id="dtab-rsi" onclick="switchDrugTab('rsi')">💉 Pre-Med RSI</div>
-        </div>
-        <!-- Panel: Senarai Ubat -->
-        <div class="drug-tab-panel active" id="dpanel-drug">
-            <input type="text" id="drug-search" placeholder="Cari ubat..." oninput="searchDrugs()">
-            <div id="drug-results"></div>
-        </div>
-        <!-- Panel: Pre-Med RSI (inline, no sheet) -->
-        <div class="drug-tab-panel" id="dpanel-rsi"></div>
+        <input type="text" id="drug-search" placeholder="Cari ubat..." oninput="searchDrugs()">
+        <div id="drug-results"></div>
     </div>
 
     <!-- TO-DO -->
@@ -1782,34 +1592,47 @@
     <div class="section">
         <div class="section-header">
             <h3>Nota Ringkas</h3>
-            <button onclick="addQuickNote()" class="btn-add-drug">+</button>
+            <button onclick="openAddQuickNote()" class="btn-add-drug">+</button>
         </div>
         <div id="quick-notes-list"></div>
-        <textarea id="personal-notes" style="display:none;"></textarea>
+        <div id="quick-notes-empty" style="text-align:center;padding:18px 0;font-size:0.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">📝 Tiada nota. Tekan + untuk tambah.</div>
     </div>
 
     <!-- NURSING NOTE -->
     <div class="section">
         <div class="section-header">
             <h3>Nursing Note</h3>
-            <div style="display:flex;align-items:center;gap:8px;">
-                <span id="nursing-note-count-badge" style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;color:var(--primary);background:var(--primary-dim);border:1px solid rgba(80,200,120,0.25);border-radius:20px;padding:2px 9px;display:none;"></span>
-                <button onclick="openAddNursingNote()" class="btn-add-drug">+</button>
+            <button onclick="openAddNursingNote()" class="btn-add-drug">+</button>
+        </div>
+        <div class="tools-tabbar" id="tools-tabbar" style="margin: -4px -16px 12px; padding: 0 12px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 0; display:none;">
+            <div class="tool-tab" onclick="switchTool('rsi')" data-tool="rsi" id="tab-rsi">💉 RSI 7P</div>
+            <div class="tool-tab" onclick="switchTool('lytic')" data-tool="lytic" id="tab-lytic">⚡ Lytic Cocktail</div>
+            <div class="tool-tab" onclick="switchTool('drugcalc')" data-tool="drugcalc" id="tab-drugcalc">🧮 Drug Calc</div>
+        </div>
+        <!-- Tool Cards Grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+            <div class="tool-card-btn" onclick="switchTool('rsi')" id="toolcard-rsi">
+                <span class="tool-card-icon">💉</span>
+                <span class="tool-card-label">RSI 7P</span>
+            </div>
+            <div class="tool-card-btn" onclick="switchTool('lytic')" id="toolcard-lytic">
+                <span class="tool-card-icon">⚡</span>
+                <span class="tool-card-label">Lytic Cocktail</span>
+            </div>
+            <div class="tool-card-btn" onclick="switchTool('drugcalc')" id="toolcard-drugcalc">
+                <span class="tool-card-icon">🧮</span>
+                <span class="tool-card-label">Drug Calc</span>
+            </div>
+            <div class="tool-card-btn" onclick="switchTool('rsipremed')" id="toolcard-rsipremed">
+                <span class="tool-card-icon">🩺</span>
+                <span class="tool-card-label">Pre-Med RSI</span>
             </div>
         </div>
-        <!-- Tabs -->
-        <div class="drug-tabs">
-            <div class="drug-tab active" id="ntab-nota" onclick="switchNursingTab('nota')">Nota</div>
-            <div class="drug-tab" id="ntab-rsi" onclick="switchNursingTab('rsi')">💉 RSI</div>
-            <div class="drug-tab" id="ntab-lytic" onclick="switchNursingTab('lytic')">⚡ Lytic</div>
-            <div class="drug-tab" id="ntab-drugcalc" onclick="switchNursingTab('drugcalc')">🧮 Drug Calc</div>
-        </div>
-        <!-- Panel: Nota -->
-        <div class="drug-tab-panel active" id="npanel-nota">
-            <input type="text" id="nursing-search-input" class="nursing-search" placeholder="🔍 Cari nota..." oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
+        <div id="tool-nursing" class="tool-panel active">
+            <input type="text" class="nursing-search" placeholder="🔍 Cari nota..." oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
             <div id="nursing-note-list"></div>
         </div>
-        <div id="npanel-rsi" class="drug-tab-panel">
+        <div id="tool-rsi" class="tool-panel">
             <div class="rsi-panel-title">7P Rapid Sequence Intubation (RSI)</div>
             <div class="rsi-step">
                 <div class="rsi-step-header">
@@ -1921,7 +1744,7 @@
                 </div>
             </div>
         </div>
-        <div id="npanel-lytic" class="drug-tab-panel">
+        <div id="tool-lytic" class="tool-panel">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#f39c12;filter:drop-shadow(0 0 6px rgba(243,156,18,0.4));">⚡ Lytic Cocktail</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">Correction for Hyperkalaemia</div>
@@ -1955,7 +1778,7 @@
                 </div>
             </div>
         </div>
-        <div id="npanel-drugcalc" class="drug-tab-panel">
+        <div id="tool-drugcalc" class="tool-panel">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#c678dd;filter:drop-shadow(0 0 6px rgba(198,120,221,0.4));">🧮 Drug Calculation</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:14px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">IV Infusion Protocol</div>
@@ -2030,313 +1853,38 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- DOPAMINE -->
-                <div class="rsi-step" style="border-color:rgba(122,179,255,0.2);margin-top:10px;margin-bottom:0;">
-                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(122,179,255,0.1),transparent);border-bottom-color:rgba(122,179,255,0.2);">
-                        <span style="font-size:0.9rem;">💉</span>
-                        <div>
-                            <div class="rsi-step-name">Dopamine</div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);margin-top:2px;">200mg/5mls — 1 amp</div>
-                        </div>
-                    </div>
-                    <div class="rsi-step-body">
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
-                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Single Strength</div>
-                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">1 amp in 45ml D5%</div>
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#7ab3ff;margin-top:2px;">= 4 mg/ml</div>
-                            </div>
-                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Double Strength</div>
-                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">2 amp in 40ml D5%</div>
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#7ab3ff;margin-top:2px;">= 8 mg/ml</div>
-                            </div>
-                        </div>
-                        <div style="background:rgba(122,179,255,0.06);border:1px solid rgba(122,179,255,0.2);border-radius:var(--radius-xs);padding:12px;">
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Dose (mcg/kg/min)</div><input type="number" id="dopa-dose" placeholder="5" step="1" min="1" max="20" oninput="calcDopa()" style="background:var(--surface);border:1px solid rgba(122,179,255,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
-                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Berat (kg)</div><input type="number" id="dopa-weight" placeholder="70" step="0.1" min="0" oninput="calcDopa()" style="background:var(--surface);border:1px solid rgba(122,179,255,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
-                            </div>
-                            <div id="dopa-result" style="display:none;">
-                                <div style="height:1px;background:rgba(122,179,255,0.2);margin-bottom:10px;"></div>
-                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                                    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Single (4mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#7ab3ff;line-height:1;" id="dopa-single">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
-                                    <div style="background:var(--card);border:1px solid rgba(122,179,255,0.3);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Double (8mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#7ab3ff;line-height:1;" id="dopa-double">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
-                                </div>
-                            </div>
-                            <div id="dopa-placeholder" style="text-align:center;padding:8px 0;font-size:0.68rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Isi dos dan berat untuk kira rate</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DOBUTAMINE -->
-                <div class="rsi-step" style="border-color:rgba(80,200,120,0.2);margin-top:10px;margin-bottom:0;">
-                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(80,200,120,0.1),transparent);border-bottom-color:rgba(80,200,120,0.2);">
-                        <span style="font-size:0.9rem;">🫀</span>
-                        <div>
-                            <div class="rsi-step-name">Dobutamine</div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);margin-top:2px;">250mg/20mls — 1 vial</div>
-                        </div>
-                    </div>
-                    <div class="rsi-step-body">
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
-                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Standard</div>
-                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">250mg in 50ml D5%</div>
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#50c878;margin-top:2px;">= 5 mg/ml</div>
-                            </div>
-                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Dose Range</div>
-                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">2–20 mcg/kg/min</div>
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:2px;">titrasi mengikut respon</div>
-                            </div>
-                        </div>
-                        <div style="background:rgba(80,200,120,0.06);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-xs);padding:12px;">
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Dose (mcg/kg/min)</div><input type="number" id="dobu-dose" placeholder="5" step="1" min="2" max="20" oninput="calcDobu()" style="background:var(--surface);border:1px solid rgba(80,200,120,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
-                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Berat (kg)</div><input type="number" id="dobu-weight" placeholder="70" step="0.1" min="0" oninput="calcDobu()" style="background:var(--surface);border:1px solid rgba(80,200,120,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
-                            </div>
-                            <div id="dobu-result" style="display:none;">
-                                <div style="height:1px;background:rgba(80,200,120,0.2);margin-bottom:10px;"></div>
-                                <div style="background:var(--card);border:1px solid rgba(80,200,120,0.3);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Rate (5mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#50c878;line-height:1;" id="dobu-rate">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
-                            </div>
-                            <div id="dobu-placeholder" style="text-align:center;padding:8px 0;font-size:0.68rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Isi dos dan berat untuk kira rate</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ADRENALINE -->
-                <div class="rsi-step" style="border-color:rgba(255,82,82,0.2);margin-top:10px;margin-bottom:0;">
-                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(255,82,82,0.08),transparent);border-bottom-color:rgba(255,82,82,0.2);">
-                        <span style="font-size:0.9rem;">⚡</span>
-                        <div>
-                            <div class="rsi-step-name" style="color:#ff7070;">Adrenaline (Epinephrine)</div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);margin-top:2px;">1mg/1ml — 1 amp</div>
-                        </div>
-                    </div>
-                    <div class="rsi-step-body">
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
-                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">Low Dose</div>
-                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">1mg in 50ml NS</div>
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#ff7070;margin-top:2px;">= 0.02 mg/ml</div>
-                            </div>
-                            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:3px;">High Dose</div>
-                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">5mg in 50ml NS</div>
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#ff7070;margin-top:2px;">= 0.1 mg/ml</div>
-                            </div>
-                        </div>
-                        <div style="margin-bottom:10px;background:rgba(255,82,82,0.08);border:1px solid rgba(255,82,82,0.25);border-radius:var(--radius-xs);padding:7px 10px;font-size:0.7rem;color:#ff7070;font-weight:700;">⚠️ Dos: 0.01–1.0 mcg/kg/min. Cardiac monitor wajib.</div>
-                        <div style="background:rgba(255,82,82,0.06);border:1px solid rgba(255,82,82,0.2);border-radius:var(--radius-xs);padding:12px;">
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Dose (mcg/kg/min)</div><input type="number" id="adre-dose" placeholder="0.1" step="0.01" min="0.01" max="1.0" oninput="calcAdre()" style="background:var(--surface);border:1px solid rgba(255,82,82,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
-                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Berat (kg)</div><input type="number" id="adre-weight" placeholder="70" step="0.1" min="0" oninput="calcAdre()" style="background:var(--surface);border:1px solid rgba(255,82,82,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:0;"></div>
-                            </div>
-                            <div id="adre-result" style="display:none;">
-                                <div style="height:1px;background:rgba(255,82,82,0.2);margin-bottom:10px;"></div>
-                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                                    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">Low (0.02mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#ff7070;line-height:1;" id="adre-low">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
-                                    <div style="background:var(--card);border:1px solid rgba(255,82,82,0.3);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:0.48rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:4px;">High (0.1mg/ml)</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#ff7070;line-height:1;" id="adre-high">—</div><div style="font-size:0.6rem;color:var(--text-dim);margin-top:2px;">ml/hr</div></div>
-                                </div>
-                            </div>
-                            <div id="adre-placeholder" style="text-align:center;padding:8px 0;font-size:0.68rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Isi dos dan berat untuk kira rate</div>
-                        </div>
-                    </div>
-                </div>
             </div>
+        </div>
+        <!-- PRE-MED RSI PANEL -->
+        <div id="tool-rsipremed" class="tool-panel">
+            <div id="rsipremed-content"></div>
         </div>
     </div>
 
-    <!-- MONTHLY EXPENSES / RECEIPT -->
-    <div class="expense-section" id="expense-section">
-        <div class="expense-header" onclick="toggleExpenses()">
-            <div class="expense-header-left">
-                <span style="font-size:1rem;">🧾</span>
-                <h3>Monthly Expenses</h3>
-                <span class="expense-tag">Receipt</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-                <span class="expense-count-badge" id="expense-header-count"></span>
-                <span id="expense-toggle-icon" style="font-size:0.75rem;color:var(--text-dim);">▼</span>
+    <!-- MONTHLY EXPENSES -->
+    <div class="section">
+        <div class="expense-section-header">
+            <h3>Monthly Expenses</h3>
+            <div class="expense-month-nav">
+                <button class="nav-btn" onclick="expenseChangeMonth(-1)">❮</button>
+                <span class="expense-month-label" id="expense-month-label">—</span>
+                <button class="nav-btn" onclick="expenseChangeMonth(1)">❯</button>
             </div>
         </div>
-        <div id="expense-body" class="expense-body">
-            <!-- Month selector -->
-            <div class="expense-month-row">
-                <button onclick="changeReceiptMonth(-1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;" onmousedown="this.style.background='var(--card-raised)';" onmouseup="this.style.background='var(--surface)';">◀</button>
-                <input type="month" id="expense-month" onchange="renderReceipts()" style="flex:1;margin-bottom:0;text-align:center;">
-                <button onclick="changeReceiptMonth(1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;" onmousedown="this.style.background='var(--card-raised)';" onmouseup="this.style.background='var(--surface)';">▶</button>
-            </div>
 
-            <!-- JUMLAH BULANAN BANNER -->
-            <div id="expense-total-banner" style="display:flex;justify-content:space-between;align-items:center;background:var(--primary-dim);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-xs);padding:10px 14px;margin-bottom:10px;">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;color:var(--primary);letter-spacing:0.1em;text-transform:uppercase;">Jumlah Bulan Ini</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--primary);letter-spacing:0.05em;line-height:1;" id="expense-grand-total">RM 0.00</div>
-            </div>
-
-            <!-- House Rent -->
-            <div class="receipt-cat">
-                <div class="receipt-cat-header">
-                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
-                        <span id="dot-rent" class="receipt-status-dot empty"></span>🏠 House Rent
-                    </div>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <span class="receipt-count" id="rc-count-rent"></span>
-                        <input type="file" id="rf-rent" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('rent',this)">
-                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-rent').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('rent',event,this)">
-                            <span class="receipt-upload-icon">📎</span>
-                            <span class="receipt-upload-text">Upload</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;padding:4px 0 6px;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
-                    <input type="number" id="amt-rent" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
-                </div>
-                <div class="receipt-list" id="rg-rent"></div>
-            </div>
-
-            <!-- Car -->
-            <div class="receipt-cat">
-                <div class="receipt-cat-header">
-                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
-                        <span id="dot-car" class="receipt-status-dot empty"></span>🚗 Car
-                    </div>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <span class="receipt-count" id="rc-count-car"></span>
-                        <input type="file" id="rf-car" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('car',this)">
-                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-car').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('car',event,this)">
-                            <span class="receipt-upload-icon">📎</span>
-                            <span class="receipt-upload-text">Upload</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;padding:4px 0 6px;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
-                    <input type="number" id="amt-car" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
-                </div>
-                <div class="receipt-list" id="rg-car"></div>
-            </div>
-
-            <!-- Personal -->
-            <div class="receipt-cat">
-                <div class="receipt-cat-header">
-                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
-                        <span id="dot-personal" class="receipt-status-dot empty"></span>👤 Personal
-                    </div>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <span class="receipt-count" id="rc-count-personal"></span>
-                        <input type="file" id="rf-personal" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('personal',this)">
-                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-personal').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('personal',event,this)">
-                            <span class="receipt-upload-icon">📎</span>
-                            <span class="receipt-upload-text">Upload</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;padding:4px 0 6px;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
-                    <input type="number" id="amt-personal" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
-                </div>
-                <div class="receipt-list" id="rg-personal"></div>
-            </div>
-
-            <!-- Utility -->
-            <div class="receipt-cat">
-                <div class="receipt-cat-header">
-                    <div class="receipt-cat-title" style="display:flex;align-items:center;gap:7px;">
-                        ⚡ Utility
-                    </div>
-                    <span class="receipt-count" id="rc-count-utility"></span>
-                </div>
-                <!-- TNB -->
-                <div class="receipt-sub-header">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;"><span id="dot-utility-tnb" class="receipt-status-dot empty"></span>TNB</span>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <input type="file" id="rf-utility-tnb" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('utility-tnb',this)">
-                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-utility-tnb').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('utility-tnb',event,this)">
-                            <span class="receipt-upload-icon">📎</span>
-                            <span class="receipt-upload-text">Upload</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;padding:2px 0 6px;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
-                    <input type="number" id="amt-tnb" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
-                </div>
-                <div class="receipt-list" id="rg-utility-tnb"></div>
-                <!-- SATU -->
-                <div class="receipt-sub-header">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;"><span id="dot-utility-satu" class="receipt-status-dot empty"></span>SATU</span>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <input type="file" id="rf-utility-satu" accept="image/*,application/pdf" multiple hidden onchange="handleReceiptUpload('utility-satu',this)">
-                        <div class="receipt-upload-zone" onclick="document.getElementById('rf-utility-satu').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleReceiptDrop('utility-satu',event,this)">
-                            <span class="receipt-upload-icon">📎</span>
-                            <span class="receipt-upload-text">Upload</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;padding:2px 0 6px;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-dim);white-space:nowrap;">RM</span>
-                    <input type="number" id="amt-satu" placeholder="0.00" step="0.01" min="0" oninput="updateExpenseTotal()" style="flex:1;margin-bottom:0;font-size:0.8rem;padding:6px 10px;">
-                </div>
-                <div class="receipt-list" id="rg-utility-satu"></div>
-            </div>
+        <div class="expense-cards-grid" id="expense-cards-grid">
+            <!-- Cards rendered by JS -->
         </div>
-    </div>
 
-    <!-- RECEIPT LIGHTBOX -->
-    <div class="receipt-lightbox" id="receipt-lightbox" onclick="closeReceiptLightbox()">
-        <button class="receipt-lightbox-close" onclick="closeReceiptLightbox()">✕</button>
-        <img id="receipt-lightbox-img" src="" alt="Receipt">
-        <div class="receipt-lightbox-name" id="receipt-lightbox-name"></div>
-    </div>
-
-    <!-- LHDN RECORD -->
-    <div class="expense-section" id="lhdn-section">
-        <div class="expense-header" onclick="toggleLhdn()">
-            <div class="expense-header-left">
-                <span style="font-size:1rem;">🏛️</span>
-                <h3>LHDN Record</h3>
-                <span class="expense-tag" style="background:rgba(122,179,255,0.1);border-color:rgba(122,179,255,0.25);color:#7ab3ff;">Cukai</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-                <span class="expense-count-badge" id="lhdn-header-count" style="color:#7ab3ff;"></span>
-                <span id="lhdn-toggle-icon" style="font-size:0.75rem;color:var(--text-dim);">▼</span>
-            </div>
-        </div>
-        <div id="lhdn-body" class="expense-body">
-            <!-- Year selector -->
-            <div class="expense-month-row">
-                <button onclick="changeLhdnYear(-1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">◀</button>
-                <div id="lhdn-year-display" style="flex:1;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.1em;color:#7ab3ff;filter:drop-shadow(0 0 6px rgba(122,179,255,0.3));"></div>
-                <button onclick="changeLhdnYear(1)" style="background:var(--surface);border:1px solid var(--border-bright);color:var(--text-dim);border-radius:var(--radius-xs);width:30px;height:30px;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">▶</button>
-            </div>
-
-            <!-- Upload zone -->
-            <div class="receipt-cat" style="border-color:rgba(122,179,255,0.15);">
-                <div class="receipt-cat-header" style="background:linear-gradient(90deg,rgba(122,179,255,0.08),transparent);">
-                    <div class="receipt-cat-title" style="color:#7ab3ff;">📁 Dokumen Cukai</div>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <span class="receipt-count" id="lhdn-count"></span>
-                        <input type="file" id="lhdn-file-input" accept="image/*,application/pdf" multiple hidden onchange="handleLhdnUpload(this)">
-                        <div class="receipt-upload-zone" style="border-color:rgba(122,179,255,0.3);" onclick="document.getElementById('lhdn-file-input').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleLhdnDrop(event,this)">
-                            <span class="receipt-upload-icon">📎</span>
-                            <span class="receipt-upload-text">Upload</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Category filter tabs -->
-                <div id="lhdn-cat-tabs" style="display:none;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:0 4px;">
-                </div>
-                <!-- Receipt list -->
-                <div class="receipt-list" id="lhdn-list"></div>
-            </div>
+        <div class="expense-summary-bar" style="margin-top:12px;">
+            <span class="expense-summary-label">Jumlah Keseluruhan</span>
+            <span class="expense-summary-total" id="expense-grand-total">RM 0.00</span>
         </div>
     </div>
 
 </div><!-- /page -->
+
+<!-- MODAL -->
 <div class="modal-overlay" id="overlay" onclick="closeSheet()"></div>
 <div class="bottom-sheet" id="sheet">
     <div class="sheet-handle"></div>
@@ -2353,7 +1901,7 @@
 const ph2026 = [
     {n:"Israk dan Mikraj",d:"2026-01-17",paid:false},{n:"Tahun Baru Cina",d:"2026-02-17",paid:false},
     {n:"Tahun Baru Cina (Hari ke-2)",d:"2026-02-18",paid:false},{n:"Hari Ulangtahun Sultan TRG",d:"2026-03-04",paid:false},
-    {n:"Nuzul Quran",d:"2026-03-07",paid:false},{n:"Cuti Peristiwa Hari Raya Puasa",d:"2026-03-19",paid:false},{n:"Hari Raya Puasa",d:"2026-03-21",paid:false},
+    {n:"Nuzul Quran",d:"2026-03-07",paid:false},{n:"Hari Raya Puasa",d:"2026-03-21",paid:false},
     {n:"Hari Raya Puasa (Hari ke-2)",d:"2026-03-22",paid:false},{n:"Hari Keputeraan Sultan TRG",d:"2026-04-26",paid:true},
     {n:"Hari Pekerja",d:"2026-05-01",paid:true},{n:"Hari Arafah",d:"2026-05-26",paid:false},
     {n:"Hari Raya Haji",d:"2026-05-27",paid:false},{n:"Hari Raya Haji (Hari ke-2)",d:"2026-05-28",paid:false},
@@ -2368,9 +1916,11 @@ let store = JSON.parse(localStorage.getItem('roster_ultimate_v3')) || {
     al:{total:0,taken:[]}, rpl:{records:[]}, cpd:{records:[]},
     calendar:{}, todos:[], notes:"", drugs:[],
     pdfData:null, rsiImage:null, profilePic:null,
-    nursingNotes:[], receipts:{}, lhdn:{}
+    nursingNotes:[]
 };
 if(!store.nursingNotes) store.nursingNotes = [];
+if(!store.expenses) store.expenses = {};
+if(!store.quickNotes) store.quickNotes = [];
 
 const PRAYER_NAMES = ['Subuh','Syuruk','Zohor','Asar','Maghrib','Isyak'];
 const PRAYER_KEYS  = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
@@ -2416,8 +1966,7 @@ function renderPrayerWidget() {
         html += `<div class="prayer-slot${isNext?' active':''}${isPassed&&!isNext?' passed':''}"><div class="prayer-slot-name">${PRAYER_NAMES[i]}</div><div class="prayer-slot-time">${prayerTimes[k]}</div></div>`;
     });
     grid.innerHTML = html;
-    const compact = document.getElementById('prayer-next-compact');
-    if (compact) compact.style.display = 'flex';
+    banner.style.display = 'flex';
     document.getElementById('prayer-next-name').innerText = PRAYER_NAMES[nextIdx === 0 && nextMins > 24*60 ? 0 : nextIdx];
     document.getElementById('prayer-next-time').innerText = prayerTimes[PRAYER_KEYS[nextIdx === 0 && nextMins > 24*60 ? 0 : nextIdx]];
     updatePrayerCountdown(nextMins, nowMins);
@@ -2459,13 +2008,22 @@ function startPrayerTick() {
 let activeToolTab = 'nursing';
 
 function switchTool(id) {
-    const panels = ['nursing', 'rsi', 'lytic', 'drugcalc'];
+    const panels = ['nursing', 'rsi', 'lytic', 'drugcalc', 'rsipremed'];
+    const cards = ['rsi', 'lytic', 'drugcalc', 'rsipremed'];
     activeToolTab = (activeToolTab === id) ? 'nursing' : id;
     panels.forEach(p => {
         const panel = document.getElementById('tool-' + p);
+        const tab = document.getElementById('tab-' + p);
         if(panel) panel.classList.toggle('active', activeToolTab === p);
+        if(tab) tab.classList.toggle('active', activeToolTab === p);
+    });
+    // Update tool cards active state
+    cards.forEach(c => {
+        const card = document.getElementById('toolcard-' + c);
+        if(card) card.classList.toggle('active', activeToolTab === c);
     });
     if(activeToolTab === 'nursing') renderNursingNotes();
+    if(activeToolTab === 'rsipremed') renderRSIPremedPanel();
 }
 
 function calcNora() {
@@ -2482,121 +2040,6 @@ function calcNora() {
     document.getElementById('nora-single').innerText = single.toFixed(2);
     document.getElementById('nora-double').innerText = double.toFixed(2);
     result.style.display = 'block'; placeholder.style.display = 'none';
-}
-
-// ── KALKULATOR DOS UBAT (Dose by Weight) ──
-function calcDopa() {
-    const dose=parseFloat(document.getElementById('dopa-dose').value);
-    const wt=parseFloat(document.getElementById('dopa-weight').value);
-    const res=document.getElementById('dopa-result'), ph=document.getElementById('dopa-placeholder');
-    if(isNaN(dose)||isNaN(wt)||dose<=0||wt<=0){res.style.display='none';ph.style.display='block';return;}
-    const mghr=(dose*wt*60)/1000;
-    document.getElementById('dopa-single').innerText=(mghr/4).toFixed(2);
-    document.getElementById('dopa-double').innerText=(mghr/8).toFixed(2);
-    res.style.display='block'; ph.style.display='none';
-}
-
-function calcDobu() {
-    const dose=parseFloat(document.getElementById('dobu-dose').value);
-    const wt=parseFloat(document.getElementById('dobu-weight').value);
-    const res=document.getElementById('dobu-result'), ph=document.getElementById('dobu-placeholder');
-    if(isNaN(dose)||isNaN(wt)||dose<=0||wt<=0){res.style.display='none';ph.style.display='block';return;}
-    const mghr=(dose*wt*60)/1000;
-    document.getElementById('dobu-rate').innerText=(mghr/5).toFixed(2);
-    res.style.display='block'; ph.style.display='none';
-}
-
-function calcAdre() {
-    const dose=parseFloat(document.getElementById('adre-dose').value);
-    const wt=parseFloat(document.getElementById('adre-weight').value);
-    const res=document.getElementById('adre-result'), ph=document.getElementById('adre-placeholder');
-    if(isNaN(dose)||isNaN(wt)||dose<=0||wt<=0){res.style.display='none';ph.style.display='block';return;}
-    const mghr=(dose*wt*60)/1000;
-    document.getElementById('adre-low').innerText=(mghr/0.02).toFixed(2);
-    document.getElementById('adre-high').innerText=(mghr/0.1).toFixed(2);
-    res.style.display='block'; ph.style.display='none';
-}
-
-// ── KALKULATOR DOS UBAT (Dose per Weight) ──
-// Dipaparkan dalam sheet ubat — masuk berat → dapat dos
-function openDrugDoseCalc(drugName, dosePerKg, unit, notes) {
-    document.getElementById('sheet-title').innerText='⚖️ Kalkulator Dos';
-    document.getElementById('sheet-content').innerHTML=`
-        <div style="background:var(--primary-dim);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-xs);padding:10px 12px;margin-bottom:14px;">
-            <div style="font-weight:700;font-size:0.85rem;color:var(--primary);margin-bottom:2px;">${drugName}</div>
-            <div style="font-size:0.68rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">${dosePerKg} ${unit}/kg${notes?'<br>'+notes:''}</div>
-        </div>
-        <label>Berat Pesakit (kg)</label>
-        <input type="number" id="dc-weight" placeholder="cth: 70" step="0.1" min="0" oninput="updateDrugDose(${JSON.stringify(dosePerKg)},${JSON.stringify(unit)})" style="font-size:1rem;">
-        <div id="dc-result" style="display:none;margin-top:10px;">
-            <div style="background:var(--surface);border:1px solid var(--primary);border-radius:var(--radius-sm);padding:16px;text-align:center;">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.1em;">Dos Diperlukan</div>
-                <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--primary);line-height:1;filter:drop-shadow(0 0 8px rgba(80,200,120,0.4));" id="dc-dose-val">—</div>
-                <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;" id="dc-dose-unit"></div>
-            </div>
-        </div>
-        <div id="dc-placeholder" style="text-align:center;padding:20px 0;font-size:0.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Masukkan berat pesakit</div>
-    `;
-    openSheet();
-}
-
-function updateDrugDose(dosePerKg, unit) {
-    const wt=parseFloat(document.getElementById('dc-weight').value);
-    const res=document.getElementById('dc-result'), ph=document.getElementById('dc-placeholder');
-    if(isNaN(wt)||wt<=0){res.style.display='none';ph.style.display='block';return;}
-    const totalDose=(dosePerKg*wt);
-    document.getElementById('dc-dose-val').innerText=totalDose%1===0?totalDose:totalDose.toFixed(2);
-    document.getElementById('dc-dose-unit').innerText=unit+' (berat: '+wt+' kg)';
-    res.style.display='block'; ph.style.display='none';
-}
-
-// ── LABEL LHDN AUTO ──
-const LHDN_KEYWORD_MAP = [
-    {keys:['ea form','ea','borang ea'],cat:'EA Form'},
-    {keys:['slip gaji','payslip','gaji'],cat:'Slip Gaji'},
-    {keys:['pcb','potongan cukai'],cat:'PCB'},
-    {keys:['zakat'],cat:'Zakat'},
-    {keys:['tabung haji','th'],cat:'Tabung Haji'},
-    {keys:['kwsp','epf'],cat:'KWSP / EPF'},
-    {keys:['socso','perkeso'],cat:'SOCSO'},
-    {keys:['eis','pka'],cat:'EIS'},
-    {keys:['insurans','insurance','takaful'],cat:'Insurans / Takaful'},
-    {keys:['resit','receipt','bil','invoice'],cat:'Resit'},
-    {keys:['bank','penyata bank','statement'],cat:'Penyata Bank'},
-    {keys:['sewa','rent','sewaan'],cat:'Sewa'},
-    {keys:['medical','ubat','hospital','klinik','clinic','bil hospital'],cat:'Perbelanjaan Perubatan'},
-    {keys:['pendidikan','education','yuran','fees','sekolah','kolej','universiti'],cat:'Pendidikan'},
-    {keys:['derma','donation','wakaf','sadaqah'],cat:'Derma'},
-    {keys:['kereta','car','kenderaan','roadtax','insurans kenderaan'],cat:'Kenderaan'},
-];
-
-function autoLhdnLabel(filename) {
-    const lower = filename.toLowerCase().replace(/[_\-\.]/g,' ');
-    for(const rule of LHDN_KEYWORD_MAP) {
-        for(const key of rule.keys) {
-            if(lower.includes(key)) return rule.cat;
-        }
-    }
-    return '';
-}
-
-// ── KOMPRES IMEJ SEBELUM SIMPAN ──
-async function compressImage(dataUrl, maxWidth=1200, quality=0.72) {
-    return new Promise(resolve => {
-        if(!dataUrl.startsWith('data:image/')) { resolve(dataUrl); return; }
-        const img = new Image();
-        img.onload = () => {
-            let {width, height} = img;
-            if(width > maxWidth) { height = Math.round(height * maxWidth / width); width = maxWidth; }
-            const canvas = document.createElement('canvas');
-            canvas.width = width; canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-            resolve(canvas.toDataURL('image/jpeg', quality));
-        };
-        img.onerror = () => resolve(dataUrl);
-        img.src = dataUrl;
-    });
 }
 
 const NURSING_CATEGORIES = [
@@ -2643,54 +2086,15 @@ function deleteNursingNote(idx) {
     store.nursingNotes.splice(idx, 1); saveData(); renderNursingNotes(); closeSheet();
 }
 
-function filterNursingNotes(q) {
-    renderNursingNotes(q);
-}
-
-function openBuiltinPanel(panel) {
-    if (panel) switchNursingTab(panel);
-    else switchNursingTab('nota');
-}
-
-let nursingShowAll = false;
-
-const BUILTIN_SHORTCUTS = [
-    { panel: 'rsi',      label: '7P Rapid Sequence Intubation', icon: '💉', color: '#7ab3ff', bg: 'rgba(122,179,255,0.08)', border: 'rgba(122,179,255,0.25)' },
-    { panel: 'lytic',    label: 'Lytic Cocktail',               icon: '⚡', color: '#f39c12', bg: 'rgba(243,156,18,0.08)',  border: 'rgba(243,156,18,0.25)'  },
-    { panel: 'drugcalc', label: 'Drug Calculation',             icon: '🧮', color: '#c678dd', bg: 'rgba(198,120,221,0.08)', border: 'rgba(198,120,221,0.25)' },
-];
+function filterNursingNotes(q) { renderNursingNotes(q); }
 
 function renderNursingNotes(query = '') {
     const list = document.getElementById('nursing-note-list'); if(!list) return;
     const notes = store.nursingNotes || [];
-
-    // Update count badge
-    const badge = document.getElementById('nursing-note-count-badge');
-    if (badge) {
-        if (notes.length > 0) {
-            badge.style.display = 'inline-block';
-            badge.innerText = notes.length + ' nota';
-        } else {
-            badge.style.display = 'none';
-        }
-    }
-
-    const queryLower = (query || '').toLowerCase().trim();
-    const filtered = queryLower ? notes.filter(n => n.text.toLowerCase().includes(queryLower) || (n.patient||'').toLowerCase().includes(queryLower)) : notes;
-
-    if (filtered.length === 0) {
-        list.innerHTML = `<div class="nursing-empty">${query ? '😕 Tiada nota ditemui.' : '📋 Belum ada nota. Tambah yang pertama!'}</div>`;
-        return;
-    }
-
+    const filtered = query ? notes.filter(n => n.text.toLowerCase().includes(query.toLowerCase()) || (n.patient||'').toLowerCase().includes(query.toLowerCase())) : notes;
+    if(filtered.length === 0) { list.innerHTML = `<div class="nursing-empty">${query ? '😕 Tiada nota ditemui.' : '📋 Belum ada nota. Tambah yang pertama!'}</div>`; return; }
     const sorted = [...filtered].sort((a,b) => { const da = new Date(a.date+'T'+(a.time||'00:00')), db = new Date(b.date+'T'+(b.time||'00:00')); return db-da; });
-
-    const PREVIEW_COUNT = 3;
-    const showAll = nursingShowAll || !!query;
-    const toShow = showAll ? sorted : sorted.slice(0, PREVIEW_COUNT);
-    const hidden = sorted.length - PREVIEW_COUNT;
-
-    const cards = toShow.map(n => {
+    list.innerHTML = sorted.map(n => {
         const realIdx = store.nursingNotes.indexOf(n);
         const catInfo = NURSING_CATEGORIES.find(c => c.id === n.category) || NURSING_CATEGORIES[4];
         const dispDate = n.date ? n.date.split('-').reverse().join('/') : '';
@@ -2703,124 +2107,108 @@ function renderNursingNotes(query = '') {
             <div class="nursing-note-tags"><span class="nursing-tag ${n.category}">${catInfo.label}</span></div>
         </div>`;
     }).join('');
-
-    let toggleBtn = '';
-    if (!query && sorted.length > PREVIEW_COUNT) {
-        if (!showAll) {
-            toggleBtn = `<button onclick="nursingShowAll=true;renderNursingNotes('')" style="width:100%;margin-top:4px;background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xs);padding:9px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;color:var(--text-dim);cursor:pointer;letter-spacing:0.08em;">▼ LIHAT ${hidden} NOTA LAGI</button>`;
-        } else {
-            toggleBtn = `<button onclick="nursingShowAll=false;renderNursingNotes('')" style="width:100%;margin-top:4px;background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xs);padding:9px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;color:var(--text-dim);cursor:pointer;letter-spacing:0.08em;">▲ LIPAT SEMULA</button>`;
-        }
-    }
-
-    list.innerHTML = cards + toggleBtn;
 }
 
 function toMY(d) { if(!d) return ''; const p=d.split('-'); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d; }
 function saveData() { localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); renderStats(); updateShiftSummary(); gTriggerSave(); }
-function saveNotes() { /* legacy compat */ }
-function saveNotesManual() { /* legacy compat */ }
+function saveNotes() { gTriggerSave(); } // legacy stub
+function loadNotes() { if(store.profilePic) document.getElementById('profile-pic').src=store.profilePic; renderQuickNotes(); }
 
-function getQuickNotes() {
-    if (!store.quickNotes) store.quickNotes = [];
-    return store.quickNotes;
-}
-
-function saveQuickNotes() {
-    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
-    gTriggerSave();
-}
+// ── QUICK NOTES ──
+if(!store.quickNotes) store.quickNotes = [];
 
 function renderQuickNotes() {
+    if(!store.quickNotes) store.quickNotes = [];
     const list = document.getElementById('quick-notes-list');
-    if (!list) return;
-    const notes = getQuickNotes();
-    if (notes.length === 0) {
-        list.innerHTML = `<div class="qnote-empty">Tiada nota. Tekan + untuk tambah.</div>`;
+    const empty = document.getElementById('quick-notes-empty');
+    if(!list) return;
+    const sorted = [...store.quickNotes].sort((a,b) => a.title.localeCompare(b.title, 'ms'));
+    if(sorted.length === 0) {
+        list.innerHTML = '';
+        if(empty) empty.style.display = 'block';
         return;
     }
-    list.innerHTML = notes.map((n, i) => `
-        <div class="qnote-card" id="qnote-card-${i}">
-            <div class="qnote-header">
-                <input class="qnote-title" type="text" value="${(n.title||'').replace(/"/g,'&quot;')}" placeholder="Tajuk nota..." onchange="updateQuickNoteTitle(${i}, this.value)">
-                <div class="qnote-actions">
-                    <span class="qnote-saved-badge" id="qnote-badge-${i}">✓ SIMPAN</span>
-                    <button class="qnote-btn-save" onclick="saveQuickNote(${i})">SIMPAN</button>
-                    <button class="qnote-btn-del" onclick="deleteQuickNote(${i})">✕</button>
+    if(empty) empty.style.display = 'none';
+    list.innerHTML = sorted.map((n, si) => {
+        const ri = store.quickNotes.indexOf(store.quickNotes.find(x => x.id === n.id));
+        const preview = n.text ? n.text.replace(/\n/g,' ').substring(0,50) + (n.text.length > 50 ? '…' : '') : '';
+        return `<div class="quick-note-card" id="qncard-${n.id}">
+            <div class="quick-note-card-header" onclick="toggleQuickNote('${n.id}')">
+                <span class="quick-note-title">${n.title}</span>
+                <div class="quick-note-actions" onclick="event.stopPropagation()">
+                    <button class="quick-note-action-btn edit" onclick="openEditQuickNote('${n.id}')">EDIT</button>
+                    <button class="quick-note-action-btn del" onclick="deleteQuickNote('${n.id}')">DEL</button>
                 </div>
+                <span class="quick-note-chevron">▼</span>
             </div>
-            <textarea class="qnote-textarea" placeholder="Tulis nota di sini..." rows="3">${n.text||''}</textarea>
-        </div>`).join('');
+            <div class="quick-note-body">
+                <div class="quick-note-text">${n.text || '<span style="color:var(--text-muted);font-style:italic;font-size:0.75rem;">Tiada kandungan.</span>'}</div>
+            </div>
+        </div>`;
+    }).join('');
 }
 
-function addQuickNote() {
-    const notes = getQuickNotes();
-    notes.unshift({ title: '', text: '', saved: true });
-    saveQuickNotes();
-    renderQuickNotes();
-    // Focus title of first note
-    setTimeout(() => {
-        const t = document.querySelector('.qnote-title');
-        if (t) t.focus();
-    }, 50);
+function toggleQuickNote(id) {
+    const card = document.getElementById('qncard-' + id);
+    if(card) card.classList.toggle('open');
 }
 
-function updateQuickNoteTitle(idx, val) {
-    const notes = getQuickNotes();
-    if (notes[idx]) notes[idx].title = val;
+function openAddQuickNote() {
+    document.getElementById('sheet-title').innerText = '📝 Tambah Nota Baru';
+    document.getElementById('sheet-content').innerHTML = `
+        <label>Tajuk Nota</label>
+        <input type="text" id="qn-title" placeholder="cth: Prosedur IV, Dos Ubat..." maxlength="60">
+        <label>Kandungan Nota</label>
+        <textarea id="qn-text" style="height:200px;" placeholder="Tulis nota di sini..."></textarea>
+        <input type="hidden" id="qn-edit-id" value="">
+        <button class="btn-primary" onclick="saveQuickNote()">SIMPAN NOTA</button>`;
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('qn-title'); if(el) el.focus(); }, 350);
 }
 
-function saveQuickNote(idx) {
-    const notes = getQuickNotes();
-    if (!notes[idx]) return;
-    const card = document.getElementById(`qnote-card-${idx}`);
-    if (card) {
-        const ta = card.querySelector('.qnote-textarea');
-        if (ta) notes[idx].text = ta.value;
-        const ti = card.querySelector('.qnote-title');
-        if (ti) notes[idx].title = ti.value;
+function openEditQuickNote(id) {
+    const note = store.quickNotes.find(n => n.id === id);
+    if(!note) return;
+    document.getElementById('sheet-title').innerText = '✏️ Edit Nota';
+    document.getElementById('sheet-content').innerHTML = `
+        <label>Tajuk Nota</label>
+        <input type="text" id="qn-title" value="${note.title.replace(/"/g,'&quot;')}" maxlength="60">
+        <label>Kandungan Nota</label>
+        <textarea id="qn-text" style="height:200px;">${note.text || ''}</textarea>
+        <input type="hidden" id="qn-edit-id" value="${id}">
+        <button class="btn-primary" style="background:var(--warning);color:black;" onclick="saveQuickNote()">KEMASKINI NOTA</button>
+        <button class="btn-danger" onclick="deleteQuickNote('${id}',true)">PADAM NOTA</button>`;
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('qn-text'); if(el) el.focus(); }, 350);
+}
+
+function saveQuickNote() {
+    const title = (document.getElementById('qn-title').value || '').trim();
+    const text = (document.getElementById('qn-text').value || '').trim();
+    const editId = document.getElementById('qn-edit-id').value;
+    if(!title) { alert('Sila isi tajuk nota.'); return; }
+    if(!store.quickNotes) store.quickNotes = [];
+    if(editId) {
+        const idx = store.quickNotes.findIndex(n => n.id === editId);
+        if(idx >= 0) { store.quickNotes[idx].title = title; store.quickNotes[idx].text = text; }
+    } else {
+        store.quickNotes.push({ id: 'qn_' + Date.now(), title, text });
     }
-    saveQuickNotes();
-    const badge = document.getElementById(`qnote-badge-${idx}`);
-    if (badge) {
-        badge.classList.add('show');
-        setTimeout(() => badge.classList.remove('show'), 1800);
-    }
+    saveData(); renderQuickNotes(); closeSheet();
 }
 
-function deleteQuickNote(idx) {
-    if (!confirm('Padam nota ini?')) return;
-    const notes = getQuickNotes();
-    notes.splice(idx, 1);
-    saveQuickNotes();
-    renderQuickNotes();
-}
-
-function loadNotes() {
-    // Migrate old single note to quickNotes if needed
-    if (store.notes && (!store.quickNotes || store.quickNotes.length === 0)) {
-        store.quickNotes = [{ title: 'Nota', text: store.notes }];
-    }
-    if (store.profilePic) document.getElementById('profile-pic').src = store.profilePic;
-    renderQuickNotes();
+function deleteQuickNote(id, fromSheet=false) {
+    if(!confirm('Padam nota ini?')) return;
+    store.quickNotes = (store.quickNotes || []).filter(n => n.id !== id);
+    saveData(); renderQuickNotes();
+    if(fromSheet) closeSheet();
 }
 function triggerDatePicker(id) { const el=document.getElementById(id); if(el&&'showPicker' in HTMLInputElement.prototype) el.showPicker(); else if(el){el.focus();el.click();} }
 
 function updateTime() {
-    const n = new Date();
-    const days = ['AHAD','ISNIN','SELASA','RABU','KHAMIS','JUMAAT','SABTU'];
-    const months = ['JAN','FEB','MAC','APR','MEI','JUN','JUL','OGO','SEP','OKT','NOV','DIS'];
-    const timeStr = n.toLocaleTimeString('ms-MY', {hour12: false, hour:'2-digit', minute:'2-digit', second:'2-digit'});
-    const dateStr = `${String(n.getDate()).padStart(2,'0')} ${months[n.getMonth()]} ${n.getFullYear()}`;
-    const dayStr = days[n.getDay()];
-    const tEl = document.getElementById('hero-clock-time');
-    const dEl = document.getElementById('hero-clock-date');
-    const dyEl = document.getElementById('hero-clock-day');
-    if (tEl) tEl.innerText = timeStr;
-    if (dEl) dEl.innerText = dateStr;
-    if (dyEl) dyEl.innerText = dayStr;
-    const legacy = document.getElementById('live-clock');
-    if (legacy) legacy.innerText = `${String(n.getDate()).padStart(2,'0')}/${String(n.getMonth()+1).padStart(2,'0')}/${n.getFullYear()} | ${timeStr}`;
+    const n=new Date();
+    const d=String(n.getDate()).padStart(2,'0'), m=String(n.getMonth()+1).padStart(2,'0'), y=n.getFullYear();
+    document.getElementById('live-clock').innerText=`${d}/${m}/${y} | ${n.toLocaleTimeString('ms-MY',{hour12:false})}`;
 }
 
 function changeMonth(dir) { currentCalDate.setMonth(currentCalDate.getMonth()+dir); generateCalendar(); renderStats(); }
@@ -2856,10 +2244,9 @@ function generateCalendar() {
 
 function getShiftColor(s) {
     if(!s || s==='-') return '#cccccc';
-    if(s==='N') return '#212121';
-    if(s==='M' || s==='E') return '#66bb6a';
-    if(s==='SD' || s==='DO' || s==='AL' || s==='RPL' || s==='MC' || s==='PH') return '#e64a19';
-    return '#00695c'; // fallback for combos
+    const CUTI = ['DO','SD','RPL','PH','MC','AL','EL','ODO'];
+    if(CUTI.includes(s)) return '#800000';
+    return '#000000';
 }
 
 function renderShiftText(s) {
@@ -2991,34 +2378,17 @@ function checkPaidPH(){ const sel=document.getElementById('in-ph-select'); if(!s
 
 function renderRecords(type){
     const content=document.getElementById('sheet-content'); let html='<div>';
-    if(type==='AL'){
-        html+=`<label>Jumlah AL Setahun</label><div style="display:flex;gap:8px;margin-bottom:12px;"><input type="number" id="in-al-total" value="${store.al.total||''}" placeholder="cth: 20" style="flex:1;margin-bottom:0;" oninput="store.al.total=parseInt(this.value)||0;saveData();renderStats();"><span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);align-self:center;white-space:nowrap;">hari/tahun</span></div>`;
-        html+=`<div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--primary);margin-bottom:8px;padding:8px 10px;background:var(--primary-dim);border-radius:var(--radius-xs);border:1px solid rgba(80,200,120,0.2);">Baki: ${store.al.total?Math.max(0,store.al.total-store.al.taken.length)+' hari':'-'} &nbsp;|&nbsp; Diambil: ${store.al.taken.length} hari</div>`;
-        store.al.taken.forEach((d,i)=>html+=`<div class="record-card"><div>Cuti: ${toMY(d)}</div><div style="display:flex;gap:6px;"><button style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;" onclick="editAL(${i})">EDIT</button><button class="btn-delete" onclick="store.al.taken.splice(${i},1);saveData();renderRecords('AL');renderStats();">×</button></div></div>`);
-        html+=`<input type="hidden" id="al-edit-idx" value="-1"><label>Tarikh Cuti</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')">`;
-    }
-    else if(type==='RPL'){ store.rpl.records.forEach((r,i)=>html+=`<div class="record-card"><div><b>${r.t}</b><br><small style="color:var(--text-dim)">${toMY(r.d1)} ➔ ${r.isPaid?'PAID':toMY(r.d2)}</small></div><div style="display:flex;gap:6px;"><button style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;" onclick="editRPL(${i})">EDIT</button><button class="btn-delete" onclick="store.rpl.records.splice(${i},1);saveData();renderRecords('RPL')">×</button></div></div>`); const recordedDates=store.rpl.records.map(r=>r.d1); const avPH=ph2026.filter(p=>!recordedDates.includes(p.d)); html+=`<input type="hidden" id="rpl-edit-idx" value="-1"><div id="paid-alert" class="paid-alert"></div><label>Pilih PH</label><select id="in-ph-select" onchange="document.getElementById('in-d1').value=this.value;checkPaidPH();"><option value="">-- Pilih --</option>${avPH.map(p=>{const dp=p.d.split('-');return`<option value="${p.d}" data-paid="${p.paid}">(${dp[2]}/${dp[1]}) ${p.n}</option>`;}).join('')}</select><input type="date" id="in-d1" hidden><label id="label-rpl">Tarikh Ganti</label><input type="date" id="in-d2" onclick="triggerDatePicker('in-d2')">`; }
+    if(type==='AL'){ store.al.taken.forEach((d,i)=>html+=`<div class="record-card"><div>Cuti: ${toMY(d)}</div><button class="btn-delete" onclick="store.al.taken.splice(${i},1);saveData();renderRecords('AL')">×</button></div>`); html+=`<label>Tarikh Cuti</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')">`; }
+    else if(type==='RPL'){ store.rpl.records.forEach((r,i)=>html+=`<div class="record-card"><div><b>${r.t}</b><br><small style="color:var(--text-dim)">${toMY(r.d1)} ➔ ${r.isPaid?'PAID':toMY(r.d2)}</small></div><button class="btn-delete" onclick="store.rpl.records.splice(${i},1);saveData();renderRecords('RPL')">×</button></div>`); const recordedDates=store.rpl.records.map(r=>r.d1); const avPH=ph2026.filter(p=>!recordedDates.includes(p.d)); html+=`<div id="paid-alert" class="paid-alert"></div><label>Pilih PH</label><select id="in-ph-select" onchange="document.getElementById('in-d1').value=this.value;checkPaidPH();"><option value="">-- Pilih --</option>${avPH.map(p=>{const dp=p.d.split('-');return`<option value="${p.d}" data-paid="${p.paid}">(${dp[2]}/${dp[1]}) ${p.n}</option>`;}).join('')}</select><input type="date" id="in-d1" hidden><label id="label-rpl">Tarikh Ganti</label><input type="date" id="in-d2" onclick="triggerDatePicker('in-d2')">`; }
     else if(type==='CPD'){ store.cpd.records.forEach((r,i)=>html+=`<div class="record-card"><div style="flex:1"><b>${r.t}</b><br><small style="color:var(--text-dim)">📅 ${toMY(r.d)} | 🕒 ${r.t1} - ${r.t2}</small></div><div style="font-weight:700;color:var(--success);margin-right:8px;">${r.p} Pts</div><div style="display:flex;flex-direction:column;gap:4px;"><button style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;" onclick="editCPD(${i})">EDIT</button><button class="btn-delete" onclick="store.cpd.records.splice(${i},1);saveData();renderRecords('CPD')">×</button></div></div>`); html+=`<input type="hidden" id="cpd-edit-idx" value="-1"><label>Nama Kursus</label><input type="text" id="in-t"><label>Tarikh</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div><label>Mula</label><input type="time" id="in-t1"></div><div><label>Tamat</label><input type="time" id="in-t2"></div></div><label>Mata</label><input type="number" id="in-p">`; }
     html+=`</div><button class="btn-primary" id="btn-save-rec" onclick="addRec('${type}')">SIMPAN</button>`; content.innerHTML=html;
 }
 
-function editAL(i){ const d=store.al.taken[i]; document.getElementById('al-edit-idx').value=i; document.getElementById('in-d').value=d; const btn=document.getElementById('btn-save-rec'); if(btn){btn.innerText='KEMASKINI';btn.style.background='var(--warning)';btn.style.color='black';} document.getElementById('in-d').scrollIntoView({behavior:'smooth',block:'center'}); }
-
-function editRPL(i){ const r=store.rpl.records[i]; document.getElementById('rpl-edit-idx').value=i; const sel=document.getElementById('in-ph-select'); if(sel){for(let o=0;o<sel.options.length;o++){if(sel.options[o].value===r.d1){sel.selectedIndex=o;break;}} document.getElementById('in-d1').value=r.d1; checkPaidPH();} document.getElementById('in-d2').value=r.d2||''; const btn=document.getElementById('btn-save-rec'); if(btn){btn.innerText='KEMASKINI RPL';btn.style.background='var(--warning)';btn.style.color='black';} }
-
 function addRec(type){
-    if(type==='AL'){
-        const d=document.getElementById('in-d').value;
-        const idx=parseInt(document.getElementById('al-edit-idx')?.value??'-1');
-        if(d){ if(idx>=0){store.al.taken[idx]=d;}else{store.al.taken.push(d);} }
-    }
-    else if(type==='RPL'){
-        const sel=document.getElementById('in-ph-select'),d1=document.getElementById('in-d1').value,d2=document.getElementById('in-d2').value;
-        const idx=parseInt(document.getElementById('rpl-edit-idx')?.value??'-1');
-        if(sel&&d1){const t=sel.options[sel.selectedIndex].text,isPaid=sel.options[sel.selectedIndex].getAttribute('data-paid')==='true';if(t&&d1&&(isPaid||d2)){if(idx>=0){store.rpl.records[idx]={t,d1,d2,isPaid};}else{store.rpl.records.push({t,d1,d2,isPaid});}}}
-    }
+    if(type==='AL'){const d=document.getElementById('in-d').value;if(d)store.al.taken.push(d);}
+    else if(type==='RPL'){const sel=document.getElementById('in-ph-select'),d1=document.getElementById('in-d1').value,d2=document.getElementById('in-d2').value;if(sel&&d1){const t=sel.options[sel.selectedIndex].text,isPaid=sel.options[sel.selectedIndex].getAttribute('data-paid')==='true';if(t&&d1&&(isPaid||d2))store.rpl.records.push({t,d1,d2,isPaid});}}
     else if(type==='CPD'){ const t=document.getElementById('in-t').value,d=document.getElementById('in-d').value,p=document.getElementById('in-p').value,t1=document.getElementById('in-t1').value,t2=document.getElementById('in-t2').value; const idx=parseInt(document.getElementById('cpd-edit-idx').value); if(t&&d&&p&&t1&&t2){ if(idx>=0){ store.cpd.records[idx]={t,d,p,t1,t2}; } else { store.cpd.records.push({t,d,p,t1,t2}); } } }
-    saveData();renderRecords(type);renderStats();
+    saveData();renderRecords(type);
 }
 
 function editCPD(i){ const r=store.cpd.records[i]; document.getElementById('cpd-edit-idx').value=i; document.getElementById('in-t').value=r.t; document.getElementById('in-d').value=r.d; document.getElementById('in-t1').value=r.t1; document.getElementById('in-t2').value=r.t2; document.getElementById('in-p').value=r.p; const btn=document.getElementById('btn-save-rec'); if(btn){btn.innerText='KEMASKINI';btn.style.background='var(--warning)';btn.style.color='black';} document.getElementById('in-t').focus(); document.getElementById('in-t').scrollIntoView({behavior:'smooth',block:'center'}); }
@@ -3030,16 +2400,7 @@ function updateTodo(i){ const t=document.getElementById('pop-todo-t').value,d=do
 function renderTodos(){ const list=document.getElementById('todo-list'); if(!list)return; list.innerHTML=''; if(store.todos.length===0){list.innerHTML='<div style="font-size:0.72rem;color:var(--text-muted);padding:10px;text-align:center;">Tiada tugasan.</div>';return;} store.todos.forEach((todo,i)=>{ list.innerHTML+=`<div class="todo-item"><input type="checkbox" style="width:16px;height:16px;accent-color:var(--primary);" ${todo.done?'checked':''} onchange="store.todos[${i}].done=!store.todos[${i}].done;saveData();renderTodos();"><div class="todo-text ${todo.done?'done':''}">${todo.t}${todo.date?`<small style="color:var(--text-muted);font-size:0.6rem;margin-left:8px;">(Due: ${toMY(todo.date)})</small>`:''}</div><button onclick="editTodo(${i})" style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;padding:0 4px;">EDIT</button><button class="todo-del" onclick="store.todos.splice(${i},1);saveData();renderTodos();">×</button></div>`; }); }
 
 function renderStats(){
-    const taken=store.al.taken.length;
-    const total=store.al.total||0;
-    const baki=total>0?Math.max(0,total-taken):null;
-    document.getElementById('text-al').innerText=baki!==null?baki:taken;
-    const subEl=document.getElementById('text-al-sub');
-    if(subEl) subEl.innerText=total>0?`diambil: ${taken} / ${total} hari`:'ketik utk tetapkan jumlah';
-    const barAl=document.getElementById('bar-al');
-    if(barAl) barAl.style.width=total>0?Math.min((taken/total*100),100)+'%':'100%';
-    if(barAl && taken>=total && total>0) barAl.style.background='var(--danger)';
-    else if(barAl) barAl.style.background='';
+    document.getElementById('text-al').innerText=store.al.taken.length;
     document.getElementById('text-rpl').innerText=store.rpl.records.length;
     const pts=store.cpd.records.reduce((s,r)=>s+Number(r.p),0);
     document.getElementById('text-cpd').innerText=`${pts}/20`;
@@ -3112,31 +2473,26 @@ const RSI_DATA = [
 
 function handleRSIClick(){ document.getElementById('sheet-title').innerText="💉 Pre-Med RSI"; let html=''; RSI_DATA.forEach(section=>{ html+=`<div class="rsi-group-header">${section.group}</div>`; section.drugs.forEach(d=>{ html+=`<div class="drug-item"><div style="flex:1;min-width:0;"><div class="drug-name">${d.name}</div><div class="drug-ampule">${d.ampule}</div><div class="drug-prep">${d.prep}</div></div></div>`; }); }); document.getElementById('sheet-content').innerHTML=html; openSheet(); }
 
-function switchNursingTab(tab) {
-    ['nota','rsi','lytic','drugcalc'].forEach(t => {
-        document.getElementById('ntab-'+t).classList.toggle('active', t===tab);
-        document.getElementById('npanel-'+t).classList.toggle('active', t===tab);
+function renderRSIPremedPanel() {
+    const el = document.getElementById('rsipremed-content');
+    if(!el) return;
+    let html = '<div style="padding:2px 0 4px;">';
+    RSI_DATA.forEach(section => {
+        html += `<div style="margin-bottom:10px;">
+            <div class="rsi-group-header" style="margin-bottom:6px;">${section.group}</div>`;
+        section.drugs.forEach(d => {
+            html += `<div class="drug-item" style="margin-bottom:6px;">
+                <div style="flex:1;min-width:0;">
+                    <div class="drug-name">${d.name}</div>
+                    <div class="drug-ampule">${d.ampule}</div>
+                    <div class="drug-prep">${d.prep}</div>
+                </div>
+            </div>`;
+        });
+        html += '</div>';
     });
-}
-
-function switchDrugTab(tab) {
-    ['drug','rsi'].forEach(t => {
-        document.getElementById('dtab-'+t).classList.toggle('active', t===tab);
-        document.getElementById('dpanel-'+t).classList.toggle('active', t===tab);
-    });
-    if (tab === 'rsi') {
-        const panel = document.getElementById('dpanel-rsi');
-        if (panel && !panel.innerHTML.trim()) {
-            let html = '';
-            RSI_DATA.forEach(section => {
-                html += `<div class="rsi-group-header">${section.group}</div>`;
-                section.drugs.forEach(d => {
-                    html += `<div class="drug-item"><div style="flex:1;min-width:0;"><div class="drug-name">${d.name}</div><div class="drug-ampule">${d.ampule}</div><div class="drug-prep">${d.prep}</div></div></div>`;
-                });
-            });
-            panel.innerHTML = html;
-        }
-    }
+    html += '</div>';
+    el.innerHTML = html;
 }
 
 function triggerPDFUpload(e){e.preventDefault();document.getElementById('pdf-upload').click();}
@@ -3297,70 +2653,12 @@ let gUserInfo      = null;
 let gFileId        = null;
 let gSaveDebounce  = null;
 let gSyncing       = false;
-let gTokenExpiry   = null;
-let gRefreshTimer  = null;
-
-// ── Simpan sesi ke localStorage ──
-function gSaveSession(token, expireIn, userInfo) {
-    const expiry = Date.now() + (expireIn - 60) * 1000;
-    localStorage.setItem('roster_gtoken', token);
-    localStorage.setItem('roster_gtoken_expiry', String(expiry));
-    if(userInfo) localStorage.setItem('roster_guser', JSON.stringify(userInfo));
-    localStorage.setItem('roster_gtoken_hint', '1');
-    gTokenExpiry = expiry;
-}
-
-// ── Muat sesi dari localStorage ──
-function gLoadSession() {
-    const token  = localStorage.getItem('roster_gtoken');
-    const expiry = parseInt(localStorage.getItem('roster_gtoken_expiry') || '0');
-    const user   = localStorage.getItem('roster_guser');
-    if(token && expiry && Date.now() < expiry) {
-        gAccessToken = token;
-        gTokenExpiry = expiry;
-        if(user) { gUserInfo = JSON.parse(user); gsyncSetUser(gUserInfo); }
-        return true;
-    }
-    localStorage.removeItem('roster_gtoken');
-    localStorage.removeItem('roster_gtoken_expiry');
-    return false;
-}
-
-// ── Jadual auto-refresh token (tanpa popup) ──
-function gScheduleRefresh() {
-    if(gRefreshTimer) clearTimeout(gRefreshTimer);
-    if(!gTokenExpiry) return;
-    const msLeft = gTokenExpiry - Date.now() - 120000;
-    if(msLeft > 0) {
-        gRefreshTimer = setTimeout(() => gSilentRefresh(), msLeft);
-    }
-}
-
-// ── Silent refresh guna hint (tanpa popup, tanpa klik) ──
-function gSilentRefresh() {
-    if(typeof google === 'undefined' || !google.accounts) return;
-    const hint = gUserInfo ? (gUserInfo.email || '') : '';
-    const client = google.accounts.oauth2.initTokenClient({
-        client_id: GDRIVE_CLIENT_ID,
-        scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-        hint: hint,
-        callback: (resp) => {
-            if(resp.error) { gsyncSetStatus('Sila log masuk semula', 'error'); return; }
-            gAccessToken = resp.access_token;
-            gSaveSession(gAccessToken, resp.expires_in || 3600, gUserInfo);
-            gScheduleRefresh();
-            gsyncSetStatus('✓ Bersambung — auto-save aktif', 'synced');
-        }
-    });
-    // prompt kosong + hint = senyap, tiada popup jika Google masih kenal user
-    client.requestAccessToken({ prompt: '', login_hint: hint });
-}
 
 // ── UI helpers ──
 function gsyncSetStatus(msg, cls='') {
     const el = document.getElementById('gsync-status');
     if(!el) return;
-    el.className = 'hero-gsync-status' + (cls ? ' '+cls : '');
+    el.className = 'gsync-status' + (cls ? ' '+cls : '');
     el.innerText = msg;
 }
 
@@ -3369,69 +2667,53 @@ function gsyncSetUser(user) {
     const avatar = document.getElementById('gsync-avatar');
     const btn = document.getElementById('gsync-action-btn');
     if(user) {
-        if(name) name.innerText = 'Google Drive';
-        if(avatar) avatar.innerHTML = '☁️';
-        if(btn) { btn.innerText = 'KELUAR'; btn.className = 'hero-gsync-btn danger'; }
+        if(name) name.innerText = user.name || user.email || 'Google User';
+        if(avatar) avatar.innerHTML = user.picture ? `<img src="${user.picture}">` : '👤';
+        if(btn) { btn.innerText = 'LOG KELUAR'; btn.className = 'gsync-btn danger'; }
     } else {
         if(name) name.innerText = 'Tidak Log Masuk';
         if(avatar) avatar.innerHTML = '☁️';
-        if(btn) { btn.innerText = 'MASUK'; btn.className = 'hero-gsync-btn'; }
-        gsyncSetStatus('Google Drive');
+        if(btn) { btn.innerText = 'LOG MASUK'; btn.className = 'gsync-btn'; }
+        gsyncSetStatus('Google Drive — Tidak aktif');
     }
 }
 
 function handleGsyncAction() {
-    if(gAccessToken) { gSignOut(); } else { gSignIn(false); }
+    if(gAccessToken) { gSignOut(); } else { gSignIn(); }
 }
 
-// ── Log Masuk (manual — bila user tekan butang LOG MASUK) ──
-function gSignIn(silent = false) {
+// ── Sign In ──
+function gSignIn() {
     if(!GDRIVE_CLIENT_ID || GDRIVE_CLIENT_ID.includes('YOUR_CLIENT_ID')) {
         alert('⚠️ Sila masukkan Google Client ID anda dalam kod.');
         return;
     }
     if(typeof google === 'undefined' || !google.accounts) {
-        setTimeout(() => gSignIn(silent), 1000);
+        gsyncSetStatus('Memuatkan Google...', 'syncing');
+        setTimeout(gSignIn, 1000);
         return;
     }
-
-    if(silent) {
-        // Cuba silent refresh dulu — jika gagal, JANGAN tunjuk popup
-        gSilentRefresh();
-        return;
-    }
-
-    // Manual login — tunjuk popup pilih akaun sekali sahaja
     gsyncSetStatus('Menghubungi Google...', 'syncing');
-    const hint = gUserInfo ? (gUserInfo.email || '') : (localStorage.getItem('roster_guser') ? JSON.parse(localStorage.getItem('roster_guser')).email : '');
     const client = google.accounts.oauth2.initTokenClient({
         client_id: GDRIVE_CLIENT_ID,
         scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-        hint: hint,
         callback: async (resp) => {
             if(resp.error) { gsyncSetStatus('Gagal log masuk', 'error'); return; }
             gAccessToken = resp.access_token;
+            localStorage.setItem('roster_gtoken_hint', '1');
             await gFetchUserInfo();
-            gSaveSession(gAccessToken, resp.expires_in || 3600, gUserInfo);
-            gScheduleRefresh();
             await gLoadFromDrive();
         }
     });
-    // Guna 'select_account' hanya kali pertama, selepas itu guna hint supaya auto-pilih
-    const prompt = hint ? '' : 'select_account';
-    client.requestAccessToken({ prompt, login_hint: hint });
+    client.requestAccessToken();
 }
 
 // ── Sign Out ──
 function gSignOut() {
     if(gAccessToken) google.accounts.oauth2.revoke(gAccessToken, ()=>{});
-    gAccessToken = null; gUserInfo = null; gFileId = null; gTokenExpiry = null;
+    gAccessToken = null; gUserInfo = null; gFileId = null;
     localStorage.removeItem('roster_gtoken_hint');
-    localStorage.removeItem('roster_gtoken');
-    localStorage.removeItem('roster_gtoken_expiry');
-    localStorage.removeItem('roster_guser');
     gsyncSetUser(null);
-    gsyncSetStatus('Google Drive — Tidak aktif');
 }
 
 // ── Fetch user info ──
@@ -3549,400 +2831,304 @@ function gTriggerSave() {
 function toggleTheme() { applyTheme(currentTheme==='dark'?'light':'dark'); }
 function loadTheme() { applyTheme(localStorage.getItem('roster_theme')==='light'?'light':'dark'); }
 
-// ── MONTHLY EXPENSES — RECEIPT STORE ──
-let expenseOpen = false;
+// ══════════════════════════════════════════
+//  MONTHLY EXPENSES
+// ══════════════════════════════════════════
 
-function toggleExpenses() {
-    expenseOpen = !expenseOpen;
-    document.getElementById('expense-body').classList.toggle('open', expenseOpen);
-    document.getElementById('expense-toggle-icon').innerText = expenseOpen ? '▲' : '▼';
-}
+if(!store.expenses) store.expenses = {};
 
-const RECEIPT_CATS = ['rent','car','personal','utility-tnb','utility-satu'];
+let expenseCurrentDate = new Date();
 
-function getReceiptMonthKey() {
-    const m = document.getElementById('expense-month');
-    return m ? m.value : new Date().toISOString().slice(0,7);
-}
-
-function getReceiptStore() {
-    if (!store.receipts) store.receipts = {};
-    const key = getReceiptMonthKey();
-    if (!store.receipts[key]) {
-        store.receipts[key] = { rent:[], car:[], personal:[], 'utility-tnb':[], 'utility-satu':[] };
+const EXPENSE_VEHICLES = [
+    {
+        id: 'motor',
+        icon: '🏍️',
+        title: 'Motor',
+        plate: 'WTE4108',
+        color: 'primary',
+        types: [
+            { key: 'lastService', label: 'Last Service', kind: 'date', hasServiceType: true },
+            { key: 'nextService', label: 'Next Service', kind: 'date', hasServiceType: true },
+        ]
+    },
+    {
+        id: 'kereta',
+        icon: '🚗',
+        title: 'Kereta',
+        plate: 'TCC8852',
+        color: 'warning',
+        types: [
+            { key: 'lastService', label: 'Last Service', kind: 'date', hasServiceType: true },
+            { key: 'nextService', label: 'Next Service', kind: 'date', hasServiceType: true },
+            { key: 'loanPayment', label: 'Loan Payment', kind: 'amount' },
+        ]
+    },
+    {
+        id: 'personal',
+        icon: '👤',
+        title: 'Personal',
+        plate: null,
+        color: 'danger',
+        types: [
+            { key: 'loanPayment', label: 'Loan Payment', kind: 'amount' },
+        ]
     }
-    return store.receipts[key];
+];
+
+function expenseMonthKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
 }
 
-function saveReceipts() {
-    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
-    gTriggerSave();
-    renderReceipts();
+function expenseGetData(vehicleId) {
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(!store.expenses[mk]) store.expenses[mk] = {};
+    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
+    return store.expenses[mk][vehicleId];
 }
 
-function getExpenseAmountsKey() { return 'expense_amt_'+getReceiptMonthKey(); }
-
-function loadExpenseAmounts() {
-    const key = getExpenseAmountsKey();
-    const saved = JSON.parse(localStorage.getItem(key)||'{}');
-    ['rent','car','personal','tnb','satu'].forEach(id => {
-        const el = document.getElementById('amt-'+id);
-        if(el) el.value = saved[id]||'';
-    });
-    updateExpenseTotal();
+function expenseChangeMonth(dir) {
+    expenseCurrentDate.setMonth(expenseCurrentDate.getMonth() + dir);
+    renderExpenseCards();
 }
 
-function saveExpenseAmounts() {
-    const key = getExpenseAmountsKey();
-    const data = {};
-    ['rent','car','personal','tnb','satu'].forEach(id => {
-        const el = document.getElementById('amt-'+id);
-        if(el && el.value) data[id] = el.value;
-    });
-    localStorage.setItem(key, JSON.stringify(data));
-}
+const MONTH_NAMES_MY = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogos','Sep','Okt','Nov','Dis'];
 
-function updateExpenseTotal() {
-    saveExpenseAmounts();
-    const ids = ['rent','car','personal','tnb','satu'];
-    const total = ids.reduce((s,id) => {
-        const el = document.getElementById('amt-'+id);
-        return s + (el ? parseFloat(el.value)||0 : 0);
-    }, 0);
-    const el = document.getElementById('expense-grand-total');
-    if(el) el.innerText = 'RM ' + total.toFixed(2);
-}
+function renderExpenseCards() {
+    const label = `${MONTH_NAMES_MY[expenseCurrentDate.getMonth()]} ${expenseCurrentDate.getFullYear()}`;
+    document.getElementById('expense-month-label').innerText = label;
 
-function handleReceiptUpload(cat, input) {
-    const files = Array.from(input.files);
-    if (!files.length) return;
-    const data = getReceiptStore();
-    let processed = 0;
-    files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = async e => {
-            const compressed = await compressImage(e.target.result);
-            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: compressed });
-            processed++;
-            if (processed === files.length) { input.value = ''; saveReceipts(); }
-        };
-        reader.readAsDataURL(file);
-    });
-}
+    let grandTotal = 0;
+    const grid = document.getElementById('expense-cards-grid');
+    grid.innerHTML = '';
 
-function handleReceiptDrop(cat, event, zone) {
-    event.preventDefault();
-    zone.classList.remove('drag-over');
-    const files = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/') || f.type === 'application/pdf');
-    if (!files.length) return;
-    const data = getReceiptStore();
-    let processed = 0;
-    files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = async e => {
-            const compressed = await compressImage(e.target.result);
-            data[cat].push({ name: file.name, origName: file.name, type: file.type, data: compressed });
-            processed++;
-            if (processed === files.length) saveReceipts();
-        };
-        reader.readAsDataURL(file);
-    });
-}
+    EXPENSE_VEHICLES.forEach(v => {
+        const data = expenseGetData(v.id);
+        let cardTotal = 0;
 
-function deleteReceipt(cat, idx) {
-    const data = getReceiptStore();
-    if (confirm('Padam receipt ini?')) {
-        data[cat].splice(idx, 1);
-        saveReceipts();
-    }
-}
+        // Sum amount types
+        v.types.forEach(t => {
+            if(t.kind === 'amount' && data[t.key]) {
+                cardTotal += parseFloat(data[t.key]) || 0;
+            }
+        });
+        grandTotal += cardTotal;
 
-function openReceiptLightbox(idx, cat) {
-    const data = getReceiptStore();
-    const r = data[cat] && data[cat][idx];
-    if (!r) return;
-    document.getElementById('receipt-lightbox-img').src = r.data;
-    document.getElementById('receipt-lightbox-name').innerText = r.name || '';
-    document.getElementById('receipt-lightbox').classList.add('open');
-}
+        const colorMap = { primary: 'var(--primary)', warning: 'var(--warning)', danger: 'var(--danger)' };
+        const accentColor = colorMap[v.color] || 'var(--primary)';
 
-function closeReceiptLightbox() {
-    document.getElementById('receipt-lightbox').classList.remove('open');
-    document.getElementById('receipt-lightbox-img').src = '';
-}
+        let typesHTML = '';
+        v.types.forEach(t => {
+            const val = data[t.key] || '';
+            let displayVal = '';
+            let valClass = '';
 
-function changeReceiptMonth(dir) {
-    const input = document.getElementById('expense-month');
-    if (!input.value) return;
-    const [y, m] = input.value.split('-').map(Number);
-    const date = new Date(y, m - 1 + dir, 1);
-    const newVal = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
-    input.value = newVal;
-    renderReceipts();
-}
+            if(t.kind === 'date') {
+                displayVal = val ? toMY(val) : '— Belum ditetapkan';
+                valClass = val ? 'date-val' : '';
+            } else if(t.kind === 'amount') {
+                displayVal = val ? `RM ${parseFloat(val).toFixed(2)}` : 'RM 0.00';
+                valClass = `amount-val ${v.color}`;
+            } else {
+                displayVal = val || '— Belum ditetapkan';
+            }
 
-function renameReceipt(cat, idx, newName) {
-    const data = getReceiptStore();
-    if (data[cat] && data[cat][idx] !== undefined) {
-        data[cat][idx].name = newName;
-        localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
-        gTriggerSave();
-    }
-}
+            // Receipt
+            const receiptData = data[`receipt_${t.key}`];
+            let receiptHTML = '';
+            if(receiptData) {
+                if(receiptData.startsWith('data:image')) {
+                    receiptHTML = `<img src="${receiptData}" class="receipt-thumb" onclick="expenseViewReceipt('${v.id}','${t.key}')" title="Lihat resit">`;
+                } else {
+                    receiptHTML = `<div class="receipt-pdf-badge" onclick="expenseViewReceipt('${v.id}','${t.key}')" title="Lihat PDF">📄</div>`;
+                }
+            }
 
-function downloadReceipt(cat, idx) {
-    const data = getReceiptStore();
-    const r = data[cat] && data[cat][idx];
-    if (!r) return;
-    const a = document.createElement('a');
-    a.href = r.data;
-    // Use current display name as filename, fallback to original
-    const ext = r.type === 'application/pdf' ? '.pdf' : r.origName ? r.origName.split('.').pop() : 'jpg';
-    a.download = r.name || r.origName || `receipt.${ext}`;
-    a.click();
-}
+            // ServiceType sub-field (only for date fields with hasServiceType)
+            let serviceTypeHTML = '';
+            if(t.hasServiceType) {
+                const stKey = t.key + '_serviceType';
+                const stVal = data[stKey] || '';
+                serviceTypeHTML = `
+                <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+                        <div>
+                            <span class="expense-type-label" style="margin-bottom:1px;">Type of Service</span>
+                            <span style="font-size:0.75rem;color:${stVal ? 'var(--text)' : 'var(--text-muted)'};font-weight:600;">${stVal || '— Belum ditetapkan'}</span>
+                        </div>
+                        <button class="expense-edit-btn" onclick="openExpenseEdit('${v.id}','${stKey}','text','Type of Service')">EDIT</button>
+                    </div>
+                </div>`;
+            }
 
-function renderReceiptGrid(cat, listId, countId) {
-    const data = getReceiptStore();
-    const items = data[cat] || [];
-    const list = document.getElementById(listId);
-    const countEl = document.getElementById(countId);
-    if (!list) return items.length;
-    if (countEl) countEl.innerText = items.length ? `${items.length} fail` : '';
-    list.innerHTML = items.map((r, i) => {
-        const isPdf = r.type === 'application/pdf';
-        const icon = isPdf ? '📄' : '🖼️';
-        const viewAction = isPdf
-            ? `window.open('${r.data}','_blank')`
-            : `openReceiptLightbox(${i},'${cat}')`;
-        const safeName = (r.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-        return `<div class="receipt-row">
-            <span class="receipt-row-icon">${icon}</span>
-            <input class="receipt-row-name" type="text" value="${safeName}" placeholder="Nama receipt..."
-                onchange="renameReceipt('${cat}',${i},this.value)"
-                onclick="this.select()">
-            <button class="receipt-row-view" onclick="${viewAction}">Buka</button>
-            <button class="receipt-row-dl" onclick="downloadReceipt('${cat}',${i})" title="Download">⬇</button>
-            <button class="receipt-row-del" onclick="deleteReceipt('${cat}',${i})">✕</button>
-        </div>`;
-    }).join('');
-    return items.length;
-}
-
-function setReceiptDot(dotId, hasItems) {
-    const dot = document.getElementById(dotId);
-    if (!dot) return;
-    dot.className = 'receipt-status-dot ' + (hasItems ? 'filled' : 'empty');
-}
-
-function renderReceipts() {
-    if (!store.receipts) store.receipts = {};
-    renderReceiptGrid('rent', 'rg-rent', 'rc-count-rent');
-    renderReceiptGrid('car', 'rg-car', 'rc-count-car');
-    renderReceiptGrid('personal', 'rg-personal', 'rc-count-personal');
-    renderReceiptGrid('utility-tnb', 'rg-utility-tnb', null);
-    renderReceiptGrid('utility-satu', 'rg-utility-satu', null);
-    // Combined utility count
-    const data = getReceiptStore();
-    const tnbCount = (data['utility-tnb']||[]).length;
-    const satuCount = (data['utility-satu']||[]).length;
-    const utilCount = tnbCount + satuCount;
-    const uc = document.getElementById('rc-count-utility');
-    if (uc) uc.innerText = utilCount ? `${utilCount} fail` : '';
-    // Header count
-    const total = RECEIPT_CATS.reduce((s,c) => s + (data[c]||[]).length, 0);
-    const hc = document.getElementById('expense-header-count');
-    if (hc) hc.innerText = total ? `${total} receipt` : '';
-    // Update status dots
-    setReceiptDot('dot-rent',         (data['rent']||[]).length > 0);
-    setReceiptDot('dot-car',          (data['car']||[]).length > 0);
-    setReceiptDot('dot-personal',     (data['personal']||[]).length > 0);
-    setReceiptDot('dot-utility-tnb',  tnbCount > 0);
-    setReceiptDot('dot-utility-satu', satuCount > 0);
-    // Load saved amounts for this month
-    loadExpenseAmounts();
-}
-
-function initExpenses() {
-    const monthInput = document.getElementById('expense-month');
-    if (monthInput) monthInput.value = new Date().toISOString().slice(0,7);
-    if (!store.receipts) store.receipts = {};
-    renderReceipts();
-}
-
-
-
-
-// ── LHDN RECORD ──
-let lhdnOpen = false;
-let lhdnYear = new Date().getFullYear();
-let lhdnActiveCat = 'semua';
-
-function toggleLhdn() {
-    lhdnOpen = !lhdnOpen;
-    document.getElementById('lhdn-body').classList.toggle('open', lhdnOpen);
-    document.getElementById('lhdn-toggle-icon').innerText = lhdnOpen ? '▲' : '▼';
-}
-
-function changeLhdnYear(dir) {
-    lhdnYear += dir;
-    renderLhdn();
-}
-
-function getLhdnStore() {
-    if (!store.lhdn) store.lhdn = {};
-    if (!store.lhdn[lhdnYear]) store.lhdn[lhdnYear] = [];
-    return store.lhdn[lhdnYear];
-}
-
-function saveLhdn() {
-    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
-    gTriggerSave();
-    renderLhdn();
-}
-
-function handleLhdnUpload(input) {
-    const files = Array.from(input.files);
-    if (!files.length) return;
-    const items = getLhdnStore();
-    let processed = 0;
-    files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = async e => {
-            const compressed = await compressImage(e.target.result);
-            const autocat = autoLhdnLabel(file.name);
-            items.push({ name: file.name, origName: file.name, type: file.type, data: compressed, cat: autocat });
-            processed++;
-            if (processed === files.length) { input.value = ''; saveLhdn(); }
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-function handleLhdnDrop(event, zone) {
-    event.preventDefault();
-    zone.classList.remove('drag-over');
-    const files = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/') || f.type === 'application/pdf');
-    if (!files.length) return;
-    const items = getLhdnStore();
-    let processed = 0;
-    files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = async e => {
-            const compressed = await compressImage(e.target.result);
-            const autocat = autoLhdnLabel(file.name);
-            items.push({ name: file.name, origName: file.name, type: file.type, data: compressed, cat: autocat });
-            processed++;
-            if (processed === files.length) saveLhdn();
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-function renameLhdn(idx, val) {
-    const items = getLhdnStore();
-    if (items[idx]) { items[idx].name = val; localStorage.setItem('roster_ultimate_v3', JSON.stringify(store)); gTriggerSave(); }
-}
-
-function recatLhdn(idx, val) {
-    const items = getLhdnStore();
-    if (items[idx]) { items[idx].cat = val; saveLhdn(); }
-}
-
-function deleteLhdn(idx) {
-    const items = getLhdnStore();
-    if (confirm('Padam dokumen ini?')) { items.splice(idx, 1); saveLhdn(); }
-}
-
-function downloadLhdn(idx) {
-    const items = getLhdnStore();
-    const r = items[idx];
-    if (!r) return;
-    const a = document.createElement('a');
-    a.href = r.data;
-    a.download = r.name || r.origName || 'dokumen';
-    a.click();
-}
-
-function openLhdnLightbox(idx) {
-    const items = getLhdnStore();
-    const r = items[idx];
-    if (!r) return;
-    document.getElementById('receipt-lightbox-img').src = r.data;
-    document.getElementById('receipt-lightbox-name').innerText = r.name || '';
-    document.getElementById('receipt-lightbox').classList.add('open');
-}
-
-function renderLhdn() {
-    if (!store.lhdn) store.lhdn = {};
-    const yearEl = document.getElementById('lhdn-year-display');
-    if (yearEl) yearEl.innerText = lhdnYear;
-
-    const items = getLhdnStore();
-    const countEl = document.getElementById('lhdn-count');
-    const headerCount = document.getElementById('lhdn-header-count');
-    if (countEl) countEl.innerText = items.length ? `${items.length} fail` : '';
-    if (headerCount) headerCount.innerText = items.length ? `${items.length} dokumen` : '';
-
-    // Build category tabs from unique cats
-    const cats = ['Semua', ...Array.from(new Set(items.map(r => r.cat).filter(Boolean)))];
-    const tabBar = document.getElementById('lhdn-cat-tabs');
-    if (tabBar) {
-        if (cats.length > 1) {
-            tabBar.style.display = 'block';
-            tabBar.innerHTML = cats.map(c => {
-                const key = c.toLowerCase();
-                const isActive = lhdnActiveCat === key;
-                return `<span onclick="lhdnActiveCat='${key}';renderLhdn()" style="display:inline-block;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid ${isActive ? '#7ab3ff' : 'transparent'};color:${isActive ? '#7ab3ff' : 'var(--text-dim)'};white-space:nowrap;">${c}</span>`;
-            }).join('');
-        } else {
-            tabBar.style.display = 'none';
-        }
-    }
-
-    // Filter items
-    const filtered = lhdnActiveCat === 'semua' ? items.map((r,i) => ({r,i})) : items.map((r,i) => ({r,i})).filter(({r}) => (r.cat||'').toLowerCase() === lhdnActiveCat);
-
-    const list = document.getElementById('lhdn-list');
-    if (!list) return;
-    if (!filtered.length) { list.innerHTML = `<div style="padding:10px 0 14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-muted);">Tiada dokumen${lhdnActiveCat !== 'semua' ? ' dalam kategori ini' : ''}</div>`; return; }
-
-    // Group by category for display
-    const groups = {};
-    filtered.forEach(({r, i}) => {
-        const g = r.cat || '—';
-        if (!groups[g]) groups[g] = [];
-        groups[g].push({r, i});
-    });
-
-    list.innerHTML = Object.entries(groups).map(([grp, grpItems]) => {
-        const rows = grpItems.map(({r, i}) => {
-            const isPdf = r.type === 'application/pdf';
-            const icon = isPdf ? '📄' : '🖼️';
-            const viewAction = isPdf ? `window.open(getLhdnStore()[${i}].data,'_blank')` : `openLhdnLightbox(${i})`;
-            const safeName = (r.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-            const safeCat = (r.cat || '').replace(/"/g, '&quot;');
-            return `<div class="receipt-row">
-                <span class="receipt-row-icon">${icon}</span>
-                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;">
-                    <input class="receipt-row-name" type="text" value="${safeName}" placeholder="Nama dokumen..." onchange="renameLhdn(${i},this.value)" onclick="this.select()" style="width:100%;">
-                    <input class="receipt-row-name" type="text" value="${safeCat}" placeholder="Kategori (cth: EA Form, Slip Gaji...)" onchange="recatLhdn(${i},this.value)" onclick="this.select()" style="font-size:0.65rem;color:var(--text-dim);width:100%;">
+            typesHTML += `
+            <div class="expense-type-row" style="flex-direction:column;align-items:stretch;gap:0;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <div class="expense-type-info">
+                        <span class="expense-type-label">${t.label}</span>
+                        <span class="expense-type-value ${valClass}">${displayVal}</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                        ${receiptHTML}
+                        <div>
+                            <button class="expense-edit-btn" onclick="openExpenseEdit('${v.id}','${t.key}','${t.kind}','${t.label}')">EDIT</button>
+                            <div style="margin-top:4px;">
+                                <label class="receipt-upload-btn" for="receipt-input-${v.id}-${t.key}" title="Upload resit" style="padding:4px 7px;flex:unset;">
+                                    <span style="font-size:0.75rem;">📎</span>
+                                    <span class="receipt-upload-label" style="font-size:0.46rem;">${receiptData ? 'TUKAR' : 'RESIT'}</span>
+                                </label>
+                                <input type="file" id="receipt-input-${v.id}-${t.key}" accept="image/*,application/pdf" hidden onchange="handleReceiptUpload(event,'${v.id}','${t.key}')">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="receipt-row-view" onclick="${viewAction}" style="color:#7ab3ff;border-color:rgba(122,179,255,0.2);">Buka</button>
-                <button class="receipt-row-dl" onclick="downloadLhdn(${i})">⬇</button>
-                <button class="receipt-row-del" onclick="deleteLhdn(${i})">✕</button>
+                ${serviceTypeHTML}
             </div>`;
-        }).join('');
-        const grpLabel = grp !== '—' ? `<div style="padding:6px 0 2px;font-family:'JetBrains Mono',monospace;font-size:0.52rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7ab3ff;opacity:0.7;">${grp}</div>` : '';
-        return grpLabel + rows;
-    }).join('');
+        });
+
+        const cardEl = document.createElement('div');
+        cardEl.className = 'expense-card';
+        cardEl.id = `expense-card-${v.id}`;
+        cardEl.innerHTML = `
+            <div class="expense-card-header" onclick="toggleExpenseCard('${v.id}')">
+                <div class="expense-card-left">
+                    <div class="expense-card-icon">${v.icon}</div>
+                    <div>
+                        <span class="expense-card-title">${v.title}</span>
+                        ${v.plate ? `<span class="expense-card-plate" style="color:${accentColor};">${v.plate}</span>` : `<span class="expense-card-plate" style="color:${accentColor};font-size:0.78rem;letter-spacing:0.04em;">Peribadi</span>`}
+                    </div>
+                </div>
+                <div class="expense-card-total">
+                    <span class="expense-total-label">Jumlah</span>
+                    <span class="expense-total-val" style="color:${cardTotal > 0 ? accentColor : 'var(--text-muted)'};">${cardTotal > 0 ? 'RM '+cardTotal.toFixed(2) : '—'}</span>
+                </div>
+            </div>
+            <div class="expense-card-body" id="expense-body-${v.id}">
+                ${typesHTML}
+            </div>`;
+        grid.appendChild(cardEl);
+    });
+
+    // Grand total
+    document.getElementById('expense-grand-total').innerText = `RM ${grandTotal.toFixed(2)}`;
 }
 
-function initLhdn() {
-    if (!store.lhdn) store.lhdn = {};
-    lhdnYear = new Date().getFullYear();
-    renderLhdn();
+function toggleExpenseCard(id) {
+    const body = document.getElementById('expense-body-'+id);
+    if(body) body.classList.toggle('open');
 }
+
+function openExpenseEdit(vehicleId, fieldKey, kind, label) {
+    const data = expenseGetData(vehicleId);
+    const current = data[fieldKey] || '';
+    const vehicle = EXPENSE_VEHICLES.find(v => v.id === vehicleId);
+    const vLabel = vehicle ? `${vehicle.title}${vehicle.plate ? ' '+vehicle.plate : ''}` : '';
+
+    document.getElementById('sheet-title').innerText = `✏️ ${vLabel} — ${label}`;
+
+    let inputHTML = '';
+    if(kind === 'date') {
+        inputHTML = `<label>${label}</label><input type="date" id="exp-input" value="${current}" onclick="triggerDatePicker('exp-input')">`;
+    } else if(kind === 'amount') {
+        inputHTML = `<label>${label} (RM)</label><input type="number" id="exp-input" value="${current}" placeholder="0.00" step="0.01" min="0">`;
+    } else {
+        inputHTML = `<label>${label}</label><input type="text" id="exp-input" value="${current}" placeholder="Masukkan jenis servis...">`;
+    }
+
+    document.getElementById('sheet-content').innerHTML = `
+        ${inputHTML}
+        <input type="hidden" id="exp-vehicle-id" value="${vehicleId}">
+        <input type="hidden" id="exp-field-key" value="${fieldKey}">
+        <button class="btn-primary" onclick="saveExpenseField()">SIMPAN</button>
+        ${current ? `<button class="btn-danger" onclick="clearExpenseField('${vehicleId}','${fieldKey}')">PADAM</button>` : ''}`;
+
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('exp-input'); if(el){ el.focus(); if(kind === 'date' && 'showPicker' in HTMLInputElement.prototype) el.showPicker(); } }, 350);
+}
+
+function saveExpenseField() {
+    const vehicleId = document.getElementById('exp-vehicle-id').value;
+    const fieldKey = document.getElementById('exp-field-key').value;
+    const val = document.getElementById('exp-input').value.trim();
+    if(!val) { alert('Sila isi nilai.'); return; }
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(!store.expenses[mk]) store.expenses[mk] = {};
+    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
+    store.expenses[mk][vehicleId][fieldKey] = val;
+    saveData();
+    renderExpenseCards();
+    closeSheet();
+    // Re-open card
+    const body = document.getElementById('expense-body-'+vehicleId);
+    if(body) body.classList.add('open');
+}
+
+function clearExpenseField(vehicleId, fieldKey) {
+    if(!confirm('Padam entri ini?')) return;
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(store.expenses[mk] && store.expenses[mk][vehicleId]) {
+        delete store.expenses[mk][vehicleId][fieldKey];
+        delete store.expenses[mk][vehicleId]['receipt_'+fieldKey];
+    }
+    saveData(); renderExpenseCards(); closeSheet();
+    const body = document.getElementById('expense-body-'+vehicleId);
+    if(body) body.classList.add('open');
+}
+
+function handleReceiptUpload(event, vehicleId, fieldKey) {
+    const file = event.target.files[0];
+    if(!file) return;
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(!store.expenses[mk]) store.expenses[mk] = {};
+    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        store.expenses[mk][vehicleId]['receipt_'+fieldKey] = e.target.result;
+        saveData();
+        renderExpenseCards();
+        const body = document.getElementById('expense-body-'+vehicleId);
+        if(body) body.classList.add('open');
+    };
+    reader.readAsDataURL(file);
+    event.target.value = '';
+}
+
+function expenseViewReceipt(vehicleId, fieldKey) {
+    const data = expenseGetData(vehicleId);
+    const receiptData = data['receipt_'+fieldKey];
+    if(!receiptData) return;
+
+    const vehicle = EXPENSE_VEHICLES.find(v => v.id === vehicleId);
+    const typeInfo = vehicle.types.find(t => t.key === fieldKey);
+    document.getElementById('sheet-title').innerText = `🧾 Resit — ${typeInfo ? typeInfo.label : fieldKey}`;
+
+    let content = '';
+    if(receiptData.startsWith('data:image')) {
+        content = `<div style="text-align:center;"><img src="${receiptData}" style="max-width:100%;border-radius:var(--radius-sm);border:1px solid var(--border);"></div>`;
+    } else {
+        content = `<div style="text-align:center;padding:20px;">
+            <div style="font-size:3rem;margin-bottom:12px;">📄</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:16px;">Fail PDF</div>
+            <a href="${receiptData}" download="resit_${vehicleId}_${fieldKey}.pdf" style="display:inline-block;background:var(--primary-dim);border:1px solid rgba(80,200,120,0.3);color:var(--primary);border-radius:var(--radius-xs);padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;text-decoration:none;letter-spacing:0.08em;">⬇️ MUAT TURUN PDF</a>
+        </div>`;
+    }
+
+    content += `<button class="btn-danger" style="margin-top:12px;" onclick="deleteExpenseReceipt('${vehicleId}','${fieldKey}')">PADAM RESIT</button>`;
+    document.getElementById('sheet-content').innerHTML = content;
+    openSheet();
+}
+
+function deleteExpenseReceipt(vehicleId, fieldKey) {
+    if(!confirm('Padam resit ini?')) return;
+    const mk = expenseMonthKey(expenseCurrentDate);
+    if(store.expenses[mk] && store.expenses[mk][vehicleId]) {
+        delete store.expenses[mk][vehicleId]['receipt_'+fieldKey];
+    }
+    saveData(); renderExpenseCards(); closeSheet();
+    const body = document.getElementById('expense-body-'+vehicleId);
+    if(body) body.classList.add('open');
+}
+
 
 
 window.addEventListener('load', () => {
@@ -3950,22 +3136,6 @@ window.addEventListener('load', () => {
     fetchPrayerTimes();
     startPrayerTick();
     schedulePrayerRefresh();
-
-    const hasCachedUser = !!localStorage.getItem('roster_guser');
-
-    if(gLoadSession()) {
-        // ✅ Token masih sah dalam cache — terus sambung tanpa sebarang popup
-        gsyncSetStatus('✓ Bersambung — auto-save aktif', 'synced');
-        gScheduleRefresh();
-    } else if(localStorage.getItem('roster_gtoken_hint') === '1' && hasCachedUser) {
-        // Token tamat — cuba silent refresh (tiada popup, tiada klik)
-        // Papar nama dari cache dulu supaya UI nampak lengkap
-        const cachedUser = localStorage.getItem('roster_guser');
-        if(cachedUser) { gUserInfo = JSON.parse(cachedUser); gsyncSetUser(gUserInfo); }
-        gsyncSetStatus('Menyambung semula...', 'syncing');
-        // Tunggu GSI library load sepenuhnya dulu
-        setTimeout(() => gSilentRefresh(), 2000);
-    }
 });
 migrateCalendarKeys();
 migrateDefaultDrugs();
@@ -3976,44 +3146,8 @@ renderStats();
 loadNotes();
 loadTheme();
 renderNursingNotes();
-initExpenses();
-initLhdn();
-
-// ── CALENDAR / CLAIM SWIPE SLIDER ──
-(function() {
-    const track = document.getElementById('cal-slider-track');
-    const wrap  = document.getElementById('cal-slider-wrap');
-    if (!track || !wrap) return;
-    let curSlide = 0;
-    const TOTAL = 2;
-
-    function goTo(idx) {
-        curSlide = Math.max(0, Math.min(TOTAL - 1, idx));
-        track.style.transform = `translateX(-${curSlide * 100}%)`;
-        document.querySelectorAll('.cal-dot').forEach((d, i) => d.classList.toggle('active', i === curSlide));
-    }
-
-    let startX = 0, startY = 0, dragging = false;
-
-    wrap.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        dragging = true;
-    }, { passive: true });
-
-    wrap.addEventListener('touchend', e => {
-        if (!dragging) return;
-        dragging = false;
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = e.changedTouches[0].clientY - startY;
-        if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
-        if (dx < 0) goTo(curSlide + 1);
-        else        goTo(curSlide - 1);
-    }, { passive: true });
-
-    // Also allow click on dots
-    document.querySelectorAll('.cal-dot').forEach((d, i) => d.addEventListener('click', () => goTo(i)));
-})();
+renderExpenseCards();
+renderQuickNotes();
 </script>
 </body>
 </html>
