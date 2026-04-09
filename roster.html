@@ -412,10 +412,10 @@
             font-weight:700;
             color: #000000;
         }
-        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color: #000000; }
-        .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; color: #000000; }
+        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color: #50c878; }
+        .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; color: #2d7a47; }
 
-        /* SHIFT KERJA — tulisan hitam */
+        /* SHIFT KERJA — tulisan emerald green */
         .day-box[data-shift="M"] .shift-text,
         .day-box[data-shift="E"] .shift-text,
         .day-box[data-shift="N"] .shift-text,
@@ -427,7 +427,7 @@
         .day-box[data-shift="SD/N"] .shift-text,
         .day-box[data-shift="DO/M"] .shift-text,
         .day-box[data-shift="DO/E"] .shift-text,
-        .day-box[data-shift="DO/N"] .shift-text { color: #000000; }
+        .day-box[data-shift="DO/N"] .shift-text { color: #50c878; }
 
         .day-box[data-shift="M"] .assign-text,
         .day-box[data-shift="E"] .assign-text,
@@ -440,7 +440,7 @@
         .day-box[data-shift="SD/N"] .assign-text,
         .day-box[data-shift="DO/M"] .assign-text,
         .day-box[data-shift="DO/E"] .assign-text,
-        .day-box[data-shift="DO/N"] .assign-text { color: #000000; }
+        .day-box[data-shift="DO/N"] .assign-text { color: #2d7a47; }
 
         /* SHIFT CUTI — tulisan maroon */
         .day-box[data-shift="DO"] .shift-text,
@@ -1567,9 +1567,9 @@
 
     <!-- EMERGENCY DRUG -->
     <div class="section">
-        <div class="section-header">
-            <h3>Emergency Drug</h3>
-            <div class="drug-toolbar">
+        <div class="section-header" style="cursor:pointer;" onclick="openAllDrugsOverlay()">
+            <h3 style="display:flex;align-items:center;gap:6px;">Emergency Drug <span style="font-size:0.55rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.08em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">LIHAT SEMUA</span></h3>
+            <div class="drug-toolbar" onclick="event.stopPropagation()">
                 <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
                 <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
                 <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
@@ -1604,26 +1604,22 @@
             <h3>Nursing Note</h3>
             <button onclick="openAddNursingNote()" class="btn-add-drug">+</button>
         </div>
-        <div class="tools-tabbar" id="tools-tabbar" style="margin: -4px -16px 12px; padding: 0 12px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 0; display:none;">
-            <div class="tool-tab" onclick="switchTool('rsi')" data-tool="rsi" id="tab-rsi">💉 RSI 7P</div>
-            <div class="tool-tab" onclick="switchTool('lytic')" data-tool="lytic" id="tab-lytic">⚡ Lytic Cocktail</div>
-            <div class="tool-tab" onclick="switchTool('drugcalc')" data-tool="drugcalc" id="tab-drugcalc">🧮 Drug Calc</div>
-        </div>
+        <div class="tools-tabbar" id="tools-tabbar" style="display:none;"></div>
         <!-- Tool Cards Grid -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
-            <div class="tool-card-btn" onclick="switchTool('rsi')" id="toolcard-rsi">
+            <div class="tool-card-btn" onclick="openToolOverlay('rsi')" id="toolcard-rsi">
                 <span class="tool-card-icon">💉</span>
                 <span class="tool-card-label">RSI 7P</span>
             </div>
-            <div class="tool-card-btn" onclick="switchTool('lytic')" id="toolcard-lytic">
+            <div class="tool-card-btn" onclick="openToolOverlay('lytic')" id="toolcard-lytic">
                 <span class="tool-card-icon">⚡</span>
                 <span class="tool-card-label">Lytic Cocktail</span>
             </div>
-            <div class="tool-card-btn" onclick="switchTool('drugcalc')" id="toolcard-drugcalc">
+            <div class="tool-card-btn" onclick="openToolOverlay('drugcalc')" id="toolcard-drugcalc">
                 <span class="tool-card-icon">🧮</span>
                 <span class="tool-card-label">Drug Calc</span>
             </div>
-            <div class="tool-card-btn" onclick="switchTool('rsipremed')" id="toolcard-rsipremed">
+            <div class="tool-card-btn" onclick="openToolOverlay('rsipremed')" id="toolcard-rsipremed">
                 <span class="tool-card-icon">🩺</span>
                 <span class="tool-card-label">Pre-Med RSI</span>
             </div>
@@ -1632,7 +1628,7 @@
             <input type="text" class="nursing-search" placeholder="🔍 Cari nota..." oninput="filterNursingNotes(this.value)" style="margin-bottom:10px;">
             <div id="nursing-note-list"></div>
         </div>
-        <div id="tool-rsi" class="tool-panel">
+        <div id="tool-rsi" class="tool-panel" style="display:none!important;">
             <div class="rsi-panel-title">7P Rapid Sequence Intubation (RSI)</div>
             <div class="rsi-step">
                 <div class="rsi-step-header">
@@ -1744,7 +1740,7 @@
                 </div>
             </div>
         </div>
-        <div id="tool-lytic" class="tool-panel">
+        <div id="tool-lytic" class="tool-panel" style="display:none!important;">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#f39c12;filter:drop-shadow(0 0 6px rgba(243,156,18,0.4));">⚡ Lytic Cocktail</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">Correction for Hyperkalaemia</div>
@@ -1778,7 +1774,7 @@
                 </div>
             </div>
         </div>
-        <div id="tool-drugcalc" class="tool-panel">
+        <div id="tool-drugcalc" class="tool-panel" style="display:none!important;">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#c678dd;filter:drop-shadow(0 0 6px rgba(198,120,221,0.4));">🧮 Drug Calculation</div>
                 <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:14px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;">IV Infusion Protocol</div>
@@ -1856,7 +1852,7 @@
             </div>
         </div>
         <!-- PRE-MED RSI PANEL -->
-        <div id="tool-rsipremed" class="tool-panel">
+        <div id="tool-rsipremed" class="tool-panel" style="display:none!important;">
             <div id="rsipremed-content"></div>
         </div>
     </div>
@@ -1883,6 +1879,20 @@
     </div>
 
 </div><!-- /page -->
+
+<!-- TOOL OVERLAY -->
+<div class="modal-overlay" id="tool-overlay-bg" onclick="closeToolOverlay()"></div>
+<div class="bottom-sheet" id="tool-overlay-sheet" style="max-height:92vh;">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title-bar">
+        <div class="sheet-accent" id="tool-overlay-accent"></div>
+        <div id="tool-overlay-title">Nota</div>
+        <button onclick="closeToolOverlay()" style="margin-left:auto;background:none;border:none;color:var(--text-dim);font-size:1.1rem;cursor:pointer;padding:0 4px;line-height:1;">✕</button>
+    </div>
+    <div id="tool-overlay-content-wrap" style="flex:1;overflow-y:auto;padding:16px 20px 40px;-webkit-overflow-scrolling:touch;">
+        <div id="tool-overlay-content"></div>
+    </div>
+</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="overlay" onclick="closeSheet()"></div>
@@ -2024,6 +2034,149 @@ function switchTool(id) {
     });
     if(activeToolTab === 'nursing') renderNursingNotes();
     if(activeToolTab === 'rsipremed') renderRSIPremedPanel();
+}
+
+// ── TOOL OVERLAY (RSI 7P, Lytic, DrugCalc, Pre-Med RSI) ──
+function openToolOverlay(id) {
+    const bg = document.getElementById('tool-overlay-bg');
+    const sheet = document.getElementById('tool-overlay-sheet');
+    const title = document.getElementById('tool-overlay-title');
+    const accent = document.getElementById('tool-overlay-accent');
+    const content = document.getElementById('tool-overlay-content');
+
+    // Grab content from existing hidden panel
+    const sourcePanel = document.getElementById('tool-' + id);
+    if (!sourcePanel) return;
+
+    // Titles & accent colours
+    const configs = {
+        rsi:      { label: '💉 RSI 7P', color: 'var(--primary)' },
+        lytic:    { label: '⚡ Lytic Cocktail', color: '#f39c12' },
+        drugcalc: { label: '🧮 Drug Calculation', color: '#c678dd' },
+        rsipremed:{ label: '🩺 Pre-Med RSI', color: 'var(--primary)' }
+    };
+    const cfg = configs[id] || { label: id, color: 'var(--primary)' };
+    title.innerText = cfg.label;
+    accent.style.background = cfg.color;
+
+    // If rsipremed, render fresh
+    if (id === 'rsipremed') {
+        let html = '<div style="padding:2px 0 4px;">';
+        RSI_DATA.forEach(section => {
+            html += `<div style="margin-bottom:10px;">
+                <div class="rsi-group-header" style="margin-bottom:6px;">${section.group}</div>`;
+            section.drugs.forEach(d => {
+                html += `<div class="drug-item" style="margin-bottom:6px;">
+                    <div style="flex:1;min-width:0;">
+                        <div class="drug-name">${d.name}</div>
+                        <div class="drug-ampule">${d.ampule}</div>
+                        <div class="drug-prep">${d.prep}</div>
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+        });
+        html += '</div>';
+        content.innerHTML = html;
+    } else if (id === 'drugcalc') {
+        // Clone content fresh with working calculator
+        content.innerHTML = sourcePanel.innerHTML;
+        // Re-attach calcNora to inputs in overlay
+        const doseIn = content.querySelector('#nora-dose');
+        const wtIn   = content.querySelector('#nora-weight');
+        if (doseIn) { doseIn.id = 'ov-nora-dose'; doseIn.setAttribute('oninput','calcNoraOv()'); }
+        if (wtIn)   { wtIn.id   = 'ov-nora-weight'; wtIn.setAttribute('oninput','calcNoraOv()'); }
+        const res = content.querySelector('#nora-result');
+        const ph  = content.querySelector('#nora-placeholder');
+        const mghrEl   = content.querySelector('#nora-mghr');
+        const doseShow = content.querySelector('#nora-dose-show');
+        const wtShow   = content.querySelector('#nora-wt-show');
+        const single   = content.querySelector('#nora-single');
+        const dbl      = content.querySelector('#nora-double');
+        if(res)   res.id   = 'ov-nora-result';
+        if(ph)    ph.id    = 'ov-nora-placeholder';
+        if(mghrEl)   mghrEl.id   = 'ov-nora-mghr';
+        if(doseShow) doseShow.id = 'ov-nora-dose-show';
+        if(wtShow)   wtShow.id   = 'ov-nora-wt-show';
+        if(single)   single.id   = 'ov-nora-single';
+        if(dbl)      dbl.id      = 'ov-nora-double';
+    } else {
+        content.innerHTML = sourcePanel.innerHTML;
+    }
+
+    // Show overlay
+    bg.style.display = 'block';
+    sheet.classList.add('active');
+    document.getElementById('tool-overlay-content-wrap').scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+}
+
+function closeToolOverlay() {
+    const bg = document.getElementById('tool-overlay-bg');
+    const sheet = document.getElementById('tool-overlay-sheet');
+    bg.style.display = 'none';
+    sheet.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function calcNoraOv() {
+    const dose = parseFloat(document.getElementById('ov-nora-dose').value);
+    const weight = parseFloat(document.getElementById('ov-nora-weight').value);
+    const result = document.getElementById('ov-nora-result');
+    const placeholder = document.getElementById('ov-nora-placeholder');
+    if(isNaN(dose)||isNaN(weight)||dose<=0||weight<=0){ result.style.display='none'; placeholder.style.display='block'; return; }
+    const mghr=(dose*weight*60)/1000;
+    const single=mghr/0.08, double=mghr/0.16;
+    document.getElementById('ov-nora-dose-show').innerText=dose;
+    document.getElementById('ov-nora-wt-show').innerText=weight;
+    document.getElementById('ov-nora-mghr').innerText=mghr.toFixed(4)+' mg/hr';
+    document.getElementById('ov-nora-single').innerText=single.toFixed(1);
+    document.getElementById('ov-nora-double').innerText=double.toFixed(1);
+    result.style.display='block'; placeholder.style.display='none';
+}
+
+// ── ALL DRUGS OVERLAY ──
+function openAllDrugsOverlay() {
+    const bg = document.getElementById('tool-overlay-bg');
+    const sheet = document.getElementById('tool-overlay-sheet');
+    const title = document.getElementById('tool-overlay-title');
+    const accent = document.getElementById('tool-overlay-accent');
+    const content = document.getElementById('tool-overlay-content');
+
+    title.innerText = '💊 Emergency Drug';
+    accent.style.background = 'var(--danger)';
+
+    const drugs = [...(store.drugs || [])].map((d,i)=>({...d,_orig:i})).sort((a,b)=>a.name.localeCompare(b.name,'ms',{sensitivity:'base'}));
+    if (drugs.length === 0) {
+        content.innerHTML = '<div style="text-align:center;padding:32px 0;font-size:0.75rem;color:var(--text-muted);font-family:\'JetBrains Mono\',monospace;">Tiada ubat disimpan.<br>Tambah ubat menggunakan butang +</div>';
+    } else {
+        content.innerHTML = drugs.map((d) =>
+            `<div class="drug-item">
+                <div style="flex:1;min-width:0;">
+                    <div class="drug-name">${d.name}</div>
+                    <div class="drug-ampule">${d.ampule||'—'}</div>
+                    <div class="drug-prep">${d.prep}</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;margin-left:8px;">
+                    <button onclick="event.stopPropagation();closeToolOverlay();setTimeout(()=>openEditDrugSheet(${d._orig}),200);" style="background:none;color:var(--success);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;">EDIT</button>
+                    <button onclick="event.stopPropagation();deleteDrugFromOverlay(${d._orig});" style="background:none;color:var(--danger);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;">DEL</button>
+                </div>
+            </div>`
+        ).join('');
+    }
+
+    bg.style.display = 'block';
+    sheet.classList.add('active');
+    document.getElementById('tool-overlay-content-wrap').scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+}
+
+function deleteDrugFromOverlay(idx) {
+    if(!confirm('Padam ubat ini?')) return;
+    store.drugs.splice(idx, 1);
+    saveData();
+    searchDrugs();
+    openAllDrugsOverlay(); // refresh
 }
 
 function calcNora() {
@@ -2246,7 +2399,7 @@ function getShiftColor(s) {
     if(!s || s==='-') return '#cccccc';
     const CUTI = ['DO','SD','RPL','PH','MC','AL','EL','ODO'];
     if(CUTI.includes(s)) return '#800000';
-    return '#000000';
+    return '#50c878';
 }
 
 function renderShiftText(s) {
