@@ -412,7 +412,7 @@
             font-weight:700;
             color: #000000;
         }
-        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color: #50c878; }
+        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color: #2d7a47; }
         .day-box .assign-text { font-size:0.38rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; color: #2d7a47; }
 
         /* SHIFT KERJA — tulisan emerald green */
@@ -427,7 +427,7 @@
         .day-box[data-shift="SD/N"] .shift-text,
         .day-box[data-shift="DO/M"] .shift-text,
         .day-box[data-shift="DO/E"] .shift-text,
-        .day-box[data-shift="DO/N"] .shift-text { color: #50c878; }
+        .day-box[data-shift="DO/N"] .shift-text { color: #2d7a47; }
 
         .day-box[data-shift="M"] .assign-text,
         .day-box[data-shift="E"] .assign-text,
@@ -2292,18 +2292,18 @@ function renderQuickNotes() {
                     <button class="quick-note-action-btn edit" onclick="openEditQuickNote('${n.id}')">EDIT</button>
                     <button class="quick-note-action-btn del" onclick="deleteQuickNote('${n.id}')">DEL</button>
                 </div>
-                <span class="quick-note-chevron">▼</span>
+                ${n.text ? `<span class="quick-note-chevron">▼</span>` : ''}
             </div>
-            <div class="quick-note-body">
-                <div class="quick-note-text">${n.text || '<span style="color:var(--text-muted);font-style:italic;font-size:0.75rem;">Tiada kandungan.</span>'}</div>
-            </div>
+            ${n.text ? `<div class="quick-note-body">
+                <div class="quick-note-text">${n.text}</div>
+            </div>` : ''}
         </div>`;
     }).join('');
 }
 
 function toggleQuickNote(id) {
     const card = document.getElementById('qncard-' + id);
-    if(card) card.classList.toggle('open');
+    if(card && card.querySelector('.quick-note-body')) card.classList.toggle('open');
 }
 
 function openAddQuickNote() {
