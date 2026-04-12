@@ -419,15 +419,7 @@
         .day-box[data-shift="M"] .shift-text,
         .day-box[data-shift="E"] .shift-text,
         .day-box[data-shift="N"] .shift-text,
-        .day-box[data-shift="M/E"] .shift-text,
-        .day-box[data-shift="M/N"] .shift-text,
-        .day-box[data-shift="E/N"] .shift-text,
-        .day-box[data-shift="SD/M"] .shift-text,
-        .day-box[data-shift="SD/E"] .shift-text,
-        .day-box[data-shift="SD/N"] .shift-text,
-        .day-box[data-shift="DO/M"] .shift-text,
-        .day-box[data-shift="DO/E"] .shift-text,
-        .day-box[data-shift="DO/N"] .shift-text { color: #2d7a47; }
+        .day-box.locum .shift-text { color: #2d7a47; }
 
         .day-box[data-shift="M"] .assign-text,
         .day-box[data-shift="E"] .assign-text,
@@ -2474,6 +2466,7 @@ function generateCalendar() {
         const box=document.createElement('div');
         box.className='day-box';
         box.setAttribute('data-shift', data.s||'-');
+        if((data.s||'').includes('/')) box.classList.add('locum');
         if(new Date().toDateString()===new Date(year,month,d).toDateString()) box.classList.add('today');
         box.onclick=()=>openShiftPicker(key);
         const reminderDot=data.reminder?`<div style="position:absolute;bottom:2px;right:3px;width:4px;height:4px;border-radius:50%;background:#8888ff;"></div>`:'';
@@ -2493,11 +2486,8 @@ function getShiftColor(s) {
 function renderShiftText(s) {
     if(!s || s==='-') return `<span style="color:#cccccc">-</span>`;
     if(!s.includes('/')) return s; // single shift, CSS handles colour via data-shift
-    const parts = s.split('/');
-    return parts.map((p,i) => {
-        const color = getShiftColor(p);
-        return `<span style="color:${color}">${p}</span>${i < parts.length-1 ? '<span style="color:#aaaaaa">/</span>' : ''}`;
-    }).join('');
+    // Locum (any shift with '/') = dark green #2d7a47
+    return `<span style="color:#2d7a47">${s}</span>`;
 }
 
 
@@ -2679,7 +2669,7 @@ function renderClaim(){
     if(label) label.innerText=`${months[month]} ${year}`;
     const malamDays=[], malamDayMap={}, locum=[], phBayar=[];
     const mm=String(month+1).padStart(2,'0');
-    Object.keys(store.calendar).forEach(key=>{ const p=key.split('-'); if(p.length!==3)return; const y=parseInt(p[0]),m=parseInt(p[1])-1,d=parseInt(p[2]); if(y!==year||m!==month)return; const entry=store.calendar[key]; const s=entry.s||''; const dateStr=`${String(d).padStart(2,'0')}/${mm}/${year}`; if(s==='N' || s.endsWith('/N')){ malamDays.push(d); malamDayMap[d]=s; } const LOCUM_SHIFTS=['M/E','M/N','E/N','SD/M','SD/E','SD/N','DO/M','DO/E','DO/N']; if(LOCUM_SHIFTS.includes(s)){const assign=entry.a?` (${entry.a})`:''; locum.push({date:dateStr,shift:s+assign});} if(s==='PH'){const phEntry=ph2026.find(p=>p.d===key);if(phEntry&&phEntry.paid)phBayar.push({date:dateStr,name:phEntry.n});} });
+    Object.keys(store.calendar).forEach(key=>{ const p=key.split('-'); if(p.length!==3)return; const y=parseInt(p[0]),m=parseInt(p[1])-1,d=parseInt(p[2]); if(y!==year||m!==month)return; const entry=store.calendar[key]; const s=entry.s||''; const dateStr=`${String(d).padStart(2,'0')}/${mm}/${year}`; if(s==='N' || s.endsWith('/N')){ malamDays.push(d); malamDayMap[d]=s; } if(s.includes('/')){const assign=entry.a?` (${entry.a})`:''; locum.push({date:dateStr,shift:s+assign});} if(s==='PH'){const phEntry=ph2026.find(p=>p.d===key);if(phEntry&&phEntry.paid)phBayar.push({date:dateStr,name:phEntry.n});} });
     malamDays.sort((a,b)=>a-b);
     locum.sort((a,b)=>a.date.localeCompare(b.date));
     phBayar.sort((a,b)=>a.date.localeCompare(b.date));
