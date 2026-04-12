@@ -2355,10 +2355,15 @@ if(!store.quickNotes) store.quickNotes = [];
 
 function renderQuickNotes() {
     if(!store.quickNotes) store.quickNotes = [];
+    // Buang nota kosong dari store
+    const before = store.quickNotes.length;
+    store.quickNotes = store.quickNotes.filter(n => (n.title && n.title.trim()) || (n.text && n.text.trim()));
+    if(store.quickNotes.length !== before) saveData();
+
     const list = document.getElementById('quick-notes-list');
     const empty = document.getElementById('quick-notes-empty');
     if(!list) return;
-    const sorted = [...store.quickNotes].sort((a,b) => a.title.localeCompare(b.title, 'ms'));
+    const sorted = [...store.quickNotes].sort((a,b) => (a.title||'').localeCompare((b.title||''), 'ms'));
     if(sorted.length === 0) {
         list.innerHTML = '';
         if(empty) empty.style.display = 'block';
