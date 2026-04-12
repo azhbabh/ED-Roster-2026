@@ -1165,6 +1165,61 @@
         }
         .tool-card-btn.active .tool-card-label { color: var(--primary); }
 
+        /* ── CAR SERVICE TRACKER ── */
+        .carsvc-card {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .carsvc-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--primary-dim);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .carsvc-card:active { transform: scale(0.96); }
+        .carsvc-card:active::before { opacity: 1; }
+        .carsvc-card-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .carsvc-card-info { flex: 1; min-width: 0; }
+        .carsvc-card-title {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--text);
+            line-height: 1.2;
+        }
+        .carsvc-card-plate {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-top: 2px;
+        }
+        .carsvc-card-hint {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.52rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            letter-spacing: 0.04em;
+        }
+        .carsvc-card-arrow {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            font-weight: 300;
+        }
+
         /* ── MONTHLY EXPENSES ── */
         .expense-section-header {
             display: flex;
@@ -1857,6 +1912,33 @@
         </div>
     </div>
 
+    <!-- CAR SERVICE TRACKER -->
+    <div class="section">
+        <div class="section-header" style="margin-bottom:12px;">
+            <h3>🔧 Servis Kenderaan</h3>
+        </div>
+        <div style="display:flex;gap:10px;">
+            <div class="carsvc-card" onclick="openKeretaServiceSheet()">
+                <div class="carsvc-card-icon">🚗</div>
+                <div class="carsvc-card-info">
+                    <div class="carsvc-card-title">Kereta</div>
+                    <div class="carsvc-card-plate">TCC8852</div>
+                    <div class="carsvc-card-hint">10 jenis servis</div>
+                </div>
+                <div class="carsvc-card-arrow">›</div>
+            </div>
+            <div class="carsvc-card" onclick="openMotorServiceSheet()">
+                <div class="carsvc-card-icon">🏍️</div>
+                <div class="carsvc-card-info">
+                    <div class="carsvc-card-title">Motor</div>
+                    <div class="carsvc-card-plate">WTE4108</div>
+                    <div class="carsvc-card-hint">Tarikh servis</div>
+                </div>
+                <div class="carsvc-card-arrow">›</div>
+            </div>
+        </div>
+    </div>
+
     <!-- MONTHLY EXPENSES -->
     <div class="section">
         <div class="expense-section-header">
@@ -1930,6 +2012,7 @@ let store = JSON.parse(localStorage.getItem('roster_ultimate_v3')) || {
 };
 if(!store.nursingNotes) store.nursingNotes = [];
 if(!store.expenses) store.expenses = {};
+if(!store.carService) store.carService = {};
 if(!store.quickNotes) store.quickNotes = [];
 
 const PRAYER_NAMES = ['Subuh','Syuruk','Zohor','Asar','Maghrib','Isyak'];
@@ -2994,25 +3077,12 @@ let expenseCurrentDate = new Date();
 
 const EXPENSE_VEHICLES = [
     {
-        id: 'motor',
-        icon: '🏍️',
-        title: 'Motor',
-        plate: 'WTE4108',
-        color: 'primary',
-        types: [
-            { key: 'lastService', label: 'Last Service', kind: 'date', hasServiceType: true },
-            { key: 'nextService', label: 'Next Service', kind: 'date', hasServiceType: true },
-        ]
-    },
-    {
         id: 'kereta',
         icon: '🚗',
         title: 'Kereta',
         plate: 'TCC8852',
         color: 'warning',
         types: [
-            { key: 'lastService', label: 'Last Service', kind: 'date', hasServiceType: true },
-            { key: 'nextService', label: 'Next Service', kind: 'date', hasServiceType: true },
             { key: 'loanPayment', label: 'Loan Payment', kind: 'amount' },
         ]
     },
@@ -3027,6 +3097,221 @@ const EXPENSE_VEHICLES = [
         ]
     }
 ];
+
+// ══════════════════════════════════════════
+//  CAR SERVICE TRACKER
+// ══════════════════════════════════════════
+
+const CAR_SERVICE_ITEMS = [
+    { key: 'minyakEnjin',  icon: '🛢️', label: 'Minyak Enjin + Oil Filter', defaultKm: 5000  },
+    { key: 'sparkPlug',    icon: '⚡',  label: 'Spark Plug',                 defaultKm: 20000 },
+    { key: 'coolant',      icon: '💧', label: 'Engine Coolant',              defaultKm: 40000 },
+    { key: 'minyakGear',   icon: '⚙️', label: 'Minyak Gear / ATF',          defaultKm: 40000 },
+    { key: 'airFilter',    icon: '🌀', label: 'Air Filter',                  defaultKm: 15000 },
+    { key: 'cabinFilter',  icon: '❄️', label: 'Cabin Filter (Aircond)',      defaultKm: 15000 },
+    { key: 'throttleBody', icon: '🔧', label: 'Throttle Body (Cuci)',        defaultKm: 30000 },
+    { key: 'brakeSystem',  icon: '🛑', label: 'Brake System',                defaultKm: 20000 },
+    { key: 'timingBelt',   icon: '🔗', label: 'Timing Belt',                 defaultKm: 60000 },
+    { key: 'driveBelt',    icon: '🔄', label: 'Drive Belt',                  defaultKm: 40000 },
+];
+
+if(!store.carService) store.carService = {};
+
+function carSvcGet(vehicleId, itemKey, field) {
+    if(!store.carService[vehicleId]) store.carService[vehicleId] = {};
+    if(!store.carService[vehicleId][itemKey]) store.carService[vehicleId][itemKey] = {};
+    return store.carService[vehicleId][itemKey][field] || '';
+}
+
+function carSvcSet(vehicleId, itemKey, field, value) {
+    if(!store.carService[vehicleId]) store.carService[vehicleId] = {};
+    if(!store.carService[vehicleId][itemKey]) store.carService[vehicleId][itemKey] = {};
+    store.carService[vehicleId][itemKey][field] = value;
+    saveData();
+}
+
+// ── Kereta overlay: 10 jenis servis (scrollable) ──
+function openKeretaServiceSheet() {
+    document.getElementById('sheet-title').innerText = '🚗 Servis Kereta — TCC8852';
+
+    let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
+    CAR_SERVICE_ITEMS.forEach(item => {
+        const lastKm   = carSvcGet('kereta_svc', item.key, 'lastKm');
+        const nextKm   = carSvcGet('kereta_svc', item.key, 'nextKm');
+        const lastDate = carSvcGet('kereta_svc', item.key, 'lastDate');
+
+        const nextKmVal = nextKm ? parseInt(nextKm) : (lastKm ? parseInt(lastKm) + item.defaultKm : null);
+        const lastDateDisp = lastDate ? toMY(lastDate) : '—';
+        const lastKmDisp   = lastKm ? parseInt(lastKm).toLocaleString() + ' km' : '—';
+        const nextKmDisp   = nextKmVal ? nextKmVal.toLocaleString() + ' km' : item.defaultKm.toLocaleString() + ' km (lalai)';
+
+        // dot
+        const dotColor = (lastKm && nextKm) ? 'var(--success)' : (!lastKm ? 'var(--text-muted)' : 'var(--warning)');
+
+        html += `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(90deg,var(--primary-dim),transparent);">
+                <span style="font-size:1.2rem;">${item.icon}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--text);letter-spacing:0.04em;text-transform:uppercase;flex:1;">${item.label}</span>
+                <span style="width:8px;height:8px;border-radius:50%;background:${dotColor};flex-shrink:0;"></span>
+            </div>
+            <div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);font-weight:700;">📅 TARIKH SERVIS</span>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <span style="font-size:0.72rem;color:var(--text);">${lastDateDisp}</span>
+                        <button class="expense-edit-btn" onclick="openCarSvcFieldEdit('kereta_svc','${item.key}','lastDate','Tarikh Servis','date','${item.label}')">EDIT</button>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);font-weight:700;">🔢 KM TERAKHIR</span>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <span style="font-size:0.72rem;color:var(--text);">${lastKmDisp}</span>
+                        <button class="expense-edit-btn" onclick="openCarSvcFieldEdit('kereta_svc','${item.key}','lastKm','KM Terakhir','km','${item.label}')">EDIT</button>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);font-weight:700;">🎯 KM SETERUSNYA</span>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <span style="font-size:0.72rem;font-weight:700;color:var(--primary);">${nextKmDisp}</span>
+                        <button class="expense-edit-btn" onclick="openCarSvcFieldEdit('kereta_svc','${item.key}','nextKm','KM Seterusnya','km','${item.label}')">EDIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    });
+    html += '</div>';
+
+    document.getElementById('sheet-content').innerHTML = html;
+    openSheet();
+}
+
+// ── Motor overlay: tarikh servis + seterusnya ──
+function openMotorServiceSheet() {
+    document.getElementById('sheet-title').innerText = '🏍️ Servis Motor — WTE4108';
+
+    const lastDate = carSvcGet('motor_svc', 'servis', 'lastDate');
+    const nextDate = carSvcGet('motor_svc', 'servis', 'nextDate');
+    const lastDateDisp = lastDate ? toMY(lastDate) : '— Belum ditetapkan';
+    const nextDateDisp = nextDate ? toMY(nextDate) : '— Belum ditetapkan';
+
+    const lastClass = lastDate ? 'color:var(--text);' : 'color:var(--text-muted);';
+    const nextClass = nextDate ? 'color:var(--primary);font-weight:700;' : 'color:var(--text-muted);';
+
+    document.getElementById('sheet-content').innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:700;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">📅 TARIKH SERVIS TERAKHIR</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:0.9rem;${lastClass}">${lastDateDisp}</span>
+                    <button class="expense-edit-btn" onclick="openMotorDateEdit('lastDate','Tarikh Servis Terakhir')">EDIT</button>
+                </div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:700;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">🎯 TARIKH SERVIS SETERUSNYA</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:0.9rem;${nextClass}">${nextDateDisp}</span>
+                    <button class="expense-edit-btn" onclick="openMotorDateEdit('nextDate','Tarikh Servis Seterusnya')">EDIT</button>
+                </div>
+            </div>
+        </div>`;
+    openSheet();
+}
+
+// ── Edit field for Kereta service item ──
+function openCarSvcFieldEdit(vehicleId, itemKey, field, label, kind, itemLabel) {
+    const current = carSvcGet(vehicleId, itemKey, field);
+    const item = CAR_SERVICE_ITEMS.find(i => i.key === itemKey);
+
+    document.getElementById('sheet-title').innerText = `✏️ ${itemLabel} — ${label}`;
+
+    let inputHTML = '';
+    if(kind === 'date') {
+        inputHTML = `<label>${label}</label><input type="date" id="carsvc-input" value="${current}" onclick="triggerDatePicker('carsvc-input')">`;
+    } else {
+        inputHTML = `<label>${label} (km)</label><input type="number" id="carsvc-input" value="${current}" placeholder="cth: 85000" step="100" min="0">`;
+    }
+
+    let hint = '';
+    if(field === 'lastKm' && item) {
+        hint = `<div style="font-size:0.68rem;color:var(--text-dim);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 12px;margin-bottom:8px;">
+            💡 KM Seterusnya akan dikira otomatik (+${item.defaultKm.toLocaleString()} km) jika belum ditetapkan.
+        </div>`;
+    }
+
+    document.getElementById('sheet-content').innerHTML = `
+        ${hint}${inputHTML}
+        <input type="hidden" id="carsvc-vehicle" value="${vehicleId}">
+        <input type="hidden" id="carsvc-item" value="${itemKey}">
+        <input type="hidden" id="carsvc-field" value="${field}">
+        <input type="hidden" id="carsvc-kind" value="${kind}">
+        <input type="hidden" id="carsvc-defaultkm" value="${item ? item.defaultKm : 0}">
+        <input type="hidden" id="carsvc-returnto" value="kereta">
+        <button class="btn-primary" onclick="saveCarSvcField()">SIMPAN</button>
+        ${current ? `<button class="btn-danger" onclick="clearCarSvcFieldConfirm('${vehicleId}','${itemKey}','${field}')">PADAM</button>` : ''}`;
+
+    openSheet();
+    setTimeout(() => {
+        const el = document.getElementById('carsvc-input');
+        if(el) { el.focus(); if(kind === 'date' && 'showPicker' in HTMLInputElement.prototype) el.showPicker(); }
+    }, 350);
+}
+
+// ── Edit date for Motor ──
+function openMotorDateEdit(field, label) {
+    const current = carSvcGet('motor_svc', 'servis', field);
+    document.getElementById('sheet-title').innerText = `✏️ ${label}`;
+    document.getElementById('sheet-content').innerHTML = `
+        <label>${label}</label>
+        <input type="date" id="carsvc-input" value="${current}" onclick="triggerDatePicker('carsvc-input')">
+        <input type="hidden" id="carsvc-vehicle" value="motor_svc">
+        <input type="hidden" id="carsvc-item" value="servis">
+        <input type="hidden" id="carsvc-field" value="${field}">
+        <input type="hidden" id="carsvc-kind" value="date">
+        <input type="hidden" id="carsvc-defaultkm" value="0">
+        <input type="hidden" id="carsvc-returnto" value="motor">
+        <button class="btn-primary" onclick="saveCarSvcField()">SIMPAN</button>
+        ${current ? `<button class="btn-danger" onclick="clearCarSvcFieldConfirm('motor_svc','servis','${field}')">PADAM</button>` : ''}`;
+    openSheet();
+    setTimeout(() => {
+        const el = document.getElementById('carsvc-input');
+        if(el) { el.focus(); if('showPicker' in HTMLInputElement.prototype) el.showPicker(); }
+    }, 350);
+}
+
+function saveCarSvcField() {
+    const vehicleId = document.getElementById('carsvc-vehicle').value;
+    const itemKey   = document.getElementById('carsvc-item').value;
+    const field     = document.getElementById('carsvc-field').value;
+    const kind      = document.getElementById('carsvc-kind').value;
+    const defaultKm = parseInt(document.getElementById('carsvc-defaultkm').value) || 0;
+    const returnTo  = document.getElementById('carsvc-returnto').value;
+    const val       = document.getElementById('carsvc-input').value.trim();
+    if(!val) { alert('Sila isi nilai.'); return; }
+    carSvcSet(vehicleId, itemKey, field, val);
+
+    // Auto-fill nextKm
+    if(field === 'lastKm' && defaultKm) {
+        const existingNext = carSvcGet(vehicleId, itemKey, 'nextKm');
+        if(!existingNext) carSvcSet(vehicleId, itemKey, 'nextKm', String(parseInt(val) + defaultKm));
+    }
+
+    closeSheet();
+    setTimeout(() => {
+        if(returnTo === 'kereta') openKeretaServiceSheet();
+        else if(returnTo === 'motor') openMotorServiceSheet();
+    }, 370);
+}
+
+function clearCarSvcFieldConfirm(vehicleId, itemKey, field) {
+    if(!confirm('Padam entri ini?')) return;
+    carSvcSet(vehicleId, itemKey, field, '');
+    const returnTo = document.getElementById('carsvc-returnto') ? document.getElementById('carsvc-returnto').value : '';
+    closeSheet();
+    setTimeout(() => {
+        if(returnTo === 'kereta') openKeretaServiceSheet();
+        else if(returnTo === 'motor') openMotorServiceSheet();
+    }, 370);
+}
 
 function expenseMonthKey(d) {
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
