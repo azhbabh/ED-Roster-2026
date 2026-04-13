@@ -3127,6 +3127,18 @@ function carSvcSet(vehicleId, itemKey, field, value) {
 
 // ── Kereta overlay: 10 jenis servis (scrollable) ──
 function openKeretaServiceSheet() {
+    if(!gAccessToken) {
+        document.getElementById('sheet-title').innerText = '🔒 Log Masuk Diperlukan';
+        document.getElementById('sheet-content').innerHTML = `
+            <div style="text-align:center;padding:20px 0;">
+                <div style="font-size:2.5rem;margin-bottom:12px;">🔒</div>
+                <div style="font-size:0.85rem;color:var(--text);font-weight:700;margin-bottom:8px;">Sila Log Masuk</div>
+                <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5;">Log masuk ke Google Drive untuk akses dan simpan data servis kenderaan anda.</div>
+                <button class="btn-primary" onclick="closeSheet(); setTimeout(handleGsyncAction, 300);">LOG MASUK GOOGLE</button>
+            </div>`;
+        openSheet();
+        return;
+    }
     document.getElementById('sheet-title').innerText = '🚗 Servis Kereta — TCC8852';
 
     let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
@@ -3182,6 +3194,18 @@ function openKeretaServiceSheet() {
 
 // ── Motor overlay: tarikh servis + seterusnya ──
 function openMotorServiceSheet() {
+    if(!gAccessToken) {
+        document.getElementById('sheet-title').innerText = '🔒 Log Masuk Diperlukan';
+        document.getElementById('sheet-content').innerHTML = `
+            <div style="text-align:center;padding:20px 0;">
+                <div style="font-size:2.5rem;margin-bottom:12px;">🔒</div>
+                <div style="font-size:0.85rem;color:var(--text);font-weight:700;margin-bottom:8px;">Sila Log Masuk</div>
+                <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5;">Log masuk ke Google Drive untuk akses dan simpan data servis kenderaan anda.</div>
+                <button class="btn-primary" onclick="closeSheet(); setTimeout(handleGsyncAction, 300);">LOG MASUK GOOGLE</button>
+            </div>`;
+        openSheet();
+        return;
+    }
     document.getElementById('sheet-title').innerText = '🏍️ Servis Motor — WTE4108';
 
     const lastDate = carSvcGet('motor_svc', 'servis', 'lastDate');
@@ -3569,6 +3593,36 @@ window.addEventListener('load', () => {
     fetchPrayerTimes();
     startPrayerTick();
     schedulePrayerRefresh();
+
+    // Auto-login: Cuba sambung semula Google jika pernah log masuk sebelum ini
+    if(localStorage.getItem('roster_gtoken_hint') === '1') {
+        gsyncSetStatus('Menghubungi semula Google...', 'syncing');
+        function tryAutoLogin(attempt) {
+            if(typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
+                const client = google.accounts.oauth2.initTokenClient({
+                    client_id: GDRIVE_CLIENT_ID,
+                    scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+                    prompt: '', // Tiada popup — guna sesi sedia ada (silent)
+                    callback: async (resp) => {
+                        if(resp.error || !resp.access_token) {
+                            gsyncSetStatus('Sila log masuk semula', 'error');
+                            return;
+                        }
+                        gAccessToken = resp.access_token;
+                        localStorage.setItem('roster_gtoken_hint', '1');
+                        await gFetchUserInfo();
+                        await gLoadFromDrive();
+                    }
+                });
+                client.requestAccessToken({ prompt: '' });
+            } else if(attempt < 10) {
+                setTimeout(() => tryAutoLogin(attempt + 1), 800);
+            } else {
+                gsyncSetStatus('Sila log masuk ke Google Drive', '');
+            }
+        }
+        setTimeout(() => tryAutoLogin(1), 500);
+    }
 });
 migrateCalendarKeys();
 migrateDefaultDrugs();
