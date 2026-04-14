@@ -3588,40 +3588,81 @@ function deleteExpenseReceipt(vehicleId, fieldKey) {
 
 
 
+// ── Auto-login via Google One Tap (silent) ──
+function tryOneTapAutoLogin(attempt) {
+    if(typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
+        if(attempt < 15) { setTimeout(() => tryOneTapAutoLogin(attempt + 1), 600); }
+        else { gsyncSetStatus('Sila log masuk ke Google Drive', ''); }
+        return;
+    }
+    google.accounts.id.initialize({
+        client_id: GDRIVE_CLIENT_ID,
+        callback: async (credentialResponse) => {
+            // One Tap berjaya — kini dapatkan access token untuk Drive
+            if(!credentialResponse || !credentialResponse.credential) {
+                gsyncSetStatus('Sila log masuk semula', 'error');
+                return;
+            }
+            // Gunakan token client untuk dapatkan access token Drive
+            const tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: GDRIVE_CLIENT_ID,
+                scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+                prompt: '',
+                callback: async (resp) => {
+                    if(resp.error || !resp.access_token) {
+                        gsyncSetStatus('Gagal mendapatkan akses Drive', 'error');
+                        return;
+                    }
+                    gAccessToken = resp.access_token;
+                    localStorage.setItem('roster_gtoken_hint', '1');
+                    await gFetchUserInfo();
+                    await gLoadFromDrive();
+                }
+            });
+            tokenClient.requestAccessToken({ prompt: '' });
+        },
+        auto_select: true,        // Auto pilih akaun jika satu sesi aktif
+        cancel_on_tap_outside: false,
+        use_fedcm_for_prompt: true // Guna FedCM (standard baru, lebih silent)
+    });
+    google.accounts.id.prompt((notification) => {
+        // One Tap tidak tersedia / ditutup — cuba OAuth biasa secara senyap
+        if(notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            tryOAuthSilentLogin();
+        }
+    });
+}
+
+function tryOAuthSilentLogin() {
+    if(typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) return;
+    const tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: GDRIVE_CLIENT_ID,
+        scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+        prompt: '',
+        callback: async (resp) => {
+            if(resp.error || !resp.access_token) {
+                gsyncSetStatus('Sila log masuk semula', 'error');
+                return;
+            }
+            gAccessToken = resp.access_token;
+            localStorage.setItem('roster_gtoken_hint', '1');
+            await gFetchUserInfo();
+            await gLoadFromDrive();
+        }
+    });
+    tokenClient.requestAccessToken({ prompt: '' });
+}
+
 window.addEventListener('load', () => {
     checkPDFStatus();
     fetchPrayerTimes();
     startPrayerTick();
     schedulePrayerRefresh();
 
-    // Auto-login: Cuba sambung semula Google jika pernah log masuk sebelum ini
+    // Auto-login: Guna One Tap jika pernah log masuk sebelum ini
     if(localStorage.getItem('roster_gtoken_hint') === '1') {
         gsyncSetStatus('Menghubungi semula Google...', 'syncing');
-        function tryAutoLogin(attempt) {
-            if(typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
-                const client = google.accounts.oauth2.initTokenClient({
-                    client_id: GDRIVE_CLIENT_ID,
-                    scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-                    prompt: '', // Tiada popup — guna sesi sedia ada (silent)
-                    callback: async (resp) => {
-                        if(resp.error || !resp.access_token) {
-                            gsyncSetStatus('Sila log masuk semula', 'error');
-                            return;
-                        }
-                        gAccessToken = resp.access_token;
-                        localStorage.setItem('roster_gtoken_hint', '1');
-                        await gFetchUserInfo();
-                        await gLoadFromDrive();
-                    }
-                });
-                client.requestAccessToken({ prompt: '' });
-            } else if(attempt < 10) {
-                setTimeout(() => tryAutoLogin(attempt + 1), 800);
-            } else {
-                gsyncSetStatus('Sila log masuk ke Google Drive', '');
-            }
-        }
-        setTimeout(() => tryAutoLogin(1), 500);
+        setTimeout(() => tryOneTapAutoLogin(1), 500);
     }
 });
 migrateCalendarKeys();
