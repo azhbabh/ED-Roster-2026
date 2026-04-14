@@ -2875,9 +2875,10 @@ function applyTheme(name) {
 // ══════════════════════════════════════════
 
 // ⚠️  GANTI dengan Client ID anda dari Google Cloud Console
-const GDRIVE_CLIENT_ID = '651057198399-d7gg5lom71omt7k42uq21rumdejrj7k0.apps.googleusercontent.com';
-const GDRIVE_SCOPES    = 'https://www.googleapis.com/auth/drive.appdata';
-const GDRIVE_FILENAME  = 'roster_data.json';
+const GDRIVE_CLIENT_ID  = '651057198399-d7gg5lom71omt7k42uq21rumdejrj7k0.apps.googleusercontent.com';
+const GDRIVE_SCOPES     = 'https://www.googleapis.com/auth/drive.appdata';
+const GDRIVE_FILENAME   = 'roster_data.json';
+const GDRIVE_EMAIL_HINT = 'azhbabh@gmail.com'; // akaun Google tetap
 
 let gAccessToken   = null;
 let gUserInfo      = null;
@@ -2928,6 +2929,7 @@ function gSignIn() {
     const client = google.accounts.oauth2.initTokenClient({
         client_id: GDRIVE_CLIENT_ID,
         scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+        hint: GDRIVE_EMAIL_HINT,
         callback: async (resp) => {
             if(resp.error) { gsyncSetStatus('Gagal log masuk', 'error'); return; }
             gAccessToken = resp.access_token;
@@ -2944,7 +2946,6 @@ function gSignOut() {
     if(gAccessToken) google.accounts.oauth2.revoke(gAccessToken, ()=>{});
     gAccessToken = null; gUserInfo = null; gFileId = null;
     localStorage.removeItem('roster_gtoken_hint');
-    localStorage.removeItem('roster_drive_merged');
     gsyncSetUser(null);
 }
 
@@ -2990,32 +2991,12 @@ async function gLoadFromDrive() {
         );
         const remote = await res.json();
         if(remote && remote.calendar) {
-            const localStr = JSON.stringify(store);
-            const remoteStr = JSON.stringify(remote);
-            if(localStr !== remoteStr) {
-                // Popup hanya keluar SEKALI sahaja (login pertama kali)
-                const alreadyMerged = localStorage.getItem('roster_drive_merged') === '1';
-                if(alreadyMerged) {
-                    // Auto-login seterusnya: terus guna data Drive tanpa tanya
-                    store = remote;
-                    if(!store.nursingNotes) store.nursingNotes = [];
-                    migrateCalendarKeys();
-                    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
-                    generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
-                } else {
-                    // Login pertama: tanya user sekali sahaja
-                    const useRemote = confirm('Data ditemui dalam Google Drive.\n\nGuna data dari Google Drive? (Tekan Batal untuk kekal data tempatan)');
-                    if(useRemote) {
-                        store = remote;
-                        if(!store.nursingNotes) store.nursingNotes = [];
-                        migrateCalendarKeys();
-                        localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
-                        generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
-                    }
-                    // Tandakan dah pernah merge — popup tidak akan keluar lagi
-                    localStorage.setItem('roster_drive_merged', '1');
-                }
-            }
+            // Terus guna data Drive tanpa tanya — auto-sync senyap
+            store = remote;
+            if(!store.nursingNotes) store.nursingNotes = [];
+            migrateCalendarKeys();
+            localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+            generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
         }
         gsyncSetStatus('✓ Bersambung — auto-save aktif', 'synced');
     } catch(e) {
@@ -3608,35 +3589,35 @@ window.addEventListener('load', () => {
     startPrayerTick();
     schedulePrayerRefresh();
 
-    // Auto-login: Cuba sambung semula Google jika pernah log masuk sebelum ini
-    if(localStorage.getItem('roster_gtoken_hint') === '1') {
-        gsyncSetStatus('Menghubungi semula Google...', 'syncing');
-        function tryAutoLogin(attempt) {
-            if(typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
-                const client = google.accounts.oauth2.initTokenClient({
-                    client_id: GDRIVE_CLIENT_ID,
-                    scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-                    prompt: '', // Tiada popup — guna sesi sedia ada (silent)
-                    callback: async (resp) => {
-                        if(resp.error || !resp.access_token) {
-                            gsyncSetStatus('Sila log masuk semula', 'error');
-                            return;
-                        }
-                        gAccessToken = resp.access_token;
-                        localStorage.setItem('roster_gtoken_hint', '1');
-                        await gFetchUserInfo();
-                        await gLoadFromDrive();
+    // Auto-login senyap — sentiasa cuba login dengan akaun tetap tanpa popup
+    gsyncSetStatus('Menyambung ke Google Drive...', 'syncing');
+    function tryAutoLogin(attempt) {
+        if(typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
+            const client = google.accounts.oauth2.initTokenClient({
+                client_id: GDRIVE_CLIENT_ID,
+                scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+                hint: GDRIVE_EMAIL_HINT,  // terus guna azhbabh@gmail.com
+                prompt: '',               // tiada popup langsung
+                callback: async (resp) => {
+                    if(resp.error || !resp.access_token) {
+                        // Sesi Google tiada dalam browser — perlu login manual sekali
+                        gsyncSetStatus('Sila log masuk', '');
+                        return;
                     }
-                });
-                client.requestAccessToken({ prompt: '' });
-            } else if(attempt < 10) {
-                setTimeout(() => tryAutoLogin(attempt + 1), 800);
-            } else {
-                gsyncSetStatus('Sila log masuk ke Google Drive', '');
-            }
+                    gAccessToken = resp.access_token;
+                    localStorage.setItem('roster_gtoken_hint', '1');
+                    await gFetchUserInfo();
+                    await gLoadFromDrive();
+                }
+            });
+            client.requestAccessToken({ prompt: '' });
+        } else if(attempt < 20) {
+            setTimeout(() => tryAutoLogin(attempt + 1), 500);
+        } else {
+            gsyncSetStatus('Sila log masuk ke Google Drive', '');
         }
-        setTimeout(() => tryAutoLogin(1), 500);
     }
+    setTimeout(() => tryAutoLogin(1), 800);
 });
 migrateCalendarKeys();
 migrateDefaultDrugs();
