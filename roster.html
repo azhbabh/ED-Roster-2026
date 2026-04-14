@@ -2875,10 +2875,9 @@ function applyTheme(name) {
 // ══════════════════════════════════════════
 
 // ⚠️  GANTI dengan Client ID anda dari Google Cloud Console
-const GDRIVE_CLIENT_ID  = '651057198399-d7gg5lom71omt7k42uq21rumdejrj7k0.apps.googleusercontent.com';
-const GDRIVE_SCOPES     = 'https://www.googleapis.com/auth/drive.appdata';
-const GDRIVE_FILENAME   = 'roster_data.json';
-const GDRIVE_EMAIL_HINT = 'azhbabh@gmail.com'; // akaun Google tetap
+const GDRIVE_CLIENT_ID = '651057198399-d7gg5lom71omt7k42uq21rumdejrj7k0.apps.googleusercontent.com';
+const GDRIVE_SCOPES    = 'https://www.googleapis.com/auth/drive.appdata';
+const GDRIVE_FILENAME  = 'roster_data.json';
 
 let gAccessToken   = null;
 let gUserInfo      = null;
@@ -2929,7 +2928,6 @@ function gSignIn() {
     const client = google.accounts.oauth2.initTokenClient({
         client_id: GDRIVE_CLIENT_ID,
         scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-        hint: GDRIVE_EMAIL_HINT,
         callback: async (resp) => {
             if(resp.error) { gsyncSetStatus('Gagal log masuk', 'error'); return; }
             gAccessToken = resp.access_token;
@@ -2991,12 +2989,19 @@ async function gLoadFromDrive() {
         );
         const remote = await res.json();
         if(remote && remote.calendar) {
-            // Terus guna data Drive tanpa tanya — auto-sync senyap
-            store = remote;
-            if(!store.nursingNotes) store.nursingNotes = [];
-            migrateCalendarKeys();
-            localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
-            generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
+            // Merge: remote lebih utama, tapi tanya user jika ada konflik
+            const localStr = JSON.stringify(store);
+            const remoteStr = JSON.stringify(remote);
+            if(localStr !== remoteStr) {
+                const useRemote = confirm('Data ditemui dalam Google Drive.\n\nGuna data dari Google Drive? (Tekan Batal untuk kekal data tempatan)');
+                if(useRemote) {
+                    store = remote;
+                    if(!store.nursingNotes) store.nursingNotes = [];
+                    migrateCalendarKeys();
+                    localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+                    generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
+                }
+            }
         }
         gsyncSetStatus('✓ Bersambung — auto-save aktif', 'synced');
     } catch(e) {
@@ -3122,18 +3127,6 @@ function carSvcSet(vehicleId, itemKey, field, value) {
 
 // ── Kereta overlay: 10 jenis servis (scrollable) ──
 function openKeretaServiceSheet() {
-    if(!gAccessToken) {
-        document.getElementById('sheet-title').innerText = '🔒 Log Masuk Diperlukan';
-        document.getElementById('sheet-content').innerHTML = `
-            <div style="text-align:center;padding:20px 0;">
-                <div style="font-size:2.5rem;margin-bottom:12px;">🔒</div>
-                <div style="font-size:0.85rem;color:var(--text);font-weight:700;margin-bottom:8px;">Sila Log Masuk</div>
-                <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5;">Log masuk ke Google Drive untuk akses dan simpan data servis kenderaan anda.</div>
-                <button class="btn-primary" onclick="closeSheet(); setTimeout(handleGsyncAction, 300);">LOG MASUK GOOGLE</button>
-            </div>`;
-        openSheet();
-        return;
-    }
     document.getElementById('sheet-title').innerText = '🚗 Servis Kereta — TCC8852';
 
     let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
@@ -3189,18 +3182,6 @@ function openKeretaServiceSheet() {
 
 // ── Motor overlay: tarikh servis + seterusnya ──
 function openMotorServiceSheet() {
-    if(!gAccessToken) {
-        document.getElementById('sheet-title').innerText = '🔒 Log Masuk Diperlukan';
-        document.getElementById('sheet-content').innerHTML = `
-            <div style="text-align:center;padding:20px 0;">
-                <div style="font-size:2.5rem;margin-bottom:12px;">🔒</div>
-                <div style="font-size:0.85rem;color:var(--text);font-weight:700;margin-bottom:8px;">Sila Log Masuk</div>
-                <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5;">Log masuk ke Google Drive untuk akses dan simpan data servis kenderaan anda.</div>
-                <button class="btn-primary" onclick="closeSheet(); setTimeout(handleGsyncAction, 300);">LOG MASUK GOOGLE</button>
-            </div>`;
-        openSheet();
-        return;
-    }
     document.getElementById('sheet-title').innerText = '🏍️ Servis Motor — WTE4108';
 
     const lastDate = carSvcGet('motor_svc', 'servis', 'lastDate');
@@ -3589,35 +3570,35 @@ window.addEventListener('load', () => {
     startPrayerTick();
     schedulePrayerRefresh();
 
-    // Auto-login senyap — sentiasa cuba login dengan akaun tetap tanpa popup
-    gsyncSetStatus('Menyambung ke Google Drive...', 'syncing');
-    function tryAutoLogin(attempt) {
-        if(typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
-            const client = google.accounts.oauth2.initTokenClient({
-                client_id: GDRIVE_CLIENT_ID,
-                scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-                hint: GDRIVE_EMAIL_HINT,  // terus guna azhbabh@gmail.com
-                prompt: '',               // tiada popup langsung
-                callback: async (resp) => {
-                    if(resp.error || !resp.access_token) {
-                        // Sesi Google tiada dalam browser — perlu login manual sekali
-                        gsyncSetStatus('Sila log masuk', '');
-                        return;
+    // Auto-login: Cuba sambung semula Google jika pernah log masuk sebelum ini
+    if(localStorage.getItem('roster_gtoken_hint') === '1') {
+        gsyncSetStatus('Menghubungi semula Google...', 'syncing');
+        function tryAutoLogin(attempt) {
+            if(typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
+                const client = google.accounts.oauth2.initTokenClient({
+                    client_id: GDRIVE_CLIENT_ID,
+                    scope: GDRIVE_SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+                    prompt: '', // Tiada popup — guna sesi sedia ada (silent)
+                    callback: async (resp) => {
+                        if(resp.error || !resp.access_token) {
+                            gsyncSetStatus('Sila log masuk semula', 'error');
+                            return;
+                        }
+                        gAccessToken = resp.access_token;
+                        localStorage.setItem('roster_gtoken_hint', '1');
+                        await gFetchUserInfo();
+                        await gLoadFromDrive();
                     }
-                    gAccessToken = resp.access_token;
-                    localStorage.setItem('roster_gtoken_hint', '1');
-                    await gFetchUserInfo();
-                    await gLoadFromDrive();
-                }
-            });
-            client.requestAccessToken({ prompt: '' });
-        } else if(attempt < 20) {
-            setTimeout(() => tryAutoLogin(attempt + 1), 500);
-        } else {
-            gsyncSetStatus('Sila log masuk ke Google Drive', '');
+                });
+                client.requestAccessToken({ prompt: '' });
+            } else if(attempt < 10) {
+                setTimeout(() => tryAutoLogin(attempt + 1), 800);
+            } else {
+                gsyncSetStatus('Sila log masuk ke Google Drive', '');
+            }
         }
+        setTimeout(() => tryAutoLogin(1), 500);
     }
-    setTimeout(() => tryAutoLogin(1), 800);
 });
 migrateCalendarKeys();
 migrateDefaultDrugs();
