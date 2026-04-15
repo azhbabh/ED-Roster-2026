@@ -1915,7 +1915,7 @@
                 <div class="carsvc-card-info">
                     <div class="carsvc-card-title">Kereta</div>
                     <div class="carsvc-card-plate">TCC8852</div>
-                    <div class="carsvc-card-hint">10 jenis servis</div>
+                    <div class="carsvc-card-hint">Servis mengikut km</div>
                 </div>
                 <div class="carsvc-card-arrow">›</div>
             </div>
@@ -3092,17 +3092,79 @@ const EXPENSE_VEHICLES = [
 //  CAR SERVICE TRACKER
 // ══════════════════════════════════════════
 
+// Service schedule kereta mengikut km
+// every10k = setiap 10,000 km
+// at20k    = 20k – 40k km
+// at40k    = 40k – 60k km
+// at60k    = 60k km
+// at100k   = 100k km ke atas
+const CAR_SERVICE_SCHEDULE = [
+    {
+        groupKey: 'every10k',
+        groupLabel: 'Setiap 10,000 km',
+        icon: '🔄',
+        intervalKm: 10000,
+        items: [
+            { key: 'engineOil',    label: 'Tukar Engine Oil' },
+            { key: 'oilFilter',    label: 'Tukar Oil Filter' },
+            { key: 'gasketPlug',   label: 'Tukar Gasket Plug' },
+            { key: 'checkBrake',   label: 'Check Brake + Tayar + Suspension' },
+            { key: 'checkAircond', label: 'Check Aircond & Battery' },
+        ]
+    },
+    {
+        groupKey: 'at20k',
+        groupLabel: '20,000 – 40,000 km',
+        icon: '🌀',
+        intervalKm: 20000,
+        items: [
+            { key: 'airFilter',   label: 'Tukar Air Filter' },
+            { key: 'cabinFilter', label: 'Tukar Cabin Filter' },
+        ]
+    },
+    {
+        groupKey: 'at40k',
+        groupLabel: '40,000 – 60,000 km',
+        icon: '⚡',
+        intervalKm: 40000,
+        items: [
+            { key: 'sparkPlug',    label: 'Tukar Spark Plug' },
+            { key: 'brakeFluid',   label: 'Tukar Brake Fluid' },
+            { key: 'coolant',      label: 'Tukar Coolant' },
+        ]
+    },
+    {
+        groupKey: 'at60k',
+        groupLabel: '60,000 km',
+        icon: '⚙️',
+        intervalKm: 60000,
+        items: [
+            { key: 'gearboxOil', label: 'Check Gearbox / Transmission Oil' },
+        ]
+    },
+    {
+        groupKey: 'at100k',
+        groupLabel: '100,000 km ke atas',
+        icon: '🔗',
+        intervalKm: 100000,
+        items: [
+            { key: 'timingBelt', label: 'Tukar Timing Belt' },
+            { key: 'feadBelt',   label: 'Tukar FEAD Belt (Belt Aksesori)' },
+        ]
+    },
+];
+
+// Legacy flat list (untuk motor & backward compat)
 const CAR_SERVICE_ITEMS = [
-    { key: 'minyakEnjin',  icon: '🛢️', label: 'Minyak Enjin + Oil Filter', defaultKm: 5000  },
-    { key: 'sparkPlug',    icon: '⚡',  label: 'Spark Plug',                 defaultKm: 20000 },
+    { key: 'minyakEnjin',  icon: '🛢️', label: 'Minyak Enjin + Oil Filter', defaultKm: 10000 },
+    { key: 'airFilter',    icon: '🌀', label: 'Air Filter',                  defaultKm: 20000 },
+    { key: 'cabinFilter',  icon: '❄️', label: 'Cabin Filter (Aircond)',      defaultKm: 20000 },
+    { key: 'sparkPlug',    icon: '⚡',  label: 'Spark Plug',                 defaultKm: 40000 },
+    { key: 'brakeFluid',   icon: '🛑', label: 'Brake Fluid',                 defaultKm: 40000 },
     { key: 'coolant',      icon: '💧', label: 'Engine Coolant',              defaultKm: 40000 },
-    { key: 'minyakGear',   icon: '⚙️', label: 'Minyak Gear / ATF',          defaultKm: 40000 },
-    { key: 'airFilter',    icon: '🌀', label: 'Air Filter',                  defaultKm: 15000 },
-    { key: 'cabinFilter',  icon: '❄️', label: 'Cabin Filter (Aircond)',      defaultKm: 15000 },
-    { key: 'throttleBody', icon: '🔧', label: 'Throttle Body (Cuci)',        defaultKm: 30000 },
-    { key: 'brakeSystem',  icon: '🛑', label: 'Brake System',                defaultKm: 20000 },
-    { key: 'timingBelt',   icon: '🔗', label: 'Timing Belt',                 defaultKm: 60000 },
-    { key: 'driveBelt',    icon: '🔄', label: 'Drive Belt',                  defaultKm: 40000 },
+    { key: 'gearboxOil',   icon: '⚙️', label: 'Gearbox / Transmission Oil', defaultKm: 60000 },
+    { key: 'timingBelt',   icon: '🔗', label: 'Timing Belt',                 defaultKm: 100000},
+    { key: 'feadBelt',     icon: '🔄', label: 'FEAD Belt',                   defaultKm: 100000},
 ];
 
 if(!store.carService) store.carService = {};
@@ -3120,59 +3182,156 @@ function carSvcSet(vehicleId, itemKey, field, value) {
     saveData();
 }
 
-// ── Kereta overlay: 10 jenis servis (scrollable) ──
+// ── Kereta overlay: overlay dengan servis terdahulu & seterusnya, disusun ikut km ──
 function openKeretaServiceSheet() {
     document.getElementById('sheet-title').innerText = '🚗 Servis Kereta — TCC8852';
 
-    let html = '<div style="display:flex;flex-direction:column;gap:10px;">';
-    CAR_SERVICE_ITEMS.forEach(item => {
-        const lastKm   = carSvcGet('kereta_svc', item.key, 'lastKm');
-        const nextKm   = carSvcGet('kereta_svc', item.key, 'nextKm');
-        const lastDate = carSvcGet('kereta_svc', item.key, 'lastDate');
+    let html = '<div style="display:flex;flex-direction:column;gap:14px;">';
 
-        const nextKmVal = nextKm ? parseInt(nextKm) : (lastKm ? parseInt(lastKm) + item.defaultKm : null);
-        const lastDateDisp = lastDate ? toMY(lastDate) : '—';
-        const lastKmDisp   = lastKm ? parseInt(lastKm).toLocaleString() + ' km' : '—';
-        const nextKmDisp   = nextKmVal ? nextKmVal.toLocaleString() + ' km' : item.defaultKm.toLocaleString() + ' km (lalai)';
-
-        // dot
-        const dotColor = (lastKm && nextKm) ? 'var(--success)' : (!lastKm ? 'var(--text-muted)' : 'var(--warning)');
-
-        html += `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
-            <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(90deg,var(--primary-dim),transparent);">
-                <span style="font-size:1.2rem;">${item.icon}</span>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--text);letter-spacing:0.04em;text-transform:uppercase;flex:1;">${item.label}</span>
-                <span style="width:8px;height:8px;border-radius:50%;background:${dotColor};flex-shrink:0;"></span>
+    CAR_SERVICE_SCHEDULE.forEach(group => {
+        html += `<div style="background:var(--card);border:1px solid var(--border-bright);border-radius:var(--radius-sm);overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:linear-gradient(90deg,var(--primary-dim),transparent);border-bottom:1px solid var(--border);">
+                <span style="font-size:1.1rem;">${group.icon}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;color:var(--primary);letter-spacing:0.1em;text-transform:uppercase;">${group.groupLabel}</span>
             </div>
-            <div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);font-weight:700;">📅 TARIKH SERVIS</span>
+            <div style="display:flex;flex-direction:column;gap:0;">`;
+
+        group.items.forEach((item, idx) => {
+            const fullKey = group.groupKey + '_' + item.key;
+            const lastKm   = carSvcGet('kereta_svc', fullKey, 'lastKm');
+            const lastDate = carSvcGet('kereta_svc', fullKey, 'lastDate');
+            const nextKm   = carSvcGet('kereta_svc', fullKey, 'nextKm');
+
+            const nextKmVal = nextKm
+                ? parseInt(nextKm)
+                : (lastKm ? parseInt(lastKm) + group.intervalKm : null);
+
+            const lastKmDisp   = lastKm   ? parseInt(lastKm).toLocaleString() + ' km' : '—';
+            const lastDateDisp = lastDate  ? toMY(lastDate) : '—';
+            const nextKmDisp   = nextKmVal ? nextKmVal.toLocaleString() + ' km' : (group.intervalKm.toLocaleString() + ' km');
+
+            const hasData = lastKm || lastDate;
+            const dotColor = hasData && nextKm ? 'var(--success)' : (hasData ? 'var(--warning)' : 'var(--text-muted)');
+            const borderTop = idx > 0 ? 'border-top:1px solid var(--border);' : '';
+
+            html += `<div style="${borderTop}padding:10px 12px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
                     <div style="display:flex;align-items:center;gap:6px;">
-                        <span style="font-size:0.72rem;color:var(--text);">${lastDateDisp}</span>
-                        <button class="expense-edit-btn" onclick="openCarSvcFieldEdit('kereta_svc','${item.key}','lastDate','Tarikh Servis','date','${item.label}')">EDIT</button>
+                        <span style="width:7px;height:7px;border-radius:50%;background:${dotColor};flex-shrink:0;display:inline-block;"></span>
+                        <span style="font-size:0.75rem;font-weight:700;color:var(--text);">${item.label}</span>
+                    </div>
+                    <button class="expense-edit-btn" onclick="openKeretaItemEdit('${fullKey}','${item.label}',${group.intervalKm})">EDIT</button>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:7px 9px;">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:0.47rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Servis Terdahulu</div>
+                        <div style="font-size:0.7rem;font-weight:700;color:${lastKm ? 'var(--text)' : 'var(--text-muted)'};">${lastKmDisp}</div>
+                        <div style="font-size:0.62rem;color:var(--text-dim);margin-top:1px;">${lastDateDisp}</div>
+                    </div>
+                    <div style="background:var(--surface);border:1px solid ${nextKmVal ? 'rgba(80,200,120,0.25)' : 'var(--border)'};border-radius:var(--radius-xs);padding:7px 9px;">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:0.47rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Servis Akan Datang</div>
+                        <div style="font-size:0.7rem;font-weight:700;color:var(--primary);">${nextKmDisp}</div>
+                        <div style="font-size:0.62rem;color:var(--text-dim);margin-top:1px;">+${group.intervalKm.toLocaleString()} km</div>
                     </div>
                 </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);font-weight:700;">🔢 KM TERAKHIR</span>
-                    <div style="display:flex;align-items:center;gap:6px;">
-                        <span style="font-size:0.72rem;color:var(--text);">${lastKmDisp}</span>
-                        <button class="expense-edit-btn" onclick="openCarSvcFieldEdit('kereta_svc','${item.key}','lastKm','KM Terakhir','km','${item.label}')">EDIT</button>
-                    </div>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:0.55rem;color:var(--text-dim);font-weight:700;">🎯 KM SETERUSNYA</span>
-                    <div style="display:flex;align-items:center;gap:6px;">
-                        <span style="font-size:0.72rem;font-weight:700;color:var(--primary);">${nextKmDisp}</span>
-                        <button class="expense-edit-btn" onclick="openCarSvcFieldEdit('kereta_svc','${item.key}','nextKm','KM Seterusnya','km','${item.label}')">EDIT</button>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+            </div>`;
+        });
+
+        html += `</div></div>`;
     });
-    html += '</div>';
 
+    html += '</div>';
     document.getElementById('sheet-content').innerHTML = html;
     openSheet();
+}
+
+// ── Edit overlay untuk item kereta (dengan padam servis lama sebelum simpan baru) ──
+function openKeretaItemEdit(fullKey, itemLabel, intervalKm) {
+    const lastKm   = carSvcGet('kereta_svc', fullKey, 'lastKm');
+    const lastDate = carSvcGet('kereta_svc', fullKey, 'lastDate');
+    const nextKm   = carSvcGet('kereta_svc', fullKey, 'nextKm');
+
+    const lastKmDisp   = lastKm   ? parseInt(lastKm).toLocaleString() + ' km' : '—';
+    const lastDateDisp = lastDate  ? toMY(lastDate) : '—';
+    const nextKmVal    = nextKm   ? parseInt(nextKm) : (lastKm ? parseInt(lastKm) + intervalKm : null);
+    const nextKmDisp   = nextKmVal ? nextKmVal.toLocaleString() + ' km' : '—';
+
+    document.getElementById('sheet-title').innerText = `🔧 ${itemLabel}`;
+
+    let hasExisting = lastKm || lastDate;
+
+    document.getElementById('sheet-content').innerHTML = `
+        ${hasExisting ? `
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:7px;">📋 Rekod Semasa</div>
+            <div style="display:flex;justify-content:space-between;font-size:0.72rem;margin-bottom:4px;">
+                <span style="color:var(--text-dim);">KM Terakhir</span>
+                <span style="font-weight:700;color:var(--text);">${lastKmDisp}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.72rem;margin-bottom:4px;">
+                <span style="color:var(--text-dim);">Tarikh Servis</span>
+                <span style="font-weight:700;color:var(--text);">${lastDateDisp}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.72rem;">
+                <span style="color:var(--text-dim);">KM Seterusnya</span>
+                <span style="font-weight:700;color:var(--primary);">${nextKmDisp}</span>
+            </div>
+        </div>` : ''}
+        <div style="background:var(--primary-dim);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">✨ Rekod Servis Terbaru</div>
+            <label style="font-size:0.68rem;">KM Semasa (km)</label>
+            <input type="number" id="carsvc-new-km" placeholder="cth: 85000" step="100" min="0" style="margin-bottom:8px;">
+            <label style="font-size:0.68rem;">Tarikh Servis</label>
+            <input type="date" id="carsvc-new-date" onclick="triggerDatePicker('carsvc-new-date')" style="margin-bottom:0;">
+        </div>
+        <div style="font-size:0.68rem;color:var(--text-dim);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 11px;margin-bottom:12px;">
+            💡 KM Seterusnya dikira otomatik (+${intervalKm.toLocaleString()} km). Rekod lama akan digantikan dengan yang baru.
+        </div>
+        <input type="hidden" id="carsvc-fullkey" value="${fullKey}">
+        <input type="hidden" id="carsvc-interval" value="${intervalKm}">
+        <button class="btn-primary" onclick="saveKeretaNewService()">💾 SIMPAN SERVIS TERBARU</button>
+        ${hasExisting ? `<button class="btn-danger" onclick="clearKeretaItem('${fullKey}')">🗑️ PADAM REKOD</button>` : ''}`;
+
+    openSheet();
+    setTimeout(() => {
+        const el = document.getElementById('carsvc-new-km');
+        if(el) el.focus();
+    }, 350);
+}
+
+function saveKeretaNewService() {
+    const fullKey    = document.getElementById('carsvc-fullkey').value;
+    const intervalKm = parseInt(document.getElementById('carsvc-interval').value) || 0;
+    const newKm      = document.getElementById('carsvc-new-km').value.trim();
+    const newDate    = document.getElementById('carsvc-new-date').value.trim();
+
+    if(!newKm && !newDate) { alert('Sila isi sekurang-kurangnya KM atau Tarikh Servis.'); return; }
+
+    // Padam rekod lama dahulu
+    if(!store.carService['kereta_svc']) store.carService['kereta_svc'] = {};
+    store.carService['kereta_svc'][fullKey] = {};
+
+    // Simpan rekod baru
+    if(newKm) {
+        carSvcSet('kereta_svc', fullKey, 'lastKm', newKm);
+        carSvcSet('kereta_svc', fullKey, 'nextKm', String(parseInt(newKm) + intervalKm));
+    }
+    if(newDate) {
+        carSvcSet('kereta_svc', fullKey, 'lastDate', newDate);
+    }
+
+    closeSheet();
+    setTimeout(() => openKeretaServiceSheet(), 370);
+}
+
+function clearKeretaItem(fullKey) {
+    if(!confirm('Padam semua rekod untuk item ini?')) return;
+    if(store.carService['kereta_svc']) {
+        delete store.carService['kereta_svc'][fullKey];
+    }
+    saveData();
+    closeSheet();
+    setTimeout(() => openKeretaServiceSheet(), 370);
 }
 
 // ── Motor overlay: tarikh servis + seterusnya ──
