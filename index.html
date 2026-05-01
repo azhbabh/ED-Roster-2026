@@ -220,6 +220,9 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
+        body.light-theme::before { opacity: 0 !important; }
+        body.light-theme .ambient-glow { opacity: 0 !important; }
+
         /* ── THEME BAR ── */
         .theme-bar {
             display: flex;
@@ -1432,8 +1435,8 @@
 
 <div class="page">
 
-    <!-- THEME BAR -->
-    <div class="theme-bar">
+    <!-- THEME BAR (tema cerah sahaja) -->
+    <div class="theme-bar" style="display:none;">
         <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-btn">
             <span id="theme-toggle-icon">☀️</span>
             <span id="theme-toggle-label">CERAH</span>
@@ -1497,11 +1500,11 @@
     <div class="shift-summary">
         <div class="summary-pill">
             <span class="summary-pill-label">Hari Ini</span>
-            <span class="summary-pill-val today-val" id="summary-today">—</span>
+            <div class="summary-pill-val today-val" id="summary-today">—</div>
         </div>
         <div class="summary-pill">
             <span class="summary-pill-label">Esok</span>
-            <span class="summary-pill-val" id="summary-tomorrow">—</span>
+            <div class="summary-pill-val" id="summary-tomorrow">—</div>
         </div>
         <div id="summary-reminders"></div>
     </div>
@@ -1557,20 +1560,6 @@
             </div>
         </div>
         <div id="claim-body" style="display:none;margin-top:12px;"></div>
-    </div>
-
-    <!-- EMERGENCY DRUG -->
-    <div class="section">
-        <div class="section-header" style="cursor:pointer;" onclick="openAllDrugsOverlay()">
-            <h3 style="display:flex;align-items:center;gap:6px;">Emergency Drug <span style="font-size:0.55rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.08em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">LIHAT SEMUA</span></h3>
-            <div class="drug-toolbar" onclick="event.stopPropagation()">
-                <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
-                <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
-                <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
-            </div>
-        </div>
-        <input type="text" id="drug-search" placeholder="Cari ubat..." oninput="searchDrugs()">
-        <div id="drug-results"></div>
     </div>
 
     <!-- TO-DO -->
@@ -1851,7 +1840,19 @@
         </div>
     </div>
 
-
+    <!-- EMERGENCY DRUG -->
+    <div class="section">
+        <div class="section-header" style="cursor:pointer;" onclick="openAllDrugsOverlay()">
+            <h3 style="display:flex;align-items:center;gap:6px;">Emergency Drug <span style="font-size:0.55rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.08em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">LIHAT SEMUA</span></h3>
+            <div class="drug-toolbar" onclick="event.stopPropagation()">
+                <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
+                <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
+                <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
+            </div>
+        </div>
+        <input type="text" id="drug-search" placeholder="Cari ubat..." oninput="searchDrugs()">
+        <div id="drug-results"></div>
+    </div>
 
     <!-- MONTHLY EXPENSES -->
     <div class="section">
@@ -2441,10 +2442,32 @@ function updateShiftSummary() {
     const now=new Date(), tom=new Date(now); tom.setDate(now.getDate()+1);
     const getFullAssign=(short)=>{ if(!short) return ''; return short.replace(/Amb/g,'Ambulance').replace(/TL/g,'Team Leader'); };
     const getS=(date)=>{ const key=isoKey(date.getFullYear(),date.getMonth(),date.getDate()); const d=store.calendar[key]; if(!d||d.s==='-') return "OFF"; return `${d.s}${d.a?' · '+getFullAssign(d.a):''}`; };
-    document.getElementById('summary-today').innerText=getS(now);
-    document.getElementById('summary-tomorrow').innerText=getS(tom);
+    // Get today/tomorrow shift + reminder
+    const todayKey=isoKey(now.getFullYear(),now.getMonth(),now.getDate());
+    const tomKey=isoKey(tom.getFullYear(),tom.getMonth(),tom.getDate());
+    const todayEntry=store.calendar[todayKey]||{};
+    const tomEntry=store.calendar[tomKey]||{};
+    const todayShift=getS(now);
+    const tomShift=getS(tom);
+    // Hari Ini — shift + reminder hari ini
+    const todayEl=document.getElementById('summary-today');
+    if(todayEl){
+        todayEl.innerHTML=todayShift;
+        if(todayEntry.reminder){
+            todayEl.innerHTML+=`<div style="font-size:0.62rem;color:#8888ff;margin-top:3px;">🔔 ${todayEntry.reminder}</div>`;
+        }
+    }
+    // Esok — shift + reminder esok
+    const tomEl=document.getElementById('summary-tomorrow');
+    if(tomEl){
+        tomEl.innerHTML=tomShift;
+        if(tomEntry.reminder){
+            tomEl.innerHTML+=`<div style="font-size:0.62rem;color:#8888ff;margin-top:3px;">🔔 ${tomEntry.reminder}</div>`;
+        }
+    }
+    // Other reminders (day 2-7, skip today & tomorrow)
     const remDiv=document.getElementById('summary-reminders'), reminders=[];
-    for(let i=0;i<=7;i++){
+    for(let i=2;i<=7;i++){
         const d=new Date(now); d.setDate(now.getDate()+i);
         const key=isoKey(d.getFullYear(),d.getMonth(),d.getDate());
         const entry=store.calendar[key];
@@ -2542,7 +2565,7 @@ function openPHLinkSheet(key) {
     const available=ph2026.filter(p=>!linkedPHDates.includes(p.d));
     let html='';
     if(available.length===0) html+=`<div style="font-size:0.75rem;color:var(--text-dim);padding:12px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-xs);margin-bottom:12px;">Tiada rekod PH tersedia.</div>`;
-    else { html+=`<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">`; available.forEach(p=>{ const isLinked=store.calendar[key]&&store.calendar[key].phLinked===p.d; const dispD=toMY(p.d); const paidBadge=p.paid?`<span style="font-size:0.58rem;background:rgba(243,156,18,0.18);color:#f39c12;padding:1px 6px;border-radius:20px;font-weight:700;margin-left:6px;">PAID</span>`:''; html+=`<div onclick="linkPH('${key}','${p.d}')" style="background:${isLinked?'rgba(229,192,123,0.1)':'var(--surface)'};border:1px solid ${isLinked?'#e5c07b':'var(--border)'};border-radius:var(--radius-sm);padding:12px;cursor:pointer;"><div style="font-weight:700;font-size:0.8rem;color:${isLinked?'#e5c07b':'var(--text)'};margin-bottom:3px;">${p.n}${paidBadge}</div><div style="font-size:0.68rem;color:var(--text-dim);">📅 ${dispD}</div>${isLinked?'<div style="font-size:0.62rem;color:#e5c07b;margin-top:4px;">✓ Sedang dipaut</div>':''}</div>`; }); html+=`</div>`; }
+    else { html+=`<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">`; available.forEach(p=>{ const isLinked=store.calendar[key]&&store.calendar[key].phLinked===p.d; const dispD=toMY(p.d); const paidBadge=p.paid?`<span style="margin-right:4px;">💰</span>`:''; html+=`<div onclick="linkPH('${key}','${p.d}')" style="background:${isLinked?'rgba(229,192,123,0.1)':'var(--surface)'};border:1px solid ${isLinked?'#e5c07b':'var(--border)'};border-radius:var(--radius-sm);padding:12px;cursor:pointer;"><div style="font-weight:700;font-size:0.8rem;color:${isLinked?'#e5c07b':'var(--text)'};margin-bottom:3px;">${paidBadge}${p.n}</div><div style="font-size:0.68rem;color:var(--text-dim);">📅 ${dispD}</div>${isLinked?'<div style="font-size:0.62rem;color:#e5c07b;margin-top:4px;">✓ Sedang dipaut</div>':''}</div>`; }); html+=`</div>`; }
     if(store.calendar[key]&&store.calendar[key].phLinked) html+=`<button class="btn-danger" onclick="unlinkPH('${key}')">✕ Buang Pautan PH</button>`;
     html+=`<button class="btn-secondary" onclick="openShiftPicker('${key}')">✏️ Tukar Shift Lain</button>`;
     document.getElementById('sheet-content').innerHTML=html; openSheet();
@@ -2556,7 +2579,7 @@ function checkPaidPH(){ const sel=document.getElementById('in-ph-select'); if(!s
 function renderRecords(type){
     const content=document.getElementById('sheet-content'); let html='<div>';
     if(type==='AL'){ store.al.taken.forEach((d,i)=>html+=`<div class="record-card"><div>Cuti: ${toMY(d)}</div><button class="btn-delete" onclick="store.al.taken.splice(${i},1);saveData();renderRecords('AL')">×</button></div>`); html+=`<label>Tarikh Cuti</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')">`; }
-    else if(type==='RPL'){ store.rpl.records.forEach((r,i)=>html+=`<div class="record-card"><div><b>${r.t}</b><br><small style="color:var(--text-dim)">${toMY(r.d1)} ➔ ${r.isPaid?'PAID':toMY(r.d2)}</small></div><button class="btn-delete" onclick="store.rpl.records.splice(${i},1);saveData();renderRecords('RPL')">×</button></div>`); const recordedDates=store.rpl.records.map(r=>r.d1); const avPH=ph2026.filter(p=>!recordedDates.includes(p.d)); html+=`<div id="paid-alert" class="paid-alert"></div><label>Pilih PH</label><select id="in-ph-select" onchange="document.getElementById('in-d1').value=this.value;checkPaidPH();"><option value="">-- Pilih --</option>${avPH.map(p=>{const dp=p.d.split('-');return`<option value="${p.d}" data-paid="${p.paid}">(${dp[2]}/${dp[1]}) ${p.n}</option>`;}).join('')}</select><input type="date" id="in-d1" hidden><label id="label-rpl">Tarikh Ganti</label><input type="date" id="in-d2" onclick="triggerDatePicker('in-d2')">`; }
+    else if(type==='RPL'){ store.rpl.records.forEach((r,i)=>html+=`<div class="record-card"><div><b>${r.t}</b><br><small style="color:var(--text-dim)">${toMY(r.d1)} ➔ ${r.isPaid?'PAID':toMY(r.d2)}</small></div><button class="btn-delete" onclick="store.rpl.records.splice(${i},1);saveData();renderRecords('RPL')">×</button></div>`); const recordedDates=store.rpl.records.map(r=>r.d1); const avPH=ph2026.filter(p=>!recordedDates.includes(p.d)); html+=`<div id="paid-alert" class="paid-alert"></div><label>Pilih PH</label><select id="in-ph-select" onchange="document.getElementById('in-d1').value=this.value;checkPaidPH();"><option value="">-- Pilih --</option>${avPH.map(p=>{const dp=p.d.split('-');const paidMark=p.paid?'💰 ':'';return`<option value="${p.d}" data-paid="${p.paid}">(${dp[2]}/${dp[1]}) ${paidMark}${p.n}</option>`;}).join('')}</select><input type="date" id="in-d1" hidden><label id="label-rpl">Tarikh Ganti</label><input type="date" id="in-d2" onclick="triggerDatePicker('in-d2')">`; }
     else if(type==='CPD'){ store.cpd.records.forEach((r,i)=>html+=`<div class="record-card"><div style="flex:1"><b>${r.t}</b><br><small style="color:var(--text-dim)">📅 ${toMY(r.d)} | 🕒 ${r.t1} - ${r.t2}</small></div><div style="font-weight:700;color:var(--success);margin-right:8px;">${r.p} Pts</div><div style="display:flex;flex-direction:column;gap:4px;"><button style="background:none;color:var(--primary);border:none;font-size:0.65rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;" onclick="editCPD(${i})">EDIT</button><button class="btn-delete" onclick="store.cpd.records.splice(${i},1);saveData();renderRecords('CPD')">×</button></div></div>`); html+=`<input type="hidden" id="cpd-edit-idx" value="-1"><label>Nama Kursus</label><input type="text" id="in-t"><label>Tarikh</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div><label>Mula</label><input type="time" id="in-t1"></div><div><label>Tamat</label><input type="time" id="in-t2"></div></div><label>Mata</label><input type="number" id="in-p">`; }
     html+=`</div><button class="btn-primary" id="btn-save-rec" onclick="addRec('${type}')">SIMPAN</button>`; content.innerHTML=html;
 }
@@ -2615,7 +2638,16 @@ function renderClaim(){
     if(label) label.innerText=`${months[month]} ${year}`;
     const malamDays=[], malamDayMap={}, locum=[], phBayar=[];
     const mm=String(month+1).padStart(2,'0');
-    Object.keys(store.calendar).forEach(key=>{ const p=key.split('-'); if(p.length!==3)return; const y=parseInt(p[0]),m=parseInt(p[1])-1,d=parseInt(p[2]); if(y!==year||m!==month)return; const entry=store.calendar[key]; const s=entry.s||''; const dateStr=`${String(d).padStart(2,'0')}/${mm}/${year}`; if(s==='N' || s.endsWith('/N')){ malamDays.push(d); malamDayMap[d]=s; } if(s.includes('/')){const assign=entry.a?` (${entry.a})`:''; locum.push({date:dateStr,shift:s+assign});} if(s==='PH'){const phEntry=ph2026.find(p=>p.d===key);if(phEntry&&phEntry.paid)phBayar.push({date:dateStr,name:phEntry.n});} });
+    Object.keys(store.calendar).forEach(key=>{ const p=key.split('-'); if(p.length!==3)return; const y=parseInt(p[0]),m=parseInt(p[1])-1,d=parseInt(p[2]); if(y!==year||m!==month)return; const entry=store.calendar[key]; const s=entry.s||''; const dateStr=`${String(d).padStart(2,'0')}/${mm}/${year}`; if(s==='N' || s.endsWith('/N')){ malamDays.push(d); malamDayMap[d]=s; } if(s.includes('/')){const assign=entry.a?` (${entry.a})`:''; locum.push({date:dateStr,shift:s+assign});} });
+    // Auto-scan PH berbayar terus dari ph2026 — tanpa perlu calendar entry
+    ph2026.forEach(p => {
+        if(!p.paid) return;
+        const parts = p.d.split('-');
+        if(parseInt(parts[0])!==year || parseInt(parts[1])-1!==month) return;
+        const d = parseInt(parts[2]);
+        const dateStr = `${String(d).padStart(2,'0')}/${mm}/${year}`;
+        phBayar.push({date:dateStr, name:p.n});
+    });
     malamDays.sort((a,b)=>a-b);
     locum.sort((a,b)=>a.date.localeCompare(b.date));
     phBayar.sort((a,b)=>a.date.localeCompare(b.date));
@@ -2808,7 +2840,14 @@ function applyTheme(name) {
     const pic=document.getElementById('profile-pic');
     if(pic&&pic.src.includes('ui-avatars')) pic.src=`https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=${t.avatarBg}&color=${t.avatarFg}&bold=true`;
     const glow=document.querySelector('.ambient-glow');
-    if(glow) glow.style.background=`radial-gradient(circle,${t.primaryGlow} 0%,transparent 70%)`;
+    if(glow) {
+        glow.style.background=`radial-gradient(circle,${t.primaryGlow} 0%,transparent 70%)`;
+        glow.style.opacity = name === 'light' ? '0' : '0.3';
+    }
+    // noise overlay
+    const noiseBefore = document.body;
+    noiseBefore.style.setProperty('--noise-opacity', name === 'light' ? '0' : '0.4');
+    document.body.classList.toggle('light-theme', name === 'light');
     currentTheme=name;
     localStorage.setItem('roster_theme',name);
     document.querySelectorAll('.day-label').forEach(el => {
@@ -3000,8 +3039,11 @@ function gTriggerSave() {
     gSaveDebounce = setTimeout(gSaveToDrive, 1500);
 }
 
-function toggleTheme() { applyTheme(currentTheme==='dark'?'light':'dark'); }
-function loadTheme() { applyTheme(localStorage.getItem('roster_theme')==='light'?'light':'dark'); }
+function toggleTheme() { applyTheme('light'); }
+function loadTheme() {
+    applyTheme('light');
+    localStorage.setItem('roster_theme','light');
+}
 
 // ══════════════════════════════════════════
 //  MONTHLY EXPENSES
