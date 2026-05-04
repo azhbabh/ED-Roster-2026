@@ -104,7 +104,7 @@
 
         .prayer-widget-title span {
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
@@ -113,7 +113,7 @@
 
         .prayer-location {
             font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
             letter-spacing: 0.02em;
         }
@@ -131,7 +131,7 @@
 
         .prayer-next-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.6rem;
             color: var(--primary);
             font-weight: 700;
             letter-spacing: 0.03em;
@@ -139,14 +139,14 @@
         }
 
         .prayer-next-name {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text);
         }
 
         .prayer-next-time {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             letter-spacing: 0.05em;
             color: var(--primary);
             filter: drop-shadow(0 0 8px var(--primary-glow));
@@ -154,7 +154,7 @@
 
         .prayer-countdown {
             font-family: 'Inter', sans-serif;
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             color: var(--text-dim);
             text-align: right;
         }
@@ -186,7 +186,7 @@
 
         .prayer-slot-name {
             font-family: 'Inter', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: var(--text-muted);
             letter-spacing: 0.05em;
@@ -197,7 +197,7 @@
         .prayer-slot.active .prayer-slot-name { color: var(--primary); }
 
         .prayer-slot-time {
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: var(--text-dim);
         }
@@ -206,7 +206,7 @@
 
         .prayer-loading {
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
             padding: 16px;
             font-family: 'Inter', sans-serif;
@@ -214,7 +214,7 @@
 
         .prayer-error {
             text-align: center;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             color: var(--danger);
             padding: 8px;
             font-family: 'Inter', sans-serif;
@@ -236,7 +236,7 @@
             border-radius: 20px; padding: 5px 12px 5px 8px;
             cursor: pointer; transition: all 0.2s;
             font-family: 'Inter', sans-serif;
-            font-size: 0.82rem; font-weight: 700;
+            font-size: 0.72rem; font-weight: 700;
             color: var(--text-dim); letter-spacing: 0.02em;
         }
         .theme-toggle-btn:active { transform: scale(0.95); }
@@ -293,15 +293,15 @@
         .profile-info { min-width: 0; }
         .profile-name {
             font-family: 'Inter', sans-serif;
-            font-weight: 700; font-size: 0.86rem;
+            font-weight: 700; font-size: 0.75rem;
             color: var(--text);
             text-transform: uppercase; letter-spacing: 0.04em;
             line-height: 1.2; margin-bottom: 4px;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
             max-width: 160px;
         }
-        .staff-id { font-family: 'Inter', sans-serif; font-size: 0.74rem; color: var(--text-dim); margin-bottom: 4px; }
-        #live-clock { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--primary); font-weight: 700; }
+        .staff-id { font-family: 'Inter', sans-serif; font-size: 0.66rem; color: var(--text-dim); margin-bottom: 4px; }
+        #live-clock { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--primary); font-weight: 700; }
 
         .roster-badge {
             position: relative; z-index: 1;
@@ -311,7 +311,7 @@
         }
         .roster-badge .main {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2rem; letter-spacing: 0.02em;
+            font-size: 1.8rem; letter-spacing: 0.02em;
             color: var(--primary); display: block; line-height: 1;
             filter: drop-shadow(0 0 12px var(--primary-glow));
             animation: pulseText 4s ease-in-out infinite;
@@ -320,7 +320,7 @@
             0%,100% { filter: drop-shadow(0 0 8px var(--primary-glow)); }
             50% { filter: drop-shadow(0 0 20px var(--primary-glow)); }
         }
-        .roster-badge .dept { font-size: 0.76rem; color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-top: 2px; }
+        .roster-badge .dept { font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-top: 2px; }
 
         /* ── SHIFT SUMMARY ── */
         .shift-summary {
@@ -334,9 +334,9 @@
         .shift-summary::before { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:var(--border); }
         .summary-pill { padding: 12px 14px; display:flex; flex-direction:column; gap:4px; }
         .summary-pill:first-child { border-right: 1px solid var(--border); }
-        .summary-pill-label { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--text-dim); }
-        .summary-pill-val { font-size:0.9rem; font-weight:600; color:var(--text-dim); line-height:1.2; }
-        .summary-pill-val.today-val { font-size:1.05rem; font-weight:800; color:var(--primary); }
+        .summary-pill-label { font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--text-dim); }
+        .summary-pill-val { font-size:0.78rem; font-weight:600; color:var(--text-dim); line-height:1.2; }
+        .summary-pill-val.today-val { font-size:0.88rem; font-weight:800; color:var(--primary); }
         #summary-reminders { grid-column:1/-1; border-top:1px solid var(--border); padding:10px 14px 4px; display:none; }
 
         /* ── STATS ROW ── */
@@ -350,9 +350,9 @@
         .stat-card::before { content:''; position:absolute; inset:0; background:var(--primary-dim); opacity:0; transition:opacity 0.2s; }
         .stat-card:hover::before, .stat-card:active::before { opacity:1; }
         .stat-card:active { transform:scale(0.95); }
-        .stat-card .stat-val { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:0.02em; color:var(--text); line-height:1; margin:2px 0 6px; }
+        .stat-card .stat-val { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.02em; color:var(--text); line-height:1; margin:2px 0 6px; }
         .stat-card .stat-val.danger { color:var(--danger); }
-        .stat-card small { font-size:0.66rem; font-weight:700; color:var(--text-dim); letter-spacing:0.03em; text-transform:uppercase; display:block; }
+        .stat-card small { font-size:0.58rem; font-weight:700; color:var(--text-dim); letter-spacing:0.03em; text-transform:uppercase; display:block; }
         .progress-track { width:75%; height:2px; background:var(--border); border-radius:10px; overflow:hidden; margin:4px auto 0; }
         .progress-fill { height:100%; background:var(--primary); border-radius:10px; transition:width 0.6s cubic-bezier(0.34,1.56,0.64,1); }
 
@@ -364,9 +364,9 @@
             cursor:pointer; transition:all 0.2s;
         }
         .action-card:active { transform:scale(0.96); background:var(--card-raised); }
-        .action-card .action-icon { font-size:1.2rem; flex-shrink:0; }
-        .action-card .action-label { font-size:0.68rem; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.03em; display:block; margin-bottom:2px; }
-        .action-card .action-title { font-size:0.82rem; font-weight:700; }
+        .action-card .action-icon { font-size:1rem; flex-shrink:0; }
+        .action-card .action-label { font-size:0.6rem; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.03em; display:block; margin-bottom:2px; }
+        .action-card .action-title { font-size:0.72rem; font-weight:700; }
         .action-card .action-title.save { color:var(--success); }
         .action-card .action-title.restore { color:var(--warning); }
 
@@ -377,14 +377,14 @@
             position:relative; overflow:hidden;
         }
         .section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
-        h3 { font-family:'Inter',sans-serif; font-size:0.76rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--primary); }
+        h3 { font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--primary); }
 
         /* ── CALENDAR ── */
         .cal-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
-        .cal-nav h3 { font-family:'Inter',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.01em; color:var(--text); }
+        .cal-nav h3 { font-family:'Inter',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.01em; color:var(--text); }
         .nav-btn {
             background:var(--card-raised); border:1px solid var(--border-bright); color:var(--primary);
-            width:34px; height:34px; border-radius:var(--radius-xs); font-size:0.84rem;
+            width:34px; height:34px; border-radius:var(--radius-xs); font-size:0.74rem;
             font-weight:900; cursor:pointer; transition:all 0.15s;
             display:flex; align-items:center; justify-content:center;
         }
@@ -392,13 +392,13 @@
         .import-btn {
             width:100%; background:var(--primary-dim); border:1px solid rgba(80,200,120,0.25);
             color:var(--primary); border-radius:var(--radius-xs); padding:10px;
-            font-size:0.8rem; font-weight:700; letter-spacing:0.02em;
+            font-size:0.72rem; font-weight:700; letter-spacing:0.02em;
             cursor:pointer; margin-bottom:12px; transition:all 0.2s;
             font-family:'Inter',sans-serif;
         }
         .import-btn:active { background:var(--primary); color:black; }
         .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
-        .day-label { text-align:center; font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:700; color:#ffffff; padding-bottom:6px; letter-spacing:0.05em; }
+        .day-label { text-align:center; font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:700; color:#ffffff; padding-bottom:6px; letter-spacing:0.05em; }
         .day-box {
             aspect-ratio:1; border-radius:var(--radius-xs);
             display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -411,12 +411,12 @@
 
         .day-box .date-num {
             position:absolute; top:2px; left:4px;
-            font-family:'Inter',sans-serif; font-size:0.76rem;
+            font-family:'Inter',sans-serif; font-size:0.68rem;
             font-weight:700;
             color: #000000;
         }
-        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color: #2d7a47; }
-        .day-box .assign-text { font-size:0.68rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; color: #2d7a47; }
+        .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:0.88rem; letter-spacing:0.03em; line-height:1; color: #2d7a47; }
+        .day-box .assign-text { font-size:0.6rem; font-weight:700; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.03em; text-transform:uppercase; color: #2d7a47; }
 
         /* SHIFT KERJA — tulisan emerald green */
         .day-box[data-shift="M"] .shift-text,
@@ -489,54 +489,54 @@
         .drug-toolbar { display:flex; gap:6px; align-items:center; }
         .btn-rsi {
             background:var(--primary-dim); border:1px solid rgba(80,200,120,0.35); color:var(--primary);
-            border-radius:var(--radius-xs); padding:5px 10px; font-size:0.82rem; font-weight:700;
+            border-radius:var(--radius-xs); padding:5px 10px; font-size:0.72rem; font-weight:700;
             display:flex; align-items:center; gap:4px; cursor:pointer;
             font-family:'Inter',sans-serif; transition:all 0.15s;
         }
         .btn-rsi:active { background:var(--primary); color:black; }
-        #btn-pdf { background:#1a2e45; border:1px solid rgba(65,105,225,0.4); color:#7ab3ff; border-radius:var(--radius-xs); padding:5px 9px; font-size:0.82rem; font-weight:700; cursor:pointer; display:none; font-family:'Inter',sans-serif; }
-        .btn-add-drug { background:none; border:1px solid var(--border-bright); color:var(--primary); border-radius:var(--radius-xs); width:28px; height:28px; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
+        #btn-pdf { background:#1a2e45; border:1px solid rgba(65,105,225,0.4); color:#7ab3ff; border-radius:var(--radius-xs); padding:5px 9px; font-size:0.72rem; font-weight:700; cursor:pointer; display:none; font-family:'Inter',sans-serif; }
+        .btn-add-drug { background:none; border:1px solid var(--border-bright); color:var(--primary); border-radius:var(--radius-xs); width:28px; height:28px; font-size:0.85rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
         .btn-add-drug:active { background:var(--primary); color:black; }
 
         /* ── INPUTS ── */
         input[type="text"], input[type="number"], input[type="date"], input[type="month"], input[type="time"], select {
             background:var(--surface); border:1px solid var(--border-bright); color:var(--text);
             padding:11px 14px; border-radius:var(--radius-xs); width:100%;
-            font-size:0.82rem; margin-bottom:8px; font-family:'Inter',sans-serif;
+            font-size:0.72rem; margin-bottom:8px; font-family:'Inter',sans-serif;
             transition:border-color 0.15s; -webkit-appearance:none;
         }
         input:focus, select:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 2px var(--primary-dim); }
         textarea {
             background:var(--surface); border:1px solid var(--border-bright); color:var(--text);
             padding:12px 14px; border-radius:var(--radius-xs); width:100%;
-            font-family:'Inter',sans-serif; font-size:0.8rem; height:120px;
+            font-family:'Inter',sans-serif; font-size:0.72rem; height:120px;
             resize:none; line-height:1.5; transition:border-color 0.15s;
         }
         textarea:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 2px var(--primary-dim); }
-        label { font-family:'Inter',sans-serif; font-size:0.8rem; color:var(--primary); display:block; margin-bottom:4px; margin-top:6px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; }
-        #drug-search { padding:10px 14px; font-size:0.8rem; background:var(--surface); }
+        label { font-family:'Inter',sans-serif; font-size:0.72rem; color:var(--primary); display:block; margin-bottom:4px; margin-top:6px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; }
+        #drug-search { padding:10px 14px; font-size:0.72rem; background:var(--surface); }
 
         /* ── DRUG ITEM ── */
         .drug-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:flex-start; gap:8px; transition:border-color 0.2s; }
         .drug-item:hover { border-color:var(--border-bright); }
-        .drug-name { font-weight:700; font-size:0.82rem; color:var(--text); margin-bottom:3px; }
-        .drug-ampule { font-family:'Inter',sans-serif; font-size:0.74rem; color:var(--text-dim); margin-bottom:4px; }
-        .drug-prep { font-size:0.82rem; color:var(--primary); font-weight:600; line-height:1.4; }
+        .drug-name { font-weight:700; font-size:0.72rem; color:var(--text); margin-bottom:3px; }
+        .drug-ampule { font-family:'Inter',sans-serif; font-size:0.66rem; color:var(--text-dim); margin-bottom:4px; }
+        .drug-prep { font-size:0.72rem; color:var(--primary); font-weight:600; line-height:1.4; }
 
         /* ── TODO ── */
         .todo-item { display:flex; align-items:center; padding:9px 4px; border-bottom:1px solid var(--border); gap:10px; }
         .todo-item:last-child { border-bottom:none; }
-        .todo-text { flex:1; font-size:0.8rem; color:var(--text); }
+        .todo-text { flex:1; font-size:0.72rem; color:var(--text); }
         .todo-text.done { text-decoration:line-through; color:var(--text-muted); }
-        .todo-del { color:var(--danger); background:none; border:none; font-size:1rem; cursor:pointer; padding:0 4px; opacity:0.5; transition:opacity 0.15s; }
+        .todo-del { color:var(--danger); background:none; border:none; font-size:0.85rem; cursor:pointer; padding:0 4px; opacity:0.5; transition:opacity 0.15s; }
         .todo-del:hover { opacity:1; }
 
         /* ── RECORD CARD ── */
-        .record-card { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--primary); border-radius:var(--radius-sm); padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.86rem; }
+        .record-card { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--primary); border-radius:var(--radius-sm); padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; }
         .btn-delete { background:none; color:var(--danger); border:none; font-size:1.3rem; cursor:pointer; opacity:0.6; }
         .btn-delete:hover { opacity:1; }
 
-        .paid-alert { background:rgba(46,204,113,0.1); color:var(--success); border:1px solid rgba(46,204,113,0.25); padding:8px 12px; border-radius:var(--radius-xs); font-size:0.8rem; margin-bottom:8px; display:none; }
+        .paid-alert { background:rgba(46,204,113,0.1); color:var(--success); border:1px solid rgba(46,204,113,0.25); padding:8px 12px; border-radius:var(--radius-xs); font-size:0.72rem; margin-bottom:8px; display:none; }
 
         /* ── MODAL ── */
         .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px); z-index:1000; }
@@ -556,31 +556,31 @@
         .sheet-handle::before { content:''; display:inline-block; width:36px; height:3px; background:var(--border-bright); border-radius:10px; }
         .sheet-title-bar { display:flex; align-items:center; gap:10px; padding:8px 24px 14px; border-bottom:1px solid var(--border); flex-shrink:0; }
         .sheet-title-bar .sheet-accent { width:3px; height:18px; background:var(--primary); border-radius:10px; flex-shrink:0; }
-        #sheet-title { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:0.02em; color:var(--text); }
+        #sheet-title { font-family:'Bebas Neue',sans-serif; font-size:0.92rem; letter-spacing:0.02em; color:var(--text); }
         #sheet-content-wrap { flex:1; overflow-y:auto; padding:16px 24px 40px; -webkit-overflow-scrolling:touch; }
 
         /* ── BUTTONS ── */
-        .btn-primary { width:100%; background:var(--primary); border:none; color:#000; padding:15px; border-radius:var(--radius-sm); font-weight:700; font-size:0.85rem; cursor:pointer; letter-spacing:0.05em; text-transform:uppercase; font-family:'Inter',sans-serif; transition:all 0.15s; margin-top:10px; }
+        .btn-primary { width:100%; background:var(--primary); border:none; color:#000; padding:15px; border-radius:var(--radius-sm); font-weight:700; font-size:0.75rem; cursor:pointer; letter-spacing:0.05em; text-transform:uppercase; font-family:'Inter',sans-serif; transition:all 0.15s; margin-top:10px; }
         .btn-primary:active { opacity:0.85; transform:scale(0.98); }
-        .btn-secondary { width:100%; background:none; border:1px solid var(--border-bright); color:var(--text-dim); padding:12px; border-radius:var(--radius-sm); font-weight:700; font-size:0.86rem; cursor:pointer; letter-spacing:0.05em; font-family:'Inter',sans-serif; margin-top:8px; transition:all 0.15s; }
+        .btn-secondary { width:100%; background:none; border:1px solid var(--border-bright); color:var(--text-dim); padding:12px; border-radius:var(--radius-sm); font-weight:700; font-size:0.75rem; cursor:pointer; letter-spacing:0.05em; font-family:'Inter',sans-serif; margin-top:8px; transition:all 0.15s; }
         .btn-secondary:active { background:var(--card-raised); }
-        .btn-danger { width:100%; background:none; border:1px solid rgba(255,82,82,0.35); color:var(--danger); padding:12px; border-radius:var(--radius-sm); font-weight:700; font-size:0.86rem; cursor:pointer; font-family:'Inter',sans-serif; margin-top:8px; transition:all 0.15s; }
+        .btn-danger { width:100%; background:none; border:1px solid rgba(255,82,82,0.35); color:var(--danger); padding:12px; border-radius:var(--radius-sm); font-weight:700; font-size:0.75rem; cursor:pointer; font-family:'Inter',sans-serif; margin-top:8px; transition:all 0.15s; }
         .btn-danger:active { background:rgba(255,82,82,0.1); }
 
         #shift-parse-preview { min-height:36px; margin-top:4px; }
-        .preview-ok { font-size:0.84rem; color:#aaa; padding:8px 12px; background:var(--surface); border-radius:var(--radius-xs); border:1px solid var(--border); font-family:'Inter',sans-serif; }
-        .preview-err { font-size:0.8rem; color:var(--danger); padding:8px 12px; background:rgba(255,82,82,0.05); border-radius:var(--radius-xs); border:1px solid rgba(255,82,82,0.25); }
+        .preview-ok { font-size:0.74rem; color:#aaa; padding:8px 12px; background:var(--surface); border-radius:var(--radius-xs); border:1px solid var(--border); font-family:'Inter',sans-serif; }
+        .preview-err { font-size:0.72rem; color:var(--danger); padding:8px 12px; background:rgba(255,82,82,0.05); border-radius:var(--radius-xs); border:1px solid rgba(255,82,82,0.25); }
 
-        .rsi-group-header { background:linear-gradient(90deg, var(--primary-dim), transparent); color:var(--primary); border:1px solid rgba(80,200,120,0.18); font-size:0.82rem; font-weight:900; letter-spacing:0.03em; text-transform:uppercase; padding:6px 10px; border-radius:var(--radius-xs); margin-bottom:6px; margin-top:12px; font-family:'Inter',sans-serif; }
+        .rsi-group-header { background:linear-gradient(90deg, var(--primary-dim), transparent); color:var(--primary); border:1px solid rgba(80,200,120,0.18); font-size:0.72rem; font-weight:900; letter-spacing:0.03em; text-transform:uppercase; padding:6px 10px; border-radius:var(--radius-xs); margin-bottom:6px; margin-top:12px; font-family:'Inter',sans-serif; }
 
         .claim-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); }
         .claim-row:last-child { border-bottom:none; }
         .claim-cat-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-        .claim-badge { font-size:0.74rem; background:var(--primary); color:#000; font-weight:900; padding:2px 8px; border-radius:20px; }
+        .claim-badge { font-size:0.66rem; background:var(--primary); color:#000; font-weight:900; padding:2px 8px; border-radius:20px; }
         .claim-divider { height:1px; background:var(--border); margin:12px 0; }
 
         .selection-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; }
-        .select-btn { background:var(--surface); padding:14px 4px; border-radius:var(--radius-sm); text-align:center; font-weight:700; border:1px solid var(--border); color:var(--text); font-size:0.85rem; cursor:pointer; transition:all 0.15s; }
+        .select-btn { background:var(--surface); padding:14px 4px; border-radius:var(--radius-sm); text-align:center; font-weight:700; border:1px solid var(--border); color:var(--text); font-size:0.75rem; cursor:pointer; transition:all 0.15s; }
         .select-btn:active { background:var(--primary); color:black; border-color:var(--primary); }
 
         /* ── MINI TOOLS ── */
@@ -611,7 +611,7 @@
 
         .mini-tools-tag {
             font-family: 'Inter', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
@@ -644,7 +644,7 @@
             flex-shrink: 0;
             padding: 10px 14px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.02em;
             text-transform: uppercase;
@@ -691,12 +691,12 @@
 
         .nursing-note-meta {
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             color: var(--text-dim);
         }
 
         .nursing-note-text {
-            font-size: 0.86rem;
+            font-size: 0.75rem;
             line-height: 1.5;
             color: var(--text);
             white-space: pre-wrap;
@@ -711,7 +711,7 @@
 
         .nursing-tag {
             font-family: 'Inter', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             font-weight: 700;
             padding: 2px 7px;
             border-radius: 20px;
@@ -726,14 +726,14 @@
 
         .nursing-search {
             padding: 10px 14px !important;
-            font-size: 0.78rem !important;
+            font-size: 0.7rem !important;
             margin-bottom: 10px !important;
         }
 
         .nursing-empty {
             text-align: center;
             padding: 20px;
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
             font-family: 'Inter', sans-serif;
         }
@@ -748,7 +748,7 @@
 
         .rsi-panel-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.05rem;
+            font-size: 0.88rem;
             letter-spacing: 0.02em;
             color: var(--primary);
             margin-bottom: 12px;
@@ -774,7 +774,7 @@
 
         .rsi-step-num {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.1rem;
+            font-size: 0.92rem;
             color: var(--primary);
             width: 22px;
             height: 22px;
@@ -790,7 +790,7 @@
 
         .rsi-step-name {
             font-family: 'Inter', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: var(--text);
             letter-spacing: 0.06em;
@@ -804,7 +804,7 @@
 
         .rsi-sub-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-weight: 700;
             color: var(--text-dim);
             letter-spacing: 0.02em;
@@ -813,14 +813,14 @@
         }
 
         .rsi-sub-content {
-            font-size: 0.86rem;
+            font-size: 0.75rem;
             color: var(--text);
             line-height: 1.5;
         }
 
         .rsi-badge {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             letter-spacing: 0.02em;
             padding: 1px 8px;
             border-radius: 20px;
@@ -843,7 +843,7 @@
 
         .rsi-males-letter {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: var(--primary);
             width: 14px;
             flex-shrink: 0;
@@ -851,14 +851,14 @@
         }
 
         .rsi-males-desc {
-            font-size: 0.84rem;
+            font-size: 0.74rem;
             color: var(--text);
             line-height: 1.4;
         }
 
         .rsi-quote {
             font-style: italic;
-            font-size: 0.84rem;
+            font-size: 0.74rem;
             color: var(--primary);
             background: var(--primary-dim);
             border-left: 2px solid var(--primary);
@@ -878,14 +878,14 @@
         .rsi-drug-row:last-child { border-bottom: none; }
 
         .rsi-drug-name {
-            font-size: 0.86rem;
+            font-size: 0.75rem;
             color: var(--text);
             font-weight: 600;
         }
 
         .rsi-drug-dose {
             font-family: 'Inter', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             color: var(--primary);
             font-weight: 700;
             white-space: nowrap;
@@ -893,7 +893,7 @@
         }
 
         .rsi-checklist-item {
-            font-size: 0.84rem;
+            font-size: 0.74rem;
             color: var(--text);
             padding: 3px 0;
             line-height: 1.4;
@@ -912,7 +912,7 @@
             border-radius: var(--radius-xs);
             padding: 6px 4px;
             text-align: center;
-            font-size: 0.74rem;
+            font-size: 0.66rem;
             font-weight: 700;
             color: var(--text);
             line-height: 1.3;
@@ -937,7 +937,7 @@
 
         .rsi-etco2-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             color: var(--text-dim);
             font-weight: 700;
             text-transform: uppercase;
@@ -946,7 +946,7 @@
 
         .rsi-etco2-val {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.1rem;
+            font-size: 0.92rem;
             letter-spacing: 0.06em;
             color: var(--success);
             filter: drop-shadow(0 0 4px rgba(46,204,113,0.4));
@@ -960,7 +960,7 @@
 
         .rsi-post-tag {
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-weight: 700;
             padding: 3px 9px;
             border-radius: 20px;
@@ -977,7 +977,7 @@
             border-radius: var(--radius-xs);
             padding: 5px 9px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.15s;
@@ -1006,19 +1006,19 @@
             width: 28px; height: 28px; border-radius: 50%;
             background: var(--surface); border: 1px solid var(--border);
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.84rem; overflow: hidden; flex-shrink: 0;
+            font-size: 0.74rem; overflow: hidden; flex-shrink: 0;
         }
         .gsync-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .gsync-name {
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem; font-weight: 700;
+            font-size: 0.72rem; font-weight: 700;
             color: var(--text); letter-spacing: 0.04em;
             max-width: 130px; overflow: hidden;
             text-overflow: ellipsis; white-space: nowrap;
         }
         .gsync-status {
             font-family: 'Inter', sans-serif;
-            font-size: 0.66rem; color: var(--text-dim);
+            font-size: 0.58rem; color: var(--text-dim);
             letter-spacing: 0.06em;
         }
         .gsync-status.syncing { color: #f39c12; }
@@ -1031,7 +1031,7 @@
             border-radius: var(--radius-xs);
             padding: 5px 10px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem; font-weight: 700;
+            font-size: 0.72rem; font-weight: 700;
             cursor: pointer; transition: all 0.15s;
             letter-spacing: 0.06em; white-space: nowrap;
         }
@@ -1050,7 +1050,7 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
             cursor: pointer; transition: all 0.15s;
             font-family: 'Inter', sans-serif;
-            font-size: 0.86rem; font-weight: 600; color: #3c4043;
+            font-size: 0.75rem; font-weight: 600; color: #3c4043;
         }
         .gsync-signin-btn:hover { background: #f8f9fa; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
         .gsync-signin-btn:active { background: #f1f3f4; }
@@ -1076,7 +1076,7 @@
         .quick-note-card-header:active { background: var(--card-raised); }
         .quick-note-title {
             font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.6rem;
             font-weight: 700;
             color: var(--text);
             letter-spacing: 0.05em;
@@ -1097,7 +1097,7 @@
             background: none;
             border: none;
             font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.6rem;
             font-weight: 700;
             cursor: pointer;
             padding: 3px 6px;
@@ -1110,7 +1110,7 @@
         .quick-note-action-btn.del { color: var(--danger); border: 1px solid rgba(255,82,82,0.25); }
         .quick-note-action-btn.del:active { background: var(--danger); color: white; }
         .quick-note-chevron {
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
             transition: transform 0.2s;
             flex-shrink: 0;
@@ -1123,7 +1123,7 @@
         }
         .quick-note-card.open .quick-note-body { display: block; }
         .quick-note-text {
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             line-height: 1.6;
             color: var(--text);
             white-space: pre-wrap;
@@ -1149,7 +1149,7 @@
             border-color: var(--primary);
             background: var(--primary-dim);
         }
-        .tool-card-icon { font-size: 1.4rem; line-height: 1; }
+        .tool-card-icon { font-size: 1.15rem; line-height: 1; }
         .tool-card-label {
             font-family: 'Inter', sans-serif;
             font-size: 0.54rem;
@@ -1258,7 +1258,7 @@
         <div class="stat-card" style="cursor:default;">
             <small>Night</small>
             <div class="stat-val danger" id="text-night-count">0</div>
-            <div style="font-size:0.74rem;color:var(--text-muted);margin-top:2px;font-family:'Inter',sans-serif;">THIS MONTH</div>
+            <div style="font-size:0.66rem;color:var(--text-muted);margin-top:2px;font-family:'Inter',sans-serif;">THIS MONTH</div>
         </div>
         <div class="stat-card" onclick="openRecordSheet('CPD')">
             <small>CPD Pts</small>
@@ -1289,8 +1289,8 @@
         <div class="claim-toggle" onclick="toggleClaim()">
             <h3>Claim Summary</h3>
             <div style="display:flex;align-items:center;gap:8px;">
-                <span id="claim-month-label" style="font-size:0.82rem;color:var(--text-dim);font-family:'Inter',sans-serif;"></span>
-                <span id="claim-toggle-icon" style="font-size:0.84rem;color:var(--text-dim);">▼</span>
+                <span id="claim-month-label" style="font-size:0.72rem;color:var(--text-dim);font-family:'Inter',sans-serif;"></span>
+                <span id="claim-toggle-icon" style="font-size:0.74rem;color:var(--text-dim);">▼</span>
             </div>
         </div>
         <div id="claim-body" style="display:none;margin-top:12px;"></div>
@@ -1312,7 +1312,7 @@
             <button onclick="openAddQuickNote()" class="btn-add-drug">+</button>
         </div>
         <div id="quick-notes-list"></div>
-        <div id="quick-notes-empty" style="text-align:center;padding:18px 0;font-size:0.82rem;color:var(--text-muted);font-family:'Inter',sans-serif;">📝 No notes. Tap + to add.</div>
+        <div id="quick-notes-empty" style="text-align:center;padding:18px 0;font-size:0.72rem;color:var(--text-muted);font-family:'Inter',sans-serif;">📝 No notes. Tap + to add.</div>
     </div>
 
     <!-- NURSING NOTE -->
@@ -1388,7 +1388,7 @@
                 </div>
             </div>
             <div class="rsi-step">
-                <div class="rsi-step-header"><span class="rsi-step-num">3</span><span class="rsi-step-name">Pretreatment <span style="font-size:0.82rem;font-weight:400;opacity:0.6;">(Analgesic)</span></span></div>
+                <div class="rsi-step-header"><span class="rsi-step-num">3</span><span class="rsi-step-name">Pretreatment <span style="font-size:0.72rem;font-weight:400;opacity:0.6;">(Analgesic)</span></span></div>
                 <div class="rsi-step-body">
                     <div class="rsi-drug-row"><span class="rsi-drug-name">IV Fentanyl</span><span class="rsi-drug-dose">1–2 mcg/kg</span></div>
                     <div class="rsi-drug-row"><span class="rsi-drug-name">IV Lignocaine</span><span class="rsi-drug-dose">1–2 mg/kg</span></div>
@@ -1403,8 +1403,8 @@
                     <div class="rsi-drug-row"><span class="rsi-drug-name">IV Ketamine</span><span class="rsi-drug-dose">1–2 mg/kg</span></div>
                     <div class="rsi-drug-row" style="margin-bottom:12px;"><span class="rsi-drug-name">IV Propofol</span><span class="rsi-drug-dose">1–2 mg/kg</span></div>
                     <div class="rsi-sub-label" style="margin-bottom:6px;">⚡ Paralysis (Muscle Relaxant)</div>
-                    <div class="rsi-drug-row"><span class="rsi-drug-name">IV Suxamethonium <span style="opacity:0.6;font-size:0.8rem;">(Scoline)</span></span><span class="rsi-drug-dose">1–2 mg/kg</span></div>
-                    <div class="rsi-drug-row"><span class="rsi-drug-name">IV Rocuronium <span style="opacity:0.6;font-size:0.8rem;">(Esmeron)</span></span><span class="rsi-drug-dose">0.6–1 mg/kg</span></div>
+                    <div class="rsi-drug-row"><span class="rsi-drug-name">IV Suxamethonium <span style="opacity:0.6;font-size:0.72rem;">(Scoline)</span></span><span class="rsi-drug-dose">1–2 mg/kg</span></div>
+                    <div class="rsi-drug-row"><span class="rsi-drug-name">IV Rocuronium <span style="opacity:0.6;font-size:0.72rem;">(Esmeron)</span></span><span class="rsi-drug-dose">0.6–1 mg/kg</span></div>
                 </div>
             </div>
             <div class="rsi-step">
@@ -1421,11 +1421,11 @@
                     <div class="rsi-checklist-item">✅ Visible chest rise</div>
                     <div class="rsi-sub-label" style="margin:8px 0 6px;">🩺 5-Point Auscultation</div>
                     <div class="rsi-auscult-grid">
-                        <div class="rsi-auscult-item danger">Epigastrium<br><span style="font-size:0.68rem;opacity:0.7;">Rule out esophageal</span></div>
-                        <div class="rsi-auscult-item">R Upper<br><span style="font-size:0.68rem;opacity:0.7;">Lung</span></div>
-                        <div class="rsi-auscult-item">L Upper<br><span style="font-size:0.68rem;opacity:0.7;">Lung</span></div>
-                        <div class="rsi-auscult-item">R Lower<br><span style="font-size:0.68rem;opacity:0.7;">Lung</span></div>
-                        <div class="rsi-auscult-item">L Lower<br><span style="font-size:0.68rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item danger">Epigastrium<br><span style="font-size:0.6rem;opacity:0.7;">Rule out esophageal</span></div>
+                        <div class="rsi-auscult-item">R Upper<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item">L Upper<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item">R Lower<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item">L Lower<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
                     </div>
                     <div class="rsi-sub-label" style="margin:10px 0 4px;">📊 EtCO₂ (Waveform Capnography)</div>
                     <div class="rsi-etco2-bar">
@@ -1460,33 +1460,33 @@
         <div id="tool-lytic" class="tool-panel" style="display:none!important;">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#f39c12;filter:drop-shadow(0 0 6px rgba(243,156,18,0.4));">⚡ Lytic Cocktail</div>
-                <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:12px;font-family:'Inter',sans-serif;letter-spacing:0.06em;text-transform:uppercase;">Correction for Hyperkalaemia</div>
+                <div style="font-size:0.6rem;color:var(--text-dim);margin-bottom:12px;font-family:'Inter',sans-serif;letter-spacing:0.06em;text-transform:uppercase;">Correction for Hyperkalaemia</div>
                 <div class="rsi-step" style="border-color:rgba(243,156,18,0.2);">
                     <div class="rsi-step-body">
                         <div class="rsi-drug-row">
                             <div style="flex:1;">
                                 <div class="rsi-drug-name">IV Calcium Gluconate 10%</div>
-                                <div style="font-size:0.8rem;color:var(--text-dim);margin-top:3px;line-height:1.5;">Slow bolus 10mls over 2–5 min<br>Cardiac monitoring — bradycardia, hypotension, arrhythmias</div>
+                                <div style="font-size:0.72rem;color:var(--text-dim);margin-top:3px;line-height:1.5;">Slow bolus 10mls over 2–5 min<br>Cardiac monitoring — bradycardia, hypotension, arrhythmias</div>
                             </div>
                             <span class="rsi-drug-dose" style="align-self:flex-start;">10 mls</span>
                         </div>
                         <div class="rsi-drug-row">
                             <div style="flex:1;">
                                 <div class="rsi-drug-name">IV Dextrose 50%</div>
-                                <div style="font-size:0.8rem;color:var(--text-dim);margin-top:3px;line-height:1.5;">Bolus 50mls<br><span style="color:rgba(255,82,82,0.8);">✗ Not required for Hyperglycemia / DKA</span></div>
+                                <div style="font-size:0.72rem;color:var(--text-dim);margin-top:3px;line-height:1.5;">Bolus 50mls<br><span style="color:rgba(255,82,82,0.8);">✗ Not required for Hyperglycemia / DKA</span></div>
                             </div>
                             <span class="rsi-drug-dose" style="align-self:flex-start;">50 mls</span>
                         </div>
                         <div class="rsi-drug-row" style="border-bottom:none;">
                             <div style="flex:1;">
                                 <div class="rsi-drug-name">IV Insulin</div>
-                                <div style="font-size:0.8rem;color:var(--text-dim);margin-top:3px;">Bolus 10 unit</div>
+                                <div style="font-size:0.72rem;color:var(--text-dim);margin-top:3px;">Bolus 10 unit</div>
                             </div>
                             <span class="rsi-drug-dose" style="align-self:flex-start;">10 unit</span>
                         </div>
                     </div>
                 </div>
-                <div style="margin-top:10px;background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:var(--radius-xs);padding:7px 10px;font-size:0.82rem;color:#f39c12;font-weight:700;">
+                <div style="margin-top:10px;background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:var(--radius-xs);padding:7px 10px;font-size:0.72rem;color:#f39c12;font-weight:700;">
                     ⚠️ Repeat BUSE after 1 hour
                 </div>
             </div>
@@ -1494,73 +1494,73 @@
         <div id="tool-drugcalc" class="tool-panel" style="display:none!important;">
             <div class="rsi-panel">
                 <div class="rsi-panel-title" style="color:#c678dd;filter:drop-shadow(0 0 6px rgba(198,120,221,0.4));">🧮 Drug Calculation</div>
-                <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:14px;font-family:'Inter',sans-serif;letter-spacing:0.06em;text-transform:uppercase;">IV Infusion Protocol</div>
+                <div style="font-size:0.6rem;color:var(--text-dim);margin-bottom:14px;font-family:'Inter',sans-serif;letter-spacing:0.06em;text-transform:uppercase;">IV Infusion Protocol</div>
                 <div class="rsi-step" style="border-color:rgba(198,120,221,0.2);margin-bottom:0;">
                     <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(198,120,221,0.1),transparent);border-bottom-color:rgba(198,120,221,0.2);">
-                        <span style="font-size:0.9rem;">💊</span>
+                        <span style="font-size:0.78rem;">💊</span>
                         <div>
                             <div class="rsi-step-name">Noradrenaline / Lovophed</div>
-                            <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--text-dim);margin-top:2px;">4mg/4mls — 1 amp</div>
+                            <div style="font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--text-dim);margin-top:2px;">4mg/4mls — 1 amp</div>
                         </div>
                     </div>
                     <div class="rsi-step-body">
                         <div class="rsi-sub-label" style="margin-bottom:6px;">Preparation</div>
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;">
                             <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:3px;">Single Strength</div>
-                                <div style="font-size:0.82rem;color:var(--text);font-weight:600;">1 amp in 50ml D5%</div>
-                                <div style="font-family:'Inter',sans-serif;font-size:0.74rem;color:#c678dd;margin-top:2px;">= 0.08 mg/ml</div>
+                                <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:3px;">Single Strength</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">1 amp in 50ml D5%</div>
+                                <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:#c678dd;margin-top:2px;">= 0.08 mg/ml</div>
                             </div>
                             <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;">
-                                <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:3px;">Double Strength</div>
-                                <div style="font-size:0.82rem;color:var(--text);font-weight:600;">2 amp in 50ml D5%</div>
-                                <div style="font-family:'Inter',sans-serif;font-size:0.74rem;color:#c678dd;margin-top:2px;">= 0.16 mg/ml</div>
+                                <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:3px;">Double Strength</div>
+                                <div style="font-size:0.72rem;color:var(--text);font-weight:600;">2 amp in 50ml D5%</div>
+                                <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:#c678dd;margin-top:2px;">= 0.16 mg/ml</div>
                             </div>
                         </div>
                         <div class="rsi-sub-label" style="margin-bottom:6px;">Formula</div>
                         <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 12px;margin-bottom:12px;">
                             <div style="text-align:center;">
-                                <div style="font-size:0.82rem;color:var(--text);margin-bottom:4px;">mg/hr = Dose (mcg/kg/min) × BW (kg) × 60</div>
+                                <div style="font-size:0.72rem;color:var(--text);margin-bottom:4px;">mg/hr = Dose (mcg/kg/min) × BW (kg) × 60</div>
                                 <div style="height:1px;background:var(--border-bright);margin:4px 24px;"></div>
-                                <div style="font-size:0.76rem;color:var(--text-dim);">1000 mcg/mg</div>
+                                <div style="font-size:0.68rem;color:var(--text-dim);">1000 mcg/mg</div>
                             </div>
                             <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);text-align:center;">
-                                <div style="font-size:0.82rem;color:var(--text);margin-bottom:4px;">Rate (ml/hr) = Dose (mg/hr)</div>
+                                <div style="font-size:0.72rem;color:var(--text);margin-bottom:4px;">Rate (ml/hr) = Dose (mg/hr)</div>
                                 <div style="height:1px;background:var(--border-bright);margin:4px 40px;"></div>
-                                <div style="font-size:0.76rem;color:var(--text-dim);">Concentration (mg/ml)</div>
+                                <div style="font-size:0.68rem;color:var(--text-dim);">Concentration (mg/ml)</div>
                             </div>
                         </div>
                         <div class="rsi-sub-label" style="margin-bottom:8px;">Calculator</div>
                         <div style="background:rgba(198,120,221,0.06);border:1px solid rgba(198,120,221,0.2);border-radius:var(--radius-xs);padding:12px;">
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
                                 <div>
-                                    <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Dose (mcg/kg/min)</div>
-                                    <input type="number" id="nora-dose" placeholder="0.05" step="0.01" min="0.05" max="0.15" oninput="calcNora()" style="background:var(--surface);border:1px solid rgba(198,120,221,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Dose (mcg/kg/min)</div>
+                                    <input type="number" id="nora-dose" placeholder="0.05" step="0.01" min="0.05" max="0.15" oninput="calcNora()" style="background:var(--surface);border:1px solid rgba(198,120,221,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
                                 </div>
                                 <div>
-                                    <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Weight (kg)</div>
-                                    <input type="number" id="nora-weight" placeholder="cth: 70" step="0.1" min="0" oninput="calcNora()" style="background:var(--surface);border:1px solid rgba(198,120,221,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.82rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Weight (kg)</div>
+                                    <input type="number" id="nora-weight" placeholder="cth: 70" step="0.1" min="0" oninput="calcNora()" style="background:var(--surface);border:1px solid rgba(198,120,221,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
                                 </div>
                             </div>
                             <div id="nora-result" style="display:none;">
                                 <div style="height:1px;background:rgba(198,120,221,0.2);margin-bottom:10px;"></div>
-                                <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--text-dim);margin-bottom:6px;">
+                                <div style="font-family:'Inter',sans-serif;font-size:0.72rem;color:var(--text-dim);margin-bottom:6px;">
                                     mg/hr = <span id="nora-dose-show">—</span> × <span id="nora-wt-show">—</span> × 60 ÷ 1000 = <span id="nora-mghr" style="color:#c678dd;font-weight:700;">—</span>
                                 </div>
                                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">
                                     <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;">
-                                        <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">Single Strength</div>
-                                        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#c678dd;letter-spacing:0.04em;line-height:1;" id="nora-single">—</div>
-                                        <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">ml/hr</div>
+                                        <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">Single Strength</div>
+                                        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#c678dd;letter-spacing:0.04em;line-height:1;" id="nora-single">—</div>
+                                        <div style="font-size:0.72rem;color:var(--text-dim);margin-top:2px;">ml/hr</div>
                                     </div>
                                     <div style="background:var(--card);border:1px solid rgba(198,120,221,0.3);border-radius:var(--radius-xs);padding:8px 10px;text-align:center;">
-                                        <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">Double Strength</div>
-                                        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#c678dd;letter-spacing:0.04em;line-height:1;filter:drop-shadow(0 0 6px rgba(198,120,221,0.5));" id="nora-double">—</div>
-                                        <div style="font-size:0.82rem;color:var(--text-dim);margin-top:2px;">ml/hr</div>
+                                        <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">Double Strength</div>
+                                        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#c678dd;letter-spacing:0.04em;line-height:1;filter:drop-shadow(0 0 6px rgba(198,120,221,0.5));" id="nora-double">—</div>
+                                        <div style="font-size:0.72rem;color:var(--text-dim);margin-top:2px;">ml/hr</div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="nora-placeholder" style="text-align:center;padding:8px 0;font-size:0.68rem;color:var(--text-muted);font-family:'Inter',sans-serif;">
+                            <div id="nora-placeholder" style="text-align:center;padding:8px 0;font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;">
                                 Enter dose and weight to calculate rate
                             </div>
                         </div>
@@ -1577,7 +1577,7 @@
     <!-- EMERGENCY DRUG -->
     <div class="section">
         <div class="section-header" style="cursor:pointer;" onclick="openAllDrugsOverlay()">
-            <h3 style="display:flex;align-items:center;gap:6px;">Emergency Drug <span style="font-size:0.68rem;color:var(--text-muted);font-family:'Inter',sans-serif;font-weight:700;letter-spacing:0.02em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">VIEW ALL</span></h3>
+            <h3 style="display:flex;align-items:center;gap:6px;">Emergency Drug <span style="font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;font-weight:700;letter-spacing:0.02em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">VIEW ALL</span></h3>
             <div class="drug-toolbar" onclick="event.stopPropagation()">
                 <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
                 <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
@@ -1597,7 +1597,7 @@
     <div class="sheet-title-bar">
         <div class="sheet-accent" id="tool-overlay-accent"></div>
         <div id="tool-overlay-title">Note</div>
-        <button onclick="closeToolOverlay()" style="margin-left:auto;background:none;border:none;color:var(--text-dim);font-size:1.1rem;cursor:pointer;padding:0 4px;line-height:1;">✕</button>
+        <button onclick="closeToolOverlay()" style="margin-left:auto;background:none;border:none;color:var(--text-dim);font-size:0.92rem;cursor:pointer;padding:0 4px;line-height:1;">✕</button>
     </div>
     <div id="tool-overlay-content-wrap" style="flex:1;overflow-y:auto;padding:16px 20px 40px;-webkit-overflow-scrolling:touch;">
         <div id="tool-overlay-content"></div>
@@ -1611,7 +1611,7 @@
     <div class="sheet-title-bar">
         <div class="sheet-accent"></div>
         <div id="sheet-title">Butiran</div>
-        <button onclick="closeSheet()" style="margin-left:auto;background:none;border:none;color:var(--text-dim);font-size:1.1rem;cursor:pointer;padding:0 4px;line-height:1;">✕</button>
+        <button onclick="closeSheet()" style="margin-left:auto;background:none;border:none;color:var(--text-dim);font-size:0.92rem;cursor:pointer;padding:0 4px;line-height:1;">✕</button>
     </div>
     <div id="sheet-content-wrap">
         <div id="sheet-content"></div>
@@ -1859,7 +1859,7 @@ function openAllDrugsOverlay() {
 
     const drugs = [...(store.drugs || [])].map((d,i)=>({...d,_orig:i})).sort((a,b)=>a.name.localeCompare(b.name,'ms',{sensitivity:'base'}));
     if (drugs.length === 0) {
-        content.innerHTML = '<div style="text-align:center;padding:32px 0;font-size:0.84rem;color:var(--text-muted);font-family:\'Inter\',sans-serif;">No drugs saved.<br>Add a drug using the + button</div>';
+        content.innerHTML = '<div style="text-align:center;padding:32px 0;font-size:0.74rem;color:var(--text-muted);font-family:\'Inter\',sans-serif;">No drugs saved.<br>Add a drug using the + button</div>';
     } else {
         content.innerHTML = drugs.map((d) =>
             `<div class="drug-item">
@@ -1869,8 +1869,8 @@ function openAllDrugsOverlay() {
                     <div class="drug-prep">${d.prep}</div>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;margin-left:8px;">
-                    <button onclick="event.stopPropagation();closeToolOverlay();setTimeout(()=>openEditDrugSheet(${d._orig}),200);" style="background:none;color:var(--success);border:none;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">EDIT</button>
-                    <button onclick="event.stopPropagation();deleteDrugFromOverlay(${d._orig});" style="background:none;color:var(--danger);border:none;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">DEL</button>
+                    <button onclick="event.stopPropagation();closeToolOverlay();setTimeout(()=>openEditDrugSheet(${d._orig}),200);" style="background:none;color:var(--success);border:none;font-size:0.68rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">EDIT</button>
+                    <button onclick="event.stopPropagation();deleteDrugFromOverlay(${d._orig});" style="background:none;color:var(--danger);border:none;font-size:0.68rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">DEL</button>
                 </div>
             </div>`
         ).join('');
@@ -1965,7 +1965,7 @@ function renderNursingNotes(query = '') {
         return `<div class="nursing-note-card">
             <div class="nursing-note-card-header">
                 <div class="nursing-note-meta">📅 ${dispDate} ${n.time ? '· 🕒 ' + n.time : ''}${n.patient ? ' · 👤 ' + n.patient : ''}</div>
-                <button onclick="openAddNursingNote(${realIdx})" style="background:none;border:none;color:var(--primary);font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;padding:0;">EDIT</button>
+                <button onclick="openAddNursingNote(${realIdx})" style="background:none;border:none;color:var(--primary);font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;cursor:pointer;padding:0;">EDIT</button>
             </div>
             <div class="nursing-note-text">${n.text}</div>
             <div class="nursing-note-tags"><span class="nursing-tag ${n.category}">${catInfo.label}</span></div>
@@ -2031,7 +2031,7 @@ function openQuickNoteOverlay(id) {
                 <button class="btn-primary" style="flex:1;" onclick="closeToolOverlay();setTimeout(()=>openEditQuickNote('${note.id}'),200);">✏️ EDIT NOTA</button>
             </div>`;
     } else {
-        content.innerHTML = `<div style="text-align:center;padding:32px 0;font-size:0.84rem;color:var(--text-muted);font-family:'Inter',sans-serif;">No note content.</div>
+        content.innerHTML = `<div style="text-align:center;padding:32px 0;font-size:0.74rem;color:var(--text-muted);font-family:'Inter',sans-serif;">No note content.</div>
             <button class="btn-primary" onclick="closeToolOverlay();setTimeout(()=>openEditQuickNote('${note.id}'),200);">✏️ TAMBAH KANDUNGAN</button>`;
     }
 
@@ -2168,13 +2168,13 @@ function updateShiftSummary() {
     const todayEl=document.getElementById('summary-today');
     if(todayEl){
         todayEl.innerHTML=todayShift;
-        getRemArr(todayEntry).forEach(r=>{ todayEl.innerHTML+=`<div style="font-size:0.74rem;color:#8888ff;margin-top:3px;">🔔 ${r}</div>`; });
+        getRemArr(todayEntry).forEach(r=>{ todayEl.innerHTML+=`<div style="font-size:0.66rem;color:#8888ff;margin-top:3px;">🔔 ${r}</div>`; });
     }
     // Esok — shift + reminder esok
     const tomEl=document.getElementById('summary-tomorrow');
     if(tomEl){
         tomEl.innerHTML=tomShift;
-        getRemArr(tomEntry).forEach(r=>{ tomEl.innerHTML+=`<div style="font-size:0.74rem;color:#8888ff;margin-top:3px;">🔔 ${r}</div>`; });
+        getRemArr(tomEntry).forEach(r=>{ tomEl.innerHTML+=`<div style="font-size:0.66rem;color:#8888ff;margin-top:3px;">🔔 ${r}</div>`; });
     }
     // Only show reminders for today and tomorrow — hide the extra reminders panel
     const remDiv=document.getElementById('summary-reminders');
@@ -2185,8 +2185,8 @@ function searchDrugs() {
     const q=document.getElementById('drug-search').value.toLowerCase();
     const results=document.getElementById('drug-results'); results.innerHTML=''; if(!q) return;
     const matched=store.drugs.map((d,idx)=>({d,idx})).filter(({d})=>d.name.toLowerCase().includes(q));
-    if(matched.length===0){ results.innerHTML='<div style="font-size:0.84rem;color:var(--text-muted);text-align:center;padding:16px;">No drug found.</div>'; return; }
-    matched.forEach(({d,idx})=>{ const div=document.createElement('div'); div.className='drug-item'; div.innerHTML=`<div style="flex:1;min-width:0;"><div class="drug-name">${d.name}</div><div class="drug-ampule">${d.ampule||'—'}</div><div class="drug-prep">${d.prep}</div></div><div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;margin-left:8px;"><button onclick="event.stopPropagation();openEditDrugSheet(${idx})" style="background:none;color:var(--success);border:none;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">EDIT</button><button onclick="event.stopPropagation();deleteDrug(${idx})" style="background:none;color:var(--danger);border:none;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">DEL</button></div>`; results.appendChild(div); });
+    if(matched.length===0){ results.innerHTML='<div style="font-size:0.74rem;color:var(--text-muted);text-align:center;padding:16px;">No drug found.</div>'; return; }
+    matched.forEach(({d,idx})=>{ const div=document.createElement('div'); div.className='drug-item'; div.innerHTML=`<div style="flex:1;min-width:0;"><div class="drug-name">${d.name}</div><div class="drug-ampule">${d.ampule||'—'}</div><div class="drug-prep">${d.prep}</div></div><div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;margin-left:8px;"><button onclick="event.stopPropagation();openEditDrugSheet(${idx})" style="background:none;color:var(--success);border:none;font-size:0.68rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">EDIT</button><button onclick="event.stopPropagation();deleteDrug(${idx})" style="background:none;color:var(--danger);border:none;font-size:0.68rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">DEL</button></div>`; results.appendChild(div); });
 }
 function openAddDrugSheet() { document.getElementById('sheet-title').innerText="Add Drug"; document.getElementById('sheet-content').innerHTML=`<label>Drug Name</label><input type="text" id="drug-name-in" placeholder="cth: IV Morphine"><label>Dose / Ampule</label><input type="text" id="drug-ampule-in" placeholder="cth: 10mg/ml"><label>Preparation</label><textarea id="drug-prep-in" style="height:90px;" placeholder="cth: 10mg in 10mls NS"></textarea><button class="btn-primary" onclick="saveDrug()">SAVE</button>`; openSheet(); }
 function saveDrug() { const name=document.getElementById('drug-name-in').value.trim(), ampule=document.getElementById('drug-ampule-in').value.trim(), prep=document.getElementById('drug-prep-in').value.trim(); if(name&&prep){store.drugs.push({name,ampule:ampule||'—',prep}); saveData(); closeSheet(); searchDrugs();} }
@@ -2202,7 +2202,7 @@ function openShiftPicker(key) {
     document.getElementById('sheet-content').innerHTML=`
         <label>Kod Shift</label>
         <input type="text" id="shift-input" placeholder="cth: N# atau M/E*" value="${currentRaw}"
-            style="font-size:1.2rem;font-weight:700;text-align:center;letter-spacing:0.02em;"
+            style="font-size:1rem;font-weight:700;text-align:center;letter-spacing:0.02em;"
             oninput="this.value=this.value.toUpperCase()"
             onkeydown="if(event.key==='Enter') applyTypedShift('${key}')">
         <div id="shift-parse-preview"></div>
@@ -2253,14 +2253,14 @@ function renderReminderSheetContent(key) {
     let listHTML='';
     rems.forEach((r,i)=>{
         listHTML+=`<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 12px;">
-            <span style="flex:1;font-size:0.86rem;color:var(--text);line-height:1.5;word-break:break-word;">🔔 ${r}</span>
+            <span style="flex:1;font-size:0.75rem;color:var(--text);line-height:1.5;word-break:break-word;">🔔 ${r}</span>
             <div style="display:flex;gap:6px;flex-shrink:0;">
-                <button onclick="openEditReminderItem('${key}',${i})" style="background:none;border:1px solid rgba(80,200,120,0.25);color:var(--primary);border-radius:6px;padding:4px 8px;font-family:'Inter',sans-serif;font-size:0.68rem;font-weight:700;cursor:pointer;">EDIT</button>
-                <button onclick="deleteReminderItem('${key}',${i})" style="background:none;border:1px solid rgba(255,82,82,0.25);color:var(--danger);border-radius:6px;padding:4px 8px;font-family:'Inter',sans-serif;font-size:0.68rem;font-weight:700;cursor:pointer;">DEL</button>
+                <button onclick="openEditReminderItem('${key}',${i})" style="background:none;border:1px solid rgba(80,200,120,0.25);color:var(--primary);border-radius:6px;padding:4px 8px;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:700;cursor:pointer;">EDIT</button>
+                <button onclick="deleteReminderItem('${key}',${i})" style="background:none;border:1px solid rgba(255,82,82,0.25);color:var(--danger);border-radius:6px;padding:4px 8px;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:700;cursor:pointer;">DEL</button>
             </div>
         </div>`;
     });
-    if(!listHTML) listHTML=`<div style="text-align:center;padding:14px 0;font-size:0.82rem;color:var(--text-muted);font-family:'Inter',sans-serif;">No reminders. Tap + to add.</div>`;
+    if(!listHTML) listHTML=`<div style="text-align:center;padding:14px 0;font-size:0.72rem;color:var(--text-muted);font-family:'Inter',sans-serif;">No reminders. Tap + to add.</div>`;
     document.getElementById('sheet-content').innerHTML=`
         ${listHTML}
         <div id="reminder-add-area" style="display:none;margin-top:4px;">
@@ -2304,8 +2304,8 @@ function openRPLLinkSheet(key) {
     const linkedDates=Object.keys(store.calendar).filter(k=>store.calendar[k].s==='RPL'&&store.calendar[k].rplLinked&&k!==key).map(k=>store.calendar[k].rplLinked);
     const available=store.rpl.records.filter(r=>!linkedDates.includes(r.d1));
     let html='';
-    if(available.length===0) html+=`<div style="font-size:0.84rem;color:var(--text-dim);padding:12px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-xs);margin-bottom:12px;">No RPL records. Add an RPL record first.</div>`;
-    else { html+=`<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">`; available.forEach(r=>{ const isLinked=store.calendar[key]&&store.calendar[key].rplLinked===r.d1; const dispPH=toMY(r.d1), dispRepl=r.isPaid?'PAID':toMY(r.d2); html+=`<div onclick="linkRPL('${key}','${r.d1}')" style="background:${isLinked?'var(--primary-dim)':'var(--surface)'};border:1px solid ${isLinked?'var(--primary)':'var(--border)'};border-radius:var(--radius-sm);padding:12px;cursor:pointer;"><div style="font-weight:700;font-size:0.8rem;color:${isLinked?'var(--primary)':'var(--text)'};margin-bottom:3px;">${r.t}</div><div style="font-size:0.68rem;color:var(--text-dim);">PH: ${dispPH} → Ganti: ${dispRepl}</div>${isLinked?'<div style="font-size:0.74rem;color:var(--primary);margin-top:4px;">✓ Sedang dipaut</div>':''}</div>`; }); html+=`</div>`; }
+    if(available.length===0) html+=`<div style="font-size:0.74rem;color:var(--text-dim);padding:12px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-xs);margin-bottom:12px;">No RPL records. Add an RPL record first.</div>`;
+    else { html+=`<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">`; available.forEach(r=>{ const isLinked=store.calendar[key]&&store.calendar[key].rplLinked===r.d1; const dispPH=toMY(r.d1), dispRepl=r.isPaid?'PAID':toMY(r.d2); html+=`<div onclick="linkRPL('${key}','${r.d1}')" style="background:${isLinked?'var(--primary-dim)':'var(--surface)'};border:1px solid ${isLinked?'var(--primary)':'var(--border)'};border-radius:var(--radius-sm);padding:12px;cursor:pointer;"><div style="font-weight:700;font-size:0.72rem;color:${isLinked?'var(--primary)':'var(--text)'};margin-bottom:3px;">${r.t}</div><div style="font-size:0.6rem;color:var(--text-dim);">PH: ${dispPH} → Ganti: ${dispRepl}</div>${isLinked?'<div style="font-size:0.66rem;color:var(--primary);margin-top:4px;">✓ Sedang dipaut</div>':''}</div>`; }); html+=`</div>`; }
     if(store.calendar[key]&&store.calendar[key].rplLinked) html+=`<button class="btn-danger" onclick="unlinkRPL('${key}')">✕ Buang Pautan RPL</button>`;
     html+=`<button class="btn-secondary" onclick="openShiftPicker('${key}')">✏️ Tukar Shift Lain</button>`;
     document.getElementById('sheet-content').innerHTML=html; openSheet();
@@ -2319,8 +2319,8 @@ function openPHLinkSheet(key) {
     const linkedPHDates=Object.keys(store.calendar).filter(k=>store.calendar[k].s==='PH'&&store.calendar[k].phLinked&&k!==key).map(k=>store.calendar[k].phLinked);
     const available=ph2026.filter(p=>!linkedPHDates.includes(p.d));
     let html='';
-    if(available.length===0) html+=`<div style="font-size:0.84rem;color:var(--text-dim);padding:12px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-xs);margin-bottom:12px;">No PH records available.</div>`;
-    else { html+=`<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">`; available.forEach(p=>{ const isLinked=store.calendar[key]&&store.calendar[key].phLinked===p.d; const dispD=toMY(p.d); const paidBadge=p.paid?`<span style="margin-right:4px;">💰</span>`:''; html+=`<div onclick="linkPH('${key}','${p.d}')" style="background:${isLinked?'rgba(229,192,123,0.1)':'var(--surface)'};border:1px solid ${isLinked?'#e5c07b':'var(--border)'};border-radius:var(--radius-sm);padding:12px;cursor:pointer;"><div style="font-weight:700;font-size:0.8rem;color:${isLinked?'#e5c07b':'var(--text)'};margin-bottom:3px;">${paidBadge}${p.n}</div><div style="font-size:0.68rem;color:var(--text-dim);">📅 ${dispD}</div>${isLinked?'<div style="font-size:0.74rem;color:#e5c07b;margin-top:4px;">✓ Sedang dipaut</div>':''}</div>`; }); html+=`</div>`; }
+    if(available.length===0) html+=`<div style="font-size:0.74rem;color:var(--text-dim);padding:12px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-xs);margin-bottom:12px;">No PH records available.</div>`;
+    else { html+=`<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">`; available.forEach(p=>{ const isLinked=store.calendar[key]&&store.calendar[key].phLinked===p.d; const dispD=toMY(p.d); const paidBadge=p.paid?`<span style="margin-right:4px;">💰</span>`:''; html+=`<div onclick="linkPH('${key}','${p.d}')" style="background:${isLinked?'rgba(229,192,123,0.1)':'var(--surface)'};border:1px solid ${isLinked?'#e5c07b':'var(--border)'};border-radius:var(--radius-sm);padding:12px;cursor:pointer;"><div style="font-weight:700;font-size:0.72rem;color:${isLinked?'#e5c07b':'var(--text)'};margin-bottom:3px;">${paidBadge}${p.n}</div><div style="font-size:0.6rem;color:var(--text-dim);">📅 ${dispD}</div>${isLinked?'<div style="font-size:0.66rem;color:#e5c07b;margin-top:4px;">✓ Sedang dipaut</div>':''}</div>`; }); html+=`</div>`; }
     if(store.calendar[key]&&store.calendar[key].phLinked) html+=`<button class="btn-danger" onclick="unlinkPH('${key}')">✕ Buang Pautan PH</button>`;
     html+=`<button class="btn-secondary" onclick="openShiftPicker('${key}')">✏️ Tukar Shift Lain</button>`;
     document.getElementById('sheet-content').innerHTML=html; openSheet();
@@ -2335,7 +2335,7 @@ function renderRecords(type){
     const content=document.getElementById('sheet-content'); let html='<div>';
     if(type==='AL'){ store.al.taken.forEach((d,i)=>html+=`<div class="record-card"><div>Leave: ${toMY(d)}</div><button class="btn-delete" onclick="store.al.taken.splice(${i},1);saveData();renderRecords('AL')">×</button></div>`); html+=`<label>Leave Date</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')">`; }
     else if(type==='RPL'){ store.rpl.records.forEach((r,i)=>html+=`<div class="record-card"><div><b>${r.t}</b><br><small style="color:var(--text-dim)">${toMY(r.d1)} ➔ ${r.isPaid?'PAID':toMY(r.d2)}</small></div><button class="btn-delete" onclick="store.rpl.records.splice(${i},1);saveData();renderRecords('RPL')">×</button></div>`); const recordedDates=store.rpl.records.map(r=>r.d1); const avPH=ph2026.filter(p=>!recordedDates.includes(p.d)); html+=`<div id="paid-alert" class="paid-alert"></div><label>Select PH</label><select id="in-ph-select" onchange="document.getElementById('in-d1').value=this.value;checkPaidPH();"><option value="">-- Select --</option>${avPH.map(p=>{const dp=p.d.split('-');const paidMark=p.paid?'💰 ':'';return`<option value="${p.d}" data-paid="${p.paid}">(${dp[2]}/${dp[1]}) ${paidMark}${p.n}</option>`;}).join('')}</select><input type="date" id="in-d1" hidden><label id="label-rpl">Replacement Date</label><input type="date" id="in-d2" onclick="triggerDatePicker('in-d2')">`; }
-    else if(type==='CPD'){ store.cpd.records.forEach((r,i)=>html+=`<div class="record-card"><div style="flex:1"><b>${r.t}</b><br><small style="color:var(--text-dim)">📅 ${toMY(r.d)} | 🕒 ${r.t1} - ${r.t2}</small></div><div style="font-weight:700;color:var(--success);margin-right:8px;">${r.p} Pts</div><div style="display:flex;flex-direction:column;gap:4px;"><button style="background:none;color:var(--primary);border:none;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;" onclick="editCPD(${i})">EDIT</button><button class="btn-delete" onclick="store.cpd.records.splice(${i},1);saveData();renderRecords('CPD')">×</button></div></div>`); html+=`<input type="hidden" id="cpd-edit-idx" value="-1"><label>Course Name</label><input type="text" id="in-t"><label>Date</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div><label>Start</label><input type="time" id="in-t1"></div><div><label>End</label><input type="time" id="in-t2"></div></div><label>Points</label><input type="number" id="in-p">`; }
+    else if(type==='CPD'){ store.cpd.records.forEach((r,i)=>html+=`<div class="record-card"><div style="flex:1"><b>${r.t}</b><br><small style="color:var(--text-dim)">📅 ${toMY(r.d)} | 🕒 ${r.t1} - ${r.t2}</small></div><div style="font-weight:700;color:var(--success);margin-right:8px;">${r.p} Pts</div><div style="display:flex;flex-direction:column;gap:4px;"><button style="background:none;color:var(--primary);border:none;font-size:0.68rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;" onclick="editCPD(${i})">EDIT</button><button class="btn-delete" onclick="store.cpd.records.splice(${i},1);saveData();renderRecords('CPD')">×</button></div></div>`); html+=`<input type="hidden" id="cpd-edit-idx" value="-1"><label>Course Name</label><input type="text" id="in-t"><label>Date</label><input type="date" id="in-d" onclick="triggerDatePicker('in-d')"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div><label>Start</label><input type="time" id="in-t1"></div><div><label>End</label><input type="time" id="in-t2"></div></div><label>Points</label><input type="number" id="in-p">`; }
     html+=`</div><button class="btn-primary" id="btn-save-rec" onclick="addRec('${type}')">SAVE</button>`; content.innerHTML=html;
 }
 
@@ -2352,7 +2352,7 @@ function openTodoPopup(){ document.getElementById('sheet-title').innerText="Add 
 function saveTodoFinal(){ const t=document.getElementById('pop-todo-t').value,d=document.getElementById('pop-todo-d').value; if(!t.trim())return; store.todos.push({t,date:d,done:false});saveData();closeSheet();renderTodos(); }
 function editTodo(i){ const todo=store.todos[i]; document.getElementById('sheet-title').innerText="Edit Task"; document.getElementById('sheet-content').innerHTML=`<label>Task</label><input type="text" id="pop-todo-t" value="${todo.t.replace(/"/g,'&quot;')}"><label>Due Date (Optional)</label><input type="date" id="pop-todo-d" value="${todo.date||''}" onclick="triggerDatePicker('pop-todo-d')"><button class="btn-primary" style="background:var(--warning);color:black;" onclick="updateTodo(${i})">UPDATE TASK</button>`; openSheet(); setTimeout(()=>{const el=document.getElementById('pop-todo-t');if(el){el.focus();el.select();}},350); }
 function updateTodo(i){ const t=document.getElementById('pop-todo-t').value,d=document.getElementById('pop-todo-d').value; if(!t.trim())return; store.todos[i].t=t; store.todos[i].date=d; saveData();closeSheet();renderTodos(); }
-function renderTodos(){ const list=document.getElementById('todo-list'); if(!list)return; list.innerHTML=''; if(store.todos.length===0){list.innerHTML='<div style="font-size:0.82rem;color:var(--text-muted);padding:10px;text-align:center;">No tasks.</div>';return;} store.todos.forEach((todo,i)=>{ list.innerHTML+=`<div class="todo-item"><input type="checkbox" style="width:16px;height:16px;accent-color:var(--primary);" ${todo.done?'checked':''} onchange="store.todos[${i}].done=!store.todos[${i}].done;saveData();renderTodos();"><div class="todo-text ${todo.done?'done':''}" onclick="editTodo(${i})" style="cursor:pointer;">${todo.t}${todo.date?`<small style="color:var(--text-muted);font-size:0.82rem;margin-left:8px;">(Due: ${toMY(todo.date)})</small>`:''}</div><button <button class="todo-del" onclick="store.todos.splice(${i},1);saveData();renderTodos();">×</button></div>`; }); }
+function renderTodos(){ const list=document.getElementById('todo-list'); if(!list)return; list.innerHTML=''; if(store.todos.length===0){list.innerHTML='<div style="font-size:0.72rem;color:var(--text-muted);padding:10px;text-align:center;">No tasks.</div>';return;} store.todos.forEach((todo,i)=>{ list.innerHTML+=`<div class="todo-item"><input type="checkbox" style="width:16px;height:16px;accent-color:var(--primary);" ${todo.done?'checked':''} onchange="store.todos[${i}].done=!store.todos[${i}].done;saveData();renderTodos();"><div class="todo-text ${todo.done?'done':''}" onclick="editTodo(${i})" style="cursor:pointer;">${todo.t}${todo.date?`<small style="color:var(--text-muted);font-size:0.72rem;margin-left:8px;">(Due: ${toMY(todo.date)})</small>`:''}</div><button <button class="todo-del" onclick="store.todos.splice(${i},1);saveData();renderTodos();">×</button></div>`; }); }
 
 function renderStats(){
     document.getElementById('text-al').innerText=store.al.taken.length;
@@ -2409,7 +2409,7 @@ function renderClaim(){
 
     const malamGroups = groupConsecutiveDays(malamDays);
     const malamRows = malamGroups.length === 0
-        ? `<div style="font-size:0.8rem;color:var(--text-muted);padding:4px 0;">Tiada shift malam bulan ini.</div>`
+        ? `<div style="font-size:0.72rem;color:var(--text-muted);padding:4px 0;">Tiada shift malam bulan ini.</div>`
         : malamGroups.map(g => {
             const count = g.end - g.start + 1;
             const days = Array.from({length:count}, (_,i) => String(g.start+i).padStart(2,'0'));
@@ -2418,13 +2418,13 @@ function renderClaim(){
                 : `${days.join(',')}/${mm}/${year}`;
             const shifts = Array.from({length:count}, (_,i) => malamDayMap[g.start+i] || 'N');
             const shiftLabel = shifts.join(', ');
-            const countLabel = count > 1 ? `<span style="font-size:0.74rem;color:var(--text-dim);margin-left:4px;">(${count}x)</span>` : '';
-            return `<div class="claim-row"><span style="font-size:0.86rem;color:var(--text);font-weight:600;">${dateLabel}${countLabel}</span><span style="font-size:0.82rem;color:var(--primary);">${shiftLabel}</span></div>`;
+            const countLabel = count > 1 ? `<span style="font-size:0.66rem;color:var(--text-dim);margin-left:4px;">(${count}x)</span>` : '';
+            return `<div class="claim-row"><span style="font-size:0.75rem;color:var(--text);font-weight:600;">${dateLabel}${countLabel}</span><span style="font-size:0.72rem;color:var(--primary);">${shiftLabel}</span></div>`;
         }).join('');
 
-    function buildRows(items,emptyMsg,fn){if(items.length===0)return`<div style="font-size:0.8rem;color:var(--text-muted);padding:4px 0;">${emptyMsg}</div>`;return items.map(fn).join('');}
-    function row(l,r){return`<div class="claim-row"><span style="font-size:0.86rem;color:var(--text);font-weight:600;">${l}</span><span style="font-size:0.82rem;color:var(--primary);">${r}</span></div>`;}
-    function block(icon,title,count,rows){return`<div style="margin-bottom:12px;"><div class="claim-cat-header"><span style="font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;color:var(--text-dim);">${icon} ${title}</span><span class="claim-badge">${count}</span></div>${rows}</div>`;}
+    function buildRows(items,emptyMsg,fn){if(items.length===0)return`<div style="font-size:0.72rem;color:var(--text-muted);padding:4px 0;">${emptyMsg}</div>`;return items.map(fn).join('');}
+    function row(l,r){return`<div class="claim-row"><span style="font-size:0.75rem;color:var(--text);font-weight:600;">${l}</span><span style="font-size:0.72rem;color:var(--primary);">${r}</span></div>`;}
+    function block(icon,title,count,rows){return`<div style="margin-bottom:12px;"><div class="claim-cat-header"><span style="font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;color:var(--text-dim);">${icon} ${title}</span><span class="claim-badge">${count}</span></div>${rows}</div>`;}
     body.innerHTML=block('🌙','Night Shift',malamDays.length,malamRows)+`<div class="claim-divider"></div>`+block('🔄','Locum / Double Shift',locum.length,buildRows(locum,'No double shifts this month.',i=>row(i.date,i.shift)))+`<div class="claim-divider"></div>`+block('📅','Paid PH',phBayar.length,buildRows(phBayar,'No paid public holidays this month.',i=>row(i.date,i.name)));
 }
 
@@ -2475,7 +2475,7 @@ function processRestore(e){ const file=e.target.files[0]; if(!file)return; const
 function openImportSheet(){
     document.getElementById('sheet-title').innerText="📋 Import Jadual Excel";
     document.getElementById('sheet-content').innerHTML=`
-        <div style="font-size:0.82rem;color:var(--text-dim);margin-bottom:12px;line-height:1.7;background:var(--surface);padding:12px;border-radius:var(--radius-xs);border:1px solid var(--border);">
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:12px;line-height:1.7;background:var(--surface);padding:12px;border-radius:var(--radius-xs);border:1px solid var(--border);">
             <b style="color:var(--primary);display:block;margin-bottom:4px;">Cara import:</b>
             1. Buka Excel, select <b>baris DATE</b> dan <b>baris shift</b> anda (2 baris)<br>
             2. Copy (Ctrl+C) → Paste dalam kotak bawah<br><br>
@@ -2483,7 +2483,7 @@ function openImportSheet(){
         </div>
         <label>Bulan & Tahun</label><input type="month" id="import-month" style="margin-bottom:10px;">
         <label>Paste data dari Excel</label>
-        <textarea id="import-paste" style="height:120px;font-family:'Inter',sans-serif;font-size:0.68rem;" placeholder="Paste di sini... (2 baris: DATE dan shift)"></textarea>
+        <textarea id="import-paste" style="height:120px;font-family:'Inter',sans-serif;font-size:0.6rem;" placeholder="Paste di sini... (2 baris: DATE dan shift)"></textarea>
         <div id="import-preview" style="margin-top:8px;"></div>
         <button class="btn-secondary" onclick="previewImport()">🔍 PREVIEW</button>
         <button id="btn-confirm-import" class="btn-primary" onclick="confirmImport()" style="display:none;">✅ SIMPAN KE CALENDAR</button>`;
@@ -2509,19 +2509,19 @@ let _importParsed=[];
 function previewImport(){
     const raw=document.getElementById('import-paste').value, monthVal=document.getElementById('import-month').value, preview=document.getElementById('import-preview');
     _importParsed=[];
-    if(!monthVal){preview.innerHTML='<p style="color:var(--danger);font-size:0.84rem;">⚠️ Sila pilih bulan & tahun.</p>';return;}
-    if(!raw.trim()){preview.innerHTML='<p style="color:var(--danger);font-size:0.84rem;">⚠️ Tiada data.</p>';return;}
+    if(!monthVal){preview.innerHTML='<p style="color:var(--danger);font-size:0.74rem;">⚠️ Sila pilih bulan & tahun.</p>';return;}
+    if(!raw.trim()){preview.innerHTML='<p style="color:var(--danger);font-size:0.74rem;">⚠️ Tiada data.</p>';return;}
     const[impYear,impMonth]=monthVal.split('-').map(Number);
     const rows=raw.trim().split('\n').map(r=>r.split('\t').map(c=>c.trim()));
     let dateRow=null,shiftRow=null;
     for(let i=0;i<rows.length;i++){const nc=rows[i].filter(c=>/^\d{1,2}(\(PH\))?$/.test(c.replace(/\s/g,''))).length;if(nc>=5){dateRow=rows[i];shiftRow=rows[i+1]||null;break;}}
-    if(!dateRow||!shiftRow){preview.innerHTML='<p style="color:var(--danger);font-size:0.84rem;">⚠️ Unrecognised format. Copy 2 baris: DATE dan shift.</p>';return;}
-    let html=`<div style="font-size:0.8rem;margin-top:6px;border:1px solid var(--border);border-radius:var(--radius-xs);overflow:hidden;"><div style="background:var(--surface);padding:6px 10px;font-size:0.82rem;color:var(--text-dim);font-weight:700;font-family:'Inter',sans-serif;">PREVIEW</div>`;
+    if(!dateRow||!shiftRow){preview.innerHTML='<p style="color:var(--danger);font-size:0.74rem;">⚠️ Unrecognised format. Copy 2 baris: DATE dan shift.</p>';return;}
+    let html=`<div style="font-size:0.72rem;margin-top:6px;border:1px solid var(--border);border-radius:var(--radius-xs);overflow:hidden;"><div style="background:var(--surface);padding:6px 10px;font-size:0.72rem;color:var(--text-dim);font-weight:700;font-family:'Inter',sans-serif;">PREVIEW</div>`;
     let count=0;
-    for(let col=0;col<dateRow.length;col++){ const dayRaw=dateRow[col].replace(/\(PH\)/i,'').trim(), day=parseInt(dayRaw); if(isNaN(day)||day<1||day>31)continue; const cellRaw=shiftRow[col]||''; if(!cellRaw)continue; const parsed=parseShiftCell(cellRaw); if(!parsed)continue; const key=`${impYear}-${String(impMonth).padStart(2,'0')}-${String(day).padStart(2,'0')}`; _importParsed.push({key,...parsed}); const assignLabel=parsed.a?`<span style="color:var(--primary)"> @ ${parsed.a}</span>`:''; html+=`<div style="display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--border);align-items:center;"><span style="color:var(--text-dim);min-width:36px;font-family:'Inter',sans-serif;">${String(day).padStart(2,'0')}/${String(impMonth).padStart(2,'0')}</span><span style="font-weight:700;color:var(--text);">${parsed.s}${assignLabel}</span><span style="font-size:0.8rem;color:var(--text-muted);font-family:'Inter',sans-serif;">${cellRaw}</span></div>`; count++; }
+    for(let col=0;col<dateRow.length;col++){ const dayRaw=dateRow[col].replace(/\(PH\)/i,'').trim(), day=parseInt(dayRaw); if(isNaN(day)||day<1||day>31)continue; const cellRaw=shiftRow[col]||''; if(!cellRaw)continue; const parsed=parseShiftCell(cellRaw); if(!parsed)continue; const key=`${impYear}-${String(impMonth).padStart(2,'0')}-${String(day).padStart(2,'0')}`; _importParsed.push({key,...parsed}); const assignLabel=parsed.a?`<span style="color:var(--primary)"> @ ${parsed.a}</span>`:''; html+=`<div style="display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid var(--border);align-items:center;"><span style="color:var(--text-dim);min-width:36px;font-family:'Inter',sans-serif;">${String(day).padStart(2,'0')}/${String(impMonth).padStart(2,'0')}</span><span style="font-weight:700;color:var(--text);">${parsed.s}${assignLabel}</span><span style="font-size:0.72rem;color:var(--text-muted);font-family:'Inter',sans-serif;">${cellRaw}</span></div>`; count++; }
     html+='</div>';
-    if(count===0){preview.innerHTML='<p style="color:var(--danger);font-size:0.84rem;">⚠️ Tiada shift yang dapat dikenali.</p>';document.getElementById('btn-confirm-import').style.display='none';return;}
-    html+=`<p style="font-size:0.8rem;color:var(--text-dim);margin-top:6px;">✅ ${count} hari berjaya diparse.</p>`;
+    if(count===0){preview.innerHTML='<p style="color:var(--danger);font-size:0.74rem;">⚠️ Tiada shift yang dapat dikenali.</p>';document.getElementById('btn-confirm-import').style.display='none';return;}
+    html+=`<p style="font-size:0.72rem;color:var(--text-dim);margin-top:6px;">✅ ${count} hari berjaya diparse.</p>`;
     preview.innerHTML=html; document.getElementById('btn-confirm-import').style.display='block';
 }
 
