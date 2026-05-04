@@ -6,7 +6,7 @@
     <title>Roster Premium - Ahmad Zilalul Hilmi Bin Adnan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://accounts.google.com/gsi/client" onload="console.log('GSI loaded')" onerror="console.warn('GSI failed to load')"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer onload="console.log('GSI loaded')" onerror="console.warn('GSI failed to load')"></script>
     <style>
         :root {
             --primary: #50c878;
@@ -1161,272 +1161,6 @@
         .tool-card-btn.active .tool-card-label { color: var(--primary); }
 
 
-
-        /* ── MONTHLY EXPENSES ── */
-        .expense-section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-
-        .expense-month-nav {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .expense-month-label {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 0.08em;
-            color: var(--text);
-            min-width: 80px;
-            text-align: center;
-        }
-
-        .expense-cards-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .expense-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            transition: all 0.2s;
-        }
-
-        .expense-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            cursor: pointer;
-            background: linear-gradient(90deg, var(--primary-dim), transparent);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .expense-card-header:active { opacity: 0.8; }
-
-        .expense-card-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .expense-card-icon {
-            font-size: 1.3rem;
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-xs);
-            background: var(--card);
-            border: 1px solid var(--border-bright);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .expense-card-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text);
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        .expense-card-plate {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 0.12em;
-            color: var(--primary);
-            filter: drop-shadow(0 0 6px var(--primary-glow));
-        }
-
-        .expense-card-total {
-            text-align: right;
-        }
-
-        .expense-total-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.48rem;
-            color: var(--text-muted);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .expense-total-val {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 0.04em;
-            color: var(--text);
-        }
-
-        .expense-card-body {
-            display: none;
-            padding: 12px 14px;
-        }
-
-        .expense-card-body.open { display: block; }
-
-        .expense-type-row {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .expense-type-info { flex: 1; min-width: 0; }
-
-        .expense-type-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.5rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        .expense-type-value {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .expense-type-value.date-val {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--text-dim);
-        }
-
-        .expense-type-value.amount-val {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.1rem;
-            letter-spacing: 0.04em;
-        }
-
-        .expense-type-value.amount-val.danger { color: var(--danger); }
-        .expense-type-value.amount-val.primary { color: var(--primary); }
-        .expense-type-value.amount-val.warning { color: var(--warning); }
-
-        .expense-edit-btn {
-            background: var(--primary-dim);
-            border: 1px solid rgba(80,200,120,0.2);
-            color: var(--primary);
-            border-radius: var(--radius-xs);
-            padding: 4px 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.52rem;
-            font-weight: 700;
-            cursor: pointer;
-            letter-spacing: 0.06em;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .expense-edit-btn:active { background: var(--primary); color: black; }
-
-        .expense-receipt-strip {
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .receipt-upload-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--card);
-            border: 1px dashed var(--border-bright);
-            border-radius: var(--radius-xs);
-            padding: 7px 10px;
-            cursor: pointer;
-            transition: all 0.15s;
-            flex: 1;
-        }
-
-        .receipt-upload-btn:active { border-color: var(--primary); background: var(--primary-dim); }
-
-        .receipt-upload-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.52rem;
-            font-weight: 700;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .receipt-thumb {
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-xs);
-            border: 1px solid var(--border-bright);
-            object-fit: cover;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .receipt-pdf-badge {
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-xs);
-            border: 1px solid rgba(255,82,82,0.3);
-            background: rgba(255,82,82,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .expense-summary-bar {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 12px 14px;
-            margin-top: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .expense-summary-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.58rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-dim);
-        }
-
-        .expense-summary-total {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 0.04em;
-            color: var(--danger);
-            filter: drop-shadow(0 0 8px rgba(255,82,82,0.3));
-        }
     </style>
 </head>
 <body>
@@ -1854,27 +1588,6 @@
         <div id="drug-results"></div>
     </div>
 
-    <!-- MONTHLY EXPENSES -->
-    <div class="section">
-        <div class="expense-section-header">
-            <h3>Monthly Expenses</h3>
-            <div class="expense-month-nav">
-                <button class="nav-btn" onclick="expenseChangeMonth(-1)">❮</button>
-                <span class="expense-month-label" id="expense-month-label">—</span>
-                <button class="nav-btn" onclick="expenseChangeMonth(1)">❯</button>
-            </div>
-        </div>
-
-        <div class="expense-cards-grid" id="expense-cards-grid">
-            <!-- Cards rendered by JS -->
-        </div>
-
-        <div class="expense-summary-bar" style="margin-top:12px;">
-            <span class="expense-summary-label">Jumlah Keseluruhan</span>
-            <span class="expense-summary-total" id="expense-grand-total">RM 0.00</span>
-        </div>
-    </div>
-
 </div><!-- /page -->
 
 <!-- TOOL OVERLAY -->
@@ -1926,7 +1639,6 @@ let store = JSON.parse(localStorage.getItem('roster_ultimate_v3')) || {
     nursingNotes:[]
 };
 if(!store.nursingNotes) store.nursingNotes = [];
-if(!store.expenses) store.expenses = {};
 if(!store.carService) store.carService = {};
 if(!store.quickNotes) store.quickNotes = [];
 
@@ -2416,7 +2128,7 @@ function generateCalendar() {
         if((data.s||'').includes('/')) box.classList.add('locum');
         if(new Date().toDateString()===new Date(year,month,d).toDateString()) box.classList.add('today');
         box.onclick=()=>openShiftPicker(key);
-        const reminderDot=data.reminder?`<div style="position:absolute;bottom:2px;right:3px;width:4px;height:4px;border-radius:50%;background:#8888ff;"></div>`:'';
+        const reminderDot=(Array.isArray(data.reminders)?data.reminders.length>0:(data.reminder&&data.reminder.trim()))?`<div style="position:absolute;bottom:2px;right:3px;width:4px;height:4px;border-radius:50%;background:#8888ff;"></div>`:'';
         box.innerHTML=`<div class="date-num">${d}</div><div class="shift-text">${renderShiftText(data.s||'-')}</div><div class="assign-text">${data.a||''}</div>${reminderDot}`;
         body.appendChild(box);
     }
@@ -2449,29 +2161,27 @@ function updateShiftSummary() {
     const tomEntry=store.calendar[tomKey]||{};
     const todayShift=getS(now);
     const tomShift=getS(tom);
+    // Helper: get reminders array (support legacy single string)
+    function getRemArr(entry){ if(!entry) return []; if(Array.isArray(entry.reminders)) return entry.reminders; if(entry.reminder&&typeof entry.reminder==='string'&&entry.reminder.trim()) return [entry.reminder.trim()]; return []; }
     // Hari Ini — shift + reminder hari ini
     const todayEl=document.getElementById('summary-today');
     if(todayEl){
         todayEl.innerHTML=todayShift;
-        if(todayEntry.reminder){
-            todayEl.innerHTML+=`<div style="font-size:0.62rem;color:#8888ff;margin-top:3px;">🔔 ${todayEntry.reminder}</div>`;
-        }
+        getRemArr(todayEntry).forEach(r=>{ todayEl.innerHTML+=`<div style="font-size:0.62rem;color:#8888ff;margin-top:3px;">🔔 ${r}</div>`; });
     }
     // Esok — shift + reminder esok
     const tomEl=document.getElementById('summary-tomorrow');
     if(tomEl){
         tomEl.innerHTML=tomShift;
-        if(tomEntry.reminder){
-            tomEl.innerHTML+=`<div style="font-size:0.62rem;color:#8888ff;margin-top:3px;">🔔 ${tomEntry.reminder}</div>`;
-        }
+        getRemArr(tomEntry).forEach(r=>{ tomEl.innerHTML+=`<div style="font-size:0.62rem;color:#8888ff;margin-top:3px;">🔔 ${r}</div>`; });
     }
     // Other reminders (day 2-7, skip today & tomorrow)
     const remDiv=document.getElementById('summary-reminders'), reminders=[];
     for(let i=2;i<=7;i++){
         const d=new Date(now); d.setDate(now.getDate()+i);
         const key=isoKey(d.getFullYear(),d.getMonth(),d.getDate());
-        const entry=store.calendar[key];
-        if(entry&&entry.reminder){ const dd=String(d.getDate()).padStart(2,'0'), mm=String(d.getMonth()+1).padStart(2,'0'); reminders.push({label:`${dd}/${mm}`,text:entry.reminder}); }
+        const rems=getRemArr(store.calendar[key]);
+        if(rems.length>0){ const dd=String(d.getDate()).padStart(2,'0'), mm=String(d.getMonth()+1).padStart(2,'0'); rems.forEach(text=>reminders.push({label:`${dd}/${mm}`,text})); }
     }
     if(reminders.length>0){ remDiv.style.display='block'; remDiv.innerHTML=reminders.map(r=>`<div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:6px;"><span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#8888ff;font-weight:700;white-space:nowrap;">🔔 ${r.label}</span><span style="font-size:0.7rem;color:var(--text);line-height:1.4;text-align:right;">${r.text}</span></div>`).join(''); }
     else { remDiv.style.display='none'; remDiv.innerHTML=''; }
@@ -2503,7 +2213,7 @@ function openShiftPicker(key) {
             onkeydown="if(event.key==='Enter') applyTypedShift('${key}')">
         <div id="shift-parse-preview"></div>
         <button class="btn-primary" onclick="applyTypedShift('${key}')">SIMPAN SHIFT</button>
-        <button class="btn-secondary" onclick="openReminderSheet('${key}')">🔔 REMINDER${existing.reminder?' · '+existing.reminder.substring(0,18)+(existing.reminder.length>18?'...':''):''}</button>
+        <button class="btn-secondary" onclick="openReminderSheet('${key}')">🔔 REMINDER${(function(){const rems=Array.isArray(existing.reminders)?existing.reminders:(existing.reminder?[existing.reminder]:[]);return rems.length>0?' · '+rems.length+' item':'';})()}</button>
         ${existing.s&&existing.s!=='-'?`<button class="btn-danger" onclick="clearShift('${key}')">KOSONGKAN</button>`:''}
         ${existing.s==='RPL'?`<button class="btn-secondary" onclick="openRPLLinkSheet('${key}')" style="border-color:rgba(80,200,120,0.3);color:var(--primary);">🔗 PAUT REKOD RPL</button>`:''}
         ${existing.s==='PH'?`<button class="btn-secondary" onclick="openPHLinkSheet('${key}')" style="border-color:rgba(229,192,123,0.35);color:#e5c07b;">📅 PAUT CUTI UMUM</button>`:''}`;
@@ -2533,15 +2243,66 @@ function applyTypedShift(key) {
 }
 function clearShift(key){if(store.calendar[key]){delete store.calendar[key];saveData();generateCalendar();closeSheet();}}
 
+// Helper: normalise reminder storage to array
+function _remGetArr(key){ const e=store.calendar[key]||{}; if(Array.isArray(e.reminders)) return [...e.reminders]; if(e.reminder&&e.reminder.trim()) return [e.reminder.trim()]; return []; }
+function _remSaveArr(key,arr){ if(!store.calendar[key]) store.calendar[key]={s:'-',a:''}; store.calendar[key].reminders=arr.filter(x=>x.trim()); delete store.calendar[key].reminder; saveData(); }
+
 function openReminderSheet(key) {
     const parts=key.split('-'), dispDate=parts.length===3?`${parts[2]}/${parts[1]}/${parts[0]}`:key;
-    const existing=store.calendar[key]||{};
     document.getElementById('sheet-title').innerText=`🔔 Reminder — ${dispDate}`;
-    document.getElementById('sheet-content').innerHTML=`<label>Nota Reminder</label><textarea id="reminder-input" style="height:110px;" placeholder="cth: AUDIT MSQH, Mesyuarat, Kursus BLS...">${existing.reminder||''}</textarea><button class="btn-primary" onclick="saveReminder('${key}')">SIMPAN REMINDER</button>${existing.reminder?`<button class="btn-danger" onclick="deleteReminder('${key}')">BUANG REMINDER</button>`:''}`; openSheet();
-    setTimeout(()=>{const el=document.getElementById('reminder-input');if(el)el.focus();},350);
+    renderReminderSheetContent(key);
+    openSheet();
 }
-function saveReminder(key){const val=(document.getElementById('reminder-input').value||'').trim(); if(!store.calendar[key]) store.calendar[key]={s:'-',a:''}; store.calendar[key].reminder=val; saveData();generateCalendar();closeSheet();}
-function deleteReminder(key){if(store.calendar[key]){delete store.calendar[key].reminder;saveData();generateCalendar();closeSheet();}}
+function renderReminderSheetContent(key) {
+    const rems=_remGetArr(key);
+    const parts=key.split('-'), dispDate=parts.length===3?`${parts[2]}/${parts[1]}/${parts[0]}`:key;
+    let listHTML='';
+    rems.forEach((r,i)=>{
+        listHTML+=`<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 12px;">
+            <span style="flex:1;font-size:0.78rem;color:var(--text);line-height:1.5;word-break:break-word;">🔔 ${r}</span>
+            <div style="display:flex;gap:6px;flex-shrink:0;">
+                <button onclick="openEditReminderItem('${key}',${i})" style="background:none;border:1px solid rgba(80,200,120,0.25);color:var(--primary);border-radius:6px;padding:4px 8px;font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:700;cursor:pointer;">EDIT</button>
+                <button onclick="deleteReminderItem('${key}',${i})" style="background:none;border:1px solid rgba(255,82,82,0.25);color:var(--danger);border-radius:6px;padding:4px 8px;font-family:'JetBrains Mono',monospace;font-size:0.55rem;font-weight:700;cursor:pointer;">DEL</button>
+            </div>
+        </div>`;
+    });
+    if(!listHTML) listHTML=`<div style="text-align:center;padding:14px 0;font-size:0.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Tiada reminder. Tekan + untuk tambah.</div>`;
+    document.getElementById('sheet-content').innerHTML=`
+        ${listHTML}
+        <div id="reminder-add-area" style="display:none;margin-top:4px;">
+            <label>Reminder Baru</label>
+            <textarea id="reminder-input" style="height:90px;" placeholder="cth: AUDIT MSQH, Mesyuarat, Kursus BLS..."></textarea>
+            <button class="btn-primary" onclick="addReminderItem('${key}')">TAMBAH</button>
+            <button class="btn-secondary" onclick="document.getElementById('reminder-add-area').style.display='none'">BATAL</button>
+        </div>
+        <button class="btn-secondary" id="reminder-add-btn" onclick="document.getElementById('reminder-add-area').style.display='block';document.getElementById('reminder-add-btn').style.display='none';setTimeout(()=>{const el=document.getElementById('reminder-input');if(el)el.focus();},100);" style="margin-top:${rems.length?'4px':'0'};">+ TAMBAH REMINDER</button>`;
+}
+function addReminderItem(key){
+    const val=(document.getElementById('reminder-input').value||'').trim();
+    if(!val){alert('Sila isi reminder.');return;}
+    const arr=_remGetArr(key); arr.push(val);
+    _remSaveArr(key,arr); generateCalendar(); renderReminderSheetContent(key);
+}
+function openEditReminderItem(key,idx){
+    const arr=_remGetArr(key);
+    const old=arr[idx]||'';
+    const sc=document.getElementById('sheet-content');
+    sc.innerHTML=`<label>Edit Reminder</label><textarea id="reminder-edit-input" style="height:90px;">${old}</textarea><button class="btn-primary" onclick="saveEditReminderItem('${key}',${idx})">SIMPAN</button><button class="btn-secondary" onclick="renderReminderSheetContent('${key}')">BATAL</button>`;
+    setTimeout(()=>{const el=document.getElementById('reminder-edit-input');if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length);}},100);
+}
+function saveEditReminderItem(key,idx){
+    const val=(document.getElementById('reminder-edit-input').value||'').trim();
+    if(!val){alert('Sila isi reminder.');return;}
+    const arr=_remGetArr(key); arr[idx]=val;
+    _remSaveArr(key,arr); generateCalendar(); renderReminderSheetContent(key);
+}
+function deleteReminderItem(key,idx){
+    if(!confirm('Padam reminder ini?')) return;
+    const arr=_remGetArr(key); arr.splice(idx,1);
+    _remSaveArr(key,arr); generateCalendar(); renderReminderSheetContent(key);
+}
+function saveReminder(key){} // legacy stub
+function deleteReminder(key){} // legacy stub
 
 function openRPLLinkSheet(key) {
     const parts=key.split('-'), dispDate=parts.length===3?`${parts[2]}/${parts[1]}/${parts[0]}`:key;
@@ -3045,293 +2806,6 @@ function loadTheme() {
     localStorage.setItem('roster_theme','light');
 }
 
-// ══════════════════════════════════════════
-//  MONTHLY EXPENSES
-// ══════════════════════════════════════════
-
-if(!store.expenses) store.expenses = {};
-
-let expenseCurrentDate = new Date();
-
-const EXPENSE_VEHICLES = [
-    {
-        id: 'kereta',
-        icon: '🚗',
-        title: 'Kereta',
-        plate: 'TCC8852',
-        color: 'warning',
-        types: [
-            { key: 'loanPayment', label: 'Loan Payment', kind: 'amount' },
-        ]
-    },
-    {
-        id: 'personal',
-        icon: '👤',
-        title: 'Personal',
-        plate: null,
-        color: 'danger',
-        types: [
-            { key: 'loanPayment', label: 'Loan Payment', kind: 'amount' },
-        ]
-    }
-];
-
-
-function expenseMonthKey(d) {
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-}
-
-function expenseGetData(vehicleId) {
-    const mk = expenseMonthKey(expenseCurrentDate);
-    if(!store.expenses[mk]) store.expenses[mk] = {};
-    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
-    return store.expenses[mk][vehicleId];
-}
-
-function expenseChangeMonth(dir) {
-    expenseCurrentDate.setMonth(expenseCurrentDate.getMonth() + dir);
-    renderExpenseCards();
-}
-
-const MONTH_NAMES_MY = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogos','Sep','Okt','Nov','Dis'];
-
-function renderExpenseCards() {
-    const label = `${MONTH_NAMES_MY[expenseCurrentDate.getMonth()]} ${expenseCurrentDate.getFullYear()}`;
-    document.getElementById('expense-month-label').innerText = label;
-
-    let grandTotal = 0;
-    const grid = document.getElementById('expense-cards-grid');
-    grid.innerHTML = '';
-
-    EXPENSE_VEHICLES.forEach(v => {
-        const data = expenseGetData(v.id);
-        let cardTotal = 0;
-
-        // Sum amount types
-        v.types.forEach(t => {
-            if(t.kind === 'amount' && data[t.key]) {
-                cardTotal += parseFloat(data[t.key]) || 0;
-            }
-        });
-        grandTotal += cardTotal;
-
-        const colorMap = { primary: 'var(--primary)', warning: 'var(--warning)', danger: 'var(--danger)' };
-        const accentColor = colorMap[v.color] || 'var(--primary)';
-
-        let typesHTML = '';
-        v.types.forEach(t => {
-            const val = data[t.key] || '';
-            let displayVal = '';
-            let valClass = '';
-
-            if(t.kind === 'date') {
-                displayVal = val ? toMY(val) : '— Belum ditetapkan';
-                valClass = val ? 'date-val' : '';
-            } else if(t.kind === 'amount') {
-                displayVal = val ? `RM ${parseFloat(val).toFixed(2)}` : 'RM 0.00';
-                valClass = `amount-val ${v.color}`;
-            } else {
-                displayVal = val || '— Belum ditetapkan';
-            }
-
-            // Receipt
-            const receiptData = data[`receipt_${t.key}`];
-            let receiptHTML = '';
-            if(receiptData) {
-                if(receiptData.startsWith('data:image')) {
-                    receiptHTML = `<img src="${receiptData}" class="receipt-thumb" onclick="expenseViewReceipt('${v.id}','${t.key}')" title="Lihat resit">`;
-                } else {
-                    receiptHTML = `<div class="receipt-pdf-badge" onclick="expenseViewReceipt('${v.id}','${t.key}')" title="Lihat PDF">📄</div>`;
-                }
-            }
-
-            // ServiceType sub-field (only for date fields with hasServiceType)
-            let serviceTypeHTML = '';
-            if(t.hasServiceType) {
-                const stKey = t.key + '_serviceType';
-                const stVal = data[stKey] || '';
-                serviceTypeHTML = `
-                <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
-                    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
-                        <div>
-                            <span class="expense-type-label" style="margin-bottom:1px;">Type of Service</span>
-                            <span style="font-size:0.75rem;color:${stVal ? 'var(--text)' : 'var(--text-muted)'};font-weight:600;">${stVal || '— Belum ditetapkan'}</span>
-                        </div>
-                        <button class="expense-edit-btn" onclick="openExpenseEdit('${v.id}','${stKey}','text','Type of Service')">EDIT</button>
-                    </div>
-                </div>`;
-            }
-
-            typesHTML += `
-            <div class="expense-type-row" style="flex-direction:column;align-items:stretch;gap:0;">
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                    <div class="expense-type-info">
-                        <span class="expense-type-label">${t.label}</span>
-                        <span class="expense-type-value ${valClass}">${displayVal}</span>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-                        ${receiptHTML}
-                        <div>
-                            <button class="expense-edit-btn" onclick="openExpenseEdit('${v.id}','${t.key}','${t.kind}','${t.label}')">EDIT</button>
-                            <div style="margin-top:4px;">
-                                <label class="receipt-upload-btn" for="receipt-input-${v.id}-${t.key}" title="Upload resit" style="padding:4px 7px;flex:unset;">
-                                    <span style="font-size:0.75rem;">📎</span>
-                                    <span class="receipt-upload-label" style="font-size:0.46rem;">${receiptData ? 'TUKAR' : 'RESIT'}</span>
-                                </label>
-                                <input type="file" id="receipt-input-${v.id}-${t.key}" accept="image/*,application/pdf" hidden onchange="handleReceiptUpload(event,'${v.id}','${t.key}')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                ${serviceTypeHTML}
-            </div>`;
-        });
-
-        const cardEl = document.createElement('div');
-        cardEl.className = 'expense-card';
-        cardEl.id = `expense-card-${v.id}`;
-        cardEl.innerHTML = `
-            <div class="expense-card-header" onclick="toggleExpenseCard('${v.id}')">
-                <div class="expense-card-left">
-                    <div class="expense-card-icon">${v.icon}</div>
-                    <div>
-                        <span class="expense-card-title">${v.title}</span>
-                        ${v.plate ? `<span class="expense-card-plate" style="color:${accentColor};">${v.plate}</span>` : `<span class="expense-card-plate" style="color:${accentColor};font-size:0.78rem;letter-spacing:0.04em;">Peribadi</span>`}
-                    </div>
-                </div>
-                <div class="expense-card-total">
-                    <span class="expense-total-label">Jumlah</span>
-                    <span class="expense-total-val" style="color:${cardTotal > 0 ? accentColor : 'var(--text-muted)'};">${cardTotal > 0 ? 'RM '+cardTotal.toFixed(2) : '—'}</span>
-                </div>
-            </div>
-            <div class="expense-card-body" id="expense-body-${v.id}">
-                ${typesHTML}
-            </div>`;
-        grid.appendChild(cardEl);
-    });
-
-    // Grand total
-    document.getElementById('expense-grand-total').innerText = `RM ${grandTotal.toFixed(2)}`;
-}
-
-function toggleExpenseCard(id) {
-    const body = document.getElementById('expense-body-'+id);
-    if(body) body.classList.toggle('open');
-}
-
-function openExpenseEdit(vehicleId, fieldKey, kind, label) {
-    const data = expenseGetData(vehicleId);
-    const current = data[fieldKey] || '';
-    const vehicle = EXPENSE_VEHICLES.find(v => v.id === vehicleId);
-    const vLabel = vehicle ? `${vehicle.title}${vehicle.plate ? ' '+vehicle.plate : ''}` : '';
-
-    document.getElementById('sheet-title').innerText = `✏️ ${vLabel} — ${label}`;
-
-    let inputHTML = '';
-    if(kind === 'date') {
-        inputHTML = `<label>${label}</label><input type="date" id="exp-input" value="${current}" onclick="triggerDatePicker('exp-input')">`;
-    } else if(kind === 'amount') {
-        inputHTML = `<label>${label} (RM)</label><input type="number" id="exp-input" value="${current}" placeholder="0.00" step="0.01" min="0">`;
-    } else {
-        inputHTML = `<label>${label}</label><input type="text" id="exp-input" value="${current}" placeholder="Masukkan jenis servis...">`;
-    }
-
-    document.getElementById('sheet-content').innerHTML = `
-        ${inputHTML}
-        <input type="hidden" id="exp-vehicle-id" value="${vehicleId}">
-        <input type="hidden" id="exp-field-key" value="${fieldKey}">
-        <button class="btn-primary" onclick="saveExpenseField()">SIMPAN</button>
-        ${current ? `<button class="btn-danger" onclick="clearExpenseField('${vehicleId}','${fieldKey}')">PADAM</button>` : ''}`;
-
-    openSheet();
-    setTimeout(() => { const el = document.getElementById('exp-input'); if(el){ el.focus(); if(kind === 'date' && 'showPicker' in HTMLInputElement.prototype) el.showPicker(); } }, 350);
-}
-
-function saveExpenseField() {
-    const vehicleId = document.getElementById('exp-vehicle-id').value;
-    const fieldKey = document.getElementById('exp-field-key').value;
-    const val = document.getElementById('exp-input').value.trim();
-    if(!val) { alert('Sila isi nilai.'); return; }
-    const mk = expenseMonthKey(expenseCurrentDate);
-    if(!store.expenses[mk]) store.expenses[mk] = {};
-    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
-    store.expenses[mk][vehicleId][fieldKey] = val;
-    saveData();
-    renderExpenseCards();
-    closeSheet();
-    // Re-open card
-    const body = document.getElementById('expense-body-'+vehicleId);
-    if(body) body.classList.add('open');
-}
-
-function clearExpenseField(vehicleId, fieldKey) {
-    if(!confirm('Padam entri ini?')) return;
-    const mk = expenseMonthKey(expenseCurrentDate);
-    if(store.expenses[mk] && store.expenses[mk][vehicleId]) {
-        delete store.expenses[mk][vehicleId][fieldKey];
-        delete store.expenses[mk][vehicleId]['receipt_'+fieldKey];
-    }
-    saveData(); renderExpenseCards(); closeSheet();
-    const body = document.getElementById('expense-body-'+vehicleId);
-    if(body) body.classList.add('open');
-}
-
-function handleReceiptUpload(event, vehicleId, fieldKey) {
-    const file = event.target.files[0];
-    if(!file) return;
-    const mk = expenseMonthKey(expenseCurrentDate);
-    if(!store.expenses[mk]) store.expenses[mk] = {};
-    if(!store.expenses[mk][vehicleId]) store.expenses[mk][vehicleId] = {};
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        store.expenses[mk][vehicleId]['receipt_'+fieldKey] = e.target.result;
-        saveData();
-        renderExpenseCards();
-        const body = document.getElementById('expense-body-'+vehicleId);
-        if(body) body.classList.add('open');
-    };
-    reader.readAsDataURL(file);
-    event.target.value = '';
-}
-
-function expenseViewReceipt(vehicleId, fieldKey) {
-    const data = expenseGetData(vehicleId);
-    const receiptData = data['receipt_'+fieldKey];
-    if(!receiptData) return;
-
-    const vehicle = EXPENSE_VEHICLES.find(v => v.id === vehicleId);
-    const typeInfo = vehicle.types.find(t => t.key === fieldKey);
-    document.getElementById('sheet-title').innerText = `🧾 Resit — ${typeInfo ? typeInfo.label : fieldKey}`;
-
-    let content = '';
-    if(receiptData.startsWith('data:image')) {
-        content = `<div style="text-align:center;"><img src="${receiptData}" style="max-width:100%;border-radius:var(--radius-sm);border:1px solid var(--border);"></div>`;
-    } else {
-        content = `<div style="text-align:center;padding:20px;">
-            <div style="font-size:3rem;margin-bottom:12px;">📄</div>
-            <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:16px;">Fail PDF</div>
-            <a href="${receiptData}" download="resit_${vehicleId}_${fieldKey}.pdf" style="display:inline-block;background:var(--primary-dim);border:1px solid rgba(80,200,120,0.3);color:var(--primary);border-radius:var(--radius-xs);padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;text-decoration:none;letter-spacing:0.08em;">⬇️ MUAT TURUN PDF</a>
-        </div>`;
-    }
-
-    content += `<button class="btn-danger" style="margin-top:12px;" onclick="deleteExpenseReceipt('${vehicleId}','${fieldKey}')">PADAM RESIT</button>`;
-    document.getElementById('sheet-content').innerHTML = content;
-    openSheet();
-}
-
-function deleteExpenseReceipt(vehicleId, fieldKey) {
-    if(!confirm('Padam resit ini?')) return;
-    const mk = expenseMonthKey(expenseCurrentDate);
-    if(store.expenses[mk] && store.expenses[mk][vehicleId]) {
-        delete store.expenses[mk][vehicleId]['receipt_'+fieldKey];
-    }
-    saveData(); renderExpenseCards(); closeSheet();
-    const body = document.getElementById('expense-body-'+vehicleId);
-    if(body) body.classList.add('open');
-}
-
-
 
 window.addEventListener('load', () => {
     checkPDFStatus();
@@ -3339,7 +2813,15 @@ window.addEventListener('load', () => {
     startPrayerTick();
     schedulePrayerRefresh();
 
-    // Auto-login senyap — sentiasa cuba login dengan akaun tetap tanpa popup
+    // Auto-login senyap — cuba dengan cepat, lepas 3s tunjuk butang log masuk
+    const _autoLoginTimeout = setTimeout(() => {
+        // Jika masih "Menyambung..." selepas 3 saat, tunjuk status neutral
+        const el = document.getElementById('gsync-status');
+        if(el && el.classList.contains('syncing') && el.innerText.includes('Menyambung')) {
+            gsyncSetStatus('Sila log masuk ke Google Drive', '');
+        }
+    }, 3000);
+
     gsyncSetStatus('Menyambung ke Google Drive...', 'syncing');
     function tryAutoLogin(attempt) {
         if(typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
@@ -3349,6 +2831,7 @@ window.addEventListener('load', () => {
                 hint: 'azhbabh@gmail.com',
                 prompt: '',
                 callback: async (resp) => {
+                    clearTimeout(_autoLoginTimeout);
                     if(resp.error || !resp.access_token) {
                         gsyncSetStatus('Sila log masuk', '');
                         return;
@@ -3360,13 +2843,16 @@ window.addEventListener('load', () => {
                 }
             });
             client.requestAccessToken({ prompt: '' });
-        } else if(attempt < 20) {
-            setTimeout(() => tryAutoLogin(attempt + 1), 500);
+        } else if(attempt < 8) {
+            // Cuba semula setiap 300ms (max ~2.4 saat), bukan 500ms x 20 = 10 saat
+            setTimeout(() => tryAutoLogin(attempt + 1), 300);
         } else {
+            clearTimeout(_autoLoginTimeout);
             gsyncSetStatus('Sila log masuk ke Google Drive', '');
         }
     }
-    setTimeout(() => tryAutoLogin(1), 800);
+    // Mula lebih cepat — 200ms bukan 800ms
+    setTimeout(() => tryAutoLogin(1), 200);
 });
 migrateCalendarKeys();
 migrateDefaultDrugs();
@@ -3377,7 +2863,6 @@ renderStats();
 loadNotes();
 loadTheme();
 renderNursingNotes();
-renderExpenseCards();
 renderQuickNotes();
 </script>
 </body>
