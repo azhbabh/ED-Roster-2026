@@ -167,7 +167,7 @@
 
         .prayer-slot {
             text-align: center;
-            padding: 7px 2px;
+            padding: 5px 2px;
             border-radius: var(--radius-xs);
             background: var(--surface);
             border: 1px solid var(--border);
@@ -186,10 +186,10 @@
 
         .prayer-slot-name {
             font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.56rem;
             font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
             margin-bottom: 3px;
         }
@@ -197,7 +197,7 @@
         .prayer-slot.active .prayer-slot-name { color: var(--primary); }
 
         .prayer-slot-time {
-            font-size: 0.68rem;
+            font-size: 0.58rem;
             font-weight: 700;
             color: var(--text-dim);
         }
@@ -910,9 +910,9 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: var(--radius-xs);
-            padding: 6px 4px;
+            padding: 5px 3px;
             text-align: center;
-            font-size: 0.66rem;
+            font-size: 0.56rem;
             font-weight: 700;
             color: var(--text);
             line-height: 1.3;
@@ -1194,20 +1194,20 @@
         <div class="prayer-widget-top">
             <div class="prayer-widget-title">
                 <span>🕌</span>
-                <span>Prayer Times</span>
+                <span>Waktu Solat</span>
             </div>
             <span class="prayer-location">Kuala Terengganu, TRG</span>
         </div>
         <div id="prayer-next-banner" class="prayer-next-banner" style="display:none;">
             <div>
-                <div class="prayer-next-label">Next</div>
+                <div class="prayer-next-label">Seterusnya</div>
                 <div class="prayer-next-name" id="prayer-next-name">—</div>
                 <div class="prayer-countdown" id="prayer-countdown">—</div>
             </div>
             <div class="prayer-next-time" id="prayer-next-time">--:--</div>
         </div>
         <div id="prayer-grid" class="prayer-grid">
-            <div class="prayer-loading" style="grid-column:1/-1;">Loading prayer times...</div>
+            <div class="prayer-loading" style="grid-column:1/-1;">Memuatkan waktu solat...</div>
         </div>
     </div>
 
@@ -1421,11 +1421,11 @@
                     <div class="rsi-checklist-item">✅ Visible chest rise</div>
                     <div class="rsi-sub-label" style="margin:8px 0 6px;">🩺 5-Point Auscultation</div>
                     <div class="rsi-auscult-grid">
-                        <div class="rsi-auscult-item danger">Epigastrium<br><span style="font-size:0.6rem;opacity:0.7;">Rule out esophageal</span></div>
-                        <div class="rsi-auscult-item">R Upper<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
-                        <div class="rsi-auscult-item">L Upper<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
-                        <div class="rsi-auscult-item">R Lower<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
-                        <div class="rsi-auscult-item">L Lower<br><span style="font-size:0.6rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item danger">Epigastrium<br><span style="font-size:0.5rem;opacity:0.7;">Rule out esophageal intubation</span></div>
+                        <div class="rsi-auscult-item">R Upper<br><span style="font-size:0.5rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item">L Upper<br><span style="font-size:0.5rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item">R Lower<br><span style="font-size:0.5rem;opacity:0.7;">Lung</span></div>
+                        <div class="rsi-auscult-item">L Lower<br><span style="font-size:0.5rem;opacity:0.7;">Lung</span></div>
                     </div>
                     <div class="rsi-sub-label" style="margin:10px 0 4px;">📊 EtCO₂ (Waveform Capnography)</div>
                     <div class="rsi-etco2-bar">
@@ -1643,7 +1643,7 @@ if(!store.nursingNotes) store.nursingNotes = [];
 if(!store.carService) store.carService = {};
 if(!store.quickNotes) store.quickNotes = [];
 
-const PRAYER_NAMES = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+const PRAYER_NAMES = ['Subuh','Syuruk','Zohor','Asar','Maghrib','Isyak'];
 const PRAYER_KEYS  = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
 let prayerTimes = null;
 let prayerCountdownTimer = null;
@@ -1664,8 +1664,8 @@ async function fetchPrayerTimes() {
             localStorage.setItem(cacheKey, JSON.stringify(prayerTimes));
             Object.keys(localStorage).forEach(k => { if(k.startsWith('prayer_') && k !== cacheKey) localStorage.removeItem(k); });
             renderPrayerWidget();
-        } else { renderPrayerError('Data unavailable.'); }
-    } catch(e) { renderPrayerError('No internet connection. Please try again.'); }
+        } else { renderPrayerError('Data tidak tersedia.'); }
+    } catch(e) { renderPrayerError('Tiada sambungan internet. Sila cuba semula.'); }
 }
 
 function timeStrToMinutes(str) { const [h,m] = str.split(':').map(Number); return h*60 + m; }
@@ -2091,7 +2091,6 @@ function saveQuickNote() {
 }
 
 function deleteQuickNote(id, fromSheet=false) {
-    if(!confirm('Delete this note?')) return;
     store.quickNotes = (store.quickNotes || []).filter(n => n.id !== id);
     saveData(); renderQuickNotes();
     if(fromSheet) closeSheet();
