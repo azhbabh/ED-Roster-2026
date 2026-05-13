@@ -373,10 +373,10 @@
         /* ── SECTION ── */
         .section {
             background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-            padding:18px 16px; margin-bottom:12px;
+            padding:12px 14px; margin-bottom:12px;
             position:relative; overflow:hidden;
         }
-        .section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+        .section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
         h3 { font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--primary); }
 
         /* ── CALENDAR ── */
@@ -522,6 +522,37 @@
         .drug-name { font-weight:700; font-size:0.72rem; color:var(--text); margin-bottom:3px; }
         .drug-ampule { font-family:'Inter',sans-serif; font-size:0.66rem; color:var(--text-dim); margin-bottom:4px; }
         .drug-prep { font-size:0.72rem; color:var(--primary); font-weight:600; line-height:1.4; }
+
+        /* ── UBAT HARIAN PERIBADI ── */
+        .meds-section { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:12px; overflow:hidden; }
+        .meds-header { display:flex; justify-content:space-between; align-items:center; padding:12px 14px 10px; }
+        .meds-header h3 { display:flex; align-items:center; gap:6px; font-size:0.7rem; }
+        .meds-header-icon { font-size:0.85rem; }
+        .meds-body { padding:0 14px 12px; }
+        .meds-progress-bar { height:3px; background:var(--border); border-radius:10px; margin-bottom:4px; overflow:hidden; }
+        .meds-progress-fill { height:100%; background:var(--primary); border-radius:10px; transition:width 0.4s; }
+        .meds-progress-label { font-size:0.56rem; color:var(--text-dim); font-family:'Inter',sans-serif; text-align:right; margin-bottom:8px; }
+        .meds-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xs); padding:7px 10px; margin-bottom:5px; display:flex; align-items:center; gap:8px; transition:all 0.2s; cursor:pointer; }
+        .meds-item.taken { border-color:rgba(80,200,120,0.3); background:rgba(80,200,120,0.05); }
+        .meds-item.taken .meds-item-name { text-decoration:line-through; color:var(--text-muted); }
+        .meds-check { width:18px; height:18px; border-radius:50%; border:1.5px solid var(--border-bright); display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.2s; font-size:0.6rem; color:transparent; }
+        .meds-item.taken .meds-check { background:var(--primary); border-color:var(--primary); color:#000; }
+        .meds-item-info { flex:1; min-width:0; }
+        .meds-item-name { font-size:0.66rem; font-weight:700; color:var(--text); }
+        .meds-item-sub { font-size:0.58rem; color:var(--text-dim); font-family:'Inter',sans-serif; margin-top:1px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+        .meds-item-time-chips { display:flex; gap:3px; flex-wrap:wrap; margin-top:0; }
+        .meds-time-chip { font-size:0.68rem; font-weight:800; letter-spacing:0.02em; padding:0; border:none; color:var(--primary); background:none; font-family:'Inter',sans-serif; cursor:pointer; }
+        .meds-time-chip.done-chip { color:var(--text-muted); text-decoration:line-through; opacity:1; }
+        .meds-item-actions { display:flex; gap:4px; flex-shrink:0; }
+        .meds-edit-btn { background:none; border:none; color:var(--text-muted); font-size:0.66rem; cursor:pointer; padding:2px; }
+        .meds-edit-btn:active { color:var(--primary); }
+        .meds-empty { text-align:center; padding:16px 0; font-size:0.66rem; color:var(--text-muted); font-family:'Inter',sans-serif; }
+        .meds-add-btn { display:flex; align-items:center; justify-content:center; gap:5px; width:100%; padding:8px; border-radius:var(--radius-xs); background:var(--primary-dim); border:1px dashed rgba(80,200,120,0.4); color:var(--primary); font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:700; cursor:pointer; margin-top:4px; letter-spacing:0.03em; transition:all 0.15s; }
+        .meds-add-btn:active { background:var(--primary); color:#000; }
+        .meds-time-picker { display:flex; gap:6px; flex-wrap:wrap; }
+        .meds-time-tag { background:var(--surface); border:1px solid var(--border-bright); color:var(--text-dim); border-radius:20px; padding:5px 11px; font-size:0.7rem; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; transition:all 0.15s; }
+        .meds-time-tag.selected { background:var(--primary-dim); border-color:var(--primary); color:var(--primary); }
+        .meds-streak-badge { display:inline-flex; align-items:center; gap:4px; background:rgba(243,156,18,0.1); border:1px solid rgba(243,156,18,0.25); color:#f39c12; border-radius:20px; padding:2px 7px; font-size:0.56rem; font-weight:700; font-family:'Inter',sans-serif; margin-left:4px; }
 
         /* ── TODO ── */
         .todo-item { display:flex; align-items:center; padding:9px 4px; border-bottom:1px solid var(--border); gap:10px; }
@@ -1574,6 +1605,20 @@
         </div>
     </div>
 
+    <!-- UBAT HARIAN PERIBADI -->
+    <div class="meds-section" id="meds-section">
+        <div class="meds-header">
+            <h3><span class="meds-header-icon">💊</span> Ubat Harian <span id="meds-streak-el" class="meds-streak-badge" style="display:none;">🔥 0 hari</span></h3>
+            <button class="btn-add-drug" onclick="openAddMedSheet()">+</button>
+        </div>
+
+            <div class="meds-progress-bar"><div class="meds-progress-fill" id="meds-progress-fill" style="width:0%"></div></div>
+            <div class="meds-progress-label" id="meds-progress-label">0 / 0 ambil</div>
+            <div id="meds-list"></div>
+            <button class="meds-add-btn" onclick="openAddMedSheet()">+ Tambah Ubat</button>
+        </div>
+    </div>
+
     <!-- EMERGENCY DRUG -->
     <div class="section">
         <div class="section-header" style="cursor:pointer;" onclick="openAllDrugsOverlay()">
@@ -1642,6 +1687,8 @@ let store = JSON.parse(localStorage.getItem('roster_ultimate_v3')) || {
 if(!store.nursingNotes) store.nursingNotes = [];
 if(!store.carService) store.carService = {};
 if(!store.quickNotes) store.quickNotes = [];
+if(!store.myMeds) store.myMeds = [];
+if(!store.medsLog) store.medsLog = {};
 
 const PRAYER_NAMES = ['Subuh','Syuruk','Zohor','Asar','Maghrib','Isyak'];
 const PRAYER_KEYS  = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
@@ -2554,6 +2601,29 @@ const DEFAULT_DRUGS = [
 
 function migrateDefaultDrugs(){ const existingNames=store.drugs.map(d=>d.name.toLowerCase()); let added=0; DEFAULT_DRUGS.forEach(def=>{if(!existingNames.includes(def.name.toLowerCase())){store.drugs.push(def);added++;}}); store.drugs=store.drugs.map(d=>({name:d.name,ampule:d.ampule||d.prep||'—',prep:d.prep||''})); if(added>0) localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); }
 
+const DEFAULT_MY_MEDS = [
+    { id:'mymeds_gliclazide', name:'Gliclazide', dose:'1 tab', note:'Serta-merta sebelum sarapan', times:['7:00 PG'] },
+    { id:'mymeds_metformin_pg', name:'Metformin (Pagi)', dose:'1 tab', note:'Selepas sarapan pagi', times:['8:00 PG'] },
+    { id:'mymeds_metformin_mlm', name:'Metformin (Malam)', dose:'1 tab', note:'Selepas makan malam', times:['8:00 MLM'] },
+    { id:'mymeds_insulin', name:'Diabulyn N (Insulin)', dose:'8 unit', note:'Suntikan malam', times:['11:00 MLM'] },
+    { id:'mymeds_atorvastatin', name:'Atorvastatin', dose:'1 tab', note:'Sebelum tidur', times:['11:00 MLM'] }
+];
+
+function migrateDefaultMyMeds() {
+    if(!store.myMeds) store.myMeds = [];
+    // Convert any old 24hr format times to 12hr
+    const map24to12 = {'07:00':'7:00 PG','08:00':'8:00 PG','13:00':'1:00 PTG','18:00':'6:00 PTG','20:00':'8:00 MLM','21:00':'9:00 MLM','22:00':'10:00 MLM','23:00':'11:00 MLM'};
+    store.myMeds.forEach(m => {
+        if(m.times) m.times = m.times.map(t => map24to12[t] || t);
+    });
+    const existingIds = store.myMeds.map(m => m.id);
+    let added = 0;
+    DEFAULT_MY_MEDS.forEach(def => {
+        if(!existingIds.includes(def.id)) { store.myMeds.push(def); added++; }
+    });
+    if(added > 0) localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+}
+
 const THEMES = {
     dark: {
         bg:'#0a0a0a', surface:'#111', card:'#161616', cardRaised:'#1c1c1c',
@@ -2733,9 +2803,12 @@ async function gLoadFromDrive() {
             // Terus guna data Drive tanpa tanya — auto-sync senyap
             store = remote;
             if(!store.nursingNotes) store.nursingNotes = [];
+            if(!store.myMeds) store.myMeds = [];
+            if(!store.medsLog) store.medsLog = [];
             migrateCalendarKeys();
             localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
             generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
+            renderMedsList();
         }
         gsyncSetStatus('✓ Connected — auto-save active', 'synced');
     } catch(e) {
@@ -2847,8 +2920,209 @@ window.addEventListener('load', () => {
     // Mula lebih cepat — 200ms bukan 800ms
     setTimeout(() => tryAutoLogin(1), 200);
 });
+// ══════════════════════════════════════════
+// UBAT HARIAN PERIBADI
+// ══════════════════════════════════════════
+if(!store.myMeds) store.myMeds = [];
+if(!store.medsLog) store.medsLog = {};
+
+let medsSelectedDate = new Date().toISOString().split('T')[0];
+
+// ── Render the medication list for selected date ──
+function renderMedsList() {
+    const list = document.getElementById('meds-list');
+    if(!list) return;
+    const meds = store.myMeds || [];
+    if(meds.length === 0) {
+        list.innerHTML = '<div class="meds-empty">Tiada ubat ditambah.<br>Tekan <b>+</b> untuk tambah ubat anda.</div>';
+        document.getElementById('meds-progress-fill').style.width = '0%';
+        document.getElementById('meds-progress-label').innerText = '0 / 0 ambil';
+        updateMedsStreak();
+        return;
+    }
+    const log = store.medsLog[medsSelectedDate] || {};
+    // Count total "doses" — each med with times counts as number of times, else 1
+    let total = 0, done = 0;
+    meds.forEach(m => {
+        const times = m.times && m.times.length > 0 ? m.times : [''];
+        total += times.length;
+        times.forEach(t => {
+            const key = t ? `${m.id}_${t}` : m.id;
+            if(log[key]) done++;
+        });
+    });
+    const pct = total > 0 ? Math.round((done/total)*100) : 0;
+    document.getElementById('meds-progress-fill').style.width = pct + '%';
+    document.getElementById('meds-progress-label').innerText = `${done} / ${total} dos diambil (${pct}%)`;
+
+    list.innerHTML = meds.map(m => {
+        const times = m.times && m.times.length > 0 ? m.times : [];
+        let allTaken = false;
+        if(times.length > 0) {
+            allTaken = times.every(t => log[`${m.id}_${t}`]);
+        } else {
+            allTaken = !!log[m.id];
+        }
+        const chipHtml = times.length > 0 ? times.map(t => {
+            const key = `${m.id}_${t}`;
+            const isDone = !!log[key];
+            return `<span class="meds-time-chip${isDone?' done-chip':''}" onclick="event.stopPropagation();toggleMedTime('${m.id}','${t}')">${t}</span>`;
+        }).join('') : '';
+        return `<div class="meds-item${allTaken?' taken':''}" onclick="${times.length === 0 ? `toggleMedSimple('${m.id}')` : ''}">
+            <div class="meds-check" onclick="${times.length > 0 ? `event.stopPropagation();toggleMedAll('${m.id}')` : ''}">${allTaken ? '✓' : ''}</div>
+            <div class="meds-item-info">
+                <div class="meds-item-name">${m.name}</div>
+                <div class="meds-item-sub">
+                    ${m.dose ? `<span>${m.dose}</span>` : ''}
+                    ${m.note ? `<span style="color:var(--text-muted);">${m.note}</span>` : ''}
+                    ${chipHtml ? `<span class="meds-item-time-chips">${chipHtml}</span>` : ''}
+                </div>
+            </div>
+            <div class="meds-item-actions">
+                <button class="meds-edit-btn" onclick="event.stopPropagation();openEditMedSheet('${m.id}')">✏️</button>
+            </div>
+        </div>`;
+    }).join('');
+    updateMedsStreak();
+}
+
+function toggleMedSimple(medId) {
+    if(!store.medsLog[medsSelectedDate]) store.medsLog[medsSelectedDate] = {};
+    store.medsLog[medsSelectedDate][medId] = !store.medsLog[medsSelectedDate][medId];
+    saveData(); renderMedsList();
+}
+
+function toggleMedTime(medId, time) {
+    if(!store.medsLog[medsSelectedDate]) store.medsLog[medsSelectedDate] = {};
+    const key = `${medId}_${time}`;
+    store.medsLog[medsSelectedDate][key] = !store.medsLog[medsSelectedDate][key];
+    saveData(); renderMedsList();
+}
+
+function toggleMedAll(medId) {
+    const med = (store.myMeds || []).find(m => m.id === medId);
+    if(!med) return;
+    if(!store.medsLog[medsSelectedDate]) store.medsLog[medsSelectedDate] = {};
+    const log = store.medsLog[medsSelectedDate];
+    const times = med.times && med.times.length > 0 ? med.times : [];
+    const allDone = times.every(t => log[`${medId}_${t}`]);
+    times.forEach(t => { log[`${medId}_${t}`] = !allDone; });
+    saveData(); renderMedsList();
+}
+
+function updateMedsStreak() {
+    const el = document.getElementById('meds-streak-el');
+    if(!el) return;
+    if(!store.myMeds || store.myMeds.length === 0) { el.style.display='none'; return; }
+    // Calculate consecutive days with 100% completion
+    let streak = 0;
+    const today = new Date();
+    for(let i = 0; i < 365; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const iso = d.toISOString().split('T')[0];
+        const log = store.medsLog[iso] || {};
+        const meds = store.myMeds;
+        let total = 0, done = 0;
+        meds.forEach(m => {
+            const times = m.times && m.times.length > 0 ? m.times : [''];
+            times.forEach(t => {
+                total++;
+                const key = t ? `${m.id}_${t}` : m.id;
+                if(log[key]) done++;
+            });
+        });
+        if(total > 0 && done === total) streak++;
+        else break;
+    }
+    if(streak >= 2) { el.style.display='inline-flex'; el.innerText = `🔥 ${streak} hari`; }
+    else el.style.display='none';
+}
+
+const COMMON_TIMES = ['6:00 PG','7:00 PG','8:00 PG','9:00 PG','12:00 TGH','1:00 PTG','6:00 PTG','8:00 MLM','9:00 MLM','10:00 MLM','11:00 MLM'];
+
+function openAddMedSheet(editId = null) {
+    const isEdit = editId !== null;
+    const med = isEdit ? (store.myMeds||[]).find(m => m.id === editId) : null;
+    document.getElementById('sheet-title').innerText = isEdit ? '✏️ Edit Ubat' : '💊 Tambah Ubat';
+    const selTimes = med && med.times ? [...med.times] : [];
+    const timeHtml = COMMON_TIMES.map(t => `<span class="meds-time-tag${selTimes.includes(t)?' selected':''}" onclick="toggleMedTimeTag(this,'${t}')">${t}</span>`).join('');
+    document.getElementById('sheet-content').innerHTML = `
+        <label>Nama Ubat</label>
+        <input type="text" id="med-name" placeholder="cth: Metformin, Losartan..." value="${med ? med.name : ''}">
+        <label>Dos / Kekuatan</label>
+        <input type="text" id="med-dose" placeholder="cth: 500mg, 1 tab, 8 unit..." value="${med ? (med.dose||'') : ''}">
+        <label>Masa Pengambilan <span style="font-size:0.62rem;color:var(--text-dim);font-weight:400;">(boleh pilih berbilang)</span></label>
+        <div class="meds-time-picker" id="med-times-picker" style="margin-bottom:8px;">${timeHtml}</div>
+        <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px;">
+            <select id="med-custom-hr" style="flex:1;margin-bottom:0;">${[1,2,3,4,5,6,7,8,9,10,11,12].map(h=>`<option>${h}</option>`).join('')}</select>
+            <select id="med-custom-min" style="flex:1;margin-bottom:0;"><option>00</option><option>30</option></select>
+            <select id="med-custom-ampm" style="flex:1;margin-bottom:0;"><option>PG</option><option>TGH</option><option>PTG</option><option>MLM</option></select>
+            <button onclick="addCustomMedTime()" style="background:var(--primary-dim);border:1px solid rgba(80,200,120,0.35);color:var(--primary);border-radius:var(--radius-xs);padding:10px 12px;font-size:0.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;">+ Tambah</button>
+        </div>
+        <label>Catatan (Optional)</label>
+        <input type="text" id="med-note" placeholder="cth: Lepas makan, sebelum tidur..." value="${med ? (med.note||'') : ''}">
+        <input type="hidden" id="med-edit-id" value="${editId||''}">
+        <button class="btn-primary" onclick="saveMedEntry()">${isEdit ? 'KEMASKINI' : 'SIMPAN UBAT'}</button>
+        ${isEdit ? `<button class="btn-danger" onclick="deleteMedEntry('${editId}')">PADAM UBAT</button>` : ''}`;
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('med-name'); if(el) el.focus(); }, 350);
+}
+
+function openEditMedSheet(editId) { openAddMedSheet(editId); }
+
+function toggleMedTimeTag(el, time) {
+    el.classList.toggle('selected');
+}
+
+function addCustomMedTime() {
+    const hr = document.getElementById('med-custom-hr').value;
+    const min = document.getElementById('med-custom-min').value;
+    const ampm = document.getElementById('med-custom-ampm').value;
+    const val = `${hr}:${min} ${ampm}`;
+    const picker = document.getElementById('med-times-picker');
+    if(!picker) return;
+    const existing = [...picker.querySelectorAll('.meds-time-tag')].find(el => el.innerText === val);
+    if(existing) { existing.classList.add('selected'); return; }
+    const tag = document.createElement('span');
+    tag.className = 'meds-time-tag selected';
+    tag.innerText = val;
+    tag.onclick = function() { this.classList.toggle('selected'); };
+    picker.appendChild(tag);
+}
+
+function saveMedEntry() {
+    const name = (document.getElementById('med-name').value||'').trim();
+    const dose = (document.getElementById('med-dose').value||'').trim();
+    const note = (document.getElementById('med-note').value||'').trim();
+    const editId = document.getElementById('med-edit-id').value;
+    if(!name) { alert('Sila masukkan nama ubat.'); return; }
+    const selectedTags = [...document.querySelectorAll('#med-times-picker .meds-time-tag.selected')].map(el => el.innerText);
+    if(!store.myMeds) store.myMeds = [];
+    if(editId) {
+        const idx = store.myMeds.findIndex(m => m.id === editId);
+        if(idx >= 0) store.myMeds[idx] = { ...store.myMeds[idx], name, dose, note, times: selectedTags };
+    } else {
+        store.myMeds.push({ id: 'med_' + Date.now(), name, dose, note, times: selectedTags });
+    }
+    saveData(); renderMedsList(); closeSheet();
+}
+
+function deleteMedEntry(medId) {
+    if(!confirm('Padam ubat ini?')) return;
+    store.myMeds = (store.myMeds||[]).filter(m => m.id !== medId);
+    // Clean up log entries
+    Object.keys(store.medsLog||{}).forEach(date => {
+        Object.keys(store.medsLog[date]||{}).forEach(k => {
+            if(k.startsWith(medId)) delete store.medsLog[date][k];
+        });
+    });
+    saveData(); renderMedsList(); closeSheet();
+}
+
 migrateCalendarKeys();
 migrateDefaultDrugs();
+migrateDefaultMyMeds();
 setInterval(updateTime, 1000);
 updateTime();
 generateCalendar();
@@ -2857,6 +3131,8 @@ loadNotes();
 loadTheme();
 renderNursingNotes();
 renderQuickNotes();
+
+renderMedsList();
 </script>
 </body>
 </html>
