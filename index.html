@@ -1612,6 +1612,168 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- CALC 2: Dos Tablet -->
+                <div class="rsi-step" style="border-color:rgba(80,200,120,0.2);margin-bottom:10px;margin-top:10px;">
+                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(80,200,120,0.08),transparent);border-bottom-color:rgba(80,200,120,0.2);">
+                        <span style="font-size:0.78rem;">💊</span>
+                        <div>
+                            <div class="rsi-step-name">Dos Tablet (Oral)</div>
+                            <div style="font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--text-dim);margin-top:2px;">Desired ÷ On Hand × Quantity</div>
+                        </div>
+                    </div>
+                    <div class="rsi-step-body">
+                        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:9px 12px;margin-bottom:10px;font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);line-height:1.55;">
+                            <span style="color:var(--primary);font-weight:700;">Contoh:</span> Doktor arah Ibuprofen 600mg. Tablet yang ada 300mg/tablet → <span style="color:var(--text);font-weight:700;">2 tablet</span>
+                        </div>
+                        <div style="background:rgba(80,200,120,0.06);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-xs);padding:12px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Dos Dikehendaki (mg)</div>
+                                    <input type="number" id="tab-desired" placeholder="cth: 600" min="0" oninput="calcTablet()" style="background:var(--surface);border:1px solid rgba(80,200,120,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Dos Sedia Ada (mg/tab)</div>
+                                    <input type="number" id="tab-onhand" placeholder="cth: 300" min="0" oninput="calcTablet()" style="background:var(--surface);border:1px solid rgba(80,200,120,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                            </div>
+                            <div id="tab-result" style="display:none;">
+                                <div style="height:1px;background:rgba(80,200,120,0.2);margin-bottom:10px;"></div>
+                                <div style="text-align:center;">
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);margin-bottom:4px;" id="tab-formula-show">— ÷ — × 1 = —</div>
+                                    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--primary);letter-spacing:0.04em;line-height:1;filter:drop-shadow(0 0 8px var(--primary-glow));" id="tab-answer">—</div>
+                                    <div style="font-size:0.72rem;color:var(--text-dim);margin-top:2px;">tablet</div>
+                                </div>
+                            </div>
+                            <div id="tab-placeholder" style="text-align:center;padding:8px 0;font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;">Masukkan dos untuk pengiraan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALC 3: Dos Cecair / Injeksi -->
+                <div class="rsi-step" style="border-color:rgba(122,179,255,0.2);margin-bottom:10px;">
+                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(122,179,255,0.08),transparent);border-bottom-color:rgba(122,179,255,0.2);">
+                        <span style="font-size:0.78rem;">💉</span>
+                        <div>
+                            <div class="rsi-step-name">Dos Cecair / Injeksi (IV/IM)</div>
+                            <div style="font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--text-dim);margin-top:2px;">Desired ÷ Stock × Volume</div>
+                        </div>
+                    </div>
+                    <div class="rsi-step-body">
+                        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:9px 12px;margin-bottom:10px;font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);line-height:1.55;">
+                            <span style="color:#7ab3ff;font-weight:700;">Contoh:</span> Pesakit perlukan Petidine 50mg IV. Stok ada 75mg/3mL → <span style="color:var(--text);font-weight:700;">2 mL</span>
+                        </div>
+                        <div style="background:rgba(122,179,255,0.06);border:1px solid rgba(122,179,255,0.2);border-radius:var(--radius-xs);padding:12px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;">
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Dos Dikehendaki</div>
+                                    <input type="number" id="liq-desired" placeholder="50" min="0" oninput="calcLiquid()" style="background:var(--surface);border:1px solid rgba(122,179,255,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Stok (mg/mL atau mg)</div>
+                                    <input type="number" id="liq-stock" placeholder="75" min="0" oninput="calcLiquid()" style="background:var(--surface);border:1px solid rgba(122,179,255,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Isipadu Stok (mL)</div>
+                                    <input type="number" id="liq-vol" placeholder="3" min="0" oninput="calcLiquid()" style="background:var(--surface);border:1px solid rgba(122,179,255,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                            </div>
+                            <div id="liq-result" style="display:none;">
+                                <div style="height:1px;background:rgba(122,179,255,0.2);margin-bottom:10px;"></div>
+                                <div style="text-align:center;">
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);margin-bottom:4px;" id="liq-formula-show">— ÷ — × — = —</div>
+                                    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#7ab3ff;letter-spacing:0.04em;line-height:1;filter:drop-shadow(0 0 8px rgba(122,179,255,0.5));" id="liq-answer">—</div>
+                                    <div style="font-size:0.72rem;color:var(--text-dim);margin-top:2px;">mL</div>
+                                </div>
+                            </div>
+                            <div id="liq-placeholder" style="text-align:center;padding:8px 0;font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;">Masukkan nilai untuk pengiraan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALC 4: IV Infusion Rate mL/hr -->
+                <div class="rsi-step" style="border-color:rgba(255,179,71,0.2);margin-bottom:10px;">
+                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(255,179,71,0.08),transparent);border-bottom-color:rgba(255,179,71,0.2);">
+                        <span style="font-size:0.78rem;">🚿</span>
+                        <div>
+                            <div class="rsi-step-name">Kadar Infusi (mL/jam)</div>
+                            <div style="font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--text-dim);margin-top:2px;">Total Volume ÷ Total Time</div>
+                        </div>
+                    </div>
+                    <div class="rsi-step-body">
+                        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:9px 12px;margin-bottom:10px;font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);line-height:1.55;">
+                            <span style="color:#ffb347;font-weight:700;">Contoh:</span> 1000 mL NS dalam 8 jam → <span style="color:var(--text);font-weight:700;">125 mL/jam</span>
+                        </div>
+                        <div style="background:rgba(255,179,71,0.06);border:1px solid rgba(255,179,71,0.2);border-radius:var(--radius-xs);padding:12px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Jumlah Cecair (mL)</div>
+                                    <input type="number" id="infus-vol" placeholder="cth: 1000" min="0" oninput="calcInfusion()" style="background:var(--surface);border:1px solid rgba(255,179,71,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Masa (jam)</div>
+                                    <input type="number" id="infus-hr" placeholder="cth: 8" min="0" oninput="calcInfusion()" style="background:var(--surface);border:1px solid rgba(255,179,71,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                            </div>
+                            <div id="infus-result" style="display:none;">
+                                <div style="height:1px;background:rgba(255,179,71,0.2);margin-bottom:10px;"></div>
+                                <div style="text-align:center;">
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);margin-bottom:4px;" id="infus-formula-show">— ÷ — = —</div>
+                                    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#ffb347;letter-spacing:0.04em;line-height:1;filter:drop-shadow(0 0 8px rgba(255,179,71,0.4));" id="infus-answer">—</div>
+                                    <div style="font-size:0.72rem;color:var(--text-dim);margin-top:2px;">mL/jam</div>
+                                </div>
+                            </div>
+                            <div id="infus-placeholder" style="text-align:center;padding:8px 0;font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;">Masukkan nilai untuk pengiraan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALC 5: Drop Rate gtt/min -->
+                <div class="rsi-step" style="border-color:rgba(255,82,82,0.2);margin-bottom:0;">
+                    <div class="rsi-step-header" style="background:linear-gradient(90deg,rgba(255,82,82,0.08),transparent);border-bottom-color:rgba(255,82,82,0.2);">
+                        <span style="font-size:0.78rem;">🩸</span>
+                        <div>
+                            <div class="rsi-step-name">Kadar Titisan (gtt/min)</div>
+                            <div style="font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--text-dim);margin-top:2px;">Volume × Drop Factor ÷ Time (min)</div>
+                        </div>
+                    </div>
+                    <div class="rsi-step-body">
+                        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xs);padding:9px 12px;margin-bottom:10px;font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);line-height:1.55;">
+                            <span style="color:#ff5252;font-weight:700;">Contoh:</span> 500 mL saline dalam 4 jam, drop factor 20 gtt/mL → <span style="color:var(--text);font-weight:700;">42 gtt/min</span>
+                        </div>
+                        <div style="background:rgba(255,82,82,0.05);border:1px solid rgba(255,82,82,0.2);border-radius:var(--radius-xs);padding:12px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Jumlah Cecair (mL)</div>
+                                    <input type="number" id="gtt-vol" placeholder="cth: 500" min="0" oninput="calcGtt()" style="background:var(--surface);border:1px solid rgba(255,82,82,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                                <div>
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Masa (jam)</div>
+                                    <input type="number" id="gtt-hr" placeholder="cth: 4" min="0" oninput="calcGtt()" style="background:var(--surface);border:1px solid rgba(255,82,82,0.3);color:var(--text);padding:9px 10px;border-radius:var(--radius-xs);width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;margin-bottom:0;">
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--text-dim);font-weight:700;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;">Drop Factor (gtt/mL)</div>
+                                <div style="display:flex;gap:6px;margin-bottom:10px;">
+                                    <button id="gtt-df-10" onclick="selectDropFactor(10)" style="flex:1;padding:8px 4px;border-radius:var(--radius-xs);border:1px solid rgba(255,82,82,0.3);background:var(--surface);color:var(--text-dim);font-family:'Inter',sans-serif;font-size:0.66rem;font-weight:700;cursor:pointer;transition:all 0.15s;">10</button>
+                                    <button id="gtt-df-15" onclick="selectDropFactor(15)" style="flex:1;padding:8px 4px;border-radius:var(--radius-xs);border:1px solid rgba(255,82,82,0.3);background:var(--surface);color:var(--text-dim);font-family:'Inter',sans-serif;font-size:0.66rem;font-weight:700;cursor:pointer;transition:all 0.15s;">15</button>
+                                    <button id="gtt-df-20" onclick="selectDropFactor(20)" style="flex:1;padding:8px 4px;border-radius:var(--radius-xs);border:1px solid rgba(255,82,82,0.3);background:rgba(255,82,82,0.15);color:#ff5252;font-family:'Inter',sans-serif;font-size:0.66rem;font-weight:700;cursor:pointer;border-color:#ff5252;transition:all 0.15s;">20 ✓</button>
+                                    <button id="gtt-df-60" onclick="selectDropFactor(60)" style="flex:1;padding:8px 4px;border-radius:var(--radius-xs);border:1px solid rgba(255,82,82,0.3);background:var(--surface);color:var(--text-dim);font-family:'Inter',sans-serif;font-size:0.66rem;font-weight:700;cursor:pointer;transition:all 0.15s;">60</button>
+                                </div>
+                            </div>
+                            <div id="gtt-result" style="display:none;">
+                                <div style="height:1px;background:rgba(255,82,82,0.2);margin-bottom:10px;"></div>
+                                <div style="text-align:center;">
+                                    <div style="font-family:'Inter',sans-serif;font-size:0.66rem;color:var(--text-dim);margin-bottom:4px;" id="gtt-formula-show">— × — ÷ — = —</div>
+                                    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#ff5252;letter-spacing:0.04em;line-height:1;filter:drop-shadow(0 0 8px rgba(255,82,82,0.5));" id="gtt-answer">—</div>
+                                    <div style="font-size:0.72rem;color:var(--text-dim);margin-top:2px;">gtt/min</div>
+                                </div>
+                            </div>
+                            <div id="gtt-placeholder" style="text-align:center;padding:8px 0;font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;">Masukkan nilai untuk pengiraan</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!-- PRE-MED RSI PANEL -->
@@ -1838,25 +2000,63 @@ function openToolOverlay(id) {
     } else if (id === 'drugcalc') {
         // Clone content fresh with working calculator
         content.innerHTML = sourcePanel.innerHTML;
-        // Re-attach calcNora to inputs in overlay
-        const doseIn = content.querySelector('#nora-dose');
-        const wtIn   = content.querySelector('#nora-weight');
-        if (doseIn) { doseIn.id = 'ov-nora-dose'; doseIn.setAttribute('oninput','calcNoraOv()'); }
-        if (wtIn)   { wtIn.id   = 'ov-nora-weight'; wtIn.setAttribute('oninput','calcNoraOv()'); }
-        const res = content.querySelector('#nora-result');
-        const ph  = content.querySelector('#nora-placeholder');
-        const mghrEl   = content.querySelector('#nora-mghr');
-        const doseShow = content.querySelector('#nora-dose-show');
-        const wtShow   = content.querySelector('#nora-wt-show');
-        const single   = content.querySelector('#nora-single');
-        const dbl      = content.querySelector('#nora-double');
-        if(res)   res.id   = 'ov-nora-result';
-        if(ph)    ph.id    = 'ov-nora-placeholder';
-        if(mghrEl)   mghrEl.id   = 'ov-nora-mghr';
-        if(doseShow) doseShow.id = 'ov-nora-dose-show';
-        if(wtShow)   wtShow.id   = 'ov-nora-wt-show';
-        if(single)   single.id   = 'ov-nora-single';
-        if(dbl)      dbl.id      = 'ov-nora-double';
+
+        // Helper: rename element id and oninput within overlay content
+        function ovRename(oldId, newId, newOninput) {
+            const el = content.querySelector('#' + oldId);
+            if (!el) return;
+            el.id = newId;
+            if (newOninput) el.setAttribute('oninput', newOninput);
+        }
+
+        // ── CALC 1: Noradrenaline ──
+        ovRename('nora-dose',      'ov-nora-dose',      'calcNoraOv()');
+        ovRename('nora-weight',    'ov-nora-weight',    'calcNoraOv()');
+        ovRename('nora-result',    'ov-nora-result',    null);
+        ovRename('nora-placeholder','ov-nora-placeholder',null);
+        ovRename('nora-mghr',      'ov-nora-mghr',      null);
+        ovRename('nora-dose-show', 'ov-nora-dose-show', null);
+        ovRename('nora-wt-show',   'ov-nora-wt-show',   null);
+        ovRename('nora-single',    'ov-nora-single',    null);
+        ovRename('nora-double',    'ov-nora-double',    null);
+
+        // ── CALC 2: Dos Tablet ──
+        ovRename('tab-desired',      'ov-tab-desired',      'calcTabletOv()');
+        ovRename('tab-onhand',       'ov-tab-onhand',       'calcTabletOv()');
+        ovRename('tab-result',       'ov-tab-result',       null);
+        ovRename('tab-placeholder',  'ov-tab-placeholder',  null);
+        ovRename('tab-formula-show', 'ov-tab-formula-show', null);
+        ovRename('tab-answer',       'ov-tab-answer',       null);
+
+        // ── CALC 3: Dos Cecair / Injeksi ──
+        ovRename('liq-desired',      'ov-liq-desired',      'calcLiquidOv()');
+        ovRename('liq-stock',        'ov-liq-stock',        'calcLiquidOv()');
+        ovRename('liq-vol',          'ov-liq-vol',          'calcLiquidOv()');
+        ovRename('liq-result',       'ov-liq-result',       null);
+        ovRename('liq-placeholder',  'ov-liq-placeholder',  null);
+        ovRename('liq-formula-show', 'ov-liq-formula-show', null);
+        ovRename('liq-answer',       'ov-liq-answer',       null);
+
+        // ── CALC 4: IV Infusion Rate ──
+        ovRename('infus-vol',          'ov-infus-vol',          'calcInfusionOv()');
+        ovRename('infus-hr',           'ov-infus-hr',           'calcInfusionOv()');
+        ovRename('infus-result',       'ov-infus-result',       null);
+        ovRename('infus-placeholder',  'ov-infus-placeholder',  null);
+        ovRename('infus-formula-show', 'ov-infus-formula-show', null);
+        ovRename('infus-answer',       'ov-infus-answer',       null);
+
+        // ── CALC 5: Drop Rate gtt/min ──
+        ovRename('gtt-vol',         'ov-gtt-vol',         'calcGttOv()');
+        ovRename('gtt-hr',          'ov-gtt-hr',          'calcGttOv()');
+        ovRename('gtt-result',      'ov-gtt-result',      null);
+        ovRename('gtt-placeholder', 'ov-gtt-placeholder', null);
+        ovRename('gtt-formula-show','ov-gtt-formula-show',null);
+        ovRename('gtt-answer',      'ov-gtt-answer',      null);
+        // Rename drop factor buttons and rewire onclick
+        [10,15,20,60].forEach(v => {
+            const btn = content.querySelector('#gtt-df-' + v);
+            if (btn) { btn.id = 'ov-gtt-df-' + v; btn.setAttribute('onclick', 'selectDropFactorOv(' + v + ')'); }
+        });
     } else {
         content.innerHTML = sourcePanel.innerHTML;
     }
@@ -1890,6 +2090,82 @@ function calcNoraOv() {
     document.getElementById('ov-nora-single').innerText=single.toFixed(1);
     document.getElementById('ov-nora-double').innerText=double.toFixed(1);
     result.style.display='block'; placeholder.style.display='none';
+}
+
+// ── Overlay: Dos Tablet ──
+function calcTabletOv() {
+    const desired = parseFloat(document.getElementById('ov-tab-desired').value);
+    const onhand  = parseFloat(document.getElementById('ov-tab-onhand').value);
+    const res = document.getElementById('ov-tab-result');
+    const ph  = document.getElementById('ov-tab-placeholder');
+    if(isNaN(desired)||isNaN(onhand)||onhand<=0||desired<=0){res.style.display='none';ph.style.display='block';return;}
+    const answer = desired / onhand;
+    document.getElementById('ov-tab-formula-show').innerText = `${desired} ÷ ${onhand} × 1 = ${answer % 1 === 0 ? answer : answer.toFixed(2)}`;
+    document.getElementById('ov-tab-answer').innerText = answer % 1 === 0 ? answer : answer.toFixed(2);
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── Overlay: Dos Cecair / Injeksi ──
+function calcLiquidOv() {
+    const desired = parseFloat(document.getElementById('ov-liq-desired').value);
+    const stock   = parseFloat(document.getElementById('ov-liq-stock').value);
+    const vol     = parseFloat(document.getElementById('ov-liq-vol').value);
+    const res = document.getElementById('ov-liq-result');
+    const ph  = document.getElementById('ov-liq-placeholder');
+    if(isNaN(desired)||isNaN(stock)||isNaN(vol)||stock<=0||desired<=0||vol<=0){res.style.display='none';ph.style.display='block';return;}
+    const answer = (desired / stock) * vol;
+    document.getElementById('ov-liq-formula-show').innerText = `${desired} ÷ ${stock} × ${vol} = ${answer.toFixed(2)}`;
+    document.getElementById('ov-liq-answer').innerText = answer.toFixed(2);
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── Overlay: IV Infusion Rate mL/hr ──
+function calcInfusionOv() {
+    const vol = parseFloat(document.getElementById('ov-infus-vol').value);
+    const hr  = parseFloat(document.getElementById('ov-infus-hr').value);
+    const res = document.getElementById('ov-infus-result');
+    const ph  = document.getElementById('ov-infus-placeholder');
+    if(isNaN(vol)||isNaN(hr)||hr<=0||vol<=0){res.style.display='none';ph.style.display='block';return;}
+    const answer = vol / hr;
+    document.getElementById('ov-infus-formula-show').innerText = `${vol} ÷ ${hr} = ${answer.toFixed(1)}`;
+    document.getElementById('ov-infus-answer').innerText = answer.toFixed(1);
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── Overlay: Drop Rate gtt/min ──
+let ovGttDropFactor = 20;
+function selectDropFactorOv(df) {
+    ovGttDropFactor = df;
+    [10,15,20,60].forEach(v => {
+        const btn = document.getElementById('ov-gtt-df-'+v);
+        if(!btn) return;
+        if(v === df) {
+            btn.style.background='rgba(255,82,82,0.15)';
+            btn.style.color='#ff5252';
+            btn.style.borderColor='#ff5252';
+            btn.innerText = v + ' ✓';
+        } else {
+            btn.style.background='var(--surface)';
+            btn.style.color='var(--text-dim)';
+            btn.style.borderColor='rgba(255,82,82,0.3)';
+            btn.innerText = v;
+        }
+    });
+    calcGttOv();
+}
+function calcGttOv() {
+    const vol = parseFloat(document.getElementById('ov-gtt-vol').value);
+    const hr  = parseFloat(document.getElementById('ov-gtt-hr').value);
+    const df  = ovGttDropFactor;
+    const res = document.getElementById('ov-gtt-result');
+    const ph  = document.getElementById('ov-gtt-placeholder');
+    if(isNaN(vol)||isNaN(hr)||hr<=0||vol<=0){res.style.display='none';ph.style.display='block';return;}
+    const timeMins = hr * 60;
+    const raw = (vol * df) / timeMins;
+    const rounded = Math.round(raw);
+    document.getElementById('ov-gtt-formula-show').innerText = `${vol} × ${df} ÷ ${timeMins} min = ${raw.toFixed(2)} ≈ ${rounded}`;
+    document.getElementById('ov-gtt-answer').innerText = rounded;
+    res.style.display='block'; ph.style.display='none';
 }
 
 // ── ALL DRUGS OVERLAY ──
@@ -1950,6 +2226,82 @@ function calcNora() {
     document.getElementById('nora-single').innerText = single.toFixed(2);
     document.getElementById('nora-double').innerText = double.toFixed(2);
     result.style.display = 'block'; placeholder.style.display = 'none';
+}
+
+// ── Dos Tablet ──
+function calcTablet() {
+    const desired = parseFloat(document.getElementById('tab-desired').value);
+    const onhand  = parseFloat(document.getElementById('tab-onhand').value);
+    const res = document.getElementById('tab-result');
+    const ph  = document.getElementById('tab-placeholder');
+    if(isNaN(desired)||isNaN(onhand)||onhand<=0||desired<=0){res.style.display='none';ph.style.display='block';return;}
+    const answer = desired / onhand;
+    document.getElementById('tab-formula-show').innerText = `${desired} ÷ ${onhand} × 1 = ${answer % 1 === 0 ? answer : answer.toFixed(2)}`;
+    document.getElementById('tab-answer').innerText = answer % 1 === 0 ? answer : answer.toFixed(2);
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── Dos Cecair / Injeksi ──
+function calcLiquid() {
+    const desired = parseFloat(document.getElementById('liq-desired').value);
+    const stock   = parseFloat(document.getElementById('liq-stock').value);
+    const vol     = parseFloat(document.getElementById('liq-vol').value);
+    const res = document.getElementById('liq-result');
+    const ph  = document.getElementById('liq-placeholder');
+    if(isNaN(desired)||isNaN(stock)||isNaN(vol)||stock<=0||desired<=0||vol<=0){res.style.display='none';ph.style.display='block';return;}
+    const answer = (desired / stock) * vol;
+    document.getElementById('liq-formula-show').innerText = `${desired} ÷ ${stock} × ${vol} = ${answer.toFixed(2)}`;
+    document.getElementById('liq-answer').innerText = answer.toFixed(2);
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── IV Infusion Rate mL/hr ──
+function calcInfusion() {
+    const vol = parseFloat(document.getElementById('infus-vol').value);
+    const hr  = parseFloat(document.getElementById('infus-hr').value);
+    const res = document.getElementById('infus-result');
+    const ph  = document.getElementById('infus-placeholder');
+    if(isNaN(vol)||isNaN(hr)||hr<=0||vol<=0){res.style.display='none';ph.style.display='block';return;}
+    const answer = vol / hr;
+    document.getElementById('infus-formula-show').innerText = `${vol} ÷ ${hr} = ${answer.toFixed(1)}`;
+    document.getElementById('infus-answer').innerText = answer.toFixed(1);
+    res.style.display='block'; ph.style.display='none';
+}
+
+// ── Drop Rate gtt/min ──
+let gttDropFactor = 20;
+function selectDropFactor(df) {
+    gttDropFactor = df;
+    [10,15,20,60].forEach(v => {
+        const btn = document.getElementById('gtt-df-'+v);
+        if(!btn) return;
+        if(v === df) {
+            btn.style.background='rgba(255,82,82,0.15)';
+            btn.style.color='#ff5252';
+            btn.style.borderColor='#ff5252';
+            btn.innerText = v + ' ✓';
+        } else {
+            btn.style.background='var(--surface)';
+            btn.style.color='var(--text-dim)';
+            btn.style.borderColor='rgba(255,82,82,0.3)';
+            btn.innerText = v;
+        }
+    });
+    calcGtt();
+}
+function calcGtt() {
+    const vol = parseFloat(document.getElementById('gtt-vol').value);
+    const hr  = parseFloat(document.getElementById('gtt-hr').value);
+    const df  = gttDropFactor;
+    const res = document.getElementById('gtt-result');
+    const ph  = document.getElementById('gtt-placeholder');
+    if(isNaN(vol)||isNaN(hr)||hr<=0||vol<=0){res.style.display='none';ph.style.display='block';return;}
+    const timeMins = hr * 60;
+    const raw = (vol * df) / timeMins;
+    const rounded = Math.round(raw);
+    document.getElementById('gtt-formula-show').innerText = `${vol} × ${df} ÷ ${timeMins} min = ${raw.toFixed(2)} ≈ ${rounded}`;
+    document.getElementById('gtt-answer').innerText = rounded;
+    res.style.display='block'; ph.style.display='none';
 }
 
 const NURSING_CATEGORIES = [
