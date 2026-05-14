@@ -538,7 +538,8 @@
         .meds-check { width:18px; height:18px; border-radius:50%; border:1.5px solid var(--border-bright); display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.2s; font-size:0.6rem; color:transparent; }
         .meds-item.taken .meds-check { background:var(--primary); border-color:var(--primary); color:#000; }
         .meds-item-info { flex:1; min-width:0; }
-        .meds-item-name { font-size:0.66rem; font-weight:700; color:var(--text); }
+        .meds-item-name { font-size:0.66rem; font-weight:700; color:var(--text); cursor:pointer; }
+        .meds-item-name:hover { color:var(--primary); }
         .meds-item-sub { font-size:0.58rem; color:var(--text-dim); font-family:'Inter',sans-serif; margin-top:1px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
         .meds-item-time-chips { display:flex; gap:3px; flex-wrap:wrap; margin-top:0; }
         .meds-time-chip { font-size:0.68rem; font-weight:800; letter-spacing:0.02em; padding:0; border:none; color:var(--primary); background:none; font-family:'Inter',sans-serif; cursor:pointer; }
@@ -1347,6 +1348,20 @@
     </div>
 
     <!-- NURSING NOTE -->
+    <!-- EMERGENCY DRUG -->
+    <div class="section">
+        <div class="section-header" style="cursor:pointer;" onclick="openAllDrugsOverlay()">
+            <h3 style="display:flex;align-items:center;gap:6px;">Emergency Drug <span style="font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;font-weight:700;letter-spacing:0.02em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">VIEW ALL</span></h3>
+            <div class="drug-toolbar" onclick="event.stopPropagation()">
+                <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
+                <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
+                <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
+            </div>
+        </div>
+        <input type="text" id="drug-search" placeholder="Search drug..." oninput="searchDrugs()">
+        <div id="drug-results"></div>
+    </div>
+
     <div class="section">
         <div class="section-header">
             <h3>Nursing Note</h3>
@@ -1615,22 +1630,6 @@
             <div class="meds-progress-bar"><div class="meds-progress-fill" id="meds-progress-fill" style="width:0%"></div></div>
             <div class="meds-progress-label" id="meds-progress-label">0 / 0 ambil</div>
             <div id="meds-list"></div>
-            <button class="meds-add-btn" onclick="openAddMedSheet()">+ Tambah Ubat</button>
-        </div>
-    </div>
-
-    <!-- EMERGENCY DRUG -->
-    <div class="section">
-        <div class="section-header" style="cursor:pointer;" onclick="openAllDrugsOverlay()">
-            <h3 style="display:flex;align-items:center;gap:6px;">Emergency Drug <span style="font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;font-weight:700;letter-spacing:0.02em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">VIEW ALL</span></h3>
-            <div class="drug-toolbar" onclick="event.stopPropagation()">
-                <input type="file" id="pdf-upload" accept="application/pdf" hidden onchange="savePDF(event)">
-                <button id="btn-pdf" onclick="openStoredPDF()" oncontextmenu="triggerPDFUpload(event)">📖 PDF</button>
-                <button class="btn-add-drug" onclick="openAddDrugSheet()">+</button>
-            </div>
-        </div>
-        <input type="text" id="drug-search" placeholder="Search drug..." oninput="searchDrugs()">
-        <div id="drug-results"></div>
     </div>
 
 </div><!-- /page -->
@@ -2804,7 +2803,8 @@ async function gLoadFromDrive() {
             store = remote;
             if(!store.nursingNotes) store.nursingNotes = [];
             if(!store.myMeds) store.myMeds = [];
-            if(!store.medsLog) store.medsLog = [];
+            if(!store.medsLog) store.medsLog = {};
+            if(Array.isArray(store.medsLog)) store.medsLog = {};
             migrateCalendarKeys();
             localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
             generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
@@ -2971,7 +2971,7 @@ function renderMedsList() {
         return `<div class="meds-item${allTaken?' taken':''}" onclick="${times.length === 0 ? `toggleMedSimple('${m.id}')` : ''}">
             <div class="meds-check" onclick="${times.length > 0 ? `event.stopPropagation();toggleMedAll('${m.id}')` : ''}">${allTaken ? '✓' : ''}</div>
             <div class="meds-item-info">
-                <div class="meds-item-name">${m.name}</div>
+                <div class="meds-item-name" onclick="event.stopPropagation();openMedInfo('${m.id}')">${m.name}</div>
                 <div class="meds-item-sub">
                     ${m.dose ? `<span>${m.dose}</span>` : ''}
                     ${m.note ? `<span style="color:var(--text-muted);">${m.note}</span>` : ''}
@@ -3037,6 +3037,135 @@ function updateMedsStreak() {
     }
     if(streak >= 2) { el.style.display='inline-flex'; el.innerText = `🔥 ${streak} hari`; }
     else el.style.display='none';
+}
+
+const MED_INFO = {
+    'gliclazide': {
+        icon: '💊',
+        points: [
+            'Digunakan untuk merawat <b>Type 2 Diabetes</b>.',
+            'Membantu pankreas menghasilkan lebih banyak <b>insulin</b> untuk menurunkan paras gula dalam darah.',
+            'Biasanya diambil <b>sebelum makan</b>.'
+        ]
+    },
+    'metformin': {
+        icon: '💊',
+        points: [
+            'Digunakan untuk <b>Type 2 Diabetes</b>.',
+            'Mengurangkan penghasilan gula oleh hati dan membantu badan menggunakan insulin dengan lebih berkesan.',
+            'Biasanya diambil <b>selepas makan</b> untuk kurangkan sakit perut atau loya.'
+        ]
+    },
+    'diabulyn': {
+        icon: '💉',
+        points: [
+            'Digunakan untuk mengawal <b>gula darah</b> dalam pesakit diabetes.',
+            'Insulin membantu membawa gula dari darah masuk ke dalam sel badan untuk digunakan sebagai tenaga.',
+            '<b>"N"</b> ialah insulin jenis <b>intermediate-acting</b> (bertindak sederhana lama), biasanya digunakan untuk kawalan gula beberapa jam hingga semalaman.'
+        ]
+    },
+    'insulin': {
+        icon: '💉',
+        points: [
+            'Digunakan untuk mengawal <b>gula darah</b> dalam pesakit diabetes.',
+            'Insulin membantu membawa gula dari darah masuk ke dalam sel badan untuk digunakan sebagai tenaga.',
+            '<b>"N"</b> ialah insulin jenis <b>intermediate-acting</b> (bertindak sederhana lama), biasanya digunakan untuk kawalan gula beberapa jam hingga semalaman.'
+        ]
+    },
+    'atorvastatin': {
+        icon: '💊',
+        points: [
+            'Digunakan untuk menurunkan <b>kolesterol</b> dan lemak dalam darah.',
+            'Membantu mengurangkan risiko: <b>sakit jantung</b>, <b>strok</b>, dan <b>salur darah tersumbat</b>.',
+            'Selalu diambil <b>waktu malam</b> kerana penghasilan kolesterol badan lebih aktif pada waktu malam.'
+        ]
+    },
+    'losartan': {
+        icon: '💊',
+        points: [
+            'Digunakan untuk merawat <b>tekanan darah tinggi (hypertension)</b>.',
+            'Tergolong dalam kelas ubat <b>ARB (Angiotensin Receptor Blocker)</b> — melonggarkan saluran darah.',
+            'Juga digunakan untuk melindungi buah pinggang dalam pesakit diabetes.'
+        ]
+    },
+    'amlodipine': {
+        icon: '💊',
+        points: [
+            'Digunakan untuk merawat <b>tekanan darah tinggi</b> dan <b>angina</b> (sakit dada).',
+            'Tergolong dalam kelas <b>Calcium Channel Blocker</b> — melemaskan saluran darah dan jantung.',
+            'Boleh diambil pada bila-bila masa, dengan atau tanpa makan.'
+        ]
+    },
+    'aspirin': {
+        icon: '💊',
+        points: [
+            'Dos rendah digunakan untuk mencegah <b>serangan jantung</b> dan <b>strok</b>.',
+            'Bertindak sebagai <b>anti-platelet</b> — mencegah pembekuan darah yang berbahaya.',
+            'Biasanya diambil <b>selepas makan</b> untuk elakkan iritasi perut.'
+        ]
+    },
+    'omeprazole': {
+        icon: '💊',
+        points: [
+            'Digunakan untuk merawat <b>asid gastrik berlebihan</b>, ulser perut, dan GERD.',
+            'Tergolong dalam kelas <b>Proton Pump Inhibitor (PPI)</b> — mengurangkan penghasilan asid.',
+            'Biasanya diambil <b>30 minit sebelum makan</b> untuk kesan terbaik.'
+        ]
+    },
+    'simvastatin': {
+        icon: '💊',
+        points: [
+            'Digunakan untuk menurunkan <b>kolesterol LDL</b> ("kolesterol jahat") dalam darah.',
+            'Membantu mencegah penyakit jantung dan strok.',
+            'Diambil pada <b>waktu malam</b> kerana penghasilan kolesterol lebih aktif semasa tidur.'
+        ]
+    }
+};
+
+function getMedInfo(name) {
+    if(!name) return null;
+    const lower = name.toLowerCase();
+    for(const key of Object.keys(MED_INFO)) {
+        if(lower.includes(key)) return { ...MED_INFO[key], matchedKey: key };
+    }
+    return null;
+}
+
+function openMedInfo(medId) {
+    const med = (store.myMeds || []).find(m => m.id === medId);
+    if(!med) return;
+    const info = getMedInfo(med.name);
+    document.getElementById('sheet-title').innerText = (info ? info.icon + ' ' : '💊 ') + med.name;
+    if(!info) {
+        document.getElementById('sheet-content').innerHTML = `
+            <div style="text-align:center;padding:24px 0 8px;">
+                <div style="font-size:2rem;margin-bottom:10px;">💊</div>
+                <div style="font-size:0.72rem;color:var(--text-dim);font-family:'Inter',sans-serif;line-height:1.6;">
+                    Tiada maklumat tersedia untuk ubat ini.<br>
+                    <span style="color:var(--text-muted);font-size:0.66rem;">Sila rujuk doktor atau farmasis anda.</span>
+                </div>
+            </div>
+            <button class="btn-secondary" onclick="closeSheet()">TUTUP</button>`;
+    } else {
+        const pointsHtml = info.points.map(p =>
+            `<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">
+                <span style="color:var(--primary);font-size:0.7rem;margin-top:2px;flex-shrink:0;">▸</span>
+                <span style="font-size:0.74rem;color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;">${p}</span>
+            </div>`
+        ).join('');
+        document.getElementById('sheet-content').innerHTML = `
+            <div style="background:var(--primary-dim);border:1px solid rgba(80,200,120,0.2);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--primary);margin-bottom:4px;font-family:'Inter',sans-serif;">Kegunaan & Maklumat</div>
+                <div style="font-size:0.8rem;font-weight:700;color:var(--text);font-family:'Inter',sans-serif;">${med.name}</div>
+                ${med.dose ? `<div style="font-size:0.66rem;color:var(--text-dim);margin-top:2px;font-family:'Inter',sans-serif;">Dos: ${med.dose}</div>` : ''}
+            </div>
+            <div style="margin-bottom:16px;">${pointsHtml}</div>
+            <div style="font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;text-align:center;padding:8px 0;border-top:1px solid var(--border);">
+                ⚠️ Maklumat ini adalah panduan umum sahaja. Sila ikut arahan doktor anda.
+            </div>
+            <button class="btn-secondary" onclick="closeSheet()">TUTUP</button>`;
+    }
+    openSheet();
 }
 
 const COMMON_TIMES = ['6:00 PG','7:00 PG','8:00 PG','9:00 PG','12:00 TGH','1:00 PTG','6:00 PTG','8:00 MLM','9:00 MLM','10:00 MLM','11:00 MLM'];
