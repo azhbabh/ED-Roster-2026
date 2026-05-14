@@ -3151,12 +3151,28 @@ async function gLoadFromDrive() {
         );
         const remote = await res.json();
         if(remote && remote.calendar) {
-            // Terus guna data Drive tanpa tanya — auto-sync senyap
+            // Simpan myMeds & medsLog lokal sebelum overwrite
+            const localMyMeds  = store.myMeds  ? [...store.myMeds]  : [];
+            const localMedsLog = store.medsLog && !Array.isArray(store.medsLog) ? {...store.medsLog} : {};
+
             store = remote;
             if(!store.nursingNotes) store.nursingNotes = [];
             if(!store.myMeds) store.myMeds = [];
             if(!store.medsLog) store.medsLog = {};
             if(Array.isArray(store.medsLog)) store.medsLog = {};
+
+            // Merge myMeds — gabungkan ubat lokal yang tiada dalam Drive
+            const remoteIds = store.myMeds.map(m => m.id);
+            localMyMeds.forEach(m => {
+                if(!remoteIds.includes(m.id)) store.myMeds.push(m);
+            });
+
+            // Merge medsLog — gabungkan log lokal ke dalam log Drive
+            Object.keys(localMedsLog).forEach(date => {
+                if(!store.medsLog[date]) store.medsLog[date] = {};
+                Object.assign(store.medsLog[date], localMedsLog[date]);
+            });
+
             migrateCalendarKeys();
             localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
             generateCalendar(); renderStats(); loadNotes(); checkPDFStatus();
