@@ -417,6 +417,7 @@
         }
         .day-box .shift-text { font-family:'Bebas Neue',sans-serif; font-size:0.88rem; letter-spacing:0.03em; line-height:1; color: #2d7a47; }
         .day-box .assign-text { font-size:0.42rem; font-weight:500; text-align:center; width:95%; overflow:hidden; white-space:nowrap; letter-spacing:0.02em; text-transform:uppercase; color: #2d7a47; opacity:0.85; }
+        .day-box .ph-label { font-size:0.36rem; font-weight:700; text-align:center; width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:#cc2200; opacity:0.9; margin-top:1px; letter-spacing:0em; max-width:100%; display:block; }
 
         /* SHIFT KERJA — tulisan emerald green */
         .day-box[data-shift="M"] .shift-text,
@@ -1843,8 +1844,9 @@ let store = JSON.parse(localStorage.getItem('roster_ultimate_v3')) || {
     al:{total:0,taken:[]}, rpl:{records:[]}, cpd:{records:[]},
     calendar:{}, todos:[], notes:"", drugs:[],
     pdfData:null, rsiImage:null, profilePic:null,
-    nursingNotes:[]
+    nursingNotes:[], othersClaim:[]
 };
+if(!store.othersClaim) store.othersClaim = [];
 if(!store.nursingNotes) store.nursingNotes = [];
 if(!store.carService) store.carService = {};
 if(!store.quickNotes) store.quickNotes = [];
@@ -2527,7 +2529,10 @@ function generateCalendar() {
         if(new Date().toDateString()===new Date(year,month,d).toDateString()) box.classList.add('today');
         box.onclick=()=>openShiftPicker(key);
         const reminderDot=(Array.isArray(data.reminders)?data.reminders.length>0:(data.reminder&&data.reminder.trim()))?`<div style="position:absolute;bottom:2px;right:3px;width:4px;height:4px;border-radius:50%;background:#8888ff;"></div>`:'';
-        box.innerHTML=`<div class="date-num">${d}</div><div class="shift-text">${renderShiftText(data.s||'-')}</div><div class="assign-text">${data.a||''}</div>${reminderDot}`;
+        const phEntry = ph2026.find(p => p.d === key);
+        const phName = phEntry ? (phEntry.n.length > 11 ? phEntry.n.substring(0,10)+'…' : phEntry.n) : '';
+        const phLabel = phEntry ? `<div class="ph-label">${phName}</div>` : '';
+        box.innerHTML=`<div class="date-num">${d}</div><div class="shift-text">${renderShiftText(data.s||'-')}</div><div class="assign-text">${data.a||''}</div>${phLabel}${reminderDot}`;
         body.appendChild(box);
     }
     updateShiftSummary();
@@ -2822,7 +2827,90 @@ function renderClaim(){
     function buildRows(items,emptyMsg,fn){if(items.length===0)return`<div style="font-size:0.72rem;color:var(--text-muted);padding:4px 0;">${emptyMsg}</div>`;return items.map(fn).join('');}
     function row(l,r){return`<div class="claim-row"><span style="font-size:0.75rem;color:var(--text);font-weight:600;">${l}</span><span style="font-size:0.72rem;color:var(--primary);">${r}</span></div>`;}
     function block(icon,title,count,rows){return`<div style="margin-bottom:12px;"><div class="claim-cat-header"><span style="font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;color:var(--text-dim);">${icon} ${title}</span><span class="claim-badge">${count}</span></div>${rows}</div>`;}
-    body.innerHTML=block('🌙','Night Shift',malamDays.length,malamRows)+`<div class="claim-divider"></div>`+block('🔄','Locum / Double Shift',locum.length,buildRows(locum,'No double shifts this month.',i=>row(i.date,i.shift)))+`<div class="claim-divider"></div>`+block('📅','Paid PH',phBayar.length,buildRows(phBayar,'No paid public holidays this month.',i=>row(i.date,i.name)));
+    // Others Claim — filter by current month/year
+    const othersThisMonth = (store.othersClaim||[]).filter(c => {
+        if(!c.date) return false;
+        const p = c.date.split('-');
+        return p.length===3 && parseInt(p[0])===year && parseInt(p[1])-1===month;
+    }).sort((a,b)=>a.date.localeCompare(b.date));
+
+    const othersRows = othersThisMonth.length === 0
+        ? `<div style="font-size:0.72rem;color:var(--text-muted);padding:4px 0;">Tiada claim lain bulan ini.</div>`
+        : othersThisMonth.map((c) => {
+            const dp = c.date.split('-');
+            const dispDate = `${dp[2]}/${dp[1]}/${dp[0]}`;
+            return `<div class="claim-row">
+                <div style="flex:1;">
+                    <div style="font-size:0.75rem;color:var(--text);font-weight:600;">${dispDate}</div>
+                    <div style="font-size:0.66rem;color:var(--text-dim);margin-top:2px;">${c.desc||'—'}</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:0.72rem;color:var(--primary);">${c.type||'—'}</span>
+                    <button onclick="deleteOthersClaimById('${c.id}')" style="background:none;border:none;color:var(--danger);font-size:0.8rem;cursor:pointer;padding:0 2px;line-height:1;">×</button>
+                </div>
+            </div>`;
+        }).join('');
+
+    const othersBlock = `<div style="margin-bottom:12px;">
+        <div class="claim-cat-header">
+            <span style="font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;color:var(--text-dim);">📎 Others Claim</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+                <span class="claim-badge">${othersThisMonth.length}</span>
+                <button onclick="openAddOthersClaim()" style="background:var(--primary-dim);border:1px solid rgba(80,200,120,0.35);color:var(--primary);border-radius:var(--radius-xs);padding:2px 8px;font-size:0.68rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:0.04em;">+ ADD</button>
+            </div>
+        </div>
+        ${othersRows}
+    </div>`;
+
+    body.innerHTML=block('🌙','Night Shift',malamDays.length,malamRows)+`<div class="claim-divider"></div>`+block('🔄','Locum / Double Shift',locum.length,buildRows(locum,'No double shifts this month.',i=>row(i.date,i.shift)))+`<div class="claim-divider"></div>`+block('📅','Paid PH',phBayar.length,buildRows(phBayar,'No paid public holidays this month.',i=>row(i.date,i.name)))+`<div class="claim-divider"></div>`+othersBlock;
+}
+
+function openAddOthersClaim(editIdx = -1) {
+    const isEdit = editIdx >= 0;
+    const entry = isEdit ? store.othersClaim[editIdx] : null;
+    const year = currentCalDate.getFullYear(), month = currentCalDate.getMonth();
+    const defaultDate = `${year}-${String(month+1).padStart(2,'0')}-01`;
+    document.getElementById('sheet-title').innerText = isEdit ? '✏️ Edit Others Claim' : '📎 Tambah Others Claim';
+    const claimTypes = ['Overtime','On Call','Weekend Duty','Relief','Standby','Lain-lain'];
+    const typeOptions = claimTypes.map(t => `<option value="${t}" ${entry && entry.type===t?'selected':''}>${t}</option>`).join('');
+    document.getElementById('sheet-content').innerHTML = `
+        <label>Tarikh Claim</label>
+        <input type="date" id="oc-date" value="${entry ? entry.date : defaultDate}" onclick="triggerDatePicker('oc-date')">
+        <label>Jenis Claim</label>
+        <select id="oc-type">
+            ${typeOptions}
+        </select>
+        <label>Keterangan / Nota</label>
+        <input type="text" id="oc-desc" placeholder="cth: Oncall 24hr, Overtime 2hr..." value="${entry ? (entry.desc||'') : ''}">
+        <input type="hidden" id="oc-edit-idx" value="${editIdx}">
+        <button class="btn-primary" onclick="saveOthersClaim()">${isEdit ? 'KEMASKINI' : 'SIMPAN'}</button>
+        ${isEdit ? `<button class="btn-danger" onclick="deleteOthersClaim(${editIdx})">PADAM</button>` : ''}`;
+    openSheet();
+    setTimeout(() => { const el = document.getElementById('oc-desc'); if(el) el.focus(); }, 350);
+}
+
+function saveOthersClaim() {
+    const date = document.getElementById('oc-date').value;
+    const type = document.getElementById('oc-type').value;
+    const desc = (document.getElementById('oc-desc').value||'').trim();
+    const editIdx = parseInt(document.getElementById('oc-edit-idx').value);
+    if(!date) { alert('Sila pilih tarikh.'); return; }
+    const entry = { date, type, desc, id: Date.now() };
+    if(!store.othersClaim) store.othersClaim = [];
+    if(editIdx >= 0) { store.othersClaim[editIdx] = entry; }
+    else { store.othersClaim.push(entry); }
+    saveData(); renderClaim(); closeSheet();
+}
+
+function deleteOthersClaim(idx) {
+    if(!confirm('Padam claim ini?')) return;
+    store.othersClaim.splice(idx, 1);
+    saveData(); renderClaim();
+}
+
+function deleteOthersClaimById(id) {
+    store.othersClaim = (store.othersClaim||[]).filter(c => String(c.id) !== String(id));
+    saveData(); renderClaim();
 }
 
 const RSI_DATA = [
@@ -2949,6 +3037,27 @@ const DEFAULT_DRUGS = [
     {name:"IV Tranexamic Acid",ampule:"1gm/10ml",prep:"1gm in 100mls NS @ 10min"},{name:"IV Tranexamic Acid (Maintenance)",ampule:"1gm/10ml",prep:"1gm in 500mls NS @ 8Hr"},
     {name:"IV Bricanyl",ampule:"0.5mg/ml",prep:"3mg (6 amp) in 50mls NS @ 3mls/Hr"},{name:"IV Valium (Diazepam)",ampule:"10mg/2ml",prep:"5mg/min (adults), 0.25mg/kg (children)"}
 ];
+
+function autoMarkPH() {
+    let changed = false;
+    ph2026.forEach(p => {
+        const key = p.d; // already in YYYY-MM-DD format
+        const existing = store.calendar[key];
+        // Only auto-fill if empty or unset
+        if (!existing || !existing.s || existing.s === '-') {
+            // Shorten PH name for 'a' field (assignment label)
+            const shortName = p.n.length > 14 ? p.n.substring(0, 13) + '…' : p.n;
+            store.calendar[key] = {
+                s: 'PH',
+                a: shortName,
+                phLinked: p.d,
+                phAuto: true
+            };
+            changed = true;
+        }
+    });
+    if (changed) localStorage.setItem('roster_ultimate_v3', JSON.stringify(store));
+}
 
 function migrateDefaultDrugs(){ const existingNames=store.drugs.map(d=>d.name.toLowerCase()); let added=0; DEFAULT_DRUGS.forEach(def=>{if(!existingNames.includes(def.name.toLowerCase())){store.drugs.push(def);added++;}}); store.drugs=store.drugs.map(d=>({name:d.name,ampule:d.ampule||d.prep||'—',prep:d.prep||''})); if(added>0) localStorage.setItem('roster_ultimate_v3',JSON.stringify(store)); }
 
@@ -3620,6 +3729,7 @@ function deleteMedEntry(medId) {
 migrateCalendarKeys();
 migrateDefaultDrugs();
 migrateDefaultMyMeds();
+autoMarkPH();
 setInterval(updateTime, 1000);
 updateTime();
 generateCalendar();
