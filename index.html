@@ -230,16 +230,16 @@
             justify-content: flex-end;
             padding: 12px 4px 10px;
         }
-        .theme-toggle-btn {
-            display: flex; align-items: center; gap: 7px;
-            background: var(--card); border: 1px solid var(--border-bright);
-            border-radius: 20px; padding: 5px 12px 5px 8px;
-            cursor: pointer; transition: all 0.2s;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem; font-weight: 700;
-            color: var(--text-dim); letter-spacing: 0.02em;
+        .theme-dot-btn {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+            padding: 0;
+            flex-shrink: 0;
         }
-        .theme-toggle-btn:active { transform: scale(0.95); }
+        .theme-dot-btn:active { transform: scale(0.85); }
+        .theme-dot-btn.active { transform: scale(1.25); box-shadow: 0 0 0 3px var(--primary-glow); }
 
         /* ── PROFILE HEADER ── */
         .profile-header {
@@ -1202,12 +1202,15 @@
 
 <div class="page">
 
-    <!-- THEME BAR (light theme only) -->
-    <div class="theme-bar" style="display:none;">
-        <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-btn">
-            <span id="theme-toggle-icon">☀️</span>
-            <span id="theme-toggle-label">LIGHT</span>
-        </button>
+    <!-- THEME PICKER BAR -->
+    <div class="theme-bar" id="theme-bar">
+        <div id="theme-picker" style="display:flex;align-items:center;gap:6px;">
+            <span style="font-size:0.6rem;font-weight:700;color:var(--text-dim);font-family:'Inter',sans-serif;letter-spacing:0.04em;text-transform:uppercase;margin-right:2px;">TEMA</span>
+            <button class="theme-dot-btn" id="tdot-dark"        onclick="applyTheme('dark')"        title="Dark"         style="background:#0a0a0a;border:2px solid #50c878;"></button>
+            <button class="theme-dot-btn" id="tdot-light"       onclick="applyTheme('light')"       title="Light"        style="background:#f4f4f4;border:2px solid #1a8f45;"></button>
+            <button class="theme-dot-btn" id="tdot-forestDark"  onclick="applyTheme('forestDark')"  title="Forest Dark"  style="background:#0F2A1D;border:2px solid #6B9071;"></button>
+            <button class="theme-dot-btn" id="tdot-forestLight" onclick="applyTheme('forestLight')" title="Forest Light" style="background:#E3EED4;border:2px solid #375534;"></button>
+        </div>
     </div>
 
     <!-- GOOGLE SYNC BAR -->
@@ -3090,14 +3093,28 @@ const THEMES = {
         border:'#222', borderBright:'#2e2e2e',
         text:'#f0f0f0', textDim:'#777', textMuted:'#333',
         primary:'#50c878', primaryDim:'rgba(80,200,120,0.10)', primaryGlow:'rgba(80,200,120,0.30)',
-        avatarBg:'50c878', avatarFg:'000', icon:'☀️', label:'LIGHT'
+        avatarBg:'50c878', avatarFg:'000'
     },
     light: {
         bg:'#f4f4f4', surface:'#ffffff', card:'#ffffff', cardRaised:'#f9f9f9',
         border:'#e0e0e0', borderBright:'#cccccc',
         text:'#111111', textDim:'#666666', textMuted:'#aaaaaa',
         primary:'#1a8f45', primaryDim:'rgba(26,143,69,0.10)', primaryGlow:'rgba(26,143,69,0.20)',
-        avatarBg:'1a8f45', avatarFg:'fff', icon:'🌙', label:'DARK'
+        avatarBg:'1a8f45', avatarFg:'fff'
+    },
+    forestDark: {
+        bg:'#0F2A1D', surface:'#1a3528', card:'#243d30', cardRaised:'#2e4a3a',
+        border:'#375534', borderBright:'#4a6e46',
+        text:'#E3EED4', textDim:'#AEC3B0', textMuted:'#4a6e46',
+        primary:'#6B9071', primaryDim:'rgba(107,144,113,0.15)', primaryGlow:'rgba(107,144,113,0.35)',
+        avatarBg:'6B9071', avatarFg:'0F2A1D'
+    },
+    forestLight: {
+        bg:'#E3EED4', surface:'#f0f7e8', card:'#ffffff', cardRaised:'#f5faf0',
+        border:'#AEC3B0', borderBright:'#6B9071',
+        text:'#0F2A1D', textDim:'#375534', textMuted:'#6B9071',
+        primary:'#375534', primaryDim:'rgba(55,85,52,0.12)', primaryGlow:'rgba(55,85,52,0.25)',
+        avatarBg:'375534', avatarFg:'E3EED4'
     }
 };
 
@@ -3118,25 +3135,26 @@ function applyTheme(name) {
     r.style.setProperty('--primary',t.primary);
     r.style.setProperty('--primary-dim',t.primaryDim);
     r.style.setProperty('--primary-glow',t.primaryGlow);
-    const icon=document.getElementById('theme-toggle-icon'), label=document.getElementById('theme-toggle-label');
-    if(icon) icon.innerText=t.icon;
-    if(label) label.innerText=t.label;
     const pic=document.getElementById('profile-pic');
     if(pic&&pic.src.includes('ui-avatars')) pic.src=`https://ui-avatars.com/api/?name=Ahmad+Zilalul&background=${t.avatarBg}&color=${t.avatarFg}&bold=true`;
     const glow=document.querySelector('.ambient-glow');
+    const isLight = name === 'light' || name === 'forestLight';
     if(glow) {
         glow.style.background=`radial-gradient(circle,${t.primaryGlow} 0%,transparent 70%)`;
-        glow.style.opacity = name === 'light' ? '0' : '0.3';
+        glow.style.opacity = isLight ? '0' : '0.3';
     }
-    // noise overlay
-    const noiseBefore = document.body;
-    noiseBefore.style.setProperty('--noise-opacity', name === 'light' ? '0' : '0.4');
-    document.body.classList.toggle('light-theme', name === 'light');
+    document.body.classList.toggle('light-theme', isLight);
+    // Update active dot
+    ['dark','light','forestDark','forestLight'].forEach(n => {
+        const dot = document.getElementById('tdot-'+n);
+        if(dot) dot.classList.toggle('active', n===name);
+    });
+    // Day label colour
+    document.querySelectorAll('.day-label').forEach(el => {
+        el.style.color = isLight ? '#000000' : '#ffffff';
+    });
     currentTheme=name;
     localStorage.setItem('roster_theme',name);
-    document.querySelectorAll('.day-label').forEach(el => {
-        el.style.color = name === 'light' ? '#000000' : '#ffffff';
-    });
 }
 
 // ══════════════════════════════════════════
@@ -3343,10 +3361,16 @@ function gTriggerSave() {
     gSaveDebounce = setTimeout(gSaveToDrive, 1500);
 }
 
-function toggleTheme() { applyTheme('light'); }
+function toggleTheme() {
+    const next = currentTheme === 'dark' ? 'light' : currentTheme === 'light' ? 'forestDark' : currentTheme === 'forestDark' ? 'forestLight' : 'dark';
+    applyTheme(next);
+}
 function loadTheme() {
-    applyTheme('light');
-    localStorage.setItem('roster_theme','light');
+    const saved = localStorage.getItem('roster_theme') || 'dark';
+    applyTheme(saved);
+    // Show theme bar always
+    const bar = document.getElementById('theme-bar');
+    if(bar) bar.style.display = 'flex';
 }
 
 
