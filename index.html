@@ -1847,7 +1847,7 @@ async function fetchPrayerTimes() {
     const cached = localStorage.getItem(cacheKey);
     if(cached) { prayerTimes = JSON.parse(cached); renderPrayerWidget(); return; }
     try {
-        const url = `https://api.aladhan.com/v1/timings/${d}-${m}-${y}?latitude=5.3317&longitude=103.1408&method=3`;
+        const url = `https://api.aladhan.com/v1/timings/${d}-${m}-${y}?latitude=5.3302&longitude=103.1408&method=3`;
         const res = await fetch(url);
         const data = await res.json();
         if(data && data.data && data.data.timings) {
@@ -1868,16 +1868,35 @@ function renderPrayerWidget() {
     const nowMins = now.getHours()*60 + now.getMinutes();
     const grid = document.getElementById('prayer-grid');
     const banner = document.getElementById('prayer-next-banner');
-    let nextIdx = -1, nextMins = Infinity;
     const times = PRAYER_KEYS.map(k => timeStrToMinutes(prayerTimes[k]));
-    for(let i=0; i<times.length; i++) { if(times[i] > nowMins) { nextIdx = i; nextMins = times[i]; break; } }
+
+    // Find current prayer (last one passed) and next prayer
+    let currentIdx = -1, nextIdx = -1, nextMins = Infinity;
+    for(let i=0; i<times.length; i++) {
+        if(times[i] <= nowMins) { currentIdx = i; }
+    }
+    for(let i=0; i<times.length; i++) {
+        if(times[i] > nowMins) { nextIdx = i; nextMins = times[i]; break; }
+    }
     if(nextIdx === -1) { nextIdx = 0; nextMins = times[0] + 24*60; }
+
+    // Render grid - current highlighted, passed dimmed
     let html = '';
     PRAYER_KEYS.forEach((k,i) => {
-        html += `<div class="prayer-slot"><div class="prayer-slot-name">${PRAYER_NAMES[i]}</div><div class="prayer-slot-time">${prayerTimes[k]}</div></div>`;
+        let cls = 'prayer-slot';
+        if(i === currentIdx) cls += ' active';
+        else if(currentIdx !== -1 && i < currentIdx) cls += ' passed';
+        const nameStyle = i === currentIdx ? ' style="color:var(--primary);font-weight:800;"' : '';
+        const badge = i === currentIdx ? '<div style="font-size:0.42rem;color:var(--primary);margin-top:2px;letter-spacing:0.02em;font-weight:700;text-transform:uppercase;">Kini</div>' : '';
+        html += `<div class="${cls}"><div class="prayer-slot-name"${nameStyle}>${PRAYER_NAMES[i]}</div><div class="prayer-slot-time">${prayerTimes[k]}</div>${badge}</div>`;
     });
     grid.innerHTML = html;
-    banner.style.display = 'none';
+
+    // Update next prayer banner
+    document.getElementById('prayer-next-name').innerText = PRAYER_NAMES[nextIdx];
+    document.getElementById('prayer-next-time').innerText = prayerTimes[PRAYER_KEYS[nextIdx]];
+    banner.style.display = 'flex';
+    updatePrayerCountdown(nextMins, nowMins);
 }
 
 function updatePrayerCountdown(nextMins, nowMins) {
@@ -1899,7 +1918,7 @@ function schedulePrayerRefresh() {
 }
 
 function startPrayerTick() {
-    if(prayerCountdownTimer) clearInterval(prayerCountdownTimer);
+    if(prayerCountdownTimer) return; // already running
     prayerCountdownTimer = setInterval(() => {
         if(!prayerTimes) return;
         const now = new Date();
@@ -1909,6 +1928,7 @@ function startPrayerTick() {
         for(let i=0; i<times.length; i++) { if(times[i] > nowMins) { nextIdx=i; nextMins=times[i]; break; } }
         if(nextIdx === -1) { nextIdx=0; nextMins=times[0]+24*60; }
         updatePrayerCountdown(nextMins, nowMins);
+        // Re-render grid every minute to update highlight
         if(now.getSeconds() === 0) renderPrayerWidget();
     }, 1000);
 }
