@@ -405,7 +405,7 @@
             position:relative; cursor:pointer;
             transition:all 0.15s cubic-bezier(0.34,1.56,0.64,1);
             background: #ffffff;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #e0e0e0; overflow:hidden; min-width:0;
         }
         .day-box:active { transform:scale(0.88); }
 
@@ -1793,20 +1793,6 @@
             <h3><span class="meds-header-icon">💳</span> Monthly Expenses</h3>
             <button class="btn-add-drug" onclick="openAddExpenseSheet()">+</button>
         </div>
-        <div class="expenses-summary">
-            <div class="exp-summary-chip">
-                <div class="exp-summary-num" id="exp-paid-count">0</div>
-                <div class="exp-summary-lbl">PAID</div>
-            </div>
-            <div class="exp-summary-chip">
-                <div class="exp-summary-num" id="exp-pending-count">0</div>
-                <div class="exp-summary-lbl">PENDING</div>
-            </div>
-            <div class="exp-summary-chip">
-                <div class="exp-summary-num" id="exp-total-count">0</div>
-                <div class="exp-summary-lbl">TOTAL</div>
-            </div>
-        </div>
         <div class="expenses-list" id="expenses-list"></div>
     </div>
 
@@ -2398,7 +2384,7 @@ function renderNursingNotes(query = '') {
     const list = document.getElementById('nursing-note-list'); if(!list) return;
     const notes = store.nursingNotes || [];
     const filtered = query ? notes.filter(n => n.text.toLowerCase().includes(query.toLowerCase()) || (n.patient||'').toLowerCase().includes(query.toLowerCase())) : notes;
-    if(filtered.length === 0) { list.innerHTML = `<div class="nursing-empty">${query ? '😕 No notes found.' : '📋 No notes yet. Add your first one!'}</div>`; return; }
+    if(filtered.length === 0) { list.innerHTML = ''; return; }
     const sorted = [...filtered].sort((a,b) => { const da = new Date(a.date+'T'+(a.time||'00:00')), db = new Date(b.date+'T'+(b.time||'00:00')); return db-da; });
     list.innerHTML = sorted.map(n => {
         const realIdx = store.nursingNotes.indexOf(n);
@@ -3898,9 +3884,12 @@ function renderExpensesList() {
     }
     const paid = expenses.filter(e => e.status === 'paid').length;
     const pending = expenses.filter(e => e.status === 'pending').length;
-    document.getElementById('exp-paid-count').textContent = paid;
-    document.getElementById('exp-pending-count').textContent = pending;
-    document.getElementById('exp-total-count').textContent = expenses.length;
+    const expPaid = document.getElementById('exp-paid-count');
+    const expPending = document.getElementById('exp-pending-count');
+    const expTotal = document.getElementById('exp-total-count');
+    if(expPaid) expPaid.textContent = paid;
+    if(expPending) expPending.textContent = pending;
+    if(expTotal) expTotal.textContent = expenses.length;
 }
 
 function toggleExpenseStatus(id) {
