@@ -556,6 +556,28 @@
         .meds-time-tag.selected { background:var(--primary-dim); border-color:var(--primary); color:var(--primary); }
         .meds-streak-badge { display:inline-flex; align-items:center; gap:4px; background:rgba(243,156,18,0.1); border:1px solid rgba(243,156,18,0.25); color:#f39c12; border-radius:20px; padding:2px 7px; font-size:0.56rem; font-weight:700; font-family:'Inter',sans-serif; margin-left:4px; }
 
+        /* ── MONTHLY EXPENSES ── */
+        .expenses-section { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:12px; overflow:hidden; }
+        .expenses-header { display:flex; justify-content:space-between; align-items:center; padding:12px 14px 10px; }
+        .expenses-header h3 { display:flex; align-items:center; gap:6px; font-size:0.7rem; }
+        .expenses-list { padding:0 14px 12px; }
+        .expense-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xs); padding:7px 10px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+        .expense-name { font-weight:700; font-size:0.66rem; color:var(--text); flex:1; }
+        .expense-status-btn { display:flex; align-items:center; gap:0; border:1px solid var(--border); border-radius:var(--radius-xs); overflow:hidden; cursor:pointer; background:var(--surface); padding:0; transition:all 0.15s; }
+        .expense-status-dot { width:10px; align-self:stretch; flex-shrink:0; transition:background 0.2s; order:2; }
+        .expense-status-btn.paid .expense-status-dot { background:#2ecc40; }
+        .expense-status-btn.pending .expense-status-dot { background:#e74c3c; }
+        .expense-status-label { font-weight:700; font-size:0.62rem; letter-spacing:0.03em; padding:4px 0; width:52px; text-align:center; color:var(--text); font-family:'Inter',sans-serif; white-space:nowrap; order:1; }
+        .expenses-empty { text-align:center; padding:16px 0; font-size:0.66rem; color:var(--text-muted); font-family:'Inter',sans-serif; }
+        .expenses-add-btn { display:flex; align-items:center; justify-content:center; gap:5px; width:100%; padding:8px; border-radius:var(--radius-xs); background:var(--primary-dim); border:1px dashed rgba(82,121,111,0.4); color:var(--primary); font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:700; cursor:pointer; margin-top:4px; letter-spacing:0.03em; transition:all 0.15s; }
+        .expenses-add-btn:active { background:var(--primary); color:#000; }
+        .expense-del-btn { background:none; border:none; color:var(--danger); font-size:0.85rem; cursor:pointer; padding:2px 0 2px 6px; opacity:0.5; transition:opacity 0.15s; }
+        .expense-del-btn:hover { opacity:1; }
+        .expenses-summary { display:flex; gap:8px; padding:0 14px 10px; }
+        .exp-summary-chip { flex:1; background:var(--primary-dim); border-radius:var(--radius-xs); padding:6px 8px; text-align:center; }
+        .exp-summary-num { font-size:0.85rem; font-weight:800; color:var(--text); }
+        .exp-summary-lbl { font-size:0.55rem; color:var(--text-muted); font-family:'Inter',sans-serif; margin-top:1px; }
+
         /* ── TODO ── */
         .todo-item { display:flex; align-items:center; padding:9px 4px; border-bottom:1px solid var(--border); gap:10px; }
         .todo-item:last-child { border-bottom:none; }
@@ -1763,6 +1785,29 @@
         <div id="tool-rsipremed" class="tool-panel" style="display:none!important;">
             <div id="rsipremed-content"></div>
         </div>
+    </div>
+
+    <!-- MONTHLY EXPENSES -->
+    <div class="expenses-section" id="expenses-section">
+        <div class="expenses-header">
+            <h3><span class="meds-header-icon">💳</span> Monthly Expenses</h3>
+            <button class="btn-add-drug" onclick="openAddExpenseSheet()">+</button>
+        </div>
+        <div class="expenses-summary">
+            <div class="exp-summary-chip">
+                <div class="exp-summary-num" id="exp-paid-count">0</div>
+                <div class="exp-summary-lbl">PAID</div>
+            </div>
+            <div class="exp-summary-chip">
+                <div class="exp-summary-num" id="exp-pending-count">0</div>
+                <div class="exp-summary-lbl">PENDING</div>
+            </div>
+            <div class="exp-summary-chip">
+                <div class="exp-summary-num" id="exp-total-count">0</div>
+                <div class="exp-summary-lbl">TOTAL</div>
+            </div>
+        </div>
+        <div class="expenses-list" id="expenses-list"></div>
     </div>
 
     <!-- UBAT HARIAN PERIBADI -->
@@ -3828,6 +3873,96 @@ loadNotes();
 loadTheme();
 renderNursingNotes();
 renderQuickNotes();
+
+// ══════════════════════════════════════════
+// MONTHLY EXPENSES
+// ══════════════════════════════════════════
+if(!store.monthlyExpenses) store.monthlyExpenses = [];
+
+function renderExpensesList() {
+    const list = document.getElementById('expenses-list');
+    const expenses = store.monthlyExpenses || [];
+    if(expenses.length === 0) {
+        list.innerHTML = '<div class="expenses-empty">Tiada bayaran bulanan. Tekan + untuk tambah.</div>';
+    } else {
+        list.innerHTML = expenses.map(exp => `
+            <div class="expense-item" id="expitem-${exp.id}">
+                <span class="expense-name">${exp.name}</span>
+                <button class="expense-status-btn ${exp.status}" onclick="toggleExpenseStatus('${exp.id}')">
+                    <span class="expense-status-dot"></span>
+                    <span class="expense-status-label">${exp.status === 'paid' ? 'PAID' : 'PENDING'}</span>
+                </button>
+                <button class="expense-del-btn" onclick="deleteExpense('${exp.id}')">✕</button>
+            </div>
+        `).join('');
+    }
+    const paid = expenses.filter(e => e.status === 'paid').length;
+    const pending = expenses.filter(e => e.status === 'pending').length;
+    document.getElementById('exp-paid-count').textContent = paid;
+    document.getElementById('exp-pending-count').textContent = pending;
+    document.getElementById('exp-total-count').textContent = expenses.length;
+}
+
+function toggleExpenseStatus(id) {
+    const exp = (store.monthlyExpenses || []).find(e => e.id === id);
+    if(!exp) return;
+    exp.status = exp.status === 'paid' ? 'pending' : 'paid';
+    saveData(); renderExpensesList();
+}
+
+function deleteExpense(id) {
+    if(!confirm('Padam bayaran ini?')) return;
+    store.monthlyExpenses = (store.monthlyExpenses || []).filter(e => e.id !== id);
+    saveData(); renderExpensesList();
+}
+
+function openAddExpenseSheet() {
+    document.getElementById('sheet-title').textContent = 'TAMBAH BAYARAN BULANAN';
+    document.getElementById('sheet-content').innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:12px;">
+            <label style="font-size:0.68rem;font-weight:700;color:var(--text-dim);font-family:'Inter',sans-serif;">NAMA BAYARAN</label>
+            <input id="exp-name-input" type="text" placeholder="cth: Car Loan, PTPTN, Netflix..." 
+                style="width:100%;background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xs);padding:10px 12px;font-size:0.75rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;">
+            <label style="font-size:0.68rem;font-weight:700;color:var(--text-dim);font-family:'Inter',sans-serif;margin-top:4px;">STATUS AWAL</label>
+            <div style="display:flex;gap:10px;">
+                <button id="exp-status-pending" onclick="selectExpenseStatus('pending')" 
+                    style="flex:1;padding:10px;border-radius:var(--radius-xs);border:2px solid #e74c3c;background:rgba(231,76,60,0.15);color:#e74c3c;font-weight:800;font-size:0.7rem;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:0.04em;">
+                    🔴 PENDING
+                </button>
+                <button id="exp-status-paid" onclick="selectExpenseStatus('paid')"
+                    style="flex:1;padding:10px;border-radius:var(--radius-xs);border:2px solid var(--border);background:var(--card);color:var(--text-dim);font-weight:800;font-size:0.7rem;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:0.04em;">
+                    🟢 PAID
+                </button>
+            </div>
+            <input type="hidden" id="exp-status-val" value="pending">
+            <button class="btn-primary" onclick="saveExpenseEntry()" style="margin-top:8px;">SIMPAN</button>
+        </div>`;
+    openSheet();
+}
+
+function selectExpenseStatus(val) {
+    document.getElementById('exp-status-val').value = val;
+    const pendingBtn = document.getElementById('exp-status-pending');
+    const paidBtn = document.getElementById('exp-status-paid');
+    if(val === 'pending') {
+        pendingBtn.style.cssText += ';background:rgba(231,76,60,0.2);border-color:#e74c3c;color:#e74c3c;';
+        paidBtn.style.cssText += ';background:var(--card);border-color:var(--border);color:var(--text-dim);';
+    } else {
+        paidBtn.style.cssText += ';background:rgba(46,204,64,0.15);border-color:#2ecc40;color:#1E8449;';
+        pendingBtn.style.cssText += ';background:var(--card);border-color:var(--border);color:var(--text-dim);';
+    }
+}
+
+function saveExpenseEntry() {
+    const name = (document.getElementById('exp-name-input').value || '').trim();
+    if(!name) { alert('Sila masukkan nama bayaran.'); return; }
+    const status = document.getElementById('exp-status-val').value || 'pending';
+    if(!store.monthlyExpenses) store.monthlyExpenses = [];
+    store.monthlyExpenses.push({ id: 'exp_' + Date.now(), name, status });
+    saveData(); renderExpensesList(); closeSheet();
+}
+
+renderExpensesList();
 
 renderMedsList();
 </script>
