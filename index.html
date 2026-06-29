@@ -380,15 +380,10 @@
         h3 { font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--primary); }
 
         /* ── CALENDAR ── */
-        .cal-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+        .cal-nav { display:flex; justify-content:center; align-items:center; margin-bottom:14px; }
         .cal-nav h3 { font-family:'Inter',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.01em; color:var(--text); }
-        .nav-btn {
-            background:var(--card-raised); border:1px solid var(--border-bright); color:var(--primary);
-            width:34px; height:34px; border-radius:var(--radius-xs); font-size:0.74rem;
-            font-weight:900; cursor:pointer; transition:all 0.15s;
-            display:flex; align-items:center; justify-content:center;
-        }
-        .nav-btn:active { background:var(--primary); color:black; transform:scale(0.9); }
+        .calendar-swipe-zone { overflow:hidden; touch-action:pan-y; }
+        .calendar-swipe-zone .calendar-grid { transition:transform 0.22s ease, opacity 0.22s ease; }
         .import-btn {
             width:100%; background:var(--primary-dim); border:1px solid rgba(65,171,93,0.25);
             color:var(--primary); border-radius:var(--radius-xs); padding:10px;
@@ -409,8 +404,6 @@
         .cuti-sekolah-item + .cuti-sekolah-item { border-top:1px dashed rgba(22,109,59,0.25); }
         .cuti-sekolah-item b { color:var(--primary); font-weight:700; }
         .cuti-sekolah-item .csd { color:var(--text-muted); font-size:0.62rem; }
-        .qnotes-toggle-btn { display:flex; align-items:center; justify-content:center; gap:5px; width:100%; padding:8px; border-radius:var(--radius-xs); background:var(--primary-dim); border:1px dashed rgba(82,121,111,0.4); color:var(--primary); font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:700; cursor:pointer; margin-top:4px; letter-spacing:0.03em; transition:all 0.15s; }
-        .qnotes-toggle-btn:active { background:var(--primary); color:#000; }
         .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
         .day-label { text-align:center; font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:700; color:#ffffff; padding-bottom:6px; letter-spacing:0.05em; }
         .day-box {
@@ -1290,16 +1283,16 @@
     <!-- CALENDAR -->
     <div class="section">
         <div class="cal-nav">
-            <button class="nav-btn" onclick="changeMonth(-1)">❮</button>
             <h3 id="cal-title">--</h3>
-            <button class="nav-btn" onclick="changeMonth(1)">❯</button>
         </div>
         <button class="import-btn" onclick="openImportSheet()">📋 IMPORT DARI EXCEL</button>
         <div class="calendar-grid">
             <div class="day-label">SUN</div><div class="day-label">MON</div><div class="day-label">TUE</div>
             <div class="day-label">WED</div><div class="day-label">THU</div><div class="day-label">FRI</div><div class="day-label">SAT</div>
         </div>
-        <div id="calendar-body" class="calendar-grid"></div>
+        <div id="calendar-swipe-zone" class="calendar-swipe-zone">
+            <div id="calendar-body" class="calendar-grid"></div>
+        </div>
         <div id="cuti-sekolah-box"></div>
     </div>
 
@@ -1314,14 +1307,13 @@
 
     <!-- NOTES -->
     <div class="section">
-        <div class="section-header">
-            <h3>Quick Notes</h3>
-            <button onclick="openAddQuickNote()" class="btn-add-drug">+</button>
+        <div class="section-header" style="cursor:pointer;" onclick="openAllQuickNotesOverlay()">
+            <h3 style="display:flex;align-items:center;gap:6px;">Quick Notes <span style="font-size:0.6rem;color:var(--text-muted);font-family:'Inter',sans-serif;font-weight:700;letter-spacing:0.02em;background:var(--surface);border:1px solid var(--border);padding:2px 7px;border-radius:20px;">VIEW ALL</span></h3>
+            <button onclick="event.stopPropagation();openAddQuickNote()" class="btn-add-drug">+</button>
         </div>
         <input type="text" id="quick-notes-search" placeholder="Search notes..." oninput="searchQuickNotes()">
         <div id="quick-notes-list"></div>
         <div id="quick-notes-empty" style="text-align:center;padding:18px 0;font-size:0.72rem;color:var(--text-muted);font-family:'Inter',sans-serif;">📝 No notes. Tap + to add.</div>
-        <button id="quick-notes-toggle-btn" class="qnotes-toggle-btn" style="display:none;" onclick="toggleQuickNotesExpand()"></button>
     </div>
 
     <!-- NURSING NOTE -->
@@ -2376,72 +2368,74 @@ function renderQuickNotes() {
 
     const list = document.getElementById('quick-notes-list');
     const empty = document.getElementById('quick-notes-empty');
-    const toggleBtn = document.getElementById('quick-notes-toggle-btn');
     if(!list) return;
     const sorted = [...store.quickNotes].sort((a,b) => (a.title||'').localeCompare((b.title||''), 'ms'));
-
-    const searchEl = document.getElementById('quick-notes-search');
-    const q = (searchEl && searchEl.value || '').trim().toLowerCase();
-    const filtered = q ? sorted.filter(n => (n.title||'').toLowerCase().includes(q) || (n.text||'').toLowerCase().includes(q)) : sorted;
 
     if(sorted.length === 0) {
         list.innerHTML = '';
         if(empty) empty.style.display = 'block';
-        if(toggleBtn) toggleBtn.style.display = 'none';
         return;
     }
     if(empty) empty.style.display = 'none';
 
-    if(q) {
-        // Mod carian — papar semua hasil padanan, tiada limit/toggle
-        if(toggleBtn) toggleBtn.style.display = 'none';
-        if(filtered.length === 0) {
-            list.innerHTML = `<div style="text-align:center;padding:16px 0;font-size:0.7rem;color:var(--text-muted);font-family:'Inter',sans-serif;">No notes found.</div>`;
-            return;
-        }
-        list.innerHTML = filtered.map(n => `<div class="quick-note-card" id="qncard-${n.id}">
-            <div class="quick-note-card-header" onclick="openQuickNoteOverlay('${n.id}')">
-                <span class="quick-note-title">${n.title}</span>
-                <div class="quick-note-actions" onclick="event.stopPropagation()">
-                    <button class="quick-note-action-btn del" onclick="deleteQuickNote('${n.id}')">×</button>
-                </div>
-                ${n.text ? `<span class="quick-note-chevron">›</span>` : ''}
-            </div>
-        </div>`).join('');
+    const searchEl = document.getElementById('quick-notes-search');
+    const q = (searchEl && searchEl.value || '').trim().toLowerCase();
+    if(!q) { list.innerHTML = ''; return; }
+
+    const filtered = sorted.filter(n => (n.title||'').toLowerCase().includes(q) || (n.text||'').toLowerCase().includes(q));
+    if(filtered.length === 0) {
+        list.innerHTML = `<div style="text-align:center;padding:16px 0;font-size:0.7rem;color:var(--text-muted);font-family:'Inter',sans-serif;">No notes found.</div>`;
         return;
     }
-
-    const QN_LIMIT = 5;
-    const showAll = !!window.quickNotesExpanded;
-    const visible = showAll ? sorted : sorted.slice(0, QN_LIMIT);
-    list.innerHTML = visible.map((n, si) => {
-        const ri = store.quickNotes.indexOf(store.quickNotes.find(x => x.id === n.id));
-        return `<div class="quick-note-card" id="qncard-${n.id}">
-            <div class="quick-note-card-header" onclick="openQuickNoteOverlay('${n.id}')">
-                <span class="quick-note-title">${n.title}</span>
-                <div class="quick-note-actions" onclick="event.stopPropagation()">
-                    
-                    <button class="quick-note-action-btn del" onclick="deleteQuickNote('${n.id}')">×</button>
-                </div>
-                ${n.text ? `<span class="quick-note-chevron">›</span>` : ''}
+    list.innerHTML = filtered.map(n => `<div class="quick-note-card" id="qncard-${n.id}">
+        <div class="quick-note-card-header" onclick="openQuickNoteOverlay('${n.id}')">
+            <span class="quick-note-title">${n.title}</span>
+            <div class="quick-note-actions" onclick="event.stopPropagation()">
+                <button class="quick-note-action-btn del" onclick="deleteQuickNote('${n.id}')">×</button>
             </div>
-        </div>`;
-    }).join('');
-    if(toggleBtn) {
-        if(sorted.length > QN_LIMIT) {
-            toggleBtn.style.display = 'flex';
-            toggleBtn.textContent = showAll ? `▲ TUNJUK KURANG` : `▼ LIHAT SEMUA (${sorted.length})`;
-        } else {
-            toggleBtn.style.display = 'none';
-        }
-    }
+            ${n.text ? `<span class="quick-note-chevron">›</span>` : ''}
+        </div>
+    </div>`).join('');
 }
 
 function searchQuickNotes() { renderQuickNotes(); }
 
-function toggleQuickNotesExpand() {
-    window.quickNotesExpanded = !window.quickNotesExpanded;
+function openAllQuickNotesOverlay() {
+    const bg = document.getElementById('tool-overlay-bg');
+    const sheet = document.getElementById('tool-overlay-sheet');
+    const title = document.getElementById('tool-overlay-title');
+    const accent = document.getElementById('tool-overlay-accent');
+    const content = document.getElementById('tool-overlay-content');
+
+    title.innerText = '📝 Quick Notes';
+    accent.style.background = 'var(--primary)';
+
+    const sorted = [...(store.quickNotes || [])].sort((a,b) => (a.title||'').localeCompare((b.title||''), 'ms'));
+    if(sorted.length === 0) {
+        content.innerHTML = '<div style="text-align:center;padding:32px 0;font-size:0.74rem;color:var(--text-muted);font-family:\'Inter\',sans-serif;">No notes saved.<br>Add a note using the + button</div>';
+    } else {
+        content.innerHTML = sorted.map(n => `<div class="quick-note-card" id="qncard-ov-${n.id}">
+            <div class="quick-note-card-header" onclick="closeToolOverlay();setTimeout(()=>openQuickNoteOverlay('${n.id}'),200);">
+                <span class="quick-note-title">${n.title}</span>
+                <div class="quick-note-actions" onclick="event.stopPropagation()">
+                    <button class="quick-note-action-btn del" onclick="deleteQuickNoteFromOverlay('${n.id}')">×</button>
+                </div>
+                ${n.text ? `<span class="quick-note-chevron">›</span>` : ''}
+            </div>
+        </div>`).join('');
+    }
+
+    bg.style.display = 'block';
+    sheet.classList.add('active');
+    document.getElementById('tool-overlay-content-wrap').scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+}
+
+function deleteQuickNoteFromOverlay(id) {
+    store.quickNotes = (store.quickNotes || []).filter(n => n.id !== id);
+    saveData();
     renderQuickNotes();
+    openAllQuickNotesOverlay(); // refresh
 }
 
 function openQuickNoteOverlay(id) {
@@ -2534,7 +2528,53 @@ function updateTime() {
     document.getElementById('live-clock').innerText=`${d}/${m}/${y} | ${n.toLocaleTimeString('ms-MY',{hour12:false})}`;
 }
 
-function changeMonth(dir) { currentCalDate.setMonth(currentCalDate.getMonth()+dir); generateCalendar(); renderStats(); }
+function changeMonth(dir, animate) {
+    const body = document.getElementById('calendar-body');
+    if(animate && body) {
+        body.style.transform = `translateX(${dir>0?-26:26}px)`;
+        body.style.opacity = '0';
+        setTimeout(() => {
+            currentCalDate.setMonth(currentCalDate.getMonth()+dir);
+            generateCalendar(); renderStats();
+            const newBody = document.getElementById('calendar-body');
+            newBody.style.transition = 'none';
+            newBody.style.transform = `translateX(${dir>0?26:-26}px)`;
+            newBody.style.opacity = '0';
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    newBody.style.transition = 'transform 0.22s ease, opacity 0.22s ease';
+                    newBody.style.transform = 'translateX(0)';
+                    newBody.style.opacity = '1';
+                });
+            });
+        }, 180);
+    } else {
+        currentCalDate.setMonth(currentCalDate.getMonth()+dir);
+        generateCalendar(); renderStats();
+    }
+}
+
+(function initCalendarSwipe() {
+    const zone = document.getElementById('calendar-swipe-zone');
+    if(!zone) return;
+    let startX = 0, startY = 0, tracking = false;
+    const THRESHOLD = 45;
+    zone.addEventListener('touchstart', (e) => {
+        if(!e.touches || e.touches.length !== 1) return;
+        startX = e.touches[0].clientX; startY = e.touches[0].clientY; tracking = true;
+    }, { passive: true });
+    zone.addEventListener('touchend', (e) => {
+        if(!tracking) return;
+        tracking = false;
+        const touch = e.changedTouches && e.changedTouches[0];
+        if(!touch) return;
+        const dx = touch.clientX - startX, dy = touch.clientY - startY;
+        if(Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy) * 1.3) {
+            changeMonth(dx < 0 ? 1 : -1, true);
+        }
+    }, { passive: true });
+})();
+
 function isoKey(year,month,day) { return `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`; }
 
 function migrateCalendarKeys() {
